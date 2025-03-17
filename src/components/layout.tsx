@@ -1,9 +1,15 @@
-import React from 'react';
+import React from "react";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      {children}
-    </>
-  );
+interface LayoutProps {
+  children: React.ReactNode;
 }
+
+const Layout: React.FC<LayoutProps> = ({ children }) => {
+  return (
+    <div className="app-layout" data-oid="-67fhzd">
+      {children}
+    </div>
+  );
+};
+
+export default Layout;
