@@ -8,7 +8,7 @@ import "./index.css";
 const router = createBrowserRouter(
   routes.map((route) => ({
     ...route,
-    element: <Layout data-oid="dtul:yb">{route.element}</Layout>,
+    element: <Layout>{route.element}</Layout>,
   })),
   {
     future: {
@@ -22,7 +22,7 @@ const router = createBrowserRouter(
 );
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode data-oid="su_.txf">
-    <RouterProvider router={router} data-oid="rn3ejtl" />
+  <React.StrictMode>
+    <RouterProvider router={router} />
   </React.StrictMode>,
 );

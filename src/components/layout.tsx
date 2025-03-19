@@ -5,11 +5,7 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  return (
-    <div className="app-layout" data-oid="-67fhzd">
-      {children}
-    </div>
-  );
+  return <div className="app-layout">{children}</div>;
 };
 
 export default Layout;
