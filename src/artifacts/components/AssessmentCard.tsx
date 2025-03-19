@@ -16,7 +16,7 @@ export interface Assessment {
 	date?: string;
 	progress?: number;
 	score?: number;
-	type: "cognitive" | "psychological";
+	type: "cognitive" | "psychological" | "physical";
 }
 
 interface AssessmentCardProps {

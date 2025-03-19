@@ -52,6 +52,7 @@ const NeuroVibesPortal = () => {
 						progress: 100,
 						score: 87,
 						icon: <Brain className="h-6 w-6" />,
+						type: "cognitive", // Add this line
 					},
 					{
 						id: "vrxn",
@@ -62,6 +63,7 @@ const NeuroVibesPortal = () => {
 						status: "in_progress",
 						progress: 60,
 						icon: <Activity className="h-6 w-6" />,
+						type: "cognitive", // Add this line
 					},
 					{
 						id: "spatial",
@@ -72,6 +74,7 @@ const NeuroVibesPortal = () => {
 						status: "available",
 						progress: 0,
 						icon: <Brain className="h-6 w-6" />,
+						type: "cognitive", // Add this line
 					},
 				],
 
@@ -86,6 +89,7 @@ const NeuroVibesPortal = () => {
 						progress: 100,
 						score: 92,
 						icon: <Users className="h-6 w-6" />,
+						type: "psychological",
 					},
 					{
 						id: "teamres",
@@ -96,6 +100,7 @@ const NeuroVibesPortal = () => {
 						status: "available",
 						progress: 0,
 						icon: <Users className="h-6 w-6" />,
+						type: "psychological",
 					},
 					{
 						id: "selfdet",
@@ -106,6 +111,7 @@ const NeuroVibesPortal = () => {
 						status: "available",
 						progress: 0,
 						icon: <Activity className="h-6 w-6" />,
+						type: "psychological",
 					},
 				],
 
@@ -118,6 +124,7 @@ const NeuroVibesPortal = () => {
 						date: "2 Mar 2025",
 						score: 78,
 						icon: <Dumbbell className="h-6 w-6" />,
+						type: "physical",
 					},
 					{
 						id: "strength",
@@ -127,6 +134,7 @@ const NeuroVibesPortal = () => {
 						date: "28 Feb 2025",
 						score: 82,
 						icon: <Award className="h-6 w-6" />,
+						type: "physical",
 					},
 					{
 						id: "ippt",
@@ -137,6 +145,7 @@ const NeuroVibesPortal = () => {
 						date: "15 Feb 2025",
 						score: 85,
 						icon: <Award className="h-6 w-6" />,
+						type: "physical",
 					},
 				],
 			});
