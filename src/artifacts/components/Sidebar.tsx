@@ -28,8 +28,6 @@ interface SidebarProps {
 	setShowSidebar: (show: boolean) => void;
 	activeTab: string;
 	setActiveTab: (tab: string) => void;
-	darkMode: boolean;
-	toggleDarkMode: () => void;
 }
 
 const Sidebar = ({ showSidebar, activeTab, setActiveTab }: SidebarProps) => {

@@ -15,15 +15,6 @@ import CoursesTab from "./components/CoursesTab";
 import AssessmentRunsTab from "./components/AssessmentRunsTab";
 
 const NeuroVibesPortal = () => {
-	const [darkMode, setDarkMode] = useState(() => {
-		// Check localStorage first
-		const savedMode = localStorage.getItem("darkMode");
-		if (savedMode !== null) {
-			return savedMode === "true";
-		}
-		// Otherwise, use dark mode by default
-		return true;
-	});
 	const [activeTab, setActiveTab] = useState("dashboard");
 	const [assessments, setAssessments] = useState<{
 		cognitive: Assessment[];
@@ -153,18 +144,6 @@ const NeuroVibesPortal = () => {
 		}, 1000);
 	}, []);
 
-	// Apply dark mode class to document
-	useEffect(() => {
-		if (darkMode) {
-			document.documentElement.classList.add("dark");
-		} else {
-			document.documentElement.classList.remove("dark");
-		}
-
-		// Save preference to localStorage
-		localStorage.setItem("darkMode", darkMode.toString());
-	}, [darkMode]);
-
 	const startAssessment = (id: string) => {
 		console.log(`Starting assessment: ${id}`);
 		// This would navigate to the specific assessment
@@ -173,10 +152,6 @@ const NeuroVibesPortal = () => {
 	const viewReport = (id: string) => {
 		console.log(`Viewing report for: ${id}`);
 		// This would open the assessment report
-	};
-
-	const toggleDarkMode = () => {
-		setDarkMode(!darkMode);
 	};
 
 	// Calculate progress percentages
@@ -312,17 +287,13 @@ const NeuroVibesPortal = () => {
 	};
 
 	return (
-		<div
-			className={`min-h-screen ${darkMode ? "dark" : ""} bg-gray-50 dark:bg-gray-900 transition-colors duration-200 flex`}
-		>
+		<div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200 flex">
 			{/* Sidebar */}
 			<Sidebar
 				showSidebar={showSidebar}
 				setShowSidebar={setShowSidebar}
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}
-				darkMode={darkMode}
-				toggleDarkMode={toggleDarkMode}
 			/>
 
 			{/* Main Content */}
