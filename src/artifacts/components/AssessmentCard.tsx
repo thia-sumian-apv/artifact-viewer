@@ -61,7 +61,7 @@ const AssessmentCard = ({
 	};
 
 	return (
-		<Card className="hover:shadow-lg transition-shadow duration-300 border-gray-100 dark:border-gray-700 flex flex-col h-full overflow-hidden">
+		<Card className="hover:shadow-lg transition-shadow duration-300 border-gray-100 dark:border-gray-700 flex flex-col h-full overflow-hidden bg-white dark:bg-gray-800">
 			<CardHeader className="p-4 h-20 space-y-0">
 				<div className="flex items-center justify-between">
 					<div className="flex items-center flex-1 min-w-0 pr-2">
