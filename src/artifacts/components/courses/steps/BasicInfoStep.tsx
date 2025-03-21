@@ -17,7 +17,7 @@ interface BasicInfoStepProps {
 
 export function BasicInfoStep({ data, onUpdate }: BasicInfoStepProps) {
 	return (
-		<div className="space-y-4">
+		<div className="space-y-4 px-1">
 			<div className="space-y-2">
 				<label htmlFor="courseCode" className="text-sm font-medium">
 					Course Code
@@ -27,9 +27,9 @@ export function BasicInfoStep({ data, onUpdate }: BasicInfoStepProps) {
 					value={data.courseCode}
 					onChange={(e) => onUpdate({ ...data, courseCode: e.target.value })}
 					placeholder="Enter course code"
+					className="focus-visible:ring-offset-0" /* Adjust focus styling */
 				/>
 			</div>
-
 			<div className="space-y-2">
 				<label htmlFor="courseName" className="text-sm font-medium">
 					Course Name
@@ -39,9 +39,9 @@ export function BasicInfoStep({ data, onUpdate }: BasicInfoStepProps) {
 					value={data.courseName}
 					onChange={(e) => onUpdate({ ...data, courseName: e.target.value })}
 					placeholder="Enter course name"
+					className="focus-visible:ring-offset-0" /* Adjust focus styling */
 				/>
 			</div>
-
 			<div className="space-y-2">
 				<label htmlFor="courseDescription" className="text-sm font-medium">
 					Course Description
@@ -53,6 +53,7 @@ export function BasicInfoStep({ data, onUpdate }: BasicInfoStepProps) {
 						onUpdate({ ...data, courseDescription: e.target.value })
 					}
 					placeholder="Enter course description"
+					className="focus-visible:ring-offset-0" /* Adjust focus styling */
 				/>
 			</div>
 		</div>
