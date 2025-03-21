@@ -10,13 +10,20 @@ import { useEffect, useState } from "react";
 
 interface HeaderProps {
 	activeTab: string;
-	showSidebar: boolean; // Add these
-	setShowSidebar: (show: boolean) => void; // new props
+	showSidebar: boolean;
+	setShowSidebar: (show: boolean) => void;
+	themeMode: "light" | "dark" | "system";
+	setThemeMode: (mode: "light" | "dark" | "system") => void;
 }
 
 type ThemeMode = "light" | "dark" | "system";
 
-const Header = ({ activeTab, showSidebar, setShowSidebar }: HeaderProps) => {
+const Header = ({
+	activeTab,
+	showSidebar,
+	setShowSidebar,
+	setThemeMode,
+}: HeaderProps) => {
 	const [mode, setMode] = useState<ThemeMode>(() => {
 		// Check localStorage first
 		const savedMode = localStorage.getItem("theme") as ThemeMode;
@@ -57,6 +64,7 @@ const Header = ({ activeTab, showSidebar, setShowSidebar }: HeaderProps) => {
 
 	const handleModeChange = (newMode: ThemeMode) => {
 		setMode(newMode);
+		setThemeMode(newMode);
 	};
 
 	return (

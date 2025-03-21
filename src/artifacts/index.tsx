@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Brain, Activity, Users, Dumbbell, Award } from "lucide-react";
 import type { Assessment } from "./components/AssessmentCard";
 import Dashboard from "./components/Dashboard";
-import AssessmentProgress from "./components/AssessmentProgress";
 import CognitiveTab from "./components/CognitiveTab";
 import PsychologicalTab from "./components/PsychologicalTab";
 import PhysicalTab from "./components/PhysicalTab";
@@ -13,6 +12,8 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import CoursesTab from "./components/CoursesTab";
 import AssessmentRunsTab from "./components/AssessmentRunsTab";
+import SARTTraining from "./components/assessments/sart/SARTTraining";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 const NeuroVibesPortal = () => {
 	const [activeTab, setActiveTab] = useState("dashboard");
@@ -27,6 +28,13 @@ const NeuroVibesPortal = () => {
 	});
 	const [loading, setLoading] = useState(true);
 	const [showSidebar, setShowSidebar] = useState(true);
+	const [currentAssessment, setCurrentAssessment] = useState<string | null>(
+		null,
+	);
+	const [assessmentModalOpen, setAssessmentModalOpen] = useState(false);
+	const [themeMode, setThemeMode] = useState<"light" | "dark" | "system">(
+		"light",
+	);
 
 	useEffect(() => {
 		// Simulate API call to fetch available assessments
@@ -66,6 +74,17 @@ const NeuroVibesPortal = () => {
 						progress: 0,
 						icon: <Brain className="h-6 w-6" />,
 						type: "cognitive", // Add this line
+					},
+					{
+						id: "sart-training",
+						title: "SART Training",
+						description:
+							"Sustained Attention to Response Task training exercise",
+						duration: "5-10 mins",
+						status: "available",
+						progress: 0,
+						icon: <Brain className="h-6 w-6" />,
+						type: "cognitive",
 					},
 				],
 
@@ -146,7 +165,18 @@ const NeuroVibesPortal = () => {
 
 	const startAssessment = (id: string) => {
 		console.log(`Starting assessment: ${id}`);
-		// This would navigate to the specific assessment
+		if (id === "sart-training") {
+			// Here you would navigate to the SART training page
+			// For example with React Router:
+			// navigate("/assessments/sart-training");
+
+			// If you're using a modal approach instead:
+			setCurrentAssessment("sart-training");
+			setAssessmentModalOpen(true);
+
+			// If this is just a proof of concept, you could replace the current view
+			// with the SARTTraining component
+		}
 	};
 
 	const viewReport = (id: string) => {
@@ -221,25 +251,15 @@ const NeuroVibesPortal = () => {
 		switch (activeTab) {
 			case "dashboard":
 				return (
-					<>
-						<AssessmentProgress
-							cognitiveProgress={cognitiveProgress}
-							psychologicalProgress={psychologicalProgress}
-							getPhysicalProgress={getPhysicalProgress}
-							overallProgress={overallProgress}
-							setActiveTab={setActiveTab}
-						/>
-
-						<Dashboard
-							assessments={assessments}
-							cognitiveProgress={cognitiveProgress}
-							psychologicalProgress={psychologicalProgress}
-							overallProgress={overallProgress}
-							getPhysicalProgress={getPhysicalProgress}
-							setActiveTab={setActiveTab}
-							viewReport={viewReport}
-						/>
-					</>
+					<Dashboard
+						assessments={assessments}
+						cognitiveProgress={cognitiveProgress}
+						psychologicalProgress={psychologicalProgress}
+						overallProgress={overallProgress}
+						getPhysicalProgress={getPhysicalProgress}
+						setActiveTab={setActiveTab}
+						viewReport={viewReport}
+					/>
 				);
 
 			case "cognitive":
@@ -294,6 +314,7 @@ const NeuroVibesPortal = () => {
 				setShowSidebar={setShowSidebar}
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}
+				themeMode={themeMode}
 			/>
 
 			{/* Main Content */}
@@ -305,6 +326,8 @@ const NeuroVibesPortal = () => {
 					activeTab={activeTab}
 					showSidebar={showSidebar}
 					setShowSidebar={setShowSidebar}
+					themeMode={themeMode}
+					setThemeMode={setThemeMode}
 				/>
 
 				{/* Main Content */}
@@ -315,6 +338,14 @@ const NeuroVibesPortal = () => {
 				{/* Footer */}
 				<Footer />
 			</div>
+
+			<Dialog open={assessmentModalOpen} onOpenChange={setAssessmentModalOpen}>
+				<DialogContent className="max-w-6xl w-[90vw] max-h-[90vh] h-[90vh] p-0 overflow-hidden">
+					{currentAssessment === "sart-training" && (
+						<SARTTraining onClose={() => setAssessmentModalOpen(false)} />
+					)}
+				</DialogContent>
+			</Dialog>
 		</div>
 	);
 };

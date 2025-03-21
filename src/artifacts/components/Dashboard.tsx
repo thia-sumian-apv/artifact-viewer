@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import type { Assessment } from "./AssessmentCard";
+import AssessmentProgress from "./AssessmentProgress";
 
 interface ProgressData {
 	count: number;
@@ -40,11 +41,21 @@ const Dashboard = ({
 	assessments,
 	cognitiveProgress,
 	psychologicalProgress,
+	getPhysicalProgress,
+	overallProgress,
 	setActiveTab,
 	viewReport,
 }: DashboardProps) => {
 	return (
 		<>
+			{/* Add AssessmentProgress component here */}
+			<AssessmentProgress
+				cognitiveProgress={cognitiveProgress}
+				psychologicalProgress={psychologicalProgress}
+				getPhysicalProgress={getPhysicalProgress}
+				overallProgress={overallProgress}
+				setActiveTab={setActiveTab}
+			/>
 			<div className="mb-6">
 				{/* Dashboard label and notification buttons removed */}
 			</div>
