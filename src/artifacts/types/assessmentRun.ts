@@ -9,6 +9,7 @@ export interface AssessmentRun {
 	createdBy: string;
 	lastModified: string;
 	lastModifiedBy: string;
+	assessments: string[]; // IDs of assigned assessments
 }
 
 export const dummyAssessmentRunData: AssessmentRun[] = [
@@ -23,6 +24,7 @@ export const dummyAssessmentRunData: AssessmentRun[] = [
 		createdBy: "John Doe",
 		lastModified: "2024-03-15",
 		lastModifiedBy: "Jane Smith",
+		assessments: ["sart", "visual-rxn", "ml360"], // IDs matching those in assessmentOptions
 	},
 	{
 		id: "2",
@@ -35,6 +37,7 @@ export const dummyAssessmentRunData: AssessmentRun[] = [
 		createdBy: "Jane Smith",
 		lastModified: "2024-03-14",
 		lastModifiedBy: "John Doe",
+		assessments: ["spatial-planning", "team-resilience"],
 	},
 	{
 		id: "3",
@@ -47,5 +50,6 @@ export const dummyAssessmentRunData: AssessmentRun[] = [
 		createdBy: "John Doe",
 		lastModified: "2024-03-16",
 		lastModifiedBy: "John Doe",
+		assessments: ["ml360", "self-determination"],
 	},
 ];
