@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import FullscreenButton from "./FullscreenButton";
 import { ChevronRight, Brain } from "lucide-react";
 
 interface InstructionsScreenProps {
@@ -11,7 +10,6 @@ interface InstructionsScreenProps {
 
 const InstructionsScreen: React.FC<InstructionsScreenProps> = ({
 	onContinue,
-	containerRef,
 }) => {
 	return (
 		<div className="max-w-xl mx-auto w-full flex flex-col items-center justify-center">
@@ -45,7 +43,13 @@ const InstructionsScreen: React.FC<InstructionsScreenProps> = ({
 								2
 							</Badge>
 							<div>
-								<p className="font-medium">Press SPACEBAR quickly</p>
+								<p className="font-medium">
+									Press{" "}
+									<kbd className="px-2 py-0.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-md dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600">
+										SPACEBAR
+									</kbd>{" "}
+									quickly
+								</p>
 								<p className="text-sm text-gray-500 dark:text-gray-400">
 									Press for every number{" "}
 									<span className="text-md font-semibold text-red-600 dark:text-red-400 mt-2">
@@ -79,10 +83,6 @@ const InstructionsScreen: React.FC<InstructionsScreenProps> = ({
 			<Button onClick={onContinue} className="px-8 py-2 w-full md:w-auto">
 				Start <ChevronRight className="h-4 w-4 ml-2" />
 			</Button>
-
-			<div className="absolute bottom-4 right-4">
-				<FullscreenButton containerRef={containerRef} />
-			</div>
 		</div>
 	);
 };

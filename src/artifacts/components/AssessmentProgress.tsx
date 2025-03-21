@@ -24,17 +24,17 @@ const AssessmentProgress = ({
 	setActiveTab,
 }: AssessmentProgressProps) => {
 	return (
-		<Card className="mb-6">
-			<CardHeader className="pb-2">
+		<Card className="mb-6 shadow-sm border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800">
+			<CardHeader className="pb-2 p-6">
 				<CardTitle className="text-lg font-semibold text-gray-900 dark:text-white">
 					Assessment Progress
 				</CardTitle>
 			</CardHeader>
-			<CardContent>
+			<CardContent className="p-6 pt-0">
 				{/* Progress Cards Grid */}
-				<div className="grid grid-cols-3 gap-3">
-					<Card className="bg-gradient-to-r from-purple-500 to-pink-500 dark:from-purple-600 dark:to-pink-600 text-white border-0">
-						<CardContent className="p-3">
+				<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+					<Card className="bg-gradient-to-r from-purple-500 to-pink-500 dark:from-purple-600 dark:to-pink-600 text-white border-0 shadow-md">
+						<CardContent className="p-4">
 							<div className="flex justify-between">
 								<div>
 									<p className="text-xs font-medium">Physical</p>
@@ -53,8 +53,8 @@ const AssessmentProgress = ({
 						</CardContent>
 					</Card>
 
-					<Card className="bg-gradient-to-r from-blue-500 to-indigo-500 dark:from-blue-600 dark:to-indigo-600 text-white border-0">
-						<CardContent className="p-3">
+					<Card className="bg-gradient-to-r from-blue-500 to-indigo-500 dark:from-blue-600 dark:to-indigo-600 text-white border-0 shadow-md">
+						<CardContent className="p-4">
 							<div className="flex justify-between">
 								<div>
 									<p className="text-xs font-medium">Psychological</p>
@@ -73,8 +73,8 @@ const AssessmentProgress = ({
 						</CardContent>
 					</Card>
 
-					<Card className="bg-gradient-to-r from-teal-500 to-blue-500 dark:from-teal-600 dark:to-blue-600 text-white border-0">
-						<CardContent className="p-3">
+					<Card className="bg-gradient-to-r from-teal-500 to-blue-500 dark:from-teal-600 dark:to-blue-600 text-white border-0 shadow-md">
+						<CardContent className="p-4">
 							<div className="flex justify-between">
 								<div>
 									<p className="text-xs font-medium">Cognitive</p>
@@ -95,7 +95,7 @@ const AssessmentProgress = ({
 				</div>
 
 				{/* Overall Status Text Section */}
-				<Card className="mt-4">
+				<Card className="mt-4 shadow-sm border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-700">
 					<CardContent className="p-4">
 						<div className="flex justify-between items-center mb-3">
 							<h2 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">

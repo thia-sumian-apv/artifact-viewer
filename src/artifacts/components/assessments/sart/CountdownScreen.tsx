@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import FullscreenButton from "./FullscreenButton";
 import { Clock } from "lucide-react";
 import { Card } from "@/components/ui/card";
 
@@ -10,7 +9,6 @@ interface CountdownScreenProps {
 
 const CountdownScreen: React.FC<CountdownScreenProps> = ({
 	onCountdownComplete,
-	containerRef,
 }) => {
 	const [count, setCount] = useState(3);
 
@@ -67,10 +65,6 @@ const CountdownScreen: React.FC<CountdownScreenProps> = ({
 					{count === 0 ? "GO!" : count}
 				</span>
 			</Card>
-
-			<div className="absolute bottom-4 right-4">
-				<FullscreenButton containerRef={containerRef} />
-			</div>
 		</div>
 	);
 };

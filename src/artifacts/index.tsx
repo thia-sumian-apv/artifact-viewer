@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Brain, Activity, Users, Dumbbell, Award } from "lucide-react";
 import type { Assessment } from "./components/AssessmentCard";
 import Dashboard from "./components/Dashboard";
-import AssessmentProgress from "./components/AssessmentProgress";
 import CognitiveTab from "./components/CognitiveTab";
 import PsychologicalTab from "./components/PsychologicalTab";
 import PhysicalTab from "./components/PhysicalTab";
@@ -33,6 +32,9 @@ const NeuroVibesPortal = () => {
 		null,
 	);
 	const [assessmentModalOpen, setAssessmentModalOpen] = useState(false);
+	const [themeMode, setThemeMode] = useState<"light" | "dark" | "system">(
+		"light",
+	);
 
 	useEffect(() => {
 		// Simulate API call to fetch available assessments
@@ -249,25 +251,15 @@ const NeuroVibesPortal = () => {
 		switch (activeTab) {
 			case "dashboard":
 				return (
-					<>
-						<AssessmentProgress
-							cognitiveProgress={cognitiveProgress}
-							psychologicalProgress={psychologicalProgress}
-							getPhysicalProgress={getPhysicalProgress}
-							overallProgress={overallProgress}
-							setActiveTab={setActiveTab}
-						/>
-
-						<Dashboard
-							assessments={assessments}
-							cognitiveProgress={cognitiveProgress}
-							psychologicalProgress={psychologicalProgress}
-							overallProgress={overallProgress}
-							getPhysicalProgress={getPhysicalProgress}
-							setActiveTab={setActiveTab}
-							viewReport={viewReport}
-						/>
-					</>
+					<Dashboard
+						assessments={assessments}
+						cognitiveProgress={cognitiveProgress}
+						psychologicalProgress={psychologicalProgress}
+						overallProgress={overallProgress}
+						getPhysicalProgress={getPhysicalProgress}
+						setActiveTab={setActiveTab}
+						viewReport={viewReport}
+					/>
 				);
 
 			case "cognitive":
@@ -322,6 +314,7 @@ const NeuroVibesPortal = () => {
 				setShowSidebar={setShowSidebar}
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}
+				themeMode={themeMode}
 			/>
 
 			{/* Main Content */}
@@ -333,6 +326,8 @@ const NeuroVibesPortal = () => {
 					activeTab={activeTab}
 					showSidebar={showSidebar}
 					setShowSidebar={setShowSidebar}
+					themeMode={themeMode}
+					setThemeMode={setThemeMode}
 				/>
 
 				{/* Main Content */}

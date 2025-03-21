@@ -19,8 +19,9 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useState } from "react";
-import logo from "../../assets/images/nv-logo.png";
+import { useEffect, useState } from "react";
+import lightLogo from "../../assets/images/nv-logo-light.png";
+import darkLogo from "../../assets/images/nv-logo-dark.png";
 import logoCollapsed from "../../assets/images/nv-logo-collapsed.png";
 
 interface SidebarProps {
@@ -28,10 +29,45 @@ interface SidebarProps {
 	setShowSidebar: (show: boolean) => void;
 	activeTab: string;
 	setActiveTab: (tab: string) => void;
+	themeMode?: "light" | "dark" | "system"; // Add theme mode prop
 }
 
-const Sidebar = ({ showSidebar, activeTab, setActiveTab }: SidebarProps) => {
+const Sidebar = ({
+	showSidebar,
+	activeTab,
+	setActiveTab,
+	themeMode = "light",
+}: SidebarProps) => {
 	const [courseMenuOpen, setCourseMenuOpen] = useState(false);
+	const [currentLogo, setCurrentLogo] = useState(lightLogo);
+
+	// Update logo based on theme
+	useEffect(() => {
+		if (themeMode === "dark") {
+			setCurrentLogo(darkLogo);
+		} else if (themeMode === "light") {
+			setCurrentLogo(lightLogo);
+		} else if (themeMode === "system") {
+			// Check system preference
+			const isDarkMode = window.matchMedia(
+				"(prefers-color-scheme: dark)",
+			).matches;
+			setCurrentLogo(isDarkMode ? darkLogo : lightLogo);
+		}
+	}, [themeMode]);
+
+	// Listen for system theme changes when in system mode
+	useEffect(() => {
+		if (themeMode === "system") {
+			const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+			const handleChange = (e: MediaQueryListEvent) => {
+				setCurrentLogo(e.matches ? darkLogo : lightLogo);
+			};
+
+			mediaQuery.addEventListener("change", handleChange);
+			return () => mediaQuery.removeEventListener("change", handleChange);
+		}
+	}, [themeMode]);
 
 	return (
 		<div
@@ -41,7 +77,7 @@ const Sidebar = ({ showSidebar, activeTab, setActiveTab }: SidebarProps) => {
 				{showSidebar ? (
 					<div className="w-full h-12 flex-shrink-0">
 						<img
-							src={logo}
+							src={currentLogo}
 							alt="NeuroVibes Logo"
 							className="w-full h-full object-contain"
 						/>
