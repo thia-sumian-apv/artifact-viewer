@@ -24,14 +24,15 @@ import { useEffect, useState } from "react";
 import lightLogo from "../../assets/images/nv-logo-light.png";
 import darkLogo from "../../assets/images/nv-logo-dark.png";
 import logoCollapsed from "../../assets/images/nv-logo-collapsed.png";
+import type { UserRole } from "..";
 
 interface SidebarProps {
 	showSidebar: boolean;
 	setShowSidebar: (show: boolean) => void;
 	activeTab: string;
 	setActiveTab: (tab: string) => void;
-	isSuperAdmin?: boolean;
-	themeMode?: "light" | "dark" | "system"; // Add theme mode prop
+	userRole?: UserRole;
+	themeMode?: "light" | "dark" | "system";
 }
 
 const Sidebar = ({
@@ -39,7 +40,7 @@ const Sidebar = ({
 	activeTab,
 	setActiveTab,
 	themeMode = "light",
-	isSuperAdmin = true,
+	userRole = "trainee",
 }: SidebarProps) => {
 	const [courseMenuOpen, setCourseMenuOpen] = useState(false);
 	const [currentLogo, setCurrentLogo] = useState(lightLogo);
@@ -72,6 +73,35 @@ const Sidebar = ({
 		}
 	}, [themeMode]);
 
+	// Define which tabs are visible for each role
+	const rolePermissions = {
+		superAdmin: [
+			"dashboard",
+			"companies",
+			"course",
+			"physical",
+			"psychological",
+			"cognitive",
+			"reports",
+			"profile",
+		],
+		companyAdmin: [
+			"dashboard",
+			"course",
+			"physical",
+			"psychological",
+			"cognitive",
+			"reports",
+			"profile",
+		],
+		courseCommander: ["dashboard", "course", "reports", "profile"],
+		courseTrainer: ["dashboard", "course", "reports", "profile"],
+		trainee: ["dashboard", "physical", "psychological", "cognitive", "profile"],
+	};
+
+	// Get current role's visible tabs
+	const visibleTabs = rolePermissions[userRole] || rolePermissions.trainee;
+
 	return (
 		<div
 			className={`${showSidebar ? "w-64" : "w-20"} bg-white dark:bg-gray-800 h-screen shadow-md fixed transition-all duration-300 z-10`}
@@ -96,15 +126,18 @@ const Sidebar = ({
 				)}
 			</div>
 			<nav className="mt-4">
-				<div
-					className={`px-4 py-2 ${activeTab === "dashboard" ? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400" : "text-gray-600 dark:text-gray-300"} hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mx-2 flex items-center`}
-					onClick={() => setActiveTab("dashboard")}
-					onKeyDown={(e) => e.key === "Enter" && setActiveTab("dashboard")}
-				>
-					<BarChart2 className="h-5 w-5" />
-					{showSidebar && <span className="ml-3 text-sm">Dashboard</span>}
-				</div>
-				{isSuperAdmin && (
+				{visibleTabs.includes("dashboard") && (
+					<div
+						className={`px-4 py-2 ${activeTab === "dashboard" ? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400" : "text-gray-600 dark:text-gray-300"} hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mx-2 flex items-center`}
+						onClick={() => setActiveTab("dashboard")}
+						onKeyDown={(e) => e.key === "Enter" && setActiveTab("dashboard")}
+					>
+						<BarChart2 className="h-5 w-5" />
+						{showSidebar && <span className="ml-3 text-sm">Dashboard</span>}
+					</div>
+				)}
+
+				{visibleTabs.includes("companies") && (
 					<div
 						className={`px-4 py-2 mt-1 ${activeTab === "companies" ? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400" : "text-gray-600 dark:text-gray-300"} hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mx-2 flex items-center`}
 						onClick={() => setActiveTab("companies")}
@@ -114,108 +147,131 @@ const Sidebar = ({
 						{showSidebar && <span className="ml-3 text-sm">Companies</span>}
 					</div>
 				)}
-				<div className="relative">
-					<div
-						className={`px-4 py-2 mt-1 ${
-							activeTab === "course"
-								? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400"
-								: "text-gray-600 dark:text-gray-300"
-						} hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mx-2 flex items-center justify-between`}
-						onClick={() => showSidebar && setCourseMenuOpen(!courseMenuOpen)}
-						onKeyDown={(e) =>
-							e.key === "Enter" &&
-							showSidebar &&
-							setCourseMenuOpen(!courseMenuOpen)
-						}
-					>
-						<div className="flex items-center">
-							<BookOpen className="h-5 w-5" />
-							{showSidebar && <span className="ml-3 text-sm">Course</span>}
+
+				{visibleTabs.includes("course") && (
+					<div className="relative">
+						<div
+							className={`px-4 py-2 mt-1 ${
+								activeTab === "course"
+									? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400"
+									: "text-gray-600 dark:text-gray-300"
+							} hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mx-2 flex items-center justify-between`}
+							onClick={() => showSidebar && setCourseMenuOpen(!courseMenuOpen)}
+							onKeyDown={(e) =>
+								e.key === "Enter" &&
+								showSidebar &&
+								setCourseMenuOpen(!courseMenuOpen)
+							}
+						>
+							<div className="flex items-center">
+								<BookOpen className="h-5 w-5" />
+								{showSidebar && <span className="ml-3 text-sm">Course</span>}
+							</div>
+							{showSidebar && (
+								<ChevronDown
+									className={`h-4 w-4 transition-transform ${courseMenuOpen ? "transform rotate-180" : ""}`}
+								/>
+							)}
 						</div>
-						{showSidebar && (
-							<ChevronDown
-								className={`h-4 w-4 transition-transform ${courseMenuOpen ? "transform rotate-180" : ""}`}
-							/>
+
+						{/* Submenu */}
+						{showSidebar && courseMenuOpen && (
+							<div className="ml-6 mt-1 relative">
+								{/* Vertical line */}
+								<div className="absolute left-2 top-0 bottom-0 w-[1px] bg-gray-200 dark:bg-gray-700" />
+
+								<div
+									className={`px-4 py-2 ${
+										activeTab === "courses"
+											? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400"
+											: "text-gray-600 dark:text-gray-300"
+									} hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mr-2 ml-6 flex items-center relative`}
+									onClick={() => setActiveTab("courses")}
+									onKeyDown={(e) =>
+										e.key === "Enter" && setActiveTab("courses")
+									}
+								>
+									<Library className="h-5 w-5" />
+									<span className="ml-3 text-sm">Courses</span>
+								</div>
+
+								<div
+									className={`px-4 py-2 ${
+										activeTab === "assessmentRuns"
+											? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400"
+											: "text-gray-600 dark:text-gray-300"
+									} hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mr-2 ml-6 flex items-center relative`}
+									onClick={() => setActiveTab("assessmentRuns")}
+									onKeyDown={(e) =>
+										e.key === "Enter" && setActiveTab("assessmentRuns")
+									}
+								>
+									<ClipboardList className="h-5 w-5" />
+									<span className="ml-3 text-sm">Assessment Runs</span>
+								</div>
+							</div>
 						)}
 					</div>
+				)}
 
-					{/* Submenu */}
-					{showSidebar && courseMenuOpen && (
-						<div className="ml-6 mt-1 relative">
-							{/* Vertical line */}
-							<div className="absolute left-2 top-0 bottom-0 w-[1px] bg-gray-200 dark:bg-gray-700" />
+				{visibleTabs.includes("physical") && (
+					<div
+						className={`px-4 py-2 mt-1 ${activeTab === "physical" ? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400" : "text-gray-600 dark:text-gray-300"} hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mx-2 flex items-center`}
+						onClick={() => setActiveTab("physical")}
+						onKeyDown={(e) => e.key === "Enter" && setActiveTab("physical")}
+					>
+						<Dumbbell className="h-5 w-5" />
+						{showSidebar && <span className="ml-3 text-sm">Physical</span>}
+					</div>
+				)}
 
-							<div
-								className={`px-4 py-2 ${
-									activeTab === "courses"
-										? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400"
-										: "text-gray-600 dark:text-gray-300"
-								} hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mr-2 ml-6 flex items-center relative`}
-								onClick={() => setActiveTab("courses")}
-								onKeyDown={(e) => e.key === "Enter" && setActiveTab("courses")}
-							>
-								<Library className="h-5 w-5" />
-								<span className="ml-3 text-sm">Courses</span>
-							</div>
+				{visibleTabs.includes("psychological") && (
+					<div
+						className={`px-4 py-2 mt-1 ${activeTab === "psychological" ? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400" : "text-gray-600 dark:text-gray-300"} hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mx-2 flex items-center`}
+						onClick={() => setActiveTab("psychological")}
+						onKeyDown={(e) =>
+							e.key === "Enter" && setActiveTab("psychological")
+						}
+					>
+						<Activity className="h-5 w-5" />
+						{showSidebar && <span className="ml-3 text-sm">Psychological</span>}
+					</div>
+				)}
 
-							<div
-								className={`px-4 py-2 ${
-									activeTab === "assessmentRuns"
-										? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400"
-										: "text-gray-600 dark:text-gray-300"
-								} hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mr-2 ml-6 flex items-center relative`}
-								onClick={() => setActiveTab("assessmentRuns")}
-								onKeyDown={(e) =>
-									e.key === "Enter" && setActiveTab("assessmentRuns")
-								}
-							>
-								<ClipboardList className="h-5 w-5" />
-								<span className="ml-3 text-sm">Assessment Runs</span>
-							</div>
-						</div>
-					)}
-				</div>
-				<div
-					className={`px-4 py-2 mt-1 ${activeTab === "physical" ? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400" : "text-gray-600 dark:text-gray-300"} hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mx-2 flex items-center`}
-					onClick={() => setActiveTab("physical")}
-					onKeyDown={(e) => e.key === "Enter" && setActiveTab("physical")}
-				>
-					<Dumbbell className="h-5 w-5" />
-					{showSidebar && <span className="ml-3 text-sm">Physical</span>}
-				</div>
-				<div
-					className={`px-4 py-2 mt-1 ${activeTab === "psychological" ? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400" : "text-gray-600 dark:text-gray-300"} hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mx-2 flex items-center`}
-					onClick={() => setActiveTab("psychological")}
-					onKeyDown={(e) => e.key === "Enter" && setActiveTab("psychological")}
-				>
-					<Activity className="h-5 w-5" />
-					{showSidebar && <span className="ml-3 text-sm">Psychological</span>}
-				</div>
-				<div
-					className={`px-4 py-2 mt-1 ${activeTab === "cognitive" ? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400" : "text-gray-600 dark:text-gray-300"} hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mx-2 flex items-center`}
-					onClick={() => setActiveTab("cognitive")}
-					onKeyDown={(e) => e.key === "Enter" && setActiveTab("cognitive")}
-				>
-					<Brain className="h-5 w-5" />
-					{showSidebar && <span className="ml-3 text-sm">Cognitive</span>}
-				</div>
-				<div
-					className={`px-4 py-2 mt-1 ${activeTab === "reports" ? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400" : "text-gray-600 dark:text-gray-300"} hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mx-2 flex items-center`}
-					onClick={() => setActiveTab("reports")}
-					onKeyDown={(e) => e.key === "Enter" && setActiveTab("reports")}
-				>
-					<FileText className="h-5 w-5" />
-					{showSidebar && <span className="ml-3 text-sm">Reports</span>}
-				</div>
-				<div
-					className={`px-4 py-2 mt-1 ${activeTab === "profile" ? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400" : "text-gray-600 dark:text-gray-300"} hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mx-2 flex items-center`}
-					onClick={() => setActiveTab("profile")}
-					onKeyDown={(e) => e.key === "Enter" && setActiveTab("profile")}
-				>
-					<User className="h-5 w-5" />
-					{showSidebar && <span className="ml-3 text-sm">Profile</span>}
-				</div>
+				{visibleTabs.includes("cognitive") && (
+					<div
+						className={`px-4 py-2 mt-1 ${activeTab === "cognitive" ? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400" : "text-gray-600 dark:text-gray-300"} hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mx-2 flex items-center`}
+						onClick={() => setActiveTab("cognitive")}
+						onKeyDown={(e) => e.key === "Enter" && setActiveTab("cognitive")}
+					>
+						<Brain className="h-5 w-5" />
+						{showSidebar && <span className="ml-3 text-sm">Cognitive</span>}
+					</div>
+				)}
+
+				{visibleTabs.includes("reports") && (
+					<div
+						className={`px-4 py-2 mt-1 ${activeTab === "reports" ? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400" : "text-gray-600 dark:text-gray-300"} hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mx-2 flex items-center`}
+						onClick={() => setActiveTab("reports")}
+						onKeyDown={(e) => e.key === "Enter" && setActiveTab("reports")}
+					>
+						<FileText className="h-5 w-5" />
+						{showSidebar && <span className="ml-3 text-sm">Reports</span>}
+					</div>
+				)}
+
+				{visibleTabs.includes("profile") && (
+					<div
+						className={`px-4 py-2 mt-1 ${activeTab === "profile" ? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400" : "text-gray-600 dark:text-gray-300"} hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mx-2 flex items-center`}
+						onClick={() => setActiveTab("profile")}
+						onKeyDown={(e) => e.key === "Enter" && setActiveTab("profile")}
+					>
+						<User className="h-5 w-5" />
+						{showSidebar && <span className="ml-3 text-sm">Profile</span>}
+					</div>
+				)}
 			</nav>
+
 			<div className="absolute bottom-4 w-full px-4">
 				{/* User Profile Dropdown */}
 				<DropdownMenu>
@@ -238,7 +294,15 @@ const Sidebar = ({
 										John Doe
 									</p>
 									<p className="text-xs text-gray-500 dark:text-gray-400">
-										Trainee
+										{userRole === "superAdmin"
+											? "Super Admin"
+											: userRole === "companyAdmin"
+												? "Company Admin"
+												: userRole === "courseCommander"
+													? "Course Commander"
+													: userRole === "courseTrainer"
+														? "Course Trainer"
+														: "Trainee"}
 									</p>
 								</div>
 							)}
@@ -250,6 +314,59 @@ const Sidebar = ({
 						<DropdownMenuItem onClick={() => setActiveTab("profile")}>
 							My Profile
 						</DropdownMenuItem>
+
+						{/* Role Switcher Section */}
+						<DropdownMenuSeparator />
+						<DropdownMenuLabel className="text-xs font-normal text-gray-500">
+							Switch Role View (Demo)
+						</DropdownMenuLabel>
+						<DropdownMenuItem
+							onSelect={() =>
+								window.dispatchEvent(
+									new CustomEvent("switch-role", { detail: "superAdmin" }),
+								)
+							}
+						>
+							View as Super Admin
+						</DropdownMenuItem>
+						<DropdownMenuItem
+							onSelect={() =>
+								window.dispatchEvent(
+									new CustomEvent("switch-role", { detail: "companyAdmin" }),
+								)
+							}
+						>
+							View as Company Admin
+						</DropdownMenuItem>
+						<DropdownMenuItem
+							onSelect={() =>
+								window.dispatchEvent(
+									new CustomEvent("switch-role", { detail: "courseCommander" }),
+								)
+							}
+						>
+							View as Course Commander
+						</DropdownMenuItem>
+						<DropdownMenuItem
+							onSelect={() =>
+								window.dispatchEvent(
+									new CustomEvent("switch-role", { detail: "courseTrainer" }),
+								)
+							}
+						>
+							View as Course Trainer
+						</DropdownMenuItem>
+						<DropdownMenuItem
+							onSelect={() =>
+								window.dispatchEvent(
+									new CustomEvent("switch-role", { detail: "trainee" }),
+								)
+							}
+						>
+							View as Trainee
+						</DropdownMenuItem>
+
+						<DropdownMenuSeparator />
 						<DropdownMenuItem>Sign out</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>

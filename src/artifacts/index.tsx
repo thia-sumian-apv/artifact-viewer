@@ -16,6 +16,13 @@ import SARTTraining from "./components/assessments/sart/SARTTraining";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import CompaniesTab from "./components/CompaniesTab";
 
+export type UserRole =
+	| "superAdmin"
+	| "companyAdmin"
+	| "courseCommander"
+	| "courseTrainer"
+	| "trainee";
+
 const NeuroVibesPortal = () => {
 	const [isSuperAdmin, _setIsSuperAdmin] = useState(true); // For demo, set to true
 	const [activeTab, setActiveTab] = useState("dashboard");
@@ -37,6 +44,24 @@ const NeuroVibesPortal = () => {
 	const [themeMode, setThemeMode] = useState<"light" | "dark" | "system">(
 		"light",
 	);
+	const [userRole, setUserRole] = useState<UserRole>("trainee");
+	// Listen for role switch events
+	useEffect(() => {
+		const handleRoleSwitch = (event: CustomEvent<UserRole>) => {
+			setUserRole(event.detail);
+			// Optionally reset to dashboard when switching roles
+			setActiveTab("dashboard");
+		};
+
+		window.addEventListener("switch-role", handleRoleSwitch as EventListener);
+
+		return () => {
+			window.removeEventListener(
+				"switch-role",
+				handleRoleSwitch as EventListener,
+			);
+		};
+	}, []);
 
 	useEffect(() => {
 		// Simulate API call to fetch available assessments
@@ -321,7 +346,7 @@ const NeuroVibesPortal = () => {
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}
 				themeMode={themeMode}
-				isSuperAdmin={isSuperAdmin}
+				userRole={userRole}
 			/>
 
 			{/* Main Content */}
