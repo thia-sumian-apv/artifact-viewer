@@ -4,15 +4,8 @@ import {
 	DialogHeader,
 	DialogTitle,
 } from "@/components/ui/dialog";
-import {
-	Breadcrumb,
-	BreadcrumbItem,
-	BreadcrumbLink,
-	BreadcrumbList,
-	BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+import { Progress } from "@/components/ui/progress";
 import { useState } from "react";
-import { Check } from "lucide-react";
 import { toast } from "sonner";
 import { BasicInfoStep } from "./steps/BasicInfoStep";
 import { SelectAssessmentsStep } from "./steps/SelectAssessmentsStep";
@@ -64,36 +57,24 @@ export function AddCourseDialog({ open, onOpenChange }: AddCourseDialogProps) {
 		<Dialog open={open} onOpenChange={onOpenChange}>
 			<DialogContent className="max-w-3xl w-full h-[550px] flex flex-col">
 				<DialogHeader>
-					<div className="flex flex-col space-y-2">
+					<div className="flex flex-col space-y-4">
 						<DialogTitle>Add New Course</DialogTitle>
 
-						<Breadcrumb className="w-full">
-							<BreadcrumbList className="justify-start">
-								{steps.map((step, index) => (
-									<BreadcrumbItem key={step}>
-										<BreadcrumbLink
-											className={`flex items-center text-xs ${
-												index <= currentStep
-													? "text-teal-500 font-medium"
-													: "text-gray-400"
-											}`}
-											onClick={() => {
-												// Only allow clicking on completed steps to go back
-												if (index < currentStep) {
-													setCurrentStep(index);
-												}
-											}}
-										>
-											{index < currentStep && (
-												<Check className="mr-1 h-3 w-3 text-teal-500" />
-											)}
-											{step}
-										</BreadcrumbLink>
-										{index < steps.length - 1 && <BreadcrumbSeparator />}
-									</BreadcrumbItem>
-								))}
-							</BreadcrumbList>
-						</Breadcrumb>
+						<div className="flex flex-col">
+							<div className="flex justify-between mb-1">
+								<span className="text-sm font-medium">
+									Step {currentStep + 1} of {steps.length}
+								</span>
+								<span className="text-sm text-muted-foreground">
+									{steps[currentStep]}
+								</span>
+							</div>
+
+							<Progress
+								value={((currentStep + 1) / steps.length) * 100}
+								className="h-1.5 w-full"
+							/>
+						</div>
 					</div>
 				</DialogHeader>
 
@@ -127,6 +108,7 @@ export function AddCourseDialog({ open, onOpenChange }: AddCourseDialogProps) {
 						/>
 					)}
 				</div>
+
 				{/* Fixed footer with navigation buttons */}
 				<div className="mt-6 flex justify-between border-t pt-4">
 					<div>
