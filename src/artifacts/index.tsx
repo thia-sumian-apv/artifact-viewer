@@ -17,7 +17,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import CompaniesTab from "./components/CompaniesTab";
 
 const NeuroVibesPortal = () => {
-	const [isSuperAdmin, setIsSuperAdmin] = useState(true); // For demo, set to true
+	const [isSuperAdmin, _setIsSuperAdmin] = useState(true); // For demo, set to true
 	const [activeTab, setActiveTab] = useState("dashboard");
 	const [assessments, setAssessments] = useState<{
 		cognitive: Assessment[];
