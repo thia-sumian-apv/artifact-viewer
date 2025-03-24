@@ -9,6 +9,7 @@ import {
 	ClipboardList,
 	ChevronDown,
 	Library,
+	Building2,
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -29,6 +30,7 @@ interface SidebarProps {
 	setShowSidebar: (show: boolean) => void;
 	activeTab: string;
 	setActiveTab: (tab: string) => void;
+	isSuperAdmin?: boolean;
 	themeMode?: "light" | "dark" | "system"; // Add theme mode prop
 }
 
@@ -37,6 +39,7 @@ const Sidebar = ({
 	activeTab,
 	setActiveTab,
 	themeMode = "light",
+	isSuperAdmin = true,
 }: SidebarProps) => {
 	const [courseMenuOpen, setCourseMenuOpen] = useState(false);
 	const [currentLogo, setCurrentLogo] = useState(lightLogo);
@@ -101,6 +104,16 @@ const Sidebar = ({
 					<BarChart2 className="h-5 w-5" />
 					{showSidebar && <span className="ml-3 text-sm">Dashboard</span>}
 				</div>
+				{isSuperAdmin && (
+					<div
+						className={`px-4 py-2 mt-1 ${activeTab === "companies" ? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400" : "text-gray-600 dark:text-gray-300"} hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mx-2 flex items-center`}
+						onClick={() => setActiveTab("companies")}
+						onKeyDown={(e) => e.key === "Enter" && setActiveTab("companies")}
+					>
+						<Building2 className="h-5 w-5" />
+						{showSidebar && <span className="ml-3 text-sm">Companies</span>}
+					</div>
+				)}
 				<div className="relative">
 					<div
 						className={`px-4 py-2 mt-1 ${
