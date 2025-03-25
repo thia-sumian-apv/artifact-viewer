@@ -157,7 +157,7 @@ const CohortsTab = () => {
 	};
 
 	return (
-		<Card className="shadow-sm">
+		<Card className="bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700">
 			<CardContent className="pt-6">
 				<div className="space-y-6">
 					<div className="flex justify-between items-center">
