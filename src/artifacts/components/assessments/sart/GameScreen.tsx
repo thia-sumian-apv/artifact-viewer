@@ -5,8 +5,7 @@ import {
 	type SARTResponse,
 } from "./SARTConfig";
 import { useKeyPress } from "./useKeyPress";
-import FeedbackDisplay from "./FeedbackDisplay";
-import { Plus } from "lucide-react";
+import { CheckCircle, Plus, XCircle } from "lucide-react";
 
 interface GameScreenProps {
 	mode: "practice" | "test";
@@ -170,6 +169,41 @@ const GameScreen: React.FC<GameScreenProps> = ({
 				</span>
 			</div>
 
+			{/* Feedback area - fixed height, positioned at top */}
+			<div className="w-full max-w-md mb-8 h-20 flex items-center justify-center">
+				<div
+					className={`p-4 rounded-lg bg-gray-50 dark:bg-gray-800 w-full ${showFeedback ? "" : "opacity-0"}`}
+				>
+					{showFeedback && (
+						<div className="flex items-center justify-center space-x-3">
+							<div className="flex-shrink-0">
+								{isCorrectResponse ? (
+									<CheckCircle className="h-6 w-6 text-green-500" />
+								) : (
+									<XCircle className="h-6 w-6 text-red-500" />
+								)}
+							</div>
+							<div className="flex-1 text-left">
+								<p
+									className={`text-sm font-medium ${isCorrectResponse ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}
+								>
+									{isCorrectResponse ? "Correct!" : "Incorrect!"}
+								</p>
+								<p className="text-xs text-gray-600 dark:text-gray-400 truncate">
+									{currentDigit === 3
+										? isPressedSpace
+											? "You pressed space for 3. Don't press for 3."
+											: "Good! You didn't press for 3."
+										: isPressedSpace
+											? "Good! You pressed for a non-3 digit."
+											: "You should press space for all non-3 digits."}
+								</p>
+							</div>
+						</div>
+					)}
+				</div>
+			</div>
+
 			<div className="relative h-60 w-60 flex items-center justify-center bg-white dark:bg-gray-800 rounded-full shadow-md border-4 border-gray-100 dark:border-gray-700">
 				{showFixation && (
 					<Plus className="h-12 w-12 text-gray-800 dark:text-gray-200" />
@@ -191,14 +225,6 @@ const GameScreen: React.FC<GameScreenProps> = ({
 					</span>
 				</p>
 			</div>
-
-			{showFeedback && (
-				<FeedbackDisplay
-					isCorrect={isCorrectResponse}
-					digit={currentDigit || 0}
-					isPressedSpace={isPressedSpace}
-				/>
-			)}
 		</div>
 	);
 };
