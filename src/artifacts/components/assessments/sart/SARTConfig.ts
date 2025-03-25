@@ -16,8 +16,8 @@ export const DEFAULT_SETTINGS: GameSettingsType = {
 	displayTime: 1150,
 	initialCrossDuration: 100,
 	digitDuration: 500,
-	correctFeedbackDuration: 1000,
-	incorrectFeedbackDuration: 1000,
+	correctFeedbackDuration: 1500,
+	incorrectFeedbackDuration: 1500,
 };
 
 export interface SARTResponse {
