@@ -1,5 +1,4 @@
 import { Pencil, Trash2, Eye, Calendar, User } from "lucide-react";
-import { dummyCourseData } from "../types/course";
 import {
 	Table,
 	TableBody,
@@ -18,6 +17,7 @@ import {
 	DialogTitle,
 } from "@/components/ui/dialog";
 import { useState } from "react";
+import { dummyCourseData } from "../mocks/courseData";
 
 const CoursesTab = () => {
 	const [selectedCourse, setSelectedCourse] = useState<
@@ -49,7 +49,7 @@ const CoursesTab = () => {
 					<Button onClick={() => setAddDialogOpen(true)}>Add Course</Button>
 				</CardHeader>
 				<CardContent>
-					<div className="border rounded-lg">
+					<div>
 						<Table>
 							<TableHeader>
 								<TableRow>
