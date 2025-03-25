@@ -75,18 +75,22 @@ const CountdownScreen: React.FC<CountdownScreenProps> = ({
 	const currentText = stage < 3 ? stages[stage] : "";
 
 	return (
-		<div className="max-w-md mx-auto w-full flex flex-col items-center justify-center">
-			<div className="text-center mb-8">
-				<Clock className="h-12 w-12 mx-auto mb-4 text-teal-500" />
-				<h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
-					Get Ready
-				</h2>
-				<p className="mt-2 text-gray-500 dark:text-gray-400">
-					{stage >= 3 ? "Starting now..." : "The test will begin shortly"}
-				</p>
+		<div className="max-w-xl mx-auto w-full flex flex-col items-center justify-center h-full relative">
+			{/* Fixed height instruction area - same position as feedback in GameScreen */}
+			<div className="w-full max-w-md mb-8 h-32 flex items-center justify-center">
+				<div className="text-center">
+					<Clock className="h-10 w-10 mx-auto mb-2 text-teal-500" />
+					<h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+						Get Ready
+					</h2>
+					<p className="mt-1 text-gray-500 dark:text-gray-400">
+						{stage >= 3 ? "Starting now..." : "The test will begin shortly"}
+					</p>
+				</div>
 			</div>
 
-			<div className="relative flex items-center justify-center mb-10">
+			{/* Countdown timer - same position as the digit in NumberScreen and GameScreen */}
+			<div className="relative h-60 w-60 flex items-center justify-center bg-white dark:bg-gray-800 rounded-full shadow-md border-4 border-gray-100 dark:border-gray-700">
 				{/* daisyUI radial progress */}
 				<div
 					className={`radial-progress ${getProgressColorClass()} transition-colors duration-300`}
@@ -107,6 +111,9 @@ const CountdownScreen: React.FC<CountdownScreenProps> = ({
 					</span>
 				</div>
 			</div>
+
+			{/* Empty space to match layout in other screens */}
+			<div className="mt-12 h-16" />
 		</div>
 	);
 };

@@ -169,38 +169,35 @@ const GameScreen: React.FC<GameScreenProps> = ({
 				</span>
 			</div>
 
-			{/* Feedback area - fixed height, positioned at top */}
-			<div className="w-full max-w-md mb-8 h-20 flex items-center justify-center">
+			{/* Fixed height feedback area - always occupies the same space */}
+			<div className="w-full max-w-md mb-8 h-32 flex items-center justify-center">
 				<div
-					className={`p-4 rounded-lg bg-gray-50 dark:bg-gray-800 w-full ${showFeedback ? "" : "opacity-0"}`}
+					className={`w-full text-center transition-opacity duration-200 ${showFeedback ? "opacity-100" : "opacity-0"}`}
 				>
-					{showFeedback && (
-						<div className="flex items-center justify-center space-x-3">
-							<div className="flex-shrink-0">
-								{isCorrectResponse ? (
-									<CheckCircle className="h-6 w-6 text-green-500" />
-								) : (
-									<XCircle className="h-6 w-6 text-red-500" />
-								)}
-							</div>
-							<div className="flex-1 text-left">
-								<p
-									className={`text-sm font-medium ${isCorrectResponse ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}
-								>
-									{isCorrectResponse ? "Correct!" : "Incorrect!"}
-								</p>
-								<p className="text-xs text-gray-600 dark:text-gray-400 truncate">
-									{currentDigit === 3
-										? isPressedSpace
-											? "You pressed space for 3. Don't press for 3."
-											: "Good! You didn't press for 3."
-										: isPressedSpace
-											? "Good! You pressed for a non-3 digit."
-											: "You should press space for all non-3 digits."}
-								</p>
-							</div>
+					{/* Always render the content, but control visibility with opacity */}
+					<div className="flex flex-col items-center justify-center">
+						<div className="flex-shrink-0 mb-2">
+							{isCorrectResponse ? (
+								<CheckCircle className="h-10 w-10 text-green-500" />
+							) : (
+								<XCircle className="h-10 w-10 text-red-500" />
+							)}
 						</div>
-					)}
+						<h3
+							className={`text-xl font-semibold ${isCorrectResponse ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}
+						>
+							{isCorrectResponse ? "Correct!" : "Incorrect!"}
+						</h3>
+						<p className="mt-1 text-gray-600 dark:text-gray-400">
+							{currentDigit === 3
+								? isPressedSpace
+									? "You pressed space for 3. Don't press for 3."
+									: "Good! You didn't press for 3."
+								: isPressedSpace
+									? "Good! You pressed for a non-3 digit."
+									: "You should press space for all non-3 digits."}
+						</p>
+					</div>
 				</div>
 			</div>
 
