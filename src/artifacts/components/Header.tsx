@@ -22,16 +22,21 @@ const Header = ({
 	activeTab,
 	showSidebar,
 	setShowSidebar,
+	themeMode,
 	setThemeMode,
 }: HeaderProps) => {
 	const [mode, setMode] = useState<ThemeMode>(() => {
-		// Check localStorage first
+		// First prioritize the prop value from parent
+		if (themeMode) {
+			return themeMode;
+		}
+		// Then check localStorage
 		const savedMode = localStorage.getItem("theme") as ThemeMode;
 		if (savedMode) {
 			return savedMode;
 		}
-		// If no saved preference, default to system
-		return "system";
+		// If nothing else, default to light (matching parent's default)
+		return "light";
 	});
 
 	const formatTabName = (tab: string) => {
