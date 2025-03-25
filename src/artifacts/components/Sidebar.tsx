@@ -10,6 +10,8 @@ import {
 	ChevronDown,
 	Library,
 	Building2,
+	Users,
+	UserCog,
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -43,6 +45,7 @@ const Sidebar = ({
 	userRole = "trainee",
 }: SidebarProps) => {
 	const [courseMenuOpen, setCourseMenuOpen] = useState(false);
+	const [userMenuOpen, setUserMenuOpen] = useState(false);
 	const [currentLogo, setCurrentLogo] = useState(lightLogo);
 
 	// Update logo based on theme
@@ -84,6 +87,7 @@ const Sidebar = ({
 			"cognitive",
 			"reports",
 			"profile",
+			"users",
 		],
 		companyAdmin: [
 			"dashboard",
@@ -93,6 +97,7 @@ const Sidebar = ({
 			"cognitive",
 			"reports",
 			"profile",
+			"users",
 		],
 		courseCommander: ["dashboard", "course", "reports", "profile"],
 		courseTrainer: ["dashboard", "course", "reports", "profile"],
@@ -148,6 +153,68 @@ const Sidebar = ({
 					</div>
 				)}
 
+				{visibleTabs.includes("users") && (
+					<div className="relative">
+						<div
+							className={`px-4 py-2 mt-1 ${"text-gray-600 dark:text-gray-300"} hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mx-2 flex items-center justify-between`}
+							onClick={() => showSidebar && setUserMenuOpen(!userMenuOpen)}
+							onKeyDown={(e) =>
+								e.key === "Enter" &&
+								showSidebar &&
+								setUserMenuOpen(!userMenuOpen)
+							}
+						>
+							<div className="flex items-center">
+								<UserCog className="h-5 w-5" />
+								{showSidebar && (
+									<span className="ml-3 text-sm">User Management</span>
+								)}
+							</div>
+							{showSidebar && (
+								<ChevronDown
+									className={`h-4 w-4 transition-transform ${userMenuOpen ? "transform rotate-180" : ""}`}
+								/>
+							)}
+						</div>
+
+						{/* Submenu */}
+						{showSidebar && userMenuOpen && (
+							<div className="ml-6 mt-1 relative">
+								{/* Vertical line */}
+								<div className="absolute left-2 top-0 bottom-0 w-[1px] bg-gray-200 dark:bg-gray-700" />
+
+								<div
+									className={`px-4 py-2 ${
+										activeTab === "users"
+											? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400"
+											: "text-gray-600 dark:text-gray-300"
+									} hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mr-2 ml-6 flex items-center relative`}
+									onClick={() => setActiveTab("users")}
+									onKeyDown={(e) => e.key === "Enter" && setActiveTab("users")}
+								>
+									<Users className="h-5 w-5" />
+									<span className="ml-3 text-sm">Users</span>
+								</div>
+
+								<div
+									className={`px-4 py-2 ${
+										activeTab === "cohorts"
+											? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400"
+											: "text-gray-600 dark:text-gray-300"
+									} hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mr-2 ml-6 flex items-center relative`}
+									onClick={() => setActiveTab("cohorts")}
+									onKeyDown={(e) =>
+										e.key === "Enter" && setActiveTab("cohorts")
+									}
+								>
+									<ClipboardList className="h-5 w-5" />
+									<span className="ml-3 text-sm">Cohorts</span>
+								</div>
+							</div>
+						)}
+					</div>
+				)}
+
 				{visibleTabs.includes("course") && (
 					<div className="relative">
 						<div
@@ -165,7 +232,9 @@ const Sidebar = ({
 						>
 							<div className="flex items-center">
 								<BookOpen className="h-5 w-5" />
-								{showSidebar && <span className="ml-3 text-sm">Course</span>}
+								{showSidebar && (
+									<span className="ml-3 text-sm">Course Management</span>
+								)}
 							</div>
 							{showSidebar && (
 								<ChevronDown

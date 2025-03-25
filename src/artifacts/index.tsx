@@ -15,6 +15,8 @@ import AssessmentRunsTab from "./components/AssessmentRunsTab";
 import SARTTraining from "./components/assessments/sart/SARTTraining";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import CompaniesTab from "./components/CompaniesTab";
+import CohortsTab from "./components/CohortsTab";
+import UsersTab from "./components/UsersTab";
 
 export type UserRole =
 	| "superAdmin"
@@ -332,6 +334,11 @@ const NeuroVibesPortal = () => {
 				// Only render if super admin
 				return isSuperAdmin ? <CompaniesTab /> : null;
 
+			case "users":
+				return <UsersTab />;
+
+			case "cohorts":
+				return <CohortsTab />;
 			default:
 				return null;
 		}

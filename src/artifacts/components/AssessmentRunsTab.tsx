@@ -2,7 +2,6 @@ import { useState } from "react";
 import AssessmentRunsList from "./assessment-runs/AssessmentRunsList";
 import AddAssessmentRunDialog from "./assessment-runs/AddAssessmentRunDialog";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { dummyCourseData } from "../types/course";
 import { dummyAssessmentRunData } from "../types/assessmentRun";
 import type { AssessmentRun } from "../types/assessmentRun";
 import {
@@ -13,6 +12,7 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
+import { dummyCourseData } from "../mocks/courseData";
 
 const AssessmentRunsTab = () => {
 	const [selectedCourseId, setSelectedCourseId] = useState<string>(
