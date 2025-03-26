@@ -107,10 +107,10 @@ const CommanderDashboard: React.FC = () => {
 	useEffect(() => {
 		setLoading(true);
 		Promise.all([
-			fetch("/src/data/analysis/metrics_distribution.json"),
-			fetch("/src/data/analysis/correlation_matrices.json"),
-			fetch("/src/data/analysis/boxplot_analysis.json"),
-			fetch("/src/data/analysis/radar_profiles.json"),
+			fetch("/data/analysis/metrics_distribution.json"),
+			fetch("/data/analysis/correlation_matrices.json"),
+			fetch("/data/analysis/boxplot_analysis.json"),
+			fetch("/data/analysis/radar_profiles.json"),
 		])
 			.then(([metricsRes, correlationRes, boxplotRes, radarRes]) => {
 				if (

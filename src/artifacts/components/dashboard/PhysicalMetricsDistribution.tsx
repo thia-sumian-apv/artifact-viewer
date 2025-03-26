@@ -83,7 +83,7 @@ const PhysicalMetricsDistribution: React.FC<
 		}
 
 		setLoading(true);
-		fetch("/src/data/analysis/metrics_distribution.json")
+		fetch("/data/analysis/metrics_distribution.json")
 			.then((response) => {
 				if (!response.ok) {
 					throw new Error("Failed to load metrics data");

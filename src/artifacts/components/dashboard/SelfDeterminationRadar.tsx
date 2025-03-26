@@ -61,7 +61,7 @@ const SelfDeterminationRadar: React.FC<SelfDeterminationRadarProps> = ({
 		}
 
 		setLoading(true);
-		fetch("/src/data/analysis/radar_profiles.json")
+		fetch("/data/analysis/radar_profiles.json")
 			.then((response) => {
 				if (!response.ok) {
 					throw new Error("Failed to load radar profiles data");
