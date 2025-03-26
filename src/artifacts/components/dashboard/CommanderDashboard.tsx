@@ -5,6 +5,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Brain, Users, ChartBar, ArrowDown, ArrowUp } from "lucide-react";
 import CognitiveMetricsDistribution from "./CognitiveMetricsDistribution";
 import CorrelationMatrix from "./CorrelationMatrix";
+import ML360ProfilesRadar from "./ML360ProfilesRadar";
+import SelfDeterminationRadar from "./SelfDeterminationRadar";
 
 interface MetricData {
 	histogram: {
@@ -24,7 +26,6 @@ interface MetricData {
 	};
 	raw_data: number[];
 }
-
 interface MetricsData {
 	physical_metrics: Record<string, MetricData>;
 	cognitive_metrics: Record<string, MetricData>;
@@ -59,29 +60,84 @@ interface MetricsData {
 	};
 }
 
+interface RadarProfilesData {
+	ml360_profiles: {
+		by_detachment: Array<{
+			group: string;
+			count: number;
+			[key: string]: string | number;
+		}>;
+		by_age_group: Array<{
+			group: string;
+			count: number;
+			[key: string]: string | number;
+		}>;
+		dimensions: string[];
+	};
+	self_determination_profiles: {
+		by_detachment: Array<{
+			group: string;
+			count: number;
+			[key: string]: string | number;
+		}>;
+		by_age_group: Array<{
+			group: string;
+			count: number;
+			[key: string]: string | number;
+		}>;
+		dimensions: string[];
+	};
+}
+
+interface BoxplotData {
+	// Define structure based on your actual data
+	[metric: string]: {
+		whiskers: number[];
+		quartiles: number[];
+		// Add other properties as needed
+	};
+}
+
 const CommanderDashboard: React.FC = () => {
 	const [data, setData] = useState<MetricsData | null>(null);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [error, setError] = useState<string | null>(null);
-
+	const [_boxplotData, setBoxplotData] = useState<BoxplotData | null>(null);
+	const [radarData, setRadarData] = useState<RadarProfilesData | null>(null);
 	useEffect(() => {
 		setLoading(true);
 		Promise.all([
 			fetch("/src/data/analysis/metrics_distribution.json"),
 			fetch("/src/data/analysis/correlation_matrices.json"),
+			fetch("/src/data/analysis/boxplot_analysis.json"),
+			fetch("/src/data/analysis/radar_profiles.json"),
 		])
-			.then(([metricsRes, correlationRes]) => {
-				if (!metricsRes.ok || !correlationRes.ok) {
+			.then(([metricsRes, correlationRes, boxplotRes, radarRes]) => {
+				if (
+					!metricsRes.ok ||
+					!correlationRes.ok ||
+					!boxplotRes.ok ||
+					!radarRes.ok
+				) {
 					throw new Error("Failed to load data");
 				}
-				return Promise.all([metricsRes.json(), correlationRes.json()]);
+				return Promise.all([
+					metricsRes.json(),
+					correlationRes.json(),
+					boxplotRes.json(),
+					radarRes.json(),
+				]);
 			})
-			.then(([metricsData, correlationData]) => {
+			.then(([metricsData, correlationData, boxplotData, radarData]) => {
 				console.log("Correlation Data:", correlationData); // Debug log
+				console.log("Boxplot Data:", boxplotData); // Debug log
+				console.log("Radar Data:", radarData); // Debug log
 				setData({
 					...metricsData,
 					correlation_matrices: correlationData,
 				});
+				setBoxplotData(boxplotData);
+				setRadarData(radarData);
 				setLoading(false);
 			})
 			.catch((err) => {
@@ -109,6 +165,15 @@ const CommanderDashboard: React.FC = () => {
 			<div className="grid grid-cols-1">
 				<CorrelationMatrix
 					data={data?.correlation_matrices || null}
+					loading={loading}
+					error={error}
+				/>
+			</div>
+			{/* Radar Charts Row */}
+			<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+				<ML360ProfilesRadar data={radarData} loading={loading} error={error} />
+				<SelfDeterminationRadar
+					data={radarData}
 					loading={loading}
 					error={error}
 				/>
