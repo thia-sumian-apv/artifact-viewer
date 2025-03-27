@@ -1,0 +1,843 @@
+{
+	"scatter_plots": {
+		"Physical_Fitness_Composite_vs_ML360_Composite": {
+			"x_metric": "Physical_Fitness_Composite",
+			"y_metric": "ML360_Composite",
+			"title": "Physical Fitness vs Leadership Behavior",
+			"correlation": 0.13116071052465672,
+			"trend_line": {
+				"slope": 0.7144963342481019,
+				"intercept": 5.078842333177757,
+				"points": [
+					{ "x": 0.1944444444444444, "y": 5.217772175948221 },
+					{ "x": 0.7784795321637428, "y": 5.635063105195929 }
+				]
+			},
+			"x_stats": {
+				"min": 0.1944444444444444,
+				"max": 0.7784795321637428,
+				"mean": 0.5085253311851056,
+				"median": 0.4809314954051796
+			},
+			"y_stats": {
+				"min": 3.8400000000000007,
+				"max": 7.0,
+				"mean": 5.442181818181817,
+				"median": 5.54
+			}
+		},
+		"Physical_Fitness_Composite_vs_Self-Determination_General": {
+			"x_metric": "Physical_Fitness_Composite",
+			"y_metric": "Self-Determination (General)",
+			"title": "Physical Fitness vs Self-Determination",
+			"correlation": 0.2295205192833872,
+			"trend_line": {
+				"slope": 0.6722524722587224,
+				"intercept": 4.087233497995535,
+				"points": [
+					{ "x": 0.1944444444444444, "y": 4.217949256490287 },
+					{ "x": 0.7784795321637428, "y": 4.610568288095425 }
+				]
+			},
+			"x_stats": {
+				"min": 0.1944444444444444,
+				"max": 0.7784795321637428,
+				"mean": 0.5085253311851056,
+				"median": 0.4809314954051796
+			},
+			"y_stats": {
+				"min": 3.8,
+				"max": 5.0,
+				"mean": 4.429090909090909,
+				"median": 4.4
+			}
+		},
+		"Cognitive_Performance_Composite_vs_Self-Determination_General": {
+			"x_metric": "Cognitive_Performance_Composite",
+			"y_metric": "Self-Determination (General)",
+			"title": "Cognitive Performance vs Self-Determination",
+			"correlation": 0.26165996378127976,
+			"trend_line": {
+				"slope": 0.840289995445973,
+				"intercept": 3.801373565377969,
+				"points": [
+					{ "x": 0.3182360455318102, "y": 4.0687841306286385 },
+					{ "x": 0.9890710382513662, "y": 4.6324800636059535 }
+				]
+			},
+			"x_stats": {
+				"min": 0.3182360455318102,
+				"max": 0.9890710382513662,
+				"mean": 0.7470246547202878,
+				"median": 0.7671475518616533
+			},
+			"y_stats": {
+				"min": 3.8,
+				"max": 5.0,
+				"mean": 4.429090909090909,
+				"median": 4.4
+			}
+		},
+		"ML360_Composite_vs_Cognitive_Performance_Composite": {
+			"x_metric": "ML360_Composite",
+			"y_metric": "Cognitive_Performance_Composite",
+			"title": "Leadership Behavior vs Cognitive Performance",
+			"correlation": -0.06937893580624242,
+			"trend_line": {
+				"slope": -0.011615833118629333,
+				"intercept": 0.8102401305215264,
+				"points": [
+					{ "x": 3.8400000000000007, "y": 0.7656353313459898 },
+					{ "x": 7.0, "y": 0.7289292986911211 }
+				]
+			},
+			"x_stats": {
+				"min": 3.8400000000000007,
+				"max": 7.0,
+				"mean": 5.442181818181817,
+				"median": 5.54
+			},
+			"y_stats": {
+				"min": 0.3182360455318102,
+				"max": 0.9890710382513662,
+				"mean": 0.7470246547202878,
+				"median": 0.7671475518616533
+			}
+		},
+		"Physical_Fitness_Composite_vs_Cognitive_Performance_Composite": {
+			"x_metric": "Physical_Fitness_Composite",
+			"y_metric": "Cognitive_Performance_Composite",
+			"title": "Physical Fitness vs Cognitive Performance",
+			"correlation": 0.18322563440856343,
+			"trend_line": {
+				"slope": 0.16711106555742225,
+				"intercept": 0.6620444447630035,
+				"points": [
+					{ "x": 0.1944444444444444, "y": 0.6945382630658355 },
+					{ "x": 0.7784795321637428, "y": 0.7921369888975301 }
+				]
+			},
+			"x_stats": {
+				"min": 0.1944444444444444,
+				"max": 0.7784795321637428,
+				"mean": 0.5085253311851056,
+				"median": 0.4809314954051796
+			},
+			"y_stats": {
+				"min": 0.3182360455318102,
+				"max": 0.9890710382513662,
+				"mean": 0.7470246547202878,
+				"median": 0.7671475518616533
+			}
+		},
+		"Strength_Composite_vs_Cognitive_Performance_Composite": {
+			"x_metric": "Strength_Composite",
+			"y_metric": "Cognitive_Performance_Composite",
+			"title": "Strength vs Cognitive Performance",
+			"correlation": 0.09668316406162034,
+			"trend_line": {
+				"slope": 0.06507680568173989,
+				"intercept": 0.7166623231005553,
+				"points": [
+					{ "x": 0.0833333333333333, "y": 0.7220853902407003 },
+					{ "x": 0.8363408521303258, "y": 0.7710887142183414 }
+				]
+			},
+			"x_stats": {
+				"min": 0.0833333333333333,
+				"max": 0.8363408521303258,
+				"mean": 0.46656149301825994,
+				"median": 0.4676065162907268
+			},
+			"y_stats": {
+				"min": 0.3182360455318102,
+				"max": 0.9890710382513662,
+				"mean": 0.7470246547202878,
+				"median": 0.7671475518616533
+			}
+		},
+		"Endurance_Composite_vs_Cognitive_Performance_Composite": {
+			"x_metric": "Endurance_Composite",
+			"y_metric": "Cognitive_Performance_Composite",
+			"title": "Endurance vs Cognitive Performance",
+			"correlation": 0.23935618508885825,
+			"trend_line": {
+				"slope": 0.19977795829822798,
+				"intercept": 0.6328573274462025,
+				"points": [
+					{ "x": 0.246031746031746, "y": 0.6820090473449728 },
+					{ "x": 0.8432539682539683, "y": 0.801320883550859 }
+				]
+			},
+			"x_stats": {
+				"min": 0.246031746031746,
+				"max": 0.8432539682539683,
+				"mean": 0.5714710884353742,
+				"median": 0.603968253968254
+			},
+			"y_stats": {
+				"min": 0.3182360455318102,
+				"max": 0.9890710382513662,
+				"mean": 0.7470246547202878,
+				"median": 0.7671475518616533
+			}
+		}
+	},
+	"group_options": ["Detachment", "Age_Group"],
+	"metric_info": {
+		"Physical_Fitness_Composite": {
+			"min": 0.1944444444444444,
+			"max": 0.7784795321637428,
+			"mean": 0.5085253311851056,
+			"description": "Overall physical fitness score combining strength and endurance metrics"
+		},
+		"Cognitive_Performance_Composite": {
+			"min": 0.3182360455318102,
+			"max": 0.9890710382513662,
+			"mean": 0.7470246547202878,
+			"description": "Overall cognitive performance score combining attention, visual recognition, and spatial planning"
+		},
+		"ML360_Composite": {
+			"min": 3.8400000000000007,
+			"max": 7.0,
+			"mean": 5.442181818181817,
+			"description": "Overall leadership behavior score based on the Mindful Leadership assessment"
+		},
+		"Self-Determination (General)": {
+			"min": 3.8,
+			"max": 5.0,
+			"mean": 4.429090909090909,
+			"description": "Overall self-determination score measuring intrinsic motivation"
+		},
+		"Strength_Composite": {
+			"min": 0.0833333333333333,
+			"max": 0.8363408521303258,
+			"mean": 0.46656149301825994,
+			"description": "Composite score for physical strength metrics"
+		},
+		"Endurance_Composite": {
+			"min": 0.246031746031746,
+			"max": 0.8432539682539683,
+			"mean": 0.5714710884353742,
+			"description": "Composite score for physical endurance metrics"
+		}
+	},
+	"trainee_data": [
+		{
+			"Trainee": "17950E25",
+			"Detachment": "Det 1",
+			"Age_Group": "18-25",
+			"Physical_Fitness_Composite": "0.3853717627401837",
+			"Cognitive_Performance_Composite": "0.6320173227234956",
+			"ML360_Composite": "5.68",
+			"Self-Determination (General)": "4.0",
+			"Strength_Composite": "0.3531328320802004",
+			"Endurance_Composite": "0.4337301587301587"
+		},
+		{
+			"Trainee": "17142E25",
+			"Detachment": "Det 1",
+			"Age_Group": "26-30",
+			"Physical_Fitness_Composite": "0.5936173767752714",
+			"Cognitive_Performance_Composite": "0.9488080490688698",
+			"ML360_Composite": "5.56",
+			"Self-Determination (General)": "4.6",
+			"Strength_Composite": "0.5390977443609022",
+			"Endurance_Composite": "0.6753968253968254"
+		},
+		{
+			"Trainee": "17979I25",
+			"Detachment": "Det 1",
+			"Age_Group": "18-25",
+			"Physical_Fitness_Composite": "0.4855889724310777",
+			"Cognitive_Performance_Composite": "0.4177436917259343",
+			"ML360_Composite": "5.8",
+			"Self-Determination (General)": "4.0",
+			"Strength_Composite": "0.444235588972431",
+			"Endurance_Composite": "0.5476190476190477"
+		},
+		{
+			"Trainee": "17966Z25",
+			"Detachment": "Det 1",
+			"Age_Group": "18-25",
+			"Physical_Fitness_Composite": "0.4654803675856307",
+			"Cognitive_Performance_Composite": "0.6964080363280426",
+			"ML360_Composite": "4.720000000000001",
+			"Self-Determination (General)": "4.0",
+			"Strength_Composite": "0.3927318295739348",
+			"Endurance_Composite": "0.5746031746031746"
+		},
+		{
+			"Trainee": "17964H25",
+			"Detachment": "Det 1",
+			"Age_Group": "31-35",
+			"Physical_Fitness_Composite": "0.2792397660818713",
+			"Cognitive_Performance_Composite": "0.7558714943043988",
+			"ML360_Composite": "6.36",
+			"Self-Determination (General)": "5.0",
+			"Strength_Composite": "0.3013784461152882",
+			"Endurance_Composite": "0.246031746031746"
+		},
+		{
+			"Trainee": "17475I25",
+			"Detachment": "Det 1",
+			"Age_Group": "26-30",
+			"Physical_Fitness_Composite": "0.3568671679197995",
+			"Cognitive_Performance_Composite": "0.8758515841257548",
+			"ML360_Composite": "4.24",
+			"Self-Determination (General)": "4.2",
+			"Strength_Composite": "0.1677944862155388",
+			"Endurance_Composite": "0.6404761904761904"
+		},
+		{
+			"Trainee": "17858Z25",
+			"Detachment": "Det 1",
+			"Age_Group": "18-25",
+			"Physical_Fitness_Composite": "0.4622556390977443",
+			"Cognitive_Performance_Composite": "0.9890710382513662",
+			"ML360_Composite": "6.359999999999999",
+			"Self-Determination (General)": "4.8",
+			"Strength_Composite": "0.4418546365914786",
+			"Endurance_Composite": "0.4928571428571428"
+		},
+		{
+			"Trainee": "17279E25",
+			"Detachment": "Det 1",
+			"Age_Group": "26-30",
+			"Physical_Fitness_Composite": "0.6317126148705097",
+			"Cognitive_Performance_Composite": "0.7134157357004538",
+			"ML360_Composite": "6.0",
+			"Self-Determination (General)": "4.0",
+			"Strength_Composite": "0.6200501253132832",
+			"Endurance_Composite": "0.6492063492063491"
+		},
+		{
+			"Trainee": "17924G25",
+			"Detachment": "Det 1",
+			"Age_Group": "18-25",
+			"Physical_Fitness_Composite": "0.4225730994152047",
+			"Cognitive_Performance_Composite": "0.6537908198138151",
+			"ML360_Composite": "5.76",
+			"Self-Determination (General)": "4.0",
+			"Strength_Composite": "0.4847117794486216",
+			"Endurance_Composite": "0.3293650793650793"
+		},
+		{
+			"Trainee": "17191I25",
+			"Detachment": "Det 1",
+			"Age_Group": "26-30",
+			"Physical_Fitness_Composite": "0.5799248120300752",
+			"Cognitive_Performance_Composite": "0.8568777183027301",
+			"ML360_Composite": "4.48",
+			"Self-Determination (General)": "5.0",
+			"Strength_Composite": "0.5736842105263158",
+			"Endurance_Composite": "0.5892857142857143"
+		},
+		{
+			"Trainee": "17083G25",
+			"Detachment": "Det 1",
+			"Age_Group": "18-25",
+			"Physical_Fitness_Composite": "0.4025814536340852",
+			"Cognitive_Performance_Composite": "0.7736578117009997",
+			"ML360_Composite": "4.6",
+			"Self-Determination (General)": "4.2",
+			"Strength_Composite": "0.324937343358396",
+			"Endurance_Composite": "0.5190476190476191"
+		},
+		{
+			"Trainee": "17727G25",
+			"Detachment": "Det 1",
+			"Age_Group": "18-25",
+			"Physical_Fitness_Composite": "0.5600835421888053",
+			"Cognitive_Performance_Composite": "0.7470246547202879",
+			"ML360_Composite": "5.442181818181818",
+			"Self-Determination (General)": "4.42909090909091",
+			"Strength_Composite": "0.4355889724310777",
+			"Endurance_Composite": "0.7468253968253968"
+		},
+		{
+			"Trainee": "17268J25",
+			"Detachment": "Det 1",
+			"Age_Group": "26-30",
+			"Physical_Fitness_Composite": "0.3144778613199666",
+			"Cognitive_Performance_Composite": "0.735143776179109",
+			"ML360_Composite": "5.4",
+			"Self-Determination (General)": "4.0",
+			"Strength_Composite": "0.2275689223057644",
+			"Endurance_Composite": "0.4448412698412698"
+		},
+		{
+			"Trainee": "17827D25",
+			"Detachment": "Det 1",
+			"Age_Group": "26-30",
+			"Physical_Fitness_Composite": "0.7310609857978279",
+			"Cognitive_Performance_Composite": "0.846784717632732",
+			"ML360_Composite": "6.24",
+			"Self-Determination (General)": "5.0",
+			"Strength_Composite": "0.7538847117794486",
+			"Endurance_Composite": "0.6968253968253968"
+		},
+		{
+			"Trainee": "17792D25",
+			"Detachment": "Det 2",
+			"Age_Group": "18-25",
+			"Physical_Fitness_Composite": "0.6308771929824561",
+			"Cognitive_Performance_Composite": "0.5841380483177309",
+			"ML360_Composite": "6.24",
+			"Self-Determination (General)": "4.0",
+			"Strength_Composite": "0.6451127819548872",
+			"Endurance_Composite": "0.6095238095238096"
+		},
+		{
+			"Trainee": "17315Z25",
+			"Detachment": "Det 2",
+			"Age_Group": "18-25",
+			"Physical_Fitness_Composite": "0.6479949874686717",
+			"Cognitive_Performance_Composite": "0.7634201382051605",
+			"ML360_Composite": "5.159999999999999",
+			"Self-Determination (General)": "4.6",
+			"Strength_Composite": "0.7553884711779449",
+			"Endurance_Composite": "0.4869047619047619"
+		},
+		{
+			"Trainee": "17726C25",
+			"Detachment": "Det 2",
+			"Age_Group": "18-25",
+			"Physical_Fitness_Composite": "0.339030910609858",
+			"Cognitive_Performance_Composite": "0.3182360455318102",
+			"ML360_Composite": "4.880000000000001",
+			"Self-Determination (General)": "3.8",
+			"Strength_Composite": "0.2909774436090225",
+			"Endurance_Composite": "0.4111111111111111"
+		},
+		{
+			"Trainee": "17194E25",
+			"Detachment": "Det 2",
+			"Age_Group": "26-30",
+			"Physical_Fitness_Composite": "0.3906766917293233",
+			"Cognitive_Performance_Composite": "0.7853096365940978",
+			"ML360_Composite": "4.84",
+			"Self-Determination (General)": "4.0",
+			"Strength_Composite": "0.3344611528822055",
+			"Endurance_Composite": "0.475"
+		},
+		{
+			"Trainee": "17279A25",
+			"Detachment": "Det 2",
+			"Age_Group": "18-25",
+			"Physical_Fitness_Composite": "0.4375856307435254",
+			"Cognitive_Performance_Composite": "0.4639965005860922",
+			"ML360_Composite": "7.0",
+			"Self-Determination (General)": "5.0",
+			"Strength_Composite": "0.5295739348370927",
+			"Endurance_Composite": "0.2996031746031746"
+		},
+		{
+			"Trainee": "17967A25",
+			"Detachment": "Det 2",
+			"Age_Group": "26-30",
+			"Physical_Fitness_Composite": "0.7714870509607351",
+			"Cognitive_Performance_Composite": "0.7853096365940978",
+			"ML360_Composite": "6.12",
+			"Self-Determination (General)": "4.8",
+			"Strength_Composite": "0.8363408521303258",
+			"Endurance_Composite": "0.6742063492063493"
+		},
+		{
+			"Trainee": "17407E25",
+			"Detachment": "Det 2",
+			"Age_Group": "26-30",
+			"Physical_Fitness_Composite": "0.5400835421888053",
+			"Cognitive_Performance_Composite": "0.7749912542607422",
+			"ML360_Composite": "5.5200000000000005",
+			"Self-Determination (General)": "4.8",
+			"Strength_Composite": "0.4355889724310777",
+			"Endurance_Composite": "0.6968253968253968"
+		},
+		{
+			"Trainee": "17095A25",
+			"Detachment": "Det 2",
+			"Age_Group": "18-25",
+			"Physical_Fitness_Composite": "0.4432163742690059",
+			"Cognitive_Performance_Composite": "0.7751850610324299",
+			"ML360_Composite": "4.48",
+			"Self-Determination (General)": "4.4",
+			"Strength_Composite": "0.3344611528822055",
+			"Endurance_Composite": "0.6063492063492064"
+		},
+		{
+			"Trainee": "17000A25",
+			"Detachment": "Det 2",
+			"Age_Group": "18-25",
+			"Physical_Fitness_Composite": "0.596750208855472",
+			"Cognitive_Performance_Composite": "0.5911855334032033",
+			"ML360_Composite": "4.92",
+			"Self-Determination (General)": "4.8",
+			"Strength_Composite": "0.5974937343358396",
+			"Endurance_Composite": "0.5956349206349206"
+		},
+		{
+			"Trainee": "17154D25",
+			"Detachment": "Det 2",
+			"Age_Group": "26-30",
+			"Physical_Fitness_Composite": "0.4291311612364244",
+			"Cognitive_Performance_Composite": "0.8147932354954616",
+			"ML360_Composite": "4.4",
+			"Self-Determination (General)": "4.2",
+			"Strength_Composite": "0.4808270676691729",
+			"Endurance_Composite": "0.3515873015873015"
+		},
+		{
+			"Trainee": "17392B25",
+			"Detachment": "Det 2",
+			"Age_Group": "18-25",
+			"Physical_Fitness_Composite": "0.1944444444444444",
+			"Cognitive_Performance_Composite": "0.7134038492576721",
+			"ML360_Composite": "6.04",
+			"Self-Determination (General)": "4.8",
+			"Strength_Composite": "0.0833333333333333",
+			"Endurance_Composite": "0.3611111111111111"
+		},
+		{
+			"Trainee": "17388J25",
+			"Detachment": "Det 2",
+			"Age_Group": "26-30",
+			"Physical_Fitness_Composite": "0.5600835421888053",
+			"Cognitive_Performance_Composite": "0.7681859359230684",
+			"ML360_Composite": "5.68",
+			"Self-Determination (General)": "4.8",
+			"Strength_Composite": "0.468922305764411",
+			"Endurance_Composite": "0.6968253968253968"
+		},
+		{
+			"Trainee": "17785G25",
+			"Detachment": "Det 2",
+			"Age_Group": "18-25",
+			"Physical_Fitness_Composite": "0.5998078529657477",
+			"Cognitive_Performance_Composite": "0.6921266123409823",
+			"ML360_Composite": "5.4",
+			"Self-Determination (General)": "4.2",
+			"Strength_Composite": "0.6010025062656641",
+			"Endurance_Composite": "0.598015873015873"
+		},
+		{
+			"Trainee": "17926E25",
+			"Detachment": "Det 2",
+			"Age_Group": "26-30",
+			"Physical_Fitness_Composite": "0.7258395989974937",
+			"Cognitive_Performance_Composite": "0.8583228907981516",
+			"ML360_Composite": "5.5600000000000005",
+			"Self-Determination (General)": "5.0",
+			"Strength_Composite": "0.6867167919799498",
+			"Endurance_Composite": "0.7845238095238095"
+		},
+		{
+			"Trainee": "17044J25",
+			"Detachment": "Det 3",
+			"Age_Group": "26-30",
+			"Physical_Fitness_Composite": "0.5614452798663325",
+			"Cognitive_Performance_Composite": "0.8671153917985696",
+			"ML360_Composite": "5.319999999999999",
+			"Self-Determination (General)": "4.4",
+			"Strength_Composite": "0.4733082706766917",
+			"Endurance_Composite": "0.6936507936507936"
+		},
+		{
+			"Trainee": "17975J25",
+			"Detachment": "Det 3",
+			"Age_Group": "18-25",
+			"Physical_Fitness_Composite": "0.6312280701754386",
+			"Cognitive_Performance_Composite": "0.6631248909085118",
+			"ML360_Composite": "4.200000000000001",
+			"Self-Determination (General)": "3.8",
+			"Strength_Composite": "0.6298245614035088",
+			"Endurance_Composite": "0.6333333333333333"
+		},
+		{
+			"Trainee": "17791A25",
+			"Detachment": "Det 3",
+			"Age_Group": "26-30",
+			"Physical_Fitness_Composite": "0.5957894736842105",
+			"Cognitive_Performance_Composite": "0.756165738597741",
+			"ML360_Composite": "5.48",
+			"Self-Determination (General)": "5.0",
+			"Strength_Composite": "0.538220551378446",
+			"Endurance_Composite": "0.6821428571428572"
+		},
+		{
+			"Trainee": "17014D25",
+			"Detachment": "Det 3",
+			"Age_Group": "31-35",
+			"Physical_Fitness_Composite": "0.5765079365079366",
+			"Cognitive_Performance_Composite": "0.876222859922431",
+			"ML360_Composite": "6.44",
+			"Self-Determination (General)": "3.8",
+			"Strength_Composite": "0.7333333333333334",
+			"Endurance_Composite": "0.3412698412698413"
+		},
+		{
+			"Trainee": "17278D25",
+			"Detachment": "Det 3",
+			"Age_Group": "18-25",
+			"Physical_Fitness_Composite": "0.7571428571428571",
+			"Cognitive_Performance_Composite": "0.8056857673715999",
+			"ML360_Composite": "5.199999999999999",
+			"Self-Determination (General)": "4.4",
+			"Strength_Composite": "0.8285714285714286",
+			"Endurance_Composite": "0.65"
+		},
+		{
+			"Trainee": "17165G25",
+			"Detachment": "Det 3",
+			"Age_Group": "18-25",
+			"Physical_Fitness_Composite": "0.5831913116123643",
+			"Cognitive_Performance_Composite": "0.7957828961391072",
+			"ML360_Composite": "5.32",
+			"Self-Determination (General)": "4.2",
+			"Strength_Composite": "0.5233082706766917",
+			"Endurance_Composite": "0.6730158730158731"
+		},
+		{
+			"Trainee": "17370G25",
+			"Detachment": "Det 3",
+			"Age_Group": "31-35",
+			"Physical_Fitness_Composite": "0.3163241436925647",
+			"Cognitive_Performance_Composite": "0.8250763656029649",
+			"ML360_Composite": "5.84",
+			"Self-Determination (General)": "4.6",
+			"Strength_Composite": "0.2912280701754386",
+			"Endurance_Composite": "0.3539682539682539"
+		},
+		{
+			"Trainee": "17835A25",
+			"Detachment": "Det 3",
+			"Age_Group": "18-25",
+			"Physical_Fitness_Composite": "0.4541604010025062",
+			"Cognitive_Performance_Composite": "0.6652525152694079",
+			"ML360_Composite": "5.12",
+			"Self-Determination (General)": "4.2",
+			"Strength_Composite": "0.4680451127819549",
+			"Endurance_Composite": "0.4333333333333333"
+		},
+		{
+			"Trainee": "17616J25",
+			"Detachment": "Det 3",
+			"Age_Group": "18-25",
+			"Physical_Fitness_Composite": "0.3000918964076858",
+			"Cognitive_Performance_Composite": "0.6627081585001712",
+			"ML360_Composite": "6.279999999999999",
+			"Self-Determination (General)": "4.4",
+			"Strength_Composite": "0.087719298245614",
+			"Endurance_Composite": "0.6186507936507937"
+		},
+		{
+			"Trainee": "17881J25",
+			"Detachment": "Det 3",
+			"Age_Group": "26-30",
+			"Physical_Fitness_Composite": "0.4502923976608187",
+			"Cognitive_Performance_Composite": "0.7842925291562916",
+			"ML360_Composite": "4.56",
+			"Self-Determination (General)": "4.0",
+			"Strength_Composite": "0.4364661654135338",
+			"Endurance_Composite": "0.471031746031746"
+		},
+		{
+			"Trainee": "17046H25",
+			"Detachment": "Det 3",
+			"Age_Group": "26-30",
+			"Physical_Fitness_Composite": "0.3788638262322473",
+			"Cognitive_Performance_Composite": "0.6209436881490206",
+			"ML360_Composite": "4.16",
+			"Self-Determination (General)": "3.8",
+			"Strength_Composite": "0.3983709273182957",
+			"Endurance_Composite": "0.3496031746031746"
+		},
+		{
+			"Trainee": "17305D25",
+			"Detachment": "Det 3",
+			"Age_Group": "18-25",
+			"Physical_Fitness_Composite": "0.6437259816207185",
+			"Cognitive_Performance_Composite": "0.7346475160054796",
+			"ML360_Composite": "6.119999999999999",
+			"Self-Determination (General)": "5.0",
+			"Strength_Composite": "0.6286967418546366",
+			"Endurance_Composite": "0.6662698412698413"
+		},
+		{
+			"Trainee": "17033C25",
+			"Detachment": "Det 3",
+			"Age_Group": "26-30",
+			"Physical_Fitness_Composite": "0.5445614035087719",
+			"Cognitive_Performance_Composite": "0.7141267124021367",
+			"ML360_Composite": "5.44",
+			"Self-Determination (General)": "4.6",
+			"Strength_Composite": "0.5488721804511278",
+			"Endurance_Composite": "0.5380952380952381"
+		},
+		{
+			"Trainee": "17682I25",
+			"Detachment": "Det 3",
+			"Age_Group": "18-25",
+			"Physical_Fitness_Composite": "0.3870760233918128",
+			"Cognitive_Performance_Composite": "0.9183073427296996",
+			"ML360_Composite": "5.08",
+			"Self-Determination (General)": "4.0",
+			"Strength_Composite": "0.3401002506265664",
+			"Endurance_Composite": "0.4575396825396826"
+		},
+		{
+			"Trainee": "17304F25",
+			"Detachment": "Det 4",
+			"Age_Group": "26-30",
+			"Physical_Fitness_Composite": "0.6993316624895571",
+			"Cognitive_Performance_Composite": "0.8675321242069102",
+			"ML360_Composite": "5.96",
+			"Self-Determination (General)": "4.4",
+			"Strength_Composite": "0.6510025062656641",
+			"Endurance_Composite": "0.7718253968253967"
+		},
+		{
+			"Trainee": "17201E25",
+			"Detachment": "Det 4",
+			"Age_Group": "18-25",
+			"Physical_Fitness_Composite": "0.6007769423558897",
+			"Cognitive_Performance_Composite": "0.8886987594513834",
+			"ML360_Composite": "5.68",
+			"Self-Determination (General)": "5.0",
+			"Strength_Composite": "0.4671679197994988",
+			"Endurance_Composite": "0.8011904761904762"
+		},
+		{
+			"Trainee": "17806F25",
+			"Detachment": "Det 4",
+			"Age_Group": "26-30",
+			"Physical_Fitness_Composite": "0.4762740183792815",
+			"Cognitive_Performance_Composite": "0.8652586459479451",
+			"ML360_Composite": "4.2",
+			"Self-Determination (General)": "4.2",
+			"Strength_Composite": "0.3760651629072681",
+			"Endurance_Composite": "0.6265873015873016"
+		},
+		{
+			"Trainee": "17449G25",
+			"Detachment": "Det 4",
+			"Age_Group": "18-25",
+			"Physical_Fitness_Composite": "0.6272263993316625",
+			"Cognitive_Performance_Composite": "0.6023046245893428",
+			"ML360_Composite": "5.76",
+			"Self-Determination (General)": "4.8",
+			"Strength_Composite": "0.4832080200501252",
+			"Endurance_Composite": "0.8432539682539683"
+		},
+		{
+			"Trainee": "17070Z25",
+			"Detachment": "Det 4",
+			"Age_Group": "18-25",
+			"Physical_Fitness_Composite": "0.3955973266499583",
+			"Cognitive_Performance_Composite": "0.6642550962804895",
+			"ML360_Composite": "4.48",
+			"Self-Determination (General)": "4.2",
+			"Strength_Composite": "0.2582706766917293",
+			"Endurance_Composite": "0.6015873015873016"
+		},
+		{
+			"Trainee": "17782J25",
+			"Detachment": "Det 4",
+			"Age_Group": "18-25",
+			"Physical_Fitness_Composite": "0.4746700083542189",
+			"Cognitive_Performance_Composite": "0.8137306714459905",
+			"ML360_Composite": "6.159999999999999",
+			"Self-Determination (General)": "4.6",
+			"Strength_Composite": "0.3432330827067669",
+			"Endurance_Composite": "0.6718253968253969"
+		},
+		{
+			"Trainee": "17639E25",
+			"Detachment": "Det 4",
+			"Age_Group": "18-25",
+			"Physical_Fitness_Composite": "0.4456558061821219",
+			"Cognitive_Performance_Composite": "0.7864852985777402",
+			"ML360_Composite": "3.8400000000000007",
+			"Self-Determination (General)": "4.4",
+			"Strength_Composite": "0.2017543859649122",
+			"Endurance_Composite": "0.8115079365079365"
+		},
+		{
+			"Trainee": "17547B25",
+			"Detachment": "Det 4",
+			"Age_Group": "26-30",
+			"Physical_Fitness_Composite": "0.6173851294903926",
+			"Cognitive_Performance_Composite": "0.7661091678002382",
+			"ML360_Composite": "5.68",
+			"Self-Determination (General)": "4.0",
+			"Strength_Composite": "0.5522556390977443",
+			"Endurance_Composite": "0.715079365079365"
+		},
+		{
+			"Trainee": "17336H25",
+			"Detachment": "Det 4",
+			"Age_Group": "26-30",
+			"Physical_Fitness_Composite": "0.3989724310776942",
+			"Cognitive_Performance_Composite": "0.6709599770965089",
+			"ML360_Composite": "6.8",
+			"Self-Determination (General)": "5.0",
+			"Strength_Composite": "0.3927318295739348",
+			"Endurance_Composite": "0.4083333333333333"
+		},
+		{
+			"Trainee": "17854D25",
+			"Detachment": "Det 4",
+			"Age_Group": "26-30",
+			"Physical_Fitness_Composite": "0.4415121136173767",
+			"Cognitive_Performance_Composite": "0.816465157652733",
+			"ML360_Composite": "4.840000000000001",
+			"Self-Determination (General)": "4.8",
+			"Strength_Composite": "0.28796992481203",
+			"Endurance_Composite": "0.6718253968253969"
+		},
+		{
+			"Trainee": "17656G25",
+			"Detachment": "Det 4",
+			"Age_Group": "26-30",
+			"Physical_Fitness_Composite": "0.412781954887218",
+			"Cognitive_Performance_Composite": "0.7753662073916008",
+			"ML360_Composite": "5.72",
+			"Self-Determination (General)": "4.4",
+			"Strength_Composite": "0.268922305764411",
+			"Endurance_Composite": "0.6285714285714286"
+		},
+		{
+			"Trainee": "17252E25",
+			"Detachment": "Det 4",
+			"Age_Group": "31-35",
+			"Physical_Fitness_Composite": "0.5680451127819549",
+			"Cognitive_Performance_Composite": "0.8481415259755449",
+			"ML360_Composite": "5.92",
+			"Self-Determination (General)": "5.0",
+			"Strength_Composite": "0.7086466165413534",
+			"Endurance_Composite": "0.3571428571428571"
+		},
+		{
+			"Trainee": "17809C25",
+			"Detachment": "Det 4",
+			"Age_Group": "26-30",
+			"Physical_Fitness_Composite": "0.3824644945697577",
+			"Cognitive_Performance_Composite": "0.7553584490463282",
+			"ML360_Composite": "6.32",
+			"Self-Determination (General)": "4.2",
+			"Strength_Composite": "0.2522556390977443",
+			"Endurance_Composite": "0.5777777777777777"
+		},
+		{
+			"Trainee": "17443E25",
+			"Detachment": "Det 4",
+			"Age_Group": "18-25",
+			"Physical_Fitness_Composite": "0.7784795321637428",
+			"Cognitive_Performance_Composite": "0.6921917574015346",
+			"ML360_Composite": "5.959999999999999",
+			"Self-Determination (General)": "4.4",
+			"Strength_Composite": "0.8170426065162908",
+			"Endurance_Composite": "0.7206349206349206"
+		}
+	]
+}

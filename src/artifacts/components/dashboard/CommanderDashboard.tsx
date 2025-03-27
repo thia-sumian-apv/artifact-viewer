@@ -7,6 +7,7 @@ import CognitiveMetricsDistribution from "./CognitiveMetricsDistribution";
 import CorrelationMatrix from "./CorrelationMatrix";
 import ML360ProfilesRadar from "./ML360ProfilesRadar";
 import SelfDeterminationRadar from "./SelfDeterminationRadar";
+import ScatterPlotMatrix from "./ScatterPlotMatrix";
 
 interface MetricData {
 	histogram: {
@@ -98,12 +99,59 @@ interface BoxplotData {
 	};
 }
 
+interface ScatterPlotsData {
+	scatter_plots: Record<
+		string,
+		{
+			x_metric: string;
+			y_metric: string;
+			title: string;
+			correlation: number;
+			trend_line: {
+				slope: number;
+				intercept: number;
+				points: { x: number; y: number }[];
+			};
+			x_stats: {
+				min: number;
+				max: number;
+				mean: number;
+				median: number;
+			};
+			y_stats: {
+				min: number;
+				max: number;
+				mean: number;
+				median: number;
+			};
+		}
+	>;
+	group_options: string[];
+	metric_info: Record<
+		string,
+		{
+			min: number;
+			max: number;
+			mean: number;
+			description: string;
+		}
+	>;
+	trainee_data: Array<{
+		Trainee: string;
+		Detachment: string;
+		Age_Group: string;
+		[key: string]: string;
+	}>;
+}
+
 const CommanderDashboard: React.FC = () => {
 	const [data, setData] = useState<MetricsData | null>(null);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [error, setError] = useState<string | null>(null);
 	const [_boxplotData, setBoxplotData] = useState<BoxplotData | null>(null);
 	const [radarData, setRadarData] = useState<RadarProfilesData | null>(null);
+	const [scatterData, setScatterData] = useState<ScatterPlotsData | null>(null);
+
 	useEffect(() => {
 		setLoading(true);
 		Promise.all([
@@ -111,35 +159,50 @@ const CommanderDashboard: React.FC = () => {
 			fetch("/data/analysis/correlation_matrices.json"),
 			fetch("/data/analysis/boxplot_analysis.json"),
 			fetch("/data/analysis/radar_profiles.json"),
+			fetch("/data/analysis/scatter_plots.json"),
 		])
-			.then(([metricsRes, correlationRes, boxplotRes, radarRes]) => {
-				if (
-					!metricsRes.ok ||
-					!correlationRes.ok ||
-					!boxplotRes.ok ||
-					!radarRes.ok
-				) {
-					throw new Error("Failed to load data");
-				}
-				return Promise.all([
-					metricsRes.json(),
-					correlationRes.json(),
-					boxplotRes.json(),
-					radarRes.json(),
-				]);
-			})
-			.then(([metricsData, correlationData, boxplotData, radarData]) => {
-				console.log("Correlation Data:", correlationData); // Debug log
-				console.log("Boxplot Data:", boxplotData); // Debug log
-				console.log("Radar Data:", radarData); // Debug log
-				setData({
-					...metricsData,
-					correlation_matrices: correlationData,
-				});
-				setBoxplotData(boxplotData);
-				setRadarData(radarData);
-				setLoading(false);
-			})
+			.then(
+				([metricsRes, correlationRes, boxplotRes, radarRes, scatterRes]) => {
+					if (
+						!metricsRes.ok ||
+						!correlationRes.ok ||
+						!boxplotRes.ok ||
+						!radarRes.ok ||
+						!scatterRes.ok
+					) {
+						throw new Error("Failed to load data");
+					}
+					return Promise.all([
+						metricsRes.json(),
+						correlationRes.json(),
+						boxplotRes.json(),
+						radarRes.json(),
+						scatterRes.json(),
+					]);
+				},
+			)
+			.then(
+				([
+					metricsData,
+					correlationData,
+					boxplotData,
+					radarData,
+					scatterData,
+				]) => {
+					console.log("Correlation Data:", correlationData); // Debug log
+					console.log("Boxplot Data:", boxplotData); // Debug log
+					console.log("Radar Data:", radarData); // Debug log
+					console.log("Scatter Data:", scatterData); // Debug log
+					setData({
+						...metricsData,
+						correlation_matrices: correlationData,
+					});
+					setBoxplotData(boxplotData);
+					setRadarData(radarData);
+					setScatterData(scatterData);
+					setLoading(false);
+				},
+			)
 			.catch((err) => {
 				console.error("Error loading data:", err); // Debug log
 				setError(err.message);
@@ -177,6 +240,11 @@ const CommanderDashboard: React.FC = () => {
 					loading={loading}
 					error={error}
 				/>
+			</div>
+
+			{/* Scatter Plot Matrix (full width) */}
+			<div className="grid grid-cols-1">
+				<ScatterPlotMatrix data={scatterData} loading={loading} error={error} />
 			</div>
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 				{/* Course Overview Stats */}
