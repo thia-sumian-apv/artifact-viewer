@@ -1,13 +1,13 @@
 import type React from "react";
 import { useState, useEffect } from "react";
 import PhysicalMetricsDistribution from "./PhysicalMetricsDistribution";
-import { Card, CardContent } from "@/components/ui/card";
-import { Brain, Users, ChartBar, ArrowDown, ArrowUp } from "lucide-react";
 import CognitiveMetricsDistribution from "./CognitiveMetricsDistribution";
 import CorrelationMatrix from "./CorrelationMatrix";
 import ML360ProfilesRadar from "./ML360ProfilesRadar";
 import SelfDeterminationRadar from "./SelfDeterminationRadar";
 import ScatterPlotMatrix from "./ScatterPlotMatrix";
+import BoxPlotComparison from "./BoxPlotComparison";
+import SummaryStatisticsCard from "./SummaryStatisticsCard";
 
 interface MetricData {
 	histogram: {
@@ -90,15 +90,110 @@ interface RadarProfilesData {
 	};
 }
 
-interface BoxplotData {
-	// Define structure based on your actual data
-	[metric: string]: {
-		whiskers: number[];
-		quartiles: number[];
-		// Add other properties as needed
+interface BoxplotAnalysisData {
+	age_group_analysis: {
+		Physical_Fitness_Composite: {
+			groups: Array<{
+				name: string;
+				q1: number;
+				median: number;
+				q3: number;
+				lower_whisker: number;
+				upper_whisker: number;
+				min: number;
+				max: number;
+			}>;
+			outliers: Array<{
+				group: string;
+				value: number;
+			}>;
+		};
+		Cognitive_Performance_Composite: {
+			groups: Array<{
+				name: string;
+				q1: number;
+				median: number;
+				q3: number;
+				lower_whisker: number;
+				upper_whisker: number;
+				min: number;
+				max: number;
+			}>;
+			outliers: Array<{
+				group: string;
+				value: number;
+			}>;
+		};
+		ML360_Composite: {
+			groups: Array<{
+				name: string;
+				q1: number;
+				median: number;
+				q3: number;
+				lower_whisker: number;
+				upper_whisker: number;
+				min: number;
+				max: number;
+			}>;
+			outliers: Array<{
+				group: string;
+				value: number;
+			}>;
+		};
 	};
+	detachment_analysis: {
+		Physical_Fitness_Composite: {
+			groups: Array<{
+				name: string;
+				q1: number;
+				median: number;
+				q3: number;
+				lower_whisker: number;
+				upper_whisker: number;
+				min: number;
+				max: number;
+			}>;
+			outliers: Array<{
+				group: string;
+				value: number;
+			}>;
+		};
+		Cognitive_Performance_Composite: {
+			groups: Array<{
+				name: string;
+				q1: number;
+				median: number;
+				q3: number;
+				lower_whisker: number;
+				upper_whisker: number;
+				min: number;
+				max: number;
+			}>;
+			outliers: Array<{
+				group: string;
+				value: number;
+			}>;
+		};
+		ML360_Composite: {
+			groups: Array<{
+				name: string;
+				q1: number;
+				median: number;
+				q3: number;
+				lower_whisker: number;
+				upper_whisker: number;
+				min: number;
+				max: number;
+			}>;
+			outliers: Array<{
+				group: string;
+				value: number;
+			}>;
+		};
+	};
+	age_group_counts: Record<string, number>;
+	detachment_counts: Record<string, number>;
 }
-
 interface ScatterPlotsData {
 	scatter_plots: Record<
 		string,
@@ -144,13 +239,38 @@ interface ScatterPlotsData {
 	}>;
 }
 
+interface SummaryStatistic {
+	count: number;
+	mean: number;
+	std: number;
+	min: number;
+	"25%": number;
+	"50%": number;
+	"75%": number;
+	max: number;
+}
+
+interface SummaryStatisticsData {
+	metrics: Record<string, SummaryStatistic>;
+	categories: {
+		physical: string[];
+		cognitive: string[];
+		leadership: string[];
+		other: string[];
+	};
+}
+
 const CommanderDashboard: React.FC = () => {
 	const [data, setData] = useState<MetricsData | null>(null);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [error, setError] = useState<string | null>(null);
-	const [_boxplotData, setBoxplotData] = useState<BoxplotData | null>(null);
+	const [boxplotData, setBoxplotData] = useState<BoxplotAnalysisData | null>(
+		null,
+	);
 	const [radarData, setRadarData] = useState<RadarProfilesData | null>(null);
 	const [scatterData, setScatterData] = useState<ScatterPlotsData | null>(null);
+	const [summaryStats, setSummaryStats] =
+		useState<SummaryStatisticsData | null>(null);
 
 	useEffect(() => {
 		setLoading(true);
@@ -160,15 +280,24 @@ const CommanderDashboard: React.FC = () => {
 			fetch("/data/analysis/boxplot_analysis.json"),
 			fetch("/data/analysis/radar_profiles.json"),
 			fetch("/data/analysis/scatter_plots.json"),
+			fetch("/data/analysis/summary_statistics.json"),
 		])
 			.then(
-				([metricsRes, correlationRes, boxplotRes, radarRes, scatterRes]) => {
+				([
+					metricsRes,
+					correlationRes,
+					boxplotRes,
+					radarRes,
+					scatterRes,
+					summaryStatsRes,
+				]) => {
 					if (
 						!metricsRes.ok ||
 						!correlationRes.ok ||
 						!boxplotRes.ok ||
 						!radarRes.ok ||
-						!scatterRes.ok
+						!scatterRes.ok ||
+						!summaryStatsRes.ok
 					) {
 						throw new Error("Failed to load data");
 					}
@@ -178,6 +307,7 @@ const CommanderDashboard: React.FC = () => {
 						boxplotRes.json(),
 						radarRes.json(),
 						scatterRes.json(),
+						summaryStatsRes.json(),
 					]);
 				},
 			)
@@ -188,11 +318,13 @@ const CommanderDashboard: React.FC = () => {
 					boxplotData,
 					radarData,
 					scatterData,
+					summaryStatsData,
 				]) => {
 					console.log("Correlation Data:", correlationData); // Debug log
 					console.log("Boxplot Data:", boxplotData); // Debug log
 					console.log("Radar Data:", radarData); // Debug log
 					console.log("Scatter Data:", scatterData); // Debug log
+					console.log("Summary Stats Data:", summaryStatsData); // Debug log
 					setData({
 						...metricsData,
 						correlation_matrices: correlationData,
@@ -200,6 +332,7 @@ const CommanderDashboard: React.FC = () => {
 					setBoxplotData(boxplotData);
 					setRadarData(radarData);
 					setScatterData(scatterData);
+					setSummaryStats(summaryStatsData);
 					setLoading(false);
 				},
 			)
@@ -213,6 +346,14 @@ const CommanderDashboard: React.FC = () => {
 	return (
 		<div className="container mx-auto space-y-6">
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+				<SummaryStatisticsCard
+					data={summaryStats}
+					loading={loading}
+					error={error}
+				/>
+				<BoxPlotComparison data={boxplotData} loading={loading} error={error} />
+			</div>
+			<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 				<PhysicalMetricsDistribution
 					data={data}
 					loading={loading}
@@ -224,7 +365,6 @@ const CommanderDashboard: React.FC = () => {
 					error={error}
 				/>
 			</div>
-			{/* Second row: Correlation Matrix (full width) */}
 			<div className="grid grid-cols-1">
 				<CorrelationMatrix
 					data={data?.correlation_matrices || null}
@@ -232,7 +372,6 @@ const CommanderDashboard: React.FC = () => {
 					error={error}
 				/>
 			</div>
-			{/* Radar Charts Row */}
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 				<ML360ProfilesRadar data={radarData} loading={loading} error={error} />
 				<SelfDeterminationRadar
@@ -241,132 +380,8 @@ const CommanderDashboard: React.FC = () => {
 					error={error}
 				/>
 			</div>
-
-			{/* Scatter Plot Matrix (full width) */}
 			<div className="grid grid-cols-1">
 				<ScatterPlotMatrix data={scatterData} loading={loading} error={error} />
-			</div>
-			<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-				{/* Course Overview Stats */}
-				<Card className="overflow-hidden shadow-lg transform hover:scale-[1.01] transition-all duration-200 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800">
-					<div className="h-40 bg-gradient-to-r from-green-500 to-emerald-600 relative overflow-hidden">
-						<div
-							className="absolute inset-0 opacity-20"
-							style={{
-								backgroundImage:
-									"url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80')",
-								backgroundSize: "cover",
-								backgroundPosition: "center",
-							}}
-						/>
-						<div className="absolute bottom-4 left-6">
-							<h3 className="text-2xl font-bold text-white">Course Overview</h3>
-							<p className="text-white/80 text-sm">
-								Key Performance Indicators
-							</p>
-						</div>
-						<ChartBar className="absolute top-4 right-4 h-8 w-8 text-white/80" />
-					</div>
-					<CardContent className="p-6">
-						<div className="grid grid-cols-2 gap-4">
-							<div className="bg-gray-50 dark:bg-gray-700/50 p-3 rounded-lg">
-								<div className="text-xs text-gray-500 dark:text-gray-400">
-									Completion Rate
-								</div>
-								<div className="text-2xl font-bold text-green-600 dark:text-green-400">
-									82%
-								</div>
-							</div>
-							<div className="bg-gray-50 dark:bg-gray-700/50 p-3 rounded-lg">
-								<div className="text-xs text-gray-500 dark:text-gray-400">
-									Trainee Count
-								</div>
-								<div className="text-2xl font-bold">
-									{loading
-										? "..."
-										: data?.physical_metrics?.["Pull Ups"]?.stats.count}
-								</div>
-							</div>
-							<div className="bg-gray-50 dark:bg-gray-700/50 p-3 rounded-lg">
-								<div className="text-xs text-gray-500 dark:text-gray-400">
-									Above Average
-								</div>
-								<div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
-									65%
-								</div>
-							</div>
-							<div className="bg-gray-50 dark:bg-gray-700/50 p-3 rounded-lg">
-								<div className="text-xs text-gray-500 dark:text-gray-400">
-									Below Average
-								</div>
-								<div className="text-2xl font-bold text-amber-600 dark:text-amber-400">
-									35%
-								</div>
-							</div>
-						</div>
-					</CardContent>
-				</Card>
-
-				{/* Trainee Insights Card */}
-				<Card className="overflow-hidden shadow-lg transform hover:scale-[1.01] transition-all duration-200 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800">
-					<div className="h-40 bg-gradient-to-r from-blue-600 to-cyan-600 relative overflow-hidden">
-						<div
-							className="absolute inset-0 opacity-20"
-							style={{
-								backgroundImage:
-									"url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1184&q=80')",
-								backgroundSize: "cover",
-								backgroundPosition: "center",
-							}}
-						/>
-						<div className="absolute bottom-4 left-6">
-							<h3 className="text-2xl font-bold text-white">
-								Trainee Insights
-							</h3>
-							<p className="text-white/80 text-sm">Performance Distributions</p>
-						</div>
-						<Users className="absolute top-4 right-4 h-8 w-8 text-white/80" />
-					</div>
-					<CardContent className="p-6">
-						<div className="space-y-4">
-							<div className="flex items-center justify-between">
-								<div>
-									<div className="text-sm font-medium">Top Performers</div>
-									<div className="text-xs text-gray-500 dark:text-gray-400">
-										5 trainees exceed benchmarks in all areas
-									</div>
-								</div>
-								<div className="h-8 w-8 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
-									<ArrowUp className="h-4 w-4 text-green-600 dark:text-green-400" />
-								</div>
-							</div>
-
-							<div className="flex items-center justify-between">
-								<div>
-									<div className="text-sm font-medium">Needs Improvement</div>
-									<div className="text-xs text-gray-500 dark:text-gray-400">
-										8 trainees below benchmarks in physical metrics
-									</div>
-								</div>
-								<div className="h-8 w-8 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
-									<ArrowDown className="h-4 w-4 text-amber-600 dark:text-amber-400" />
-								</div>
-							</div>
-
-							<div className="flex items-center justify-between">
-								<div>
-									<div className="text-sm font-medium">Cognitive Strength</div>
-									<div className="text-xs text-gray-500 dark:text-gray-400">
-										Average accuracy in SART: 96.3%
-									</div>
-								</div>
-								<div className="h-8 w-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
-									<Brain className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-								</div>
-							</div>
-						</div>
-					</CardContent>
-				</Card>
 			</div>
 		</div>
 	);

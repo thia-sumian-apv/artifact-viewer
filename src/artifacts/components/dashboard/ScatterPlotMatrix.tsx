@@ -503,9 +503,6 @@ const ScatterPlotMatrix: React.FC<ScatterPlotMatrixProps> = ({
 						<h3 className="text-xl font-semibold text-gray-800">
 							{currentPlot.title}
 						</h3>
-						<p className="text-md text-gray-600 mt-1">
-							Correlation: {currentPlot.correlation.toFixed(3)}
-						</p>
 					</div>
 
 					{/* Scatter plot chart */}
