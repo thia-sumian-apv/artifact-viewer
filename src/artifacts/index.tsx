@@ -17,6 +17,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import CompaniesTab from "./components/CompaniesTab";
 import CohortsTab from "./components/CohortsTab";
 import UsersTab from "./components/UsersTab";
+import CommanderDashboard from "./components/dashboard/CommanderDashboard";
 
 export type UserRole =
 	| "superAdmin"
@@ -279,7 +280,10 @@ const NeuroVibesPortal = () => {
 
 		switch (activeTab) {
 			case "dashboard":
-				return (
+				// Show CommanderDashboard for course commanders, regular Dashboard for others
+				return userRole === "courseCommander" ? (
+					<CommanderDashboard />
+				) : (
 					<Dashboard
 						assessments={assessments}
 						cognitiveProgress={cognitiveProgress}

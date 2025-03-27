@@ -1,0 +1,2613 @@
+{
+	"full_correlation": {
+		"columns": [],
+		"matrix": [],
+		"metadata": { "min_value": 0, "max_value": 0 }
+	},
+	"physical_correlation": {
+		"columns": [
+			"Pull Ups",
+			"Barbell Squats 8RM (kg)",
+			"Deadlift 8RM (kg)",
+			"Sprint Drag Carry (seconds)",
+			"VO2 MAX"
+		],
+		"matrix": [
+			[
+				{ "x": "Pull Ups", "y": "Pull Ups", "value": 1.0 },
+				{
+					"x": "Pull Ups",
+					"y": "Barbell Squats 8RM (kg)",
+					"value": 0.36253174507275426
+				},
+				{
+					"x": "Pull Ups",
+					"y": "Deadlift 8RM (kg)",
+					"value": 0.297766109234063
+				},
+				{
+					"x": "Pull Ups",
+					"y": "Sprint Drag Carry (seconds)",
+					"value": -0.17385120818523997
+				},
+				{ "x": "Pull Ups", "y": "VO2 MAX", "value": 0.21448333862634586 }
+			],
+			[
+				{
+					"x": "Barbell Squats 8RM (kg)",
+					"y": "Pull Ups",
+					"value": 0.36253174507275426
+				},
+				{
+					"x": "Barbell Squats 8RM (kg)",
+					"y": "Barbell Squats 8RM (kg)",
+					"value": 1.0
+				},
+				{
+					"x": "Barbell Squats 8RM (kg)",
+					"y": "Deadlift 8RM (kg)",
+					"value": 0.6893863939276124
+				},
+				{
+					"x": "Barbell Squats 8RM (kg)",
+					"y": "Sprint Drag Carry (seconds)",
+					"value": -0.34963017617467174
+				},
+				{
+					"x": "Barbell Squats 8RM (kg)",
+					"y": "VO2 MAX",
+					"value": -0.243371387664155
+				}
+			],
+			[
+				{
+					"x": "Deadlift 8RM (kg)",
+					"y": "Pull Ups",
+					"value": 0.297766109234063
+				},
+				{
+					"x": "Deadlift 8RM (kg)",
+					"y": "Barbell Squats 8RM (kg)",
+					"value": 0.6893863939276124
+				},
+				{ "x": "Deadlift 8RM (kg)", "y": "Deadlift 8RM (kg)", "value": 1.0 },
+				{
+					"x": "Deadlift 8RM (kg)",
+					"y": "Sprint Drag Carry (seconds)",
+					"value": -0.40947657148607425
+				},
+				{
+					"x": "Deadlift 8RM (kg)",
+					"y": "VO2 MAX",
+					"value": -0.2868542339434796
+				}
+			],
+			[
+				{
+					"x": "Sprint Drag Carry (seconds)",
+					"y": "Pull Ups",
+					"value": -0.17385120818523997
+				},
+				{
+					"x": "Sprint Drag Carry (seconds)",
+					"y": "Barbell Squats 8RM (kg)",
+					"value": -0.34963017617467174
+				},
+				{
+					"x": "Sprint Drag Carry (seconds)",
+					"y": "Deadlift 8RM (kg)",
+					"value": -0.40947657148607425
+				},
+				{
+					"x": "Sprint Drag Carry (seconds)",
+					"y": "Sprint Drag Carry (seconds)",
+					"value": 1.0
+				},
+				{
+					"x": "Sprint Drag Carry (seconds)",
+					"y": "VO2 MAX",
+					"value": 0.1949013992670699
+				}
+			],
+			[
+				{ "x": "VO2 MAX", "y": "Pull Ups", "value": 0.21448333862634586 },
+				{
+					"x": "VO2 MAX",
+					"y": "Barbell Squats 8RM (kg)",
+					"value": -0.243371387664155
+				},
+				{
+					"x": "VO2 MAX",
+					"y": "Deadlift 8RM (kg)",
+					"value": -0.2868542339434796
+				},
+				{
+					"x": "VO2 MAX",
+					"y": "Sprint Drag Carry (seconds)",
+					"value": 0.1949013992670699
+				},
+				{ "x": "VO2 MAX", "y": "VO2 MAX", "value": 1.0 }
+			]
+		],
+		"metadata": { "min_value": -0.40947657148607425, "max_value": 1.0 }
+	},
+	"cognitive_correlation": {
+		"columns": [
+			"Sustained Attention Response Accuracy (%)",
+			"Visual Reaction Accuracy",
+			"Spatial Planning Accuracy (%)"
+		],
+		"matrix": [
+			[
+				{
+					"x": "Sustained Attention Response Accuracy (%)",
+					"y": "Sustained Attention Response Accuracy (%)",
+					"value": 1.0
+				},
+				{
+					"x": "Sustained Attention Response Accuracy (%)",
+					"y": "Visual Reaction Accuracy",
+					"value": 0.2581079357751009
+				},
+				{
+					"x": "Sustained Attention Response Accuracy (%)",
+					"y": "Spatial Planning Accuracy (%)",
+					"value": 0.1637896589110086
+				}
+			],
+			[
+				{
+					"x": "Visual Reaction Accuracy",
+					"y": "Sustained Attention Response Accuracy (%)",
+					"value": 0.2581079357751009
+				},
+				{
+					"x": "Visual Reaction Accuracy",
+					"y": "Visual Reaction Accuracy",
+					"value": 1.0
+				},
+				{
+					"x": "Visual Reaction Accuracy",
+					"y": "Spatial Planning Accuracy (%)",
+					"value": 0.21040396715596668
+				}
+			],
+			[
+				{
+					"x": "Spatial Planning Accuracy (%)",
+					"y": "Sustained Attention Response Accuracy (%)",
+					"value": 0.1637896589110086
+				},
+				{
+					"x": "Spatial Planning Accuracy (%)",
+					"y": "Visual Reaction Accuracy",
+					"value": 0.21040396715596668
+				},
+				{
+					"x": "Spatial Planning Accuracy (%)",
+					"y": "Spatial Planning Accuracy (%)",
+					"value": 1.0
+				}
+			]
+		],
+		"metadata": { "min_value": 0.1637896589110086, "max_value": 1.0 }
+	},
+	"psychological_correlation": {
+		"columns": [
+			"Self-Determination (Autonomy)",
+			"Self-Determination (Competence)",
+			"Self-Determination (Relatedness)",
+			"Self-Determination (General)",
+			"ML360 Awareness",
+			"ML360 Calm & Patience",
+			"ML360 Open Mind",
+			"ML360 Focus & Presence",
+			"ML360 Growth"
+		],
+		"matrix": [
+			[
+				{
+					"x": "Self-Determination (Autonomy)",
+					"y": "Self-Determination (Autonomy)",
+					"value": 1.0
+				},
+				{
+					"x": "Self-Determination (Autonomy)",
+					"y": "Self-Determination (Competence)",
+					"value": 0.6375103358353835
+				},
+				{
+					"x": "Self-Determination (Autonomy)",
+					"y": "Self-Determination (Relatedness)",
+					"value": 0.30309651160658657
+				},
+				{
+					"x": "Self-Determination (Autonomy)",
+					"y": "Self-Determination (General)",
+					"value": 0.46365804954099793
+				},
+				{
+					"x": "Self-Determination (Autonomy)",
+					"y": "ML360 Awareness",
+					"value": 0.5567159340490014
+				},
+				{
+					"x": "Self-Determination (Autonomy)",
+					"y": "ML360 Calm & Patience",
+					"value": 0.49866516258942273
+				},
+				{
+					"x": "Self-Determination (Autonomy)",
+					"y": "ML360 Open Mind",
+					"value": 0.4271542375593016
+				},
+				{
+					"x": "Self-Determination (Autonomy)",
+					"y": "ML360 Focus & Presence",
+					"value": 0.5468459392643985
+				},
+				{
+					"x": "Self-Determination (Autonomy)",
+					"y": "ML360 Growth",
+					"value": 0.5868397060521608
+				}
+			],
+			[
+				{
+					"x": "Self-Determination (Competence)",
+					"y": "Self-Determination (Autonomy)",
+					"value": 0.6375103358353835
+				},
+				{
+					"x": "Self-Determination (Competence)",
+					"y": "Self-Determination (Competence)",
+					"value": 1.0
+				},
+				{
+					"x": "Self-Determination (Competence)",
+					"y": "Self-Determination (Relatedness)",
+					"value": 0.4454561467262199
+				},
+				{
+					"x": "Self-Determination (Competence)",
+					"y": "Self-Determination (General)",
+					"value": 0.5440955783368814
+				},
+				{
+					"x": "Self-Determination (Competence)",
+					"y": "ML360 Awareness",
+					"value": 0.40686859741445275
+				},
+				{
+					"x": "Self-Determination (Competence)",
+					"y": "ML360 Calm & Patience",
+					"value": 0.4215623584055764
+				},
+				{
+					"x": "Self-Determination (Competence)",
+					"y": "ML360 Open Mind",
+					"value": 0.42942798095322243
+				},
+				{
+					"x": "Self-Determination (Competence)",
+					"y": "ML360 Focus & Presence",
+					"value": 0.46252045531117114
+				},
+				{
+					"x": "Self-Determination (Competence)",
+					"y": "ML360 Growth",
+					"value": 0.41518203255260294
+				}
+			],
+			[
+				{
+					"x": "Self-Determination (Relatedness)",
+					"y": "Self-Determination (Autonomy)",
+					"value": 0.30309651160658657
+				},
+				{
+					"x": "Self-Determination (Relatedness)",
+					"y": "Self-Determination (Competence)",
+					"value": 0.4454561467262199
+				},
+				{
+					"x": "Self-Determination (Relatedness)",
+					"y": "Self-Determination (Relatedness)",
+					"value": 1.0
+				},
+				{
+					"x": "Self-Determination (Relatedness)",
+					"y": "Self-Determination (General)",
+					"value": 0.5746943280399914
+				},
+				{
+					"x": "Self-Determination (Relatedness)",
+					"y": "ML360 Awareness",
+					"value": 0.33052483355176226
+				},
+				{
+					"x": "Self-Determination (Relatedness)",
+					"y": "ML360 Calm & Patience",
+					"value": 0.16855183024407105
+				},
+				{
+					"x": "Self-Determination (Relatedness)",
+					"y": "ML360 Open Mind",
+					"value": 0.09792502986921241
+				},
+				{
+					"x": "Self-Determination (Relatedness)",
+					"y": "ML360 Focus & Presence",
+					"value": 0.22349651691994987
+				},
+				{
+					"x": "Self-Determination (Relatedness)",
+					"y": "ML360 Growth",
+					"value": 0.21141708567389242
+				}
+			],
+			[
+				{
+					"x": "Self-Determination (General)",
+					"y": "Self-Determination (Autonomy)",
+					"value": 0.46365804954099793
+				},
+				{
+					"x": "Self-Determination (General)",
+					"y": "Self-Determination (Competence)",
+					"value": 0.5440955783368814
+				},
+				{
+					"x": "Self-Determination (General)",
+					"y": "Self-Determination (Relatedness)",
+					"value": 0.5746943280399914
+				},
+				{
+					"x": "Self-Determination (General)",
+					"y": "Self-Determination (General)",
+					"value": 1.0
+				},
+				{
+					"x": "Self-Determination (General)",
+					"y": "ML360 Awareness",
+					"value": 0.39525394585854984
+				},
+				{
+					"x": "Self-Determination (General)",
+					"y": "ML360 Calm & Patience",
+					"value": 0.3159340465076615
+				},
+				{
+					"x": "Self-Determination (General)",
+					"y": "ML360 Open Mind",
+					"value": 0.3237299257160318
+				},
+				{
+					"x": "Self-Determination (General)",
+					"y": "ML360 Focus & Presence",
+					"value": 0.3315790207726347
+				},
+				{
+					"x": "Self-Determination (General)",
+					"y": "ML360 Growth",
+					"value": 0.36282082246651914
+				}
+			],
+			[
+				{
+					"x": "ML360 Awareness",
+					"y": "Self-Determination (Autonomy)",
+					"value": 0.5567159340490014
+				},
+				{
+					"x": "ML360 Awareness",
+					"y": "Self-Determination (Competence)",
+					"value": 0.40686859741445275
+				},
+				{
+					"x": "ML360 Awareness",
+					"y": "Self-Determination (Relatedness)",
+					"value": 0.33052483355176226
+				},
+				{
+					"x": "ML360 Awareness",
+					"y": "Self-Determination (General)",
+					"value": 0.39525394585854984
+				},
+				{ "x": "ML360 Awareness", "y": "ML360 Awareness", "value": 1.0 },
+				{
+					"x": "ML360 Awareness",
+					"y": "ML360 Calm & Patience",
+					"value": 0.6484744030128694
+				},
+				{
+					"x": "ML360 Awareness",
+					"y": "ML360 Open Mind",
+					"value": 0.7364177866175726
+				},
+				{
+					"x": "ML360 Awareness",
+					"y": "ML360 Focus & Presence",
+					"value": 0.7609821471737344
+				},
+				{
+					"x": "ML360 Awareness",
+					"y": "ML360 Growth",
+					"value": 0.7735759316842756
+				}
+			],
+			[
+				{
+					"x": "ML360 Calm & Patience",
+					"y": "Self-Determination (Autonomy)",
+					"value": 0.49866516258942273
+				},
+				{
+					"x": "ML360 Calm & Patience",
+					"y": "Self-Determination (Competence)",
+					"value": 0.4215623584055764
+				},
+				{
+					"x": "ML360 Calm & Patience",
+					"y": "Self-Determination (Relatedness)",
+					"value": 0.16855183024407105
+				},
+				{
+					"x": "ML360 Calm & Patience",
+					"y": "Self-Determination (General)",
+					"value": 0.3159340465076615
+				},
+				{
+					"x": "ML360 Calm & Patience",
+					"y": "ML360 Awareness",
+					"value": 0.6484744030128694
+				},
+				{
+					"x": "ML360 Calm & Patience",
+					"y": "ML360 Calm & Patience",
+					"value": 1.0
+				},
+				{
+					"x": "ML360 Calm & Patience",
+					"y": "ML360 Open Mind",
+					"value": 0.8092671472305742
+				},
+				{
+					"x": "ML360 Calm & Patience",
+					"y": "ML360 Focus & Presence",
+					"value": 0.7613023404331051
+				},
+				{
+					"x": "ML360 Calm & Patience",
+					"y": "ML360 Growth",
+					"value": 0.519629028628884
+				}
+			],
+			[
+				{
+					"x": "ML360 Open Mind",
+					"y": "Self-Determination (Autonomy)",
+					"value": 0.4271542375593016
+				},
+				{
+					"x": "ML360 Open Mind",
+					"y": "Self-Determination (Competence)",
+					"value": 0.42942798095322243
+				},
+				{
+					"x": "ML360 Open Mind",
+					"y": "Self-Determination (Relatedness)",
+					"value": 0.09792502986921241
+				},
+				{
+					"x": "ML360 Open Mind",
+					"y": "Self-Determination (General)",
+					"value": 0.3237299257160318
+				},
+				{
+					"x": "ML360 Open Mind",
+					"y": "ML360 Awareness",
+					"value": 0.7364177866175726
+				},
+				{
+					"x": "ML360 Open Mind",
+					"y": "ML360 Calm & Patience",
+					"value": 0.8092671472305742
+				},
+				{ "x": "ML360 Open Mind", "y": "ML360 Open Mind", "value": 1.0 },
+				{
+					"x": "ML360 Open Mind",
+					"y": "ML360 Focus & Presence",
+					"value": 0.7911472895855518
+				},
+				{
+					"x": "ML360 Open Mind",
+					"y": "ML360 Growth",
+					"value": 0.6488548400802425
+				}
+			],
+			[
+				{
+					"x": "ML360 Focus & Presence",
+					"y": "Self-Determination (Autonomy)",
+					"value": 0.5468459392643985
+				},
+				{
+					"x": "ML360 Focus & Presence",
+					"y": "Self-Determination (Competence)",
+					"value": 0.46252045531117114
+				},
+				{
+					"x": "ML360 Focus & Presence",
+					"y": "Self-Determination (Relatedness)",
+					"value": 0.22349651691994987
+				},
+				{
+					"x": "ML360 Focus & Presence",
+					"y": "Self-Determination (General)",
+					"value": 0.3315790207726347
+				},
+				{
+					"x": "ML360 Focus & Presence",
+					"y": "ML360 Awareness",
+					"value": 0.7609821471737344
+				},
+				{
+					"x": "ML360 Focus & Presence",
+					"y": "ML360 Calm & Patience",
+					"value": 0.7613023404331051
+				},
+				{
+					"x": "ML360 Focus & Presence",
+					"y": "ML360 Open Mind",
+					"value": 0.7911472895855518
+				},
+				{
+					"x": "ML360 Focus & Presence",
+					"y": "ML360 Focus & Presence",
+					"value": 1.0
+				},
+				{
+					"x": "ML360 Focus & Presence",
+					"y": "ML360 Growth",
+					"value": 0.7234013684940979
+				}
+			],
+			[
+				{
+					"x": "ML360 Growth",
+					"y": "Self-Determination (Autonomy)",
+					"value": 0.5868397060521608
+				},
+				{
+					"x": "ML360 Growth",
+					"y": "Self-Determination (Competence)",
+					"value": 0.41518203255260294
+				},
+				{
+					"x": "ML360 Growth",
+					"y": "Self-Determination (Relatedness)",
+					"value": 0.21141708567389242
+				},
+				{
+					"x": "ML360 Growth",
+					"y": "Self-Determination (General)",
+					"value": 0.36282082246651914
+				},
+				{
+					"x": "ML360 Growth",
+					"y": "ML360 Awareness",
+					"value": 0.7735759316842756
+				},
+				{
+					"x": "ML360 Growth",
+					"y": "ML360 Calm & Patience",
+					"value": 0.519629028628884
+				},
+				{
+					"x": "ML360 Growth",
+					"y": "ML360 Open Mind",
+					"value": 0.6488548400802425
+				},
+				{
+					"x": "ML360 Growth",
+					"y": "ML360 Focus & Presence",
+					"value": 0.7234013684940979
+				},
+				{ "x": "ML360 Growth", "y": "ML360 Growth", "value": 1.0 }
+			]
+		],
+		"metadata": { "min_value": 0.09792502986921241, "max_value": 1.0 }
+	},
+	"composite_correlation": {
+		"columns": [
+			"Physical_Fitness_Composite",
+			"Cognitive_Performance_Composite",
+			"ML360_Composite"
+		],
+		"matrix": [
+			[
+				{
+					"x": "Physical_Fitness_Composite",
+					"y": "Physical_Fitness_Composite",
+					"value": 1.0
+				},
+				{
+					"x": "Physical_Fitness_Composite",
+					"y": "Cognitive_Performance_Composite",
+					"value": 0.18322563440856343
+				},
+				{
+					"x": "Physical_Fitness_Composite",
+					"y": "ML360_Composite",
+					"value": 0.13116071052465672
+				}
+			],
+			[
+				{
+					"x": "Cognitive_Performance_Composite",
+					"y": "Physical_Fitness_Composite",
+					"value": 0.18322563440856343
+				},
+				{
+					"x": "Cognitive_Performance_Composite",
+					"y": "Cognitive_Performance_Composite",
+					"value": 1.0
+				},
+				{
+					"x": "Cognitive_Performance_Composite",
+					"y": "ML360_Composite",
+					"value": -0.06937893580624248
+				}
+			],
+			[
+				{
+					"x": "ML360_Composite",
+					"y": "Physical_Fitness_Composite",
+					"value": 0.13116071052465672
+				},
+				{
+					"x": "ML360_Composite",
+					"y": "Cognitive_Performance_Composite",
+					"value": -0.06937893580624248
+				},
+				{ "x": "ML360_Composite", "y": "ML360_Composite", "value": 1.0 }
+			]
+		],
+		"metadata": { "min_value": -0.06937893580624248, "max_value": 1.0 }
+	},
+	"cross_domain_correlation": {
+		"data": [
+			{
+				"source": "Pull Ups",
+				"source_domain": "physical",
+				"target": "Barbell Squats 8RM (kg)",
+				"target_domain": "physical",
+				"value": 0.36253174507275426
+			},
+			{
+				"source": "Pull Ups",
+				"source_domain": "physical",
+				"target": "Deadlift 8RM (kg)",
+				"target_domain": "physical",
+				"value": 0.297766109234063
+			},
+			{
+				"source": "Pull Ups",
+				"source_domain": "physical",
+				"target": "Sprint Drag Carry (seconds)",
+				"target_domain": "physical",
+				"value": -0.17385120818523997
+			},
+			{
+				"source": "Pull Ups",
+				"source_domain": "physical",
+				"target": "VO2 MAX",
+				"target_domain": "physical",
+				"value": 0.21448333862634586
+			},
+			{
+				"source": "Pull Ups",
+				"source_domain": "physical",
+				"target": "Sustained Attention Response Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": 0.14888310929594853
+			},
+			{
+				"source": "Pull Ups",
+				"source_domain": "physical",
+				"target": "Visual Reaction Accuracy",
+				"target_domain": "cognitive",
+				"value": 0.08617712502561471
+			},
+			{
+				"source": "Pull Ups",
+				"source_domain": "physical",
+				"target": "Spatial Planning Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": -0.17124289112097393
+			},
+			{
+				"source": "Pull Ups",
+				"source_domain": "physical",
+				"target": "Self-Determination (Autonomy)",
+				"target_domain": "psychological",
+				"value": -0.05233749115575601
+			},
+			{
+				"source": "Pull Ups",
+				"source_domain": "physical",
+				"target": "Self-Determination (Competence)",
+				"target_domain": "psychological",
+				"value": 0.015283856804450937
+			},
+			{
+				"source": "Pull Ups",
+				"source_domain": "physical",
+				"target": "Self-Determination (Relatedness)",
+				"target_domain": "psychological",
+				"value": 0.0937873927012087
+			},
+			{
+				"source": "Pull Ups",
+				"source_domain": "physical",
+				"target": "Self-Determination (General)",
+				"target_domain": "psychological",
+				"value": 0.23412201015640063
+			},
+			{
+				"source": "Pull Ups",
+				"source_domain": "physical",
+				"target": "ML360 Awareness",
+				"target_domain": "psychological",
+				"value": -0.0503419426721019
+			},
+			{
+				"source": "Pull Ups",
+				"source_domain": "physical",
+				"target": "ML360 Calm & Patience",
+				"target_domain": "psychological",
+				"value": 0.05676282397551857
+			},
+			{
+				"source": "Pull Ups",
+				"source_domain": "physical",
+				"target": "ML360 Open Mind",
+				"target_domain": "psychological",
+				"value": 0.03862698254611932
+			},
+			{
+				"source": "Pull Ups",
+				"source_domain": "physical",
+				"target": "ML360 Focus & Presence",
+				"target_domain": "psychological",
+				"value": 0.010547016823155158
+			},
+			{
+				"source": "Pull Ups",
+				"source_domain": "physical",
+				"target": "ML360 Growth",
+				"target_domain": "psychological",
+				"value": 0.01662100041693232
+			},
+			{
+				"source": "Barbell Squats 8RM (kg)",
+				"source_domain": "physical",
+				"target": "Pull Ups",
+				"target_domain": "physical",
+				"value": 0.36253174507275426
+			},
+			{
+				"source": "Barbell Squats 8RM (kg)",
+				"source_domain": "physical",
+				"target": "Deadlift 8RM (kg)",
+				"target_domain": "physical",
+				"value": 0.6893863939276124
+			},
+			{
+				"source": "Barbell Squats 8RM (kg)",
+				"source_domain": "physical",
+				"target": "Sprint Drag Carry (seconds)",
+				"target_domain": "physical",
+				"value": -0.34963017617467174
+			},
+			{
+				"source": "Barbell Squats 8RM (kg)",
+				"source_domain": "physical",
+				"target": "VO2 MAX",
+				"target_domain": "physical",
+				"value": -0.243371387664155
+			},
+			{
+				"source": "Barbell Squats 8RM (kg)",
+				"source_domain": "physical",
+				"target": "Sustained Attention Response Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": 0.14354314685726352
+			},
+			{
+				"source": "Barbell Squats 8RM (kg)",
+				"source_domain": "physical",
+				"target": "Visual Reaction Accuracy",
+				"target_domain": "cognitive",
+				"value": 0.093863476833333
+			},
+			{
+				"source": "Barbell Squats 8RM (kg)",
+				"source_domain": "physical",
+				"target": "Spatial Planning Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": -0.09634396419019532
+			},
+			{
+				"source": "Barbell Squats 8RM (kg)",
+				"source_domain": "physical",
+				"target": "Self-Determination (Autonomy)",
+				"target_domain": "psychological",
+				"value": 0.12944171078872066
+			},
+			{
+				"source": "Barbell Squats 8RM (kg)",
+				"source_domain": "physical",
+				"target": "Self-Determination (Competence)",
+				"target_domain": "psychological",
+				"value": 0.0034776842773027654
+			},
+			{
+				"source": "Barbell Squats 8RM (kg)",
+				"source_domain": "physical",
+				"target": "Self-Determination (Relatedness)",
+				"target_domain": "psychological",
+				"value": -0.18264474232786523
+			},
+			{
+				"source": "Barbell Squats 8RM (kg)",
+				"source_domain": "physical",
+				"target": "Self-Determination (General)",
+				"target_domain": "psychological",
+				"value": 0.01131354949413897
+			},
+			{
+				"source": "Barbell Squats 8RM (kg)",
+				"source_domain": "physical",
+				"target": "ML360 Awareness",
+				"target_domain": "psychological",
+				"value": 0.23389377499133668
+			},
+			{
+				"source": "Barbell Squats 8RM (kg)",
+				"source_domain": "physical",
+				"target": "ML360 Calm & Patience",
+				"target_domain": "psychological",
+				"value": 0.16571098936312634
+			},
+			{
+				"source": "Barbell Squats 8RM (kg)",
+				"source_domain": "physical",
+				"target": "ML360 Open Mind",
+				"target_domain": "psychological",
+				"value": 0.2523361028905867
+			},
+			{
+				"source": "Barbell Squats 8RM (kg)",
+				"source_domain": "physical",
+				"target": "ML360 Focus & Presence",
+				"target_domain": "psychological",
+				"value": 0.2684919050460959
+			},
+			{
+				"source": "Barbell Squats 8RM (kg)",
+				"source_domain": "physical",
+				"target": "ML360 Growth",
+				"target_domain": "psychological",
+				"value": 0.11161254071576765
+			},
+			{
+				"source": "Deadlift 8RM (kg)",
+				"source_domain": "physical",
+				"target": "Pull Ups",
+				"target_domain": "physical",
+				"value": 0.297766109234063
+			},
+			{
+				"source": "Deadlift 8RM (kg)",
+				"source_domain": "physical",
+				"target": "Barbell Squats 8RM (kg)",
+				"target_domain": "physical",
+				"value": 0.6893863939276124
+			},
+			{
+				"source": "Deadlift 8RM (kg)",
+				"source_domain": "physical",
+				"target": "Sprint Drag Carry (seconds)",
+				"target_domain": "physical",
+				"value": -0.40947657148607425
+			},
+			{
+				"source": "Deadlift 8RM (kg)",
+				"source_domain": "physical",
+				"target": "VO2 MAX",
+				"target_domain": "physical",
+				"value": -0.2868542339434796
+			},
+			{
+				"source": "Deadlift 8RM (kg)",
+				"source_domain": "physical",
+				"target": "Sustained Attention Response Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": 0.21616707740052085
+			},
+			{
+				"source": "Deadlift 8RM (kg)",
+				"source_domain": "physical",
+				"target": "Visual Reaction Accuracy",
+				"target_domain": "cognitive",
+				"value": 0.05804014338471088
+			},
+			{
+				"source": "Deadlift 8RM (kg)",
+				"source_domain": "physical",
+				"target": "Spatial Planning Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": 0.07379616199468118
+			},
+			{
+				"source": "Deadlift 8RM (kg)",
+				"source_domain": "physical",
+				"target": "Self-Determination (Autonomy)",
+				"target_domain": "psychological",
+				"value": 0.3381747910604681
+			},
+			{
+				"source": "Deadlift 8RM (kg)",
+				"source_domain": "physical",
+				"target": "Self-Determination (Competence)",
+				"target_domain": "psychological",
+				"value": 0.07513004074624746
+			},
+			{
+				"source": "Deadlift 8RM (kg)",
+				"source_domain": "physical",
+				"target": "Self-Determination (Relatedness)",
+				"target_domain": "psychological",
+				"value": -0.028231847373368153
+			},
+			{
+				"source": "Deadlift 8RM (kg)",
+				"source_domain": "physical",
+				"target": "Self-Determination (General)",
+				"target_domain": "psychological",
+				"value": 0.1467644768255421
+			},
+			{
+				"source": "Deadlift 8RM (kg)",
+				"source_domain": "physical",
+				"target": "ML360 Awareness",
+				"target_domain": "psychological",
+				"value": 0.289297511996068
+			},
+			{
+				"source": "Deadlift 8RM (kg)",
+				"source_domain": "physical",
+				"target": "ML360 Calm & Patience",
+				"target_domain": "psychological",
+				"value": 0.30146815705668345
+			},
+			{
+				"source": "Deadlift 8RM (kg)",
+				"source_domain": "physical",
+				"target": "ML360 Open Mind",
+				"target_domain": "psychological",
+				"value": 0.324315996962421
+			},
+			{
+				"source": "Deadlift 8RM (kg)",
+				"source_domain": "physical",
+				"target": "ML360 Focus & Presence",
+				"target_domain": "psychological",
+				"value": 0.26162029646324875
+			},
+			{
+				"source": "Deadlift 8RM (kg)",
+				"source_domain": "physical",
+				"target": "ML360 Growth",
+				"target_domain": "psychological",
+				"value": 0.1927277973326435
+			},
+			{
+				"source": "Sprint Drag Carry (seconds)",
+				"source_domain": "physical",
+				"target": "Pull Ups",
+				"target_domain": "physical",
+				"value": -0.17385120818523997
+			},
+			{
+				"source": "Sprint Drag Carry (seconds)",
+				"source_domain": "physical",
+				"target": "Barbell Squats 8RM (kg)",
+				"target_domain": "physical",
+				"value": -0.34963017617467174
+			},
+			{
+				"source": "Sprint Drag Carry (seconds)",
+				"source_domain": "physical",
+				"target": "Deadlift 8RM (kg)",
+				"target_domain": "physical",
+				"value": -0.40947657148607425
+			},
+			{
+				"source": "Sprint Drag Carry (seconds)",
+				"source_domain": "physical",
+				"target": "VO2 MAX",
+				"target_domain": "physical",
+				"value": 0.1949013992670699
+			},
+			{
+				"source": "Sprint Drag Carry (seconds)",
+				"source_domain": "physical",
+				"target": "Sustained Attention Response Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": -0.21256507088647503
+			},
+			{
+				"source": "Sprint Drag Carry (seconds)",
+				"source_domain": "physical",
+				"target": "Visual Reaction Accuracy",
+				"target_domain": "cognitive",
+				"value": -0.31627485291839186
+			},
+			{
+				"source": "Sprint Drag Carry (seconds)",
+				"source_domain": "physical",
+				"target": "Spatial Planning Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": -0.04015442785567252
+			},
+			{
+				"source": "Sprint Drag Carry (seconds)",
+				"source_domain": "physical",
+				"target": "Self-Determination (Autonomy)",
+				"target_domain": "psychological",
+				"value": -0.11890302575911164
+			},
+			{
+				"source": "Sprint Drag Carry (seconds)",
+				"source_domain": "physical",
+				"target": "Self-Determination (Competence)",
+				"target_domain": "psychological",
+				"value": -0.2553082339978516
+			},
+			{
+				"source": "Sprint Drag Carry (seconds)",
+				"source_domain": "physical",
+				"target": "Self-Determination (Relatedness)",
+				"target_domain": "psychological",
+				"value": -0.11074551376538339
+			},
+			{
+				"source": "Sprint Drag Carry (seconds)",
+				"source_domain": "physical",
+				"target": "Self-Determination (General)",
+				"target_domain": "psychological",
+				"value": -0.3473424951313257
+			},
+			{
+				"source": "Sprint Drag Carry (seconds)",
+				"source_domain": "physical",
+				"target": "ML360 Awareness",
+				"target_domain": "psychological",
+				"value": -0.11077515974633666
+			},
+			{
+				"source": "Sprint Drag Carry (seconds)",
+				"source_domain": "physical",
+				"target": "ML360 Calm & Patience",
+				"target_domain": "psychological",
+				"value": -0.12945352113416456
+			},
+			{
+				"source": "Sprint Drag Carry (seconds)",
+				"source_domain": "physical",
+				"target": "ML360 Open Mind",
+				"target_domain": "psychological",
+				"value": -0.11297517491064206
+			},
+			{
+				"source": "Sprint Drag Carry (seconds)",
+				"source_domain": "physical",
+				"target": "ML360 Focus & Presence",
+				"target_domain": "psychological",
+				"value": -0.1230162464709129
+			},
+			{
+				"source": "Sprint Drag Carry (seconds)",
+				"source_domain": "physical",
+				"target": "ML360 Growth",
+				"target_domain": "psychological",
+				"value": -0.05948079312742135
+			},
+			{
+				"source": "VO2 MAX",
+				"source_domain": "physical",
+				"target": "Pull Ups",
+				"target_domain": "physical",
+				"value": 0.21448333862634586
+			},
+			{
+				"source": "VO2 MAX",
+				"source_domain": "physical",
+				"target": "Barbell Squats 8RM (kg)",
+				"target_domain": "physical",
+				"value": -0.243371387664155
+			},
+			{
+				"source": "VO2 MAX",
+				"source_domain": "physical",
+				"target": "Deadlift 8RM (kg)",
+				"target_domain": "physical",
+				"value": -0.2868542339434796
+			},
+			{
+				"source": "VO2 MAX",
+				"source_domain": "physical",
+				"target": "Sprint Drag Carry (seconds)",
+				"target_domain": "physical",
+				"value": 0.1949013992670699
+			},
+			{
+				"source": "VO2 MAX",
+				"source_domain": "physical",
+				"target": "Sustained Attention Response Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": -0.11706879584546877
+			},
+			{
+				"source": "VO2 MAX",
+				"source_domain": "physical",
+				"target": "Visual Reaction Accuracy",
+				"target_domain": "cognitive",
+				"value": 0.11922611021340322
+			},
+			{
+				"source": "VO2 MAX",
+				"source_domain": "physical",
+				"target": "Spatial Planning Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": 0.07756595469189781
+			},
+			{
+				"source": "VO2 MAX",
+				"source_domain": "physical",
+				"target": "Self-Determination (Autonomy)",
+				"target_domain": "psychological",
+				"value": -0.22353997091351938
+			},
+			{
+				"source": "VO2 MAX",
+				"source_domain": "physical",
+				"target": "Self-Determination (Competence)",
+				"target_domain": "psychological",
+				"value": -0.17232360616413125
+			},
+			{
+				"source": "VO2 MAX",
+				"source_domain": "physical",
+				"target": "Self-Determination (Relatedness)",
+				"target_domain": "psychological",
+				"value": -0.17655944084025993
+			},
+			{
+				"source": "VO2 MAX",
+				"source_domain": "physical",
+				"target": "Self-Determination (General)",
+				"target_domain": "psychological",
+				"value": -0.08639579368399841
+			},
+			{
+				"source": "VO2 MAX",
+				"source_domain": "physical",
+				"target": "ML360 Awareness",
+				"target_domain": "psychological",
+				"value": -0.23858013502034728
+			},
+			{
+				"source": "VO2 MAX",
+				"source_domain": "physical",
+				"target": "ML360 Calm & Patience",
+				"target_domain": "psychological",
+				"value": -0.3087711599231955
+			},
+			{
+				"source": "VO2 MAX",
+				"source_domain": "physical",
+				"target": "ML360 Open Mind",
+				"target_domain": "psychological",
+				"value": -0.25616536975599247
+			},
+			{
+				"source": "VO2 MAX",
+				"source_domain": "physical",
+				"target": "ML360 Focus & Presence",
+				"target_domain": "psychological",
+				"value": -0.32336073644663327
+			},
+			{
+				"source": "VO2 MAX",
+				"source_domain": "physical",
+				"target": "ML360 Growth",
+				"target_domain": "psychological",
+				"value": -0.059465078954760844
+			},
+			{
+				"source": "Sustained Attention Response Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "Pull Ups",
+				"target_domain": "physical",
+				"value": 0.14888310929594853
+			},
+			{
+				"source": "Sustained Attention Response Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "Barbell Squats 8RM (kg)",
+				"target_domain": "physical",
+				"value": 0.14354314685726352
+			},
+			{
+				"source": "Sustained Attention Response Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "Deadlift 8RM (kg)",
+				"target_domain": "physical",
+				"value": 0.21616707740052085
+			},
+			{
+				"source": "Sustained Attention Response Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "Sprint Drag Carry (seconds)",
+				"target_domain": "physical",
+				"value": -0.21256507088647503
+			},
+			{
+				"source": "Sustained Attention Response Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "VO2 MAX",
+				"target_domain": "physical",
+				"value": -0.11706879584546877
+			},
+			{
+				"source": "Sustained Attention Response Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "Visual Reaction Accuracy",
+				"target_domain": "cognitive",
+				"value": 0.2581079357751009
+			},
+			{
+				"source": "Sustained Attention Response Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "Spatial Planning Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": 0.1637896589110086
+			},
+			{
+				"source": "Sustained Attention Response Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "Self-Determination (Autonomy)",
+				"target_domain": "psychological",
+				"value": 0.07735708545562349
+			},
+			{
+				"source": "Sustained Attention Response Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "Self-Determination (Competence)",
+				"target_domain": "psychological",
+				"value": 0.05163703310815334
+			},
+			{
+				"source": "Sustained Attention Response Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "Self-Determination (Relatedness)",
+				"target_domain": "psychological",
+				"value": 0.19821277732635878
+			},
+			{
+				"source": "Sustained Attention Response Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "Self-Determination (General)",
+				"target_domain": "psychological",
+				"value": 0.190695537242556
+			},
+			{
+				"source": "Sustained Attention Response Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "ML360 Awareness",
+				"target_domain": "psychological",
+				"value": -0.06482134053784806
+			},
+			{
+				"source": "Sustained Attention Response Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "ML360 Calm & Patience",
+				"target_domain": "psychological",
+				"value": -0.03615653757255881
+			},
+			{
+				"source": "Sustained Attention Response Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "ML360 Open Mind",
+				"target_domain": "psychological",
+				"value": 0.02375095915905451
+			},
+			{
+				"source": "Sustained Attention Response Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "ML360 Focus & Presence",
+				"target_domain": "psychological",
+				"value": -0.012219323197172257
+			},
+			{
+				"source": "Sustained Attention Response Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "ML360 Growth",
+				"target_domain": "psychological",
+				"value": 0.03421134368430399
+			},
+			{
+				"source": "Visual Reaction Accuracy",
+				"source_domain": "cognitive",
+				"target": "Pull Ups",
+				"target_domain": "physical",
+				"value": 0.08617712502561471
+			},
+			{
+				"source": "Visual Reaction Accuracy",
+				"source_domain": "cognitive",
+				"target": "Barbell Squats 8RM (kg)",
+				"target_domain": "physical",
+				"value": 0.093863476833333
+			},
+			{
+				"source": "Visual Reaction Accuracy",
+				"source_domain": "cognitive",
+				"target": "Deadlift 8RM (kg)",
+				"target_domain": "physical",
+				"value": 0.05804014338471088
+			},
+			{
+				"source": "Visual Reaction Accuracy",
+				"source_domain": "cognitive",
+				"target": "Sprint Drag Carry (seconds)",
+				"target_domain": "physical",
+				"value": -0.31627485291839186
+			},
+			{
+				"source": "Visual Reaction Accuracy",
+				"source_domain": "cognitive",
+				"target": "VO2 MAX",
+				"target_domain": "physical",
+				"value": 0.11922611021340322
+			},
+			{
+				"source": "Visual Reaction Accuracy",
+				"source_domain": "cognitive",
+				"target": "Sustained Attention Response Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": 0.2581079357751009
+			},
+			{
+				"source": "Visual Reaction Accuracy",
+				"source_domain": "cognitive",
+				"target": "Spatial Planning Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": 0.21040396715596668
+			},
+			{
+				"source": "Visual Reaction Accuracy",
+				"source_domain": "cognitive",
+				"target": "Self-Determination (Autonomy)",
+				"target_domain": "psychological",
+				"value": -0.16729926093469996
+			},
+			{
+				"source": "Visual Reaction Accuracy",
+				"source_domain": "cognitive",
+				"target": "Self-Determination (Competence)",
+				"target_domain": "psychological",
+				"value": -0.12714061103684104
+			},
+			{
+				"source": "Visual Reaction Accuracy",
+				"source_domain": "cognitive",
+				"target": "Self-Determination (Relatedness)",
+				"target_domain": "psychological",
+				"value": -0.052683443910660425
+			},
+			{
+				"source": "Visual Reaction Accuracy",
+				"source_domain": "cognitive",
+				"target": "Self-Determination (General)",
+				"target_domain": "psychological",
+				"value": 0.11064265753511439
+			},
+			{
+				"source": "Visual Reaction Accuracy",
+				"source_domain": "cognitive",
+				"target": "ML360 Awareness",
+				"target_domain": "psychological",
+				"value": -0.05037658743304163
+			},
+			{
+				"source": "Visual Reaction Accuracy",
+				"source_domain": "cognitive",
+				"target": "ML360 Calm & Patience",
+				"target_domain": "psychological",
+				"value": -0.10913672826269201
+			},
+			{
+				"source": "Visual Reaction Accuracy",
+				"source_domain": "cognitive",
+				"target": "ML360 Open Mind",
+				"target_domain": "psychological",
+				"value": -0.10993333079987012
+			},
+			{
+				"source": "Visual Reaction Accuracy",
+				"source_domain": "cognitive",
+				"target": "ML360 Focus & Presence",
+				"target_domain": "psychological",
+				"value": -0.13041689471041748
+			},
+			{
+				"source": "Visual Reaction Accuracy",
+				"source_domain": "cognitive",
+				"target": "ML360 Growth",
+				"target_domain": "psychological",
+				"value": -0.02431369036616724
+			},
+			{
+				"source": "Spatial Planning Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "Pull Ups",
+				"target_domain": "physical",
+				"value": -0.17124289112097393
+			},
+			{
+				"source": "Spatial Planning Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "Barbell Squats 8RM (kg)",
+				"target_domain": "physical",
+				"value": -0.09634396419019532
+			},
+			{
+				"source": "Spatial Planning Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "Deadlift 8RM (kg)",
+				"target_domain": "physical",
+				"value": 0.07379616199468118
+			},
+			{
+				"source": "Spatial Planning Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "Sprint Drag Carry (seconds)",
+				"target_domain": "physical",
+				"value": -0.04015442785567252
+			},
+			{
+				"source": "Spatial Planning Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "VO2 MAX",
+				"target_domain": "physical",
+				"value": 0.07756595469189781
+			},
+			{
+				"source": "Spatial Planning Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "Sustained Attention Response Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": 0.1637896589110086
+			},
+			{
+				"source": "Spatial Planning Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "Visual Reaction Accuracy",
+				"target_domain": "cognitive",
+				"value": 0.21040396715596668
+			},
+			{
+				"source": "Spatial Planning Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "Self-Determination (Autonomy)",
+				"target_domain": "psychological",
+				"value": 0.1463096953648083
+			},
+			{
+				"source": "Spatial Planning Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "Self-Determination (Competence)",
+				"target_domain": "psychological",
+				"value": 0.07743379956987412
+			},
+			{
+				"source": "Spatial Planning Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "Self-Determination (Relatedness)",
+				"target_domain": "psychological",
+				"value": 0.1839687871271888
+			},
+			{
+				"source": "Spatial Planning Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "Self-Determination (General)",
+				"target_domain": "psychological",
+				"value": 0.23087922237577574
+			},
+			{
+				"source": "Spatial Planning Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "ML360 Awareness",
+				"target_domain": "psychological",
+				"value": 0.09727716645108173
+			},
+			{
+				"source": "Spatial Planning Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "ML360 Calm & Patience",
+				"target_domain": "psychological",
+				"value": -0.19288715387376348
+			},
+			{
+				"source": "Spatial Planning Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "ML360 Open Mind",
+				"target_domain": "psychological",
+				"value": -0.05814659414242973
+			},
+			{
+				"source": "Spatial Planning Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "ML360 Focus & Presence",
+				"target_domain": "psychological",
+				"value": -0.12064262956871641
+			},
+			{
+				"source": "Spatial Planning Accuracy (%)",
+				"source_domain": "cognitive",
+				"target": "ML360 Growth",
+				"target_domain": "psychological",
+				"value": 0.0979262137251465
+			},
+			{
+				"source": "Self-Determination (Autonomy)",
+				"source_domain": "psychological",
+				"target": "Pull Ups",
+				"target_domain": "physical",
+				"value": -0.05233749115575601
+			},
+			{
+				"source": "Self-Determination (Autonomy)",
+				"source_domain": "psychological",
+				"target": "Barbell Squats 8RM (kg)",
+				"target_domain": "physical",
+				"value": 0.12944171078872066
+			},
+			{
+				"source": "Self-Determination (Autonomy)",
+				"source_domain": "psychological",
+				"target": "Deadlift 8RM (kg)",
+				"target_domain": "physical",
+				"value": 0.3381747910604681
+			},
+			{
+				"source": "Self-Determination (Autonomy)",
+				"source_domain": "psychological",
+				"target": "Sprint Drag Carry (seconds)",
+				"target_domain": "physical",
+				"value": -0.11890302575911164
+			},
+			{
+				"source": "Self-Determination (Autonomy)",
+				"source_domain": "psychological",
+				"target": "VO2 MAX",
+				"target_domain": "physical",
+				"value": -0.22353997091351938
+			},
+			{
+				"source": "Self-Determination (Autonomy)",
+				"source_domain": "psychological",
+				"target": "Sustained Attention Response Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": 0.07735708545562349
+			},
+			{
+				"source": "Self-Determination (Autonomy)",
+				"source_domain": "psychological",
+				"target": "Visual Reaction Accuracy",
+				"target_domain": "cognitive",
+				"value": -0.16729926093469996
+			},
+			{
+				"source": "Self-Determination (Autonomy)",
+				"source_domain": "psychological",
+				"target": "Spatial Planning Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": 0.1463096953648083
+			},
+			{
+				"source": "Self-Determination (Autonomy)",
+				"source_domain": "psychological",
+				"target": "Self-Determination (Competence)",
+				"target_domain": "psychological",
+				"value": 0.6375103358353835
+			},
+			{
+				"source": "Self-Determination (Autonomy)",
+				"source_domain": "psychological",
+				"target": "Self-Determination (Relatedness)",
+				"target_domain": "psychological",
+				"value": 0.30309651160658657
+			},
+			{
+				"source": "Self-Determination (Autonomy)",
+				"source_domain": "psychological",
+				"target": "Self-Determination (General)",
+				"target_domain": "psychological",
+				"value": 0.46365804954099793
+			},
+			{
+				"source": "Self-Determination (Autonomy)",
+				"source_domain": "psychological",
+				"target": "ML360 Awareness",
+				"target_domain": "psychological",
+				"value": 0.5567159340490014
+			},
+			{
+				"source": "Self-Determination (Autonomy)",
+				"source_domain": "psychological",
+				"target": "ML360 Calm & Patience",
+				"target_domain": "psychological",
+				"value": 0.49866516258942273
+			},
+			{
+				"source": "Self-Determination (Autonomy)",
+				"source_domain": "psychological",
+				"target": "ML360 Open Mind",
+				"target_domain": "psychological",
+				"value": 0.4271542375593016
+			},
+			{
+				"source": "Self-Determination (Autonomy)",
+				"source_domain": "psychological",
+				"target": "ML360 Focus & Presence",
+				"target_domain": "psychological",
+				"value": 0.5468459392643985
+			},
+			{
+				"source": "Self-Determination (Autonomy)",
+				"source_domain": "psychological",
+				"target": "ML360 Growth",
+				"target_domain": "psychological",
+				"value": 0.5868397060521608
+			},
+			{
+				"source": "Self-Determination (Competence)",
+				"source_domain": "psychological",
+				"target": "Pull Ups",
+				"target_domain": "physical",
+				"value": 0.015283856804450937
+			},
+			{
+				"source": "Self-Determination (Competence)",
+				"source_domain": "psychological",
+				"target": "Barbell Squats 8RM (kg)",
+				"target_domain": "physical",
+				"value": 0.0034776842773027654
+			},
+			{
+				"source": "Self-Determination (Competence)",
+				"source_domain": "psychological",
+				"target": "Deadlift 8RM (kg)",
+				"target_domain": "physical",
+				"value": 0.07513004074624746
+			},
+			{
+				"source": "Self-Determination (Competence)",
+				"source_domain": "psychological",
+				"target": "Sprint Drag Carry (seconds)",
+				"target_domain": "physical",
+				"value": -0.2553082339978516
+			},
+			{
+				"source": "Self-Determination (Competence)",
+				"source_domain": "psychological",
+				"target": "VO2 MAX",
+				"target_domain": "physical",
+				"value": -0.17232360616413125
+			},
+			{
+				"source": "Self-Determination (Competence)",
+				"source_domain": "psychological",
+				"target": "Sustained Attention Response Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": 0.05163703310815334
+			},
+			{
+				"source": "Self-Determination (Competence)",
+				"source_domain": "psychological",
+				"target": "Visual Reaction Accuracy",
+				"target_domain": "cognitive",
+				"value": -0.12714061103684104
+			},
+			{
+				"source": "Self-Determination (Competence)",
+				"source_domain": "psychological",
+				"target": "Spatial Planning Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": 0.07743379956987412
+			},
+			{
+				"source": "Self-Determination (Competence)",
+				"source_domain": "psychological",
+				"target": "Self-Determination (Autonomy)",
+				"target_domain": "psychological",
+				"value": 0.6375103358353835
+			},
+			{
+				"source": "Self-Determination (Competence)",
+				"source_domain": "psychological",
+				"target": "Self-Determination (Relatedness)",
+				"target_domain": "psychological",
+				"value": 0.4454561467262199
+			},
+			{
+				"source": "Self-Determination (Competence)",
+				"source_domain": "psychological",
+				"target": "Self-Determination (General)",
+				"target_domain": "psychological",
+				"value": 0.5440955783368814
+			},
+			{
+				"source": "Self-Determination (Competence)",
+				"source_domain": "psychological",
+				"target": "ML360 Awareness",
+				"target_domain": "psychological",
+				"value": 0.40686859741445275
+			},
+			{
+				"source": "Self-Determination (Competence)",
+				"source_domain": "psychological",
+				"target": "ML360 Calm & Patience",
+				"target_domain": "psychological",
+				"value": 0.4215623584055764
+			},
+			{
+				"source": "Self-Determination (Competence)",
+				"source_domain": "psychological",
+				"target": "ML360 Open Mind",
+				"target_domain": "psychological",
+				"value": 0.42942798095322243
+			},
+			{
+				"source": "Self-Determination (Competence)",
+				"source_domain": "psychological",
+				"target": "ML360 Focus & Presence",
+				"target_domain": "psychological",
+				"value": 0.46252045531117114
+			},
+			{
+				"source": "Self-Determination (Competence)",
+				"source_domain": "psychological",
+				"target": "ML360 Growth",
+				"target_domain": "psychological",
+				"value": 0.41518203255260294
+			},
+			{
+				"source": "Self-Determination (Relatedness)",
+				"source_domain": "psychological",
+				"target": "Pull Ups",
+				"target_domain": "physical",
+				"value": 0.0937873927012087
+			},
+			{
+				"source": "Self-Determination (Relatedness)",
+				"source_domain": "psychological",
+				"target": "Barbell Squats 8RM (kg)",
+				"target_domain": "physical",
+				"value": -0.18264474232786523
+			},
+			{
+				"source": "Self-Determination (Relatedness)",
+				"source_domain": "psychological",
+				"target": "Deadlift 8RM (kg)",
+				"target_domain": "physical",
+				"value": -0.028231847373368153
+			},
+			{
+				"source": "Self-Determination (Relatedness)",
+				"source_domain": "psychological",
+				"target": "Sprint Drag Carry (seconds)",
+				"target_domain": "physical",
+				"value": -0.11074551376538339
+			},
+			{
+				"source": "Self-Determination (Relatedness)",
+				"source_domain": "psychological",
+				"target": "VO2 MAX",
+				"target_domain": "physical",
+				"value": -0.17655944084025993
+			},
+			{
+				"source": "Self-Determination (Relatedness)",
+				"source_domain": "psychological",
+				"target": "Sustained Attention Response Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": 0.19821277732635878
+			},
+			{
+				"source": "Self-Determination (Relatedness)",
+				"source_domain": "psychological",
+				"target": "Visual Reaction Accuracy",
+				"target_domain": "cognitive",
+				"value": -0.052683443910660425
+			},
+			{
+				"source": "Self-Determination (Relatedness)",
+				"source_domain": "psychological",
+				"target": "Spatial Planning Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": 0.1839687871271888
+			},
+			{
+				"source": "Self-Determination (Relatedness)",
+				"source_domain": "psychological",
+				"target": "Self-Determination (Autonomy)",
+				"target_domain": "psychological",
+				"value": 0.30309651160658657
+			},
+			{
+				"source": "Self-Determination (Relatedness)",
+				"source_domain": "psychological",
+				"target": "Self-Determination (Competence)",
+				"target_domain": "psychological",
+				"value": 0.4454561467262199
+			},
+			{
+				"source": "Self-Determination (Relatedness)",
+				"source_domain": "psychological",
+				"target": "Self-Determination (General)",
+				"target_domain": "psychological",
+				"value": 0.5746943280399914
+			},
+			{
+				"source": "Self-Determination (Relatedness)",
+				"source_domain": "psychological",
+				"target": "ML360 Awareness",
+				"target_domain": "psychological",
+				"value": 0.33052483355176226
+			},
+			{
+				"source": "Self-Determination (Relatedness)",
+				"source_domain": "psychological",
+				"target": "ML360 Calm & Patience",
+				"target_domain": "psychological",
+				"value": 0.16855183024407105
+			},
+			{
+				"source": "Self-Determination (Relatedness)",
+				"source_domain": "psychological",
+				"target": "ML360 Open Mind",
+				"target_domain": "psychological",
+				"value": 0.09792502986921241
+			},
+			{
+				"source": "Self-Determination (Relatedness)",
+				"source_domain": "psychological",
+				"target": "ML360 Focus & Presence",
+				"target_domain": "psychological",
+				"value": 0.22349651691994987
+			},
+			{
+				"source": "Self-Determination (Relatedness)",
+				"source_domain": "psychological",
+				"target": "ML360 Growth",
+				"target_domain": "psychological",
+				"value": 0.21141708567389242
+			},
+			{
+				"source": "Self-Determination (General)",
+				"source_domain": "psychological",
+				"target": "Pull Ups",
+				"target_domain": "physical",
+				"value": 0.23412201015640063
+			},
+			{
+				"source": "Self-Determination (General)",
+				"source_domain": "psychological",
+				"target": "Barbell Squats 8RM (kg)",
+				"target_domain": "physical",
+				"value": 0.01131354949413897
+			},
+			{
+				"source": "Self-Determination (General)",
+				"source_domain": "psychological",
+				"target": "Deadlift 8RM (kg)",
+				"target_domain": "physical",
+				"value": 0.1467644768255421
+			},
+			{
+				"source": "Self-Determination (General)",
+				"source_domain": "psychological",
+				"target": "Sprint Drag Carry (seconds)",
+				"target_domain": "physical",
+				"value": -0.3473424951313257
+			},
+			{
+				"source": "Self-Determination (General)",
+				"source_domain": "psychological",
+				"target": "VO2 MAX",
+				"target_domain": "physical",
+				"value": -0.08639579368399841
+			},
+			{
+				"source": "Self-Determination (General)",
+				"source_domain": "psychological",
+				"target": "Sustained Attention Response Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": 0.190695537242556
+			},
+			{
+				"source": "Self-Determination (General)",
+				"source_domain": "psychological",
+				"target": "Visual Reaction Accuracy",
+				"target_domain": "cognitive",
+				"value": 0.11064265753511439
+			},
+			{
+				"source": "Self-Determination (General)",
+				"source_domain": "psychological",
+				"target": "Spatial Planning Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": 0.23087922237577574
+			},
+			{
+				"source": "Self-Determination (General)",
+				"source_domain": "psychological",
+				"target": "Self-Determination (Autonomy)",
+				"target_domain": "psychological",
+				"value": 0.46365804954099793
+			},
+			{
+				"source": "Self-Determination (General)",
+				"source_domain": "psychological",
+				"target": "Self-Determination (Competence)",
+				"target_domain": "psychological",
+				"value": 0.5440955783368814
+			},
+			{
+				"source": "Self-Determination (General)",
+				"source_domain": "psychological",
+				"target": "Self-Determination (Relatedness)",
+				"target_domain": "psychological",
+				"value": 0.5746943280399914
+			},
+			{
+				"source": "Self-Determination (General)",
+				"source_domain": "psychological",
+				"target": "ML360 Awareness",
+				"target_domain": "psychological",
+				"value": 0.39525394585854984
+			},
+			{
+				"source": "Self-Determination (General)",
+				"source_domain": "psychological",
+				"target": "ML360 Calm & Patience",
+				"target_domain": "psychological",
+				"value": 0.3159340465076615
+			},
+			{
+				"source": "Self-Determination (General)",
+				"source_domain": "psychological",
+				"target": "ML360 Open Mind",
+				"target_domain": "psychological",
+				"value": 0.3237299257160318
+			},
+			{
+				"source": "Self-Determination (General)",
+				"source_domain": "psychological",
+				"target": "ML360 Focus & Presence",
+				"target_domain": "psychological",
+				"value": 0.3315790207726347
+			},
+			{
+				"source": "Self-Determination (General)",
+				"source_domain": "psychological",
+				"target": "ML360 Growth",
+				"target_domain": "psychological",
+				"value": 0.36282082246651914
+			},
+			{
+				"source": "ML360 Awareness",
+				"source_domain": "psychological",
+				"target": "Pull Ups",
+				"target_domain": "physical",
+				"value": -0.0503419426721019
+			},
+			{
+				"source": "ML360 Awareness",
+				"source_domain": "psychological",
+				"target": "Barbell Squats 8RM (kg)",
+				"target_domain": "physical",
+				"value": 0.23389377499133668
+			},
+			{
+				"source": "ML360 Awareness",
+				"source_domain": "psychological",
+				"target": "Deadlift 8RM (kg)",
+				"target_domain": "physical",
+				"value": 0.289297511996068
+			},
+			{
+				"source": "ML360 Awareness",
+				"source_domain": "psychological",
+				"target": "Sprint Drag Carry (seconds)",
+				"target_domain": "physical",
+				"value": -0.11077515974633666
+			},
+			{
+				"source": "ML360 Awareness",
+				"source_domain": "psychological",
+				"target": "VO2 MAX",
+				"target_domain": "physical",
+				"value": -0.23858013502034728
+			},
+			{
+				"source": "ML360 Awareness",
+				"source_domain": "psychological",
+				"target": "Sustained Attention Response Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": -0.06482134053784806
+			},
+			{
+				"source": "ML360 Awareness",
+				"source_domain": "psychological",
+				"target": "Visual Reaction Accuracy",
+				"target_domain": "cognitive",
+				"value": -0.05037658743304163
+			},
+			{
+				"source": "ML360 Awareness",
+				"source_domain": "psychological",
+				"target": "Spatial Planning Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": 0.09727716645108173
+			},
+			{
+				"source": "ML360 Awareness",
+				"source_domain": "psychological",
+				"target": "Self-Determination (Autonomy)",
+				"target_domain": "psychological",
+				"value": 0.5567159340490014
+			},
+			{
+				"source": "ML360 Awareness",
+				"source_domain": "psychological",
+				"target": "Self-Determination (Competence)",
+				"target_domain": "psychological",
+				"value": 0.40686859741445275
+			},
+			{
+				"source": "ML360 Awareness",
+				"source_domain": "psychological",
+				"target": "Self-Determination (Relatedness)",
+				"target_domain": "psychological",
+				"value": 0.33052483355176226
+			},
+			{
+				"source": "ML360 Awareness",
+				"source_domain": "psychological",
+				"target": "Self-Determination (General)",
+				"target_domain": "psychological",
+				"value": 0.39525394585854984
+			},
+			{
+				"source": "ML360 Awareness",
+				"source_domain": "psychological",
+				"target": "ML360 Calm & Patience",
+				"target_domain": "psychological",
+				"value": 0.6484744030128694
+			},
+			{
+				"source": "ML360 Awareness",
+				"source_domain": "psychological",
+				"target": "ML360 Open Mind",
+				"target_domain": "psychological",
+				"value": 0.7364177866175726
+			},
+			{
+				"source": "ML360 Awareness",
+				"source_domain": "psychological",
+				"target": "ML360 Focus & Presence",
+				"target_domain": "psychological",
+				"value": 0.7609821471737344
+			},
+			{
+				"source": "ML360 Awareness",
+				"source_domain": "psychological",
+				"target": "ML360 Growth",
+				"target_domain": "psychological",
+				"value": 0.7735759316842756
+			},
+			{
+				"source": "ML360 Calm & Patience",
+				"source_domain": "psychological",
+				"target": "Pull Ups",
+				"target_domain": "physical",
+				"value": 0.05676282397551857
+			},
+			{
+				"source": "ML360 Calm & Patience",
+				"source_domain": "psychological",
+				"target": "Barbell Squats 8RM (kg)",
+				"target_domain": "physical",
+				"value": 0.16571098936312634
+			},
+			{
+				"source": "ML360 Calm & Patience",
+				"source_domain": "psychological",
+				"target": "Deadlift 8RM (kg)",
+				"target_domain": "physical",
+				"value": 0.30146815705668345
+			},
+			{
+				"source": "ML360 Calm & Patience",
+				"source_domain": "psychological",
+				"target": "Sprint Drag Carry (seconds)",
+				"target_domain": "physical",
+				"value": -0.12945352113416456
+			},
+			{
+				"source": "ML360 Calm & Patience",
+				"source_domain": "psychological",
+				"target": "VO2 MAX",
+				"target_domain": "physical",
+				"value": -0.3087711599231955
+			},
+			{
+				"source": "ML360 Calm & Patience",
+				"source_domain": "psychological",
+				"target": "Sustained Attention Response Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": -0.03615653757255881
+			},
+			{
+				"source": "ML360 Calm & Patience",
+				"source_domain": "psychological",
+				"target": "Visual Reaction Accuracy",
+				"target_domain": "cognitive",
+				"value": -0.10913672826269201
+			},
+			{
+				"source": "ML360 Calm & Patience",
+				"source_domain": "psychological",
+				"target": "Spatial Planning Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": -0.19288715387376348
+			},
+			{
+				"source": "ML360 Calm & Patience",
+				"source_domain": "psychological",
+				"target": "Self-Determination (Autonomy)",
+				"target_domain": "psychological",
+				"value": 0.49866516258942273
+			},
+			{
+				"source": "ML360 Calm & Patience",
+				"source_domain": "psychological",
+				"target": "Self-Determination (Competence)",
+				"target_domain": "psychological",
+				"value": 0.4215623584055764
+			},
+			{
+				"source": "ML360 Calm & Patience",
+				"source_domain": "psychological",
+				"target": "Self-Determination (Relatedness)",
+				"target_domain": "psychological",
+				"value": 0.16855183024407105
+			},
+			{
+				"source": "ML360 Calm & Patience",
+				"source_domain": "psychological",
+				"target": "Self-Determination (General)",
+				"target_domain": "psychological",
+				"value": 0.3159340465076615
+			},
+			{
+				"source": "ML360 Calm & Patience",
+				"source_domain": "psychological",
+				"target": "ML360 Awareness",
+				"target_domain": "psychological",
+				"value": 0.6484744030128694
+			},
+			{
+				"source": "ML360 Calm & Patience",
+				"source_domain": "psychological",
+				"target": "ML360 Open Mind",
+				"target_domain": "psychological",
+				"value": 0.8092671472305742
+			},
+			{
+				"source": "ML360 Calm & Patience",
+				"source_domain": "psychological",
+				"target": "ML360 Focus & Presence",
+				"target_domain": "psychological",
+				"value": 0.7613023404331051
+			},
+			{
+				"source": "ML360 Calm & Patience",
+				"source_domain": "psychological",
+				"target": "ML360 Growth",
+				"target_domain": "psychological",
+				"value": 0.519629028628884
+			},
+			{
+				"source": "ML360 Open Mind",
+				"source_domain": "psychological",
+				"target": "Pull Ups",
+				"target_domain": "physical",
+				"value": 0.03862698254611932
+			},
+			{
+				"source": "ML360 Open Mind",
+				"source_domain": "psychological",
+				"target": "Barbell Squats 8RM (kg)",
+				"target_domain": "physical",
+				"value": 0.2523361028905867
+			},
+			{
+				"source": "ML360 Open Mind",
+				"source_domain": "psychological",
+				"target": "Deadlift 8RM (kg)",
+				"target_domain": "physical",
+				"value": 0.324315996962421
+			},
+			{
+				"source": "ML360 Open Mind",
+				"source_domain": "psychological",
+				"target": "Sprint Drag Carry (seconds)",
+				"target_domain": "physical",
+				"value": -0.11297517491064206
+			},
+			{
+				"source": "ML360 Open Mind",
+				"source_domain": "psychological",
+				"target": "VO2 MAX",
+				"target_domain": "physical",
+				"value": -0.25616536975599247
+			},
+			{
+				"source": "ML360 Open Mind",
+				"source_domain": "psychological",
+				"target": "Sustained Attention Response Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": 0.02375095915905451
+			},
+			{
+				"source": "ML360 Open Mind",
+				"source_domain": "psychological",
+				"target": "Visual Reaction Accuracy",
+				"target_domain": "cognitive",
+				"value": -0.10993333079987012
+			},
+			{
+				"source": "ML360 Open Mind",
+				"source_domain": "psychological",
+				"target": "Spatial Planning Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": -0.05814659414242973
+			},
+			{
+				"source": "ML360 Open Mind",
+				"source_domain": "psychological",
+				"target": "Self-Determination (Autonomy)",
+				"target_domain": "psychological",
+				"value": 0.4271542375593016
+			},
+			{
+				"source": "ML360 Open Mind",
+				"source_domain": "psychological",
+				"target": "Self-Determination (Competence)",
+				"target_domain": "psychological",
+				"value": 0.42942798095322243
+			},
+			{
+				"source": "ML360 Open Mind",
+				"source_domain": "psychological",
+				"target": "Self-Determination (Relatedness)",
+				"target_domain": "psychological",
+				"value": 0.09792502986921241
+			},
+			{
+				"source": "ML360 Open Mind",
+				"source_domain": "psychological",
+				"target": "Self-Determination (General)",
+				"target_domain": "psychological",
+				"value": 0.3237299257160318
+			},
+			{
+				"source": "ML360 Open Mind",
+				"source_domain": "psychological",
+				"target": "ML360 Awareness",
+				"target_domain": "psychological",
+				"value": 0.7364177866175726
+			},
+			{
+				"source": "ML360 Open Mind",
+				"source_domain": "psychological",
+				"target": "ML360 Calm & Patience",
+				"target_domain": "psychological",
+				"value": 0.8092671472305742
+			},
+			{
+				"source": "ML360 Open Mind",
+				"source_domain": "psychological",
+				"target": "ML360 Focus & Presence",
+				"target_domain": "psychological",
+				"value": 0.7911472895855518
+			},
+			{
+				"source": "ML360 Open Mind",
+				"source_domain": "psychological",
+				"target": "ML360 Growth",
+				"target_domain": "psychological",
+				"value": 0.6488548400802425
+			},
+			{
+				"source": "ML360 Focus & Presence",
+				"source_domain": "psychological",
+				"target": "Pull Ups",
+				"target_domain": "physical",
+				"value": 0.010547016823155158
+			},
+			{
+				"source": "ML360 Focus & Presence",
+				"source_domain": "psychological",
+				"target": "Barbell Squats 8RM (kg)",
+				"target_domain": "physical",
+				"value": 0.2684919050460959
+			},
+			{
+				"source": "ML360 Focus & Presence",
+				"source_domain": "psychological",
+				"target": "Deadlift 8RM (kg)",
+				"target_domain": "physical",
+				"value": 0.26162029646324875
+			},
+			{
+				"source": "ML360 Focus & Presence",
+				"source_domain": "psychological",
+				"target": "Sprint Drag Carry (seconds)",
+				"target_domain": "physical",
+				"value": -0.1230162464709129
+			},
+			{
+				"source": "ML360 Focus & Presence",
+				"source_domain": "psychological",
+				"target": "VO2 MAX",
+				"target_domain": "physical",
+				"value": -0.32336073644663327
+			},
+			{
+				"source": "ML360 Focus & Presence",
+				"source_domain": "psychological",
+				"target": "Sustained Attention Response Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": -0.012219323197172257
+			},
+			{
+				"source": "ML360 Focus & Presence",
+				"source_domain": "psychological",
+				"target": "Visual Reaction Accuracy",
+				"target_domain": "cognitive",
+				"value": -0.13041689471041748
+			},
+			{
+				"source": "ML360 Focus & Presence",
+				"source_domain": "psychological",
+				"target": "Spatial Planning Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": -0.12064262956871641
+			},
+			{
+				"source": "ML360 Focus & Presence",
+				"source_domain": "psychological",
+				"target": "Self-Determination (Autonomy)",
+				"target_domain": "psychological",
+				"value": 0.5468459392643985
+			},
+			{
+				"source": "ML360 Focus & Presence",
+				"source_domain": "psychological",
+				"target": "Self-Determination (Competence)",
+				"target_domain": "psychological",
+				"value": 0.46252045531117114
+			},
+			{
+				"source": "ML360 Focus & Presence",
+				"source_domain": "psychological",
+				"target": "Self-Determination (Relatedness)",
+				"target_domain": "psychological",
+				"value": 0.22349651691994987
+			},
+			{
+				"source": "ML360 Focus & Presence",
+				"source_domain": "psychological",
+				"target": "Self-Determination (General)",
+				"target_domain": "psychological",
+				"value": 0.3315790207726347
+			},
+			{
+				"source": "ML360 Focus & Presence",
+				"source_domain": "psychological",
+				"target": "ML360 Awareness",
+				"target_domain": "psychological",
+				"value": 0.7609821471737344
+			},
+			{
+				"source": "ML360 Focus & Presence",
+				"source_domain": "psychological",
+				"target": "ML360 Calm & Patience",
+				"target_domain": "psychological",
+				"value": 0.7613023404331051
+			},
+			{
+				"source": "ML360 Focus & Presence",
+				"source_domain": "psychological",
+				"target": "ML360 Open Mind",
+				"target_domain": "psychological",
+				"value": 0.7911472895855518
+			},
+			{
+				"source": "ML360 Focus & Presence",
+				"source_domain": "psychological",
+				"target": "ML360 Growth",
+				"target_domain": "psychological",
+				"value": 0.7234013684940979
+			},
+			{
+				"source": "ML360 Growth",
+				"source_domain": "psychological",
+				"target": "Pull Ups",
+				"target_domain": "physical",
+				"value": 0.01662100041693232
+			},
+			{
+				"source": "ML360 Growth",
+				"source_domain": "psychological",
+				"target": "Barbell Squats 8RM (kg)",
+				"target_domain": "physical",
+				"value": 0.11161254071576765
+			},
+			{
+				"source": "ML360 Growth",
+				"source_domain": "psychological",
+				"target": "Deadlift 8RM (kg)",
+				"target_domain": "physical",
+				"value": 0.1927277973326435
+			},
+			{
+				"source": "ML360 Growth",
+				"source_domain": "psychological",
+				"target": "Sprint Drag Carry (seconds)",
+				"target_domain": "physical",
+				"value": -0.05948079312742135
+			},
+			{
+				"source": "ML360 Growth",
+				"source_domain": "psychological",
+				"target": "VO2 MAX",
+				"target_domain": "physical",
+				"value": -0.059465078954760844
+			},
+			{
+				"source": "ML360 Growth",
+				"source_domain": "psychological",
+				"target": "Sustained Attention Response Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": 0.03421134368430399
+			},
+			{
+				"source": "ML360 Growth",
+				"source_domain": "psychological",
+				"target": "Visual Reaction Accuracy",
+				"target_domain": "cognitive",
+				"value": -0.02431369036616724
+			},
+			{
+				"source": "ML360 Growth",
+				"source_domain": "psychological",
+				"target": "Spatial Planning Accuracy (%)",
+				"target_domain": "cognitive",
+				"value": 0.0979262137251465
+			},
+			{
+				"source": "ML360 Growth",
+				"source_domain": "psychological",
+				"target": "Self-Determination (Autonomy)",
+				"target_domain": "psychological",
+				"value": 0.5868397060521608
+			},
+			{
+				"source": "ML360 Growth",
+				"source_domain": "psychological",
+				"target": "Self-Determination (Competence)",
+				"target_domain": "psychological",
+				"value": 0.41518203255260294
+			},
+			{
+				"source": "ML360 Growth",
+				"source_domain": "psychological",
+				"target": "Self-Determination (Relatedness)",
+				"target_domain": "psychological",
+				"value": 0.21141708567389242
+			},
+			{
+				"source": "ML360 Growth",
+				"source_domain": "psychological",
+				"target": "Self-Determination (General)",
+				"target_domain": "psychological",
+				"value": 0.36282082246651914
+			},
+			{
+				"source": "ML360 Growth",
+				"source_domain": "psychological",
+				"target": "ML360 Awareness",
+				"target_domain": "psychological",
+				"value": 0.7735759316842756
+			},
+			{
+				"source": "ML360 Growth",
+				"source_domain": "psychological",
+				"target": "ML360 Calm & Patience",
+				"target_domain": "psychological",
+				"value": 0.519629028628884
+			},
+			{
+				"source": "ML360 Growth",
+				"source_domain": "psychological",
+				"target": "ML360 Open Mind",
+				"target_domain": "psychological",
+				"value": 0.6488548400802425
+			},
+			{
+				"source": "ML360 Growth",
+				"source_domain": "psychological",
+				"target": "ML360 Focus & Presence",
+				"target_domain": "psychological",
+				"value": 0.7234013684940979
+			}
+		],
+		"domains": {
+			"physical": [
+				"Pull Ups",
+				"Barbell Squats 8RM (kg)",
+				"Deadlift 8RM (kg)",
+				"Sprint Drag Carry (seconds)",
+				"VO2 MAX"
+			],
+			"cognitive": [
+				"Sustained Attention Response Accuracy (%)",
+				"Visual Reaction Accuracy",
+				"Spatial Planning Accuracy (%)"
+			],
+			"psychological": [
+				"Self-Determination (Autonomy)",
+				"Self-Determination (Competence)",
+				"Self-Determination (Relatedness)",
+				"Self-Determination (General)",
+				"ML360 Awareness",
+				"ML360 Calm & Patience",
+				"ML360 Open Mind",
+				"ML360 Focus & Presence",
+				"ML360 Growth"
+			]
+		},
+		"metadata": { "min_value": -0.40947657148607425, "max_value": 1.0 }
+	}
+}
