@@ -8,6 +8,7 @@ import SelfDeterminationRadar from "./SelfDeterminationRadar";
 import ScatterPlotMatrix from "./ScatterPlotMatrix";
 import BoxPlotComparison from "./BoxPlotComparison";
 import SummaryStatisticsCard from "./SummaryStatisticsCard";
+import CompanyAssessmentProgress from "./CommanderAssessmentProgress";
 
 interface MetricData {
 	histogram: {
@@ -272,6 +273,18 @@ const CommanderDashboard: React.FC = () => {
 	const [summaryStats, setSummaryStats] =
 		useState<SummaryStatisticsData | null>(null);
 
+	const handleCompanyChange = (companyId: string) => {
+		// In a real app, you would fetch new data for this company
+		console.log(`Switched to company: ${companyId}`);
+		// You could trigger data fetching here
+	};
+
+	const handleRunChange = (runId: string) => {
+		// In a real app, you would fetch new data for this assessment run
+		console.log(`Switched to assessment run: ${runId}`);
+		// You could trigger data fetching here
+	};
+
 	useEffect(() => {
 		setLoading(true);
 		Promise.all([
@@ -320,11 +333,6 @@ const CommanderDashboard: React.FC = () => {
 					scatterData,
 					summaryStatsData,
 				]) => {
-					console.log("Correlation Data:", correlationData); // Debug log
-					console.log("Boxplot Data:", boxplotData); // Debug log
-					console.log("Radar Data:", radarData); // Debug log
-					console.log("Scatter Data:", scatterData); // Debug log
-					console.log("Summary Stats Data:", summaryStatsData); // Debug log
 					setData({
 						...metricsData,
 						correlation_matrices: correlationData,
@@ -337,7 +345,7 @@ const CommanderDashboard: React.FC = () => {
 				},
 			)
 			.catch((err) => {
-				console.error("Error loading data:", err); // Debug log
+				console.error("Error loading data:", err);
 				setError(err.message);
 				setLoading(false);
 			});
@@ -345,6 +353,11 @@ const CommanderDashboard: React.FC = () => {
 
 	return (
 		<div className="container mx-auto space-y-6">
+			{/* Add the new progress component at the top */}
+			<CompanyAssessmentProgress
+				onCompanyChange={handleCompanyChange}
+				onRunChange={handleRunChange}
+			/>
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 				<SummaryStatisticsCard
 					data={summaryStats}
