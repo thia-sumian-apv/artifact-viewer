@@ -113,7 +113,7 @@ const CompanyAssessmentProgress: React.FC<CompanyAssessmentProgressProps> = ({
 					</CardTitle>
 					<div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
 						<div className="flex items-center space-x-2">
-							<span className="text-sm text-gray-500 dark:text-gray-400">
+							<span className="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">
 								Company:
 							</span>
 							<Select
@@ -133,8 +133,8 @@ const CompanyAssessmentProgress: React.FC<CompanyAssessmentProgressProps> = ({
 							</Select>
 						</div>
 						<div className="flex items-center space-x-2">
-							<span className="text-sm text-gray-500 dark:text-gray-400">
-								Assessment:
+							<span className="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">
+								Assessment Run:
 							</span>
 							<Select value={selectedRun} onValueChange={handleRunChange}>
 								<SelectTrigger>
@@ -177,9 +177,9 @@ const CompanyAssessmentProgress: React.FC<CompanyAssessmentProgressProps> = ({
 									>
 										{currentRunInfo?.status === "completed"
 											? "Completed"
-											: currentRunInfo?.status === "in-progress"
-												? "In Progress"
-												: "Upcoming"}
+											: currentRunInfo?.status === "upcoming"
+												? "Upcoming"
+												: "In Progress"}
 									</span>
 								</div>
 
@@ -334,7 +334,8 @@ const CompanyAssessmentProgress: React.FC<CompanyAssessmentProgressProps> = ({
 								</div>
 								<div className="text-sm font-medium text-blue-600 dark:text-blue-400">
 									{progress.overall.count} of{" "}
-									{selectedCompanyInfo?.totalTrainees * 3} total assessments
+									{(selectedCompanyInfo?.totalTrainees ?? 0) * 3} total
+									assessments
 								</div>
 							</div>
 
