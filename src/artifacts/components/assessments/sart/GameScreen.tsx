@@ -5,7 +5,7 @@ import {
 	type SARTResponse,
 } from "./SARTConfig";
 import { useKeyPress } from "./useKeyPress";
-import { CheckCircle, Plus, XCircle } from "lucide-react";
+import { CheckCircle, XCircle } from "lucide-react";
 
 interface GameScreenProps {
 	mode: "practice" | "test";
@@ -21,7 +21,6 @@ const GameScreen: React.FC<GameScreenProps> = ({
 }) => {
 	// Game state
 	const [currentDigit, setCurrentDigit] = useState<number | null>(null);
-	const [showFixation, setShowFixation] = useState(false);
 	const [showFeedback, setShowFeedback] = useState(false);
 	const [isCorrectResponse, setIsCorrectResponse] = useState(false);
 	const [isPressedSpace, setIsPressedSpace] = useState(false);
@@ -44,13 +43,10 @@ const GameScreen: React.FC<GameScreenProps> = ({
 		responseTime.current = null;
 
 		// Show fixation cross
-		setShowFixation(true);
 		setCurrentDigit(null);
 
 		// After delay, show digit
 		setTimeout(() => {
-			setShowFixation(false);
-
 			// Generate digit based on noise level
 			const digit = generateDigit(settings.noiseLevel);
 			setCurrentDigit(digit);
@@ -202,10 +198,6 @@ const GameScreen: React.FC<GameScreenProps> = ({
 			</div>
 
 			<div className="relative h-60 w-60 flex items-center justify-center bg-white dark:bg-gray-800 rounded-full shadow-md border-4 border-gray-100 dark:border-gray-700">
-				{showFixation && (
-					<Plus className="h-12 w-12 text-gray-800 dark:text-gray-200" />
-				)}
-
 				{currentDigit !== null && (
 					<span className="text-8xl font-bold text-gray-900 dark:text-white">
 						{currentDigit}
