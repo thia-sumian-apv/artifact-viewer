@@ -37,7 +37,6 @@ const GameScreen: React.FC<GameScreenProps> = ({
 
 	useEffect(() => {
 		if (showBuffer) {
-			// Show empty ring for buffer period (1000ms = 1 second)
 			const bufferTimer = setTimeout(() => {
 				setShowBuffer(false);
 			}, 300);

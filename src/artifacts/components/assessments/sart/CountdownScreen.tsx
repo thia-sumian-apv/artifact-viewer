@@ -12,8 +12,7 @@ const CountdownScreen: React.FC<CountdownScreenProps> = ({
 	const [stage, setStage] = useState(0);
 	const stages = ["Ready", "Get Set", "Go!"];
 
-	// Longer duration for each stage (2 seconds per stage)
-	const stageDurations = [1500, 1500, 1500]; // Ready: 1.25s, Get Set: 1.25s, Go!: 0.5s
+	const stageDurations = [1500, 1500, 1500];
 	const [progress, setProgress] = useState(0);
 
 	useEffect(() => {
