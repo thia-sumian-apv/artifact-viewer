@@ -27,7 +27,7 @@ const GameScreen: React.FC<GameScreenProps> = ({
 	const [trialCount, setTrialCount] = useState(0);
 	const [responses, setResponses] = useState<SARTResponse[]>([]);
 	const [isPaused, setIsPaused] = useState(false);
-
+	const [showBuffer, setShowBuffer] = useState(true);
 	const digitDisplayTime = useRef<number | null>(null);
 	const responseTime = useRef<number | null>(null);
 	const hasResponded = useRef(false);
@@ -35,8 +35,21 @@ const GameScreen: React.FC<GameScreenProps> = ({
 	const totalTrials =
 		mode === "practice" ? settings.practiceQuestions : settings.mainQuestions;
 
+	useEffect(() => {
+		if (showBuffer) {
+			const bufferTimer = setTimeout(() => {
+				setShowBuffer(false);
+			}, 300);
+
+			return () => clearTimeout(bufferTimer);
+		}
+	}, [showBuffer]);
+
 	// Function to start a new trial
 	const startNewTrial = useCallback(() => {
+		// Skip if we're still in the buffer period
+		if (showBuffer) return;
+
 		// Reset state for new trial
 		hasResponded.current = false;
 		setIsPressedSpace(false);
@@ -90,11 +103,12 @@ const GameScreen: React.FC<GameScreenProps> = ({
 				}
 			}, settings.digitDuration);
 		}, settings.initialCrossDuration);
-	}, [settings, mode]);
+	}, [settings, mode, showBuffer]);
 
 	// Process spacebar press
 	const handleSpacebarPress = useCallback(() => {
-		if (currentDigit === null || isPaused || hasResponded.current) return;
+		if (currentDigit === null || isPaused || hasResponded.current || showBuffer)
+			return;
 
 		hasResponded.current = true;
 		setIsPressedSpace(true);
@@ -132,7 +146,7 @@ const GameScreen: React.FC<GameScreenProps> = ({
 			setIsPaused(false);
 			setTrialCount((prev) => prev + 1);
 		}, feedbackDuration);
-	}, [currentDigit, isPaused, mode, settings]);
+	}, [currentDigit, isPaused, mode, settings, showBuffer]);
 
 	// Listen for spacebar presses
 	useKeyPress("Space", handleSpacebarPress);
@@ -145,7 +159,7 @@ const GameScreen: React.FC<GameScreenProps> = ({
 			return;
 		}
 
-		if (isPaused) return;
+		if (isPaused || showBuffer) return;
 
 		// Start a new trial immediately
 		startNewTrial();
@@ -154,7 +168,15 @@ const GameScreen: React.FC<GameScreenProps> = ({
 			// Cleanup any pending timers if component unmounts during a trial
 			// This doesn't handle all timer cleanup, but helps with unmounting
 		};
-	}, [trialCount, totalTrials, isPaused, responses, onComplete, startNewTrial]);
+	}, [
+		trialCount,
+		totalTrials,
+		isPaused,
+		responses,
+		onComplete,
+		startNewTrial,
+		showBuffer,
+	]);
 
 	return (
 		<div className="max-w-xl mx-auto w-full flex flex-col items-center justify-center h-full relative">
@@ -198,7 +220,7 @@ const GameScreen: React.FC<GameScreenProps> = ({
 			</div>
 
 			<div className="relative h-60 w-60 flex items-center justify-center bg-white dark:bg-gray-800 rounded-full shadow-md border-4 border-gray-100 dark:border-gray-700">
-				{currentDigit !== null && (
+				{!showBuffer && currentDigit !== null && (
 					<span className="text-8xl font-bold text-gray-900 dark:text-white">
 						{currentDigit}
 					</span>
