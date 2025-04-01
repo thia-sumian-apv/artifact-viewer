@@ -1,72 +1,5 @@
 import { addMonths } from "date-fns";
-
-export interface Company {
-	id: string;
-	name: string;
-	shortName: string;
-	registrationNumber: string;
-	logo?: string;
-	status: "active" | "inactive";
-
-	// Contact info
-	contactName: string;
-	contactEmail: string;
-	contactNumber: string;
-	address: string;
-
-	// Subscription details
-	subscriptionDuration: number; // in months
-	subscriptionStart: Date;
-	subscriptionEnd: Date;
-	maxLicenses: number;
-	usedLicenses: number;
-	renewalReminder: number; // days
-
-	// Role customization
-	roleLabels: {
-		superAdmin: string;
-		companyAdmin: string;
-		courseCommander: string;
-		courseTrainer: string;
-		trainee: string;
-	};
-
-	// Module configuration
-	modules: {
-		cognitiveAssessments: boolean;
-		psychologicalAssessments: boolean;
-		externalAssessments: boolean;
-		physicalAssessments: boolean;
-		teamResilience: boolean;
-		individualReporting: boolean;
-		externalIntegration: boolean;
-	};
-
-	// Notification settings
-	notificationSettings?: {
-		welcomeEmail: boolean;
-		reportAvailabilityNotification: boolean;
-		emailSenderName: string;
-		emailFooterText: string;
-		companySupportEmail: string;
-	};
-
-	// Data retention policy
-	dataRetentionPolicy?: {
-		retentionPeriod: number; // in months
-		archivePolicy: string; // archive, delete, anonymize
-		dataExportSettings: string; // none, monthly, quarterly, yearly
-	};
-
-	// Branding settings
-	brandingSettings?: {
-		primaryColor: string;
-		secondaryColor: string;
-		customCSS: string;
-		customWelcomeMessage: string;
-		dashboardWelcomeText: string;
-	};
-}
+import type { Company } from "../types/company";
 
 export const mockCompanyData: Company[] = [
 	{
@@ -102,6 +35,48 @@ export const mockCompanyData: Company[] = [
 			individualReporting: true,
 			externalIntegration: false,
 		},
+		moduleDetails: {
+			cognitiveAssessments: {
+				sart: true,
+				visualRxn: true,
+				spatialPlanning: true,
+			},
+			psychologicalAssessments: {
+				selfDetermination: true,
+				ml360Self: true,
+				ml360Buddy: true,
+				ml360Trainer: true,
+				teamResilience: true,
+			},
+			reports: {
+				enabled: true,
+				teamResilienceReport: true,
+				traineeReport: true,
+			},
+		},
+		notificationSettings: {
+			userRegistration: "email",
+			reportAvailability: true,
+			emailSenderName: "NeuroTech Support",
+			welcomeEmailText:
+				"Welcome to NeuroTech Solutions! Please complete your profile setup.",
+			reportAvailabilityText: "Your assessment results are ready to view.",
+			companySupportEmail: "support@neurotech.com",
+		},
+		dataRetentionPolicy: {
+			retentionPeriod: 24,
+		},
+		trialSettings: {
+			includeTrial: false,
+			trialDays: 0,
+		},
+		brandingSettings: {
+			primaryColor: "#2563eb",
+			secondaryColor: "#60a5fa",
+			customCSS: "",
+			customWelcomeMessage: "Welcome to NeuroTech Solutions Platform",
+			dashboardWelcomeText: "Track your cognitive and psychological metrics",
+		},
 	},
 	{
 		id: "comp-002",
@@ -136,6 +111,68 @@ export const mockCompanyData: Company[] = [
 			individualReporting: true,
 			externalIntegration: true,
 		},
+		moduleDetails: {
+			cognitiveAssessments: {
+				sart: true,
+				visualRxn: true,
+				spatialPlanning: true,
+			},
+			psychologicalAssessments: {
+				selfDetermination: true,
+				ml360Self: true,
+				ml360Buddy: true,
+				ml360Trainer: true,
+				teamResilience: true,
+			},
+			externalAssessments: {
+				cardioRespiratory: true,
+				strengthAssessment: true,
+				ippt: true,
+				soc: true,
+				roadMarch20km: true,
+			},
+			training: {
+				enabled: true,
+				trainingA: true,
+				trainingB: true,
+			},
+			thirdPartyIntegration: {
+				enabled: true,
+				polarWatch: true,
+				vald: true,
+			},
+			reports: {
+				enabled: true,
+				teamResilienceReport: true,
+				traineeReport: true,
+			},
+		},
+		notificationSettings: {
+			userRegistration: "self",
+			reportAvailability: true,
+			emailSenderName: "Cognitive Edge Team",
+			welcomeEmailText:
+				"Welcome to Cognitive Edge Solutions platform! Complete your profile to begin.",
+			reportAvailabilityText:
+				"Your comprehensive assessment report is now available.",
+			companySupportEmail: "help@cognitive-edge.com",
+		},
+		dataRetentionPolicy: {
+			retentionPeriod: 36,
+		},
+		trialSettings: {
+			includeTrial: true,
+			trialDays: 30,
+		},
+		brandingSettings: {
+			primaryColor: "#0f766e",
+			secondaryColor: "#5eead4",
+			customCSS: "body { font-family: 'Poppins', sans-serif; }",
+			customWelcomeMessage:
+				"Welcome to the Cognitive Edge Performance Platform",
+			dashboardWelcomeText:
+				"Track, improve, and excel with our comprehensive analytics",
+		},
 	},
 	{
 		id: "comp-003",
@@ -169,6 +206,56 @@ export const mockCompanyData: Company[] = [
 			teamResilience: false,
 			individualReporting: true,
 			externalIntegration: false,
+		},
+		moduleDetails: {
+			cognitiveAssessments: {
+				sart: true,
+				visualRxn: true,
+				spatialPlanning: false,
+			},
+			psychologicalAssessments: {
+				selfDetermination: true,
+				ml360Self: true,
+				ml360Buddy: false,
+				ml360Trainer: true,
+				teamResilience: false,
+			},
+			externalAssessments: {
+				cardioRespiratory: true,
+				strengthAssessment: true,
+				ippt: false,
+				soc: false,
+				roadMarch20km: false,
+			},
+			reports: {
+				enabled: true,
+				teamResilienceReport: false,
+				traineeReport: true,
+			},
+		},
+		notificationSettings: {
+			userRegistration: "email",
+			reportAvailability: false,
+			emailSenderName: "MindFit Academy",
+			welcomeEmailText:
+				"Welcome to MindFit Training Academy! Your account is ready.",
+			reportAvailabilityText:
+				"Your assessment report is available in your dashboard.",
+			companySupportEmail: "support@mindfit.edu",
+		},
+		dataRetentionPolicy: {
+			retentionPeriod: 12,
+		},
+		trialSettings: {
+			includeTrial: false,
+			trialDays: 0,
+		},
+		brandingSettings: {
+			primaryColor: "#be123c",
+			secondaryColor: "#fda4af",
+			customCSS: "",
+			customWelcomeMessage: "Welcome to MindFit Training Academy",
+			dashboardWelcomeText: "Your cognitive training journey starts here",
 		},
 	},
 ];
