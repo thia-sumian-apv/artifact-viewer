@@ -112,7 +112,7 @@ export function ViewUserDialog({
 						<h2 className="text-xl font-semibold">
 							{user.firstName} {user.lastName}
 						</h2>
-						<p className="text-muted-foreground text-sm">{user.email}</p>
+						<p className=" text-sm">{user.email}</p>
 						<div className="flex flex-wrap items-center gap-2 mt-2">
 							<Badge
 								variant={
@@ -151,35 +151,27 @@ export function ViewUserDialog({
 								</CardHeader>
 								<CardContent className="space-y-2">
 									<div className="flex justify-between">
-										<span className="text-sm text-muted-foreground">Age</span>
+										<span className="text-sm ">Age</span>
 										<span className="text-sm font-medium">{user.age}</span>
 									</div>
 									<div className="flex justify-between">
-										<span className="text-sm text-muted-foreground">
-											Gender
-										</span>
+										<span className="text-sm ">Gender</span>
 										<span className="text-sm font-medium">{user.gender}</span>
 									</div>
 									<div className="flex justify-between">
-										<span className="text-sm text-muted-foreground">
-											Height
-										</span>
+										<span className="text-sm ">Height</span>
 										<span className="text-sm font-medium">
 											{user.height} cm
 										</span>
 									</div>
 									<div className="flex justify-between">
-										<span className="text-sm text-muted-foreground">
-											Weight
-										</span>
+										<span className="text-sm ">Weight</span>
 										<span className="text-sm font-medium">
 											{user.weight} kg
 										</span>
 									</div>
 									<div className="flex justify-between">
-										<span className="text-sm text-muted-foreground">
-											Date of Birth
-										</span>
+										<span className="text-sm ">Date of Birth</span>
 										<span className="text-sm font-medium">
 											{user.dateOfBirth.toLocaleDateString()}
 										</span>
@@ -193,18 +185,14 @@ export function ViewUserDialog({
 								</CardHeader>
 								<CardContent className="space-y-2 py-0">
 									<div className="flex items-center justify-between">
-										<span className="text-sm text-muted-foreground">
-											Created
-										</span>
+										<span className="text-sm ">Created</span>
 										<span className="text-sm font-medium flex items-center gap-1">
 											<Calendar className="h-3.5 w-3.5" />
 											{user.createdAt.toLocaleDateString()}
 										</span>
 									</div>
 									<div className="flex items-center justify-between">
-										<span className="text-sm text-muted-foreground">
-											Last Updated
-										</span>
+										<span className="text-sm ">Last Updated</span>
 										<span className="text-sm font-medium flex items-center gap-1">
 											<Clock className="h-3.5 w-3.5" />
 											{user.updatedAt.toLocaleDateString()}
@@ -213,7 +201,7 @@ export function ViewUserDialog({
 
 									{user.role === "trainee" && userTrainers.length > 0 && (
 										<div className="mt-4">
-											<span className="text-sm text-muted-foreground block mb-2">
+											<span className="text-sm  block mb-2">
 												Assigned Trainers
 											</span>
 											<div className="flex flex-col gap-2">
@@ -222,7 +210,7 @@ export function ViewUserDialog({
 														key={trainer.id}
 														className="flex items-center gap-2 bg-muted/50 p-2 rounded"
 													>
-														<GraduationCap className="h-4 w-4 text-muted-foreground" />
+														<GraduationCap className="h-4 w-4 " />
 														<span className="text-sm">
 															{trainer.firstName} {trainer.lastName}
 														</span>
@@ -235,11 +223,11 @@ export function ViewUserDialog({
 									{user.role === "courseTrainer" &&
 										trainerTrainees.length > 0 && (
 											<div className="mt-4">
-												<span className="text-sm text-muted-foreground block mb-2">
+												<span className="text-sm  block mb-2">
 													Assigned Trainees
 												</span>
 												<div className="flex items-center gap-1">
-													<BookUser className="h-4 w-4 text-muted-foreground" />
+													<BookUser className="h-4 w-4 " />
 													<span className="text-sm">
 														{trainerTrainees.length} trainees
 													</span>
@@ -273,7 +261,7 @@ export function ViewUserDialog({
 									<CardContent>
 										<div className="space-y-4">
 											{courseInfo.length === 0 ? (
-												<div className="text-sm text-muted-foreground">
+												<div className="text-sm ">
 													No course assignment information available.
 												</div>
 											) : (
@@ -281,16 +269,14 @@ export function ViewUserDialog({
 													<div key={course.id} className="space-y-2">
 														<div className="flex justify-between">
 															<div className="flex items-center gap-2">
-																<BookOpen className="h-4 w-4 text-muted-foreground" />
+																<BookOpen className="h-4 w-4 " />
 																<span className="font-medium">
 																	{course.name}
 																</span>
 															</div>
 															<Badge variant="outline">{course.code}</Badge>
 														</div>
-														<p className="text-sm text-muted-foreground">
-															{course.description}
-														</p>
+														<p className="text-sm ">{course.description}</p>
 														<Separator />
 													</div>
 												))
@@ -315,7 +301,7 @@ export function ViewUserDialog({
 											<div className="space-y-4">
 												<div className="flex items-center justify-between">
 													<div className="flex items-center gap-2">
-														<Users className="h-4 w-4 text-muted-foreground" />
+														<Users className="h-4 w-4 " />
 														<span className="font-medium">
 															{cohortInfo.name}
 														</span>
@@ -384,16 +370,12 @@ export function ViewUserDialog({
 								</CardHeader>
 								<CardContent className="space-y-2 py-2">
 									<div className="flex justify-between">
-										<span className="text-sm text-muted-foreground">
-											User ID
-										</span>
+										<span className="text-sm ">User ID</span>
 										<span className="text-sm font-mono">{user.id}</span>
 									</div>
 									{"companyId" in user && user.companyId && (
 										<div className="flex justify-between">
-											<span className="text-sm text-muted-foreground">
-												Company ID
-											</span>
+											<span className="text-sm ">Company ID</span>
 											<span className="text-sm font-mono">
 												{user.companyId}
 											</span>
@@ -401,9 +383,7 @@ export function ViewUserDialog({
 									)}
 									{user.role === "courseCommander" && "courseIds" in user && (
 										<div className="flex justify-between">
-											<span className="text-sm text-muted-foreground">
-												Course IDs
-											</span>
+											<span className="text-sm ">Course IDs</span>
 											<span className="text-sm font-mono">
 												{user.courseIds?.join(", ") || "None"}
 											</span>
@@ -412,9 +392,7 @@ export function ViewUserDialog({
 
 									{"subcohortId" in user && user.subcohortId && (
 										<div className="flex justify-between">
-											<span className="text-sm text-muted-foreground">
-												Cohort ID
-											</span>
+											<span className="text-sm ">Cohort ID</span>
 											<span className="text-sm font-mono">
 												{mockSubcohorts.find((s) => s.id === user.subcohortId)
 													?.cohortId || "Unknown"}
@@ -423,9 +401,7 @@ export function ViewUserDialog({
 									)}
 									{"subcohortId" in user && user.subcohortId && (
 										<div className="flex justify-between">
-											<span className="text-sm text-muted-foreground">
-												Subcohort ID
-											</span>
+											<span className="text-sm ">Subcohort ID</span>
 											<span className="text-sm font-mono">
 												{user.subcohortId}
 											</span>
@@ -433,9 +409,7 @@ export function ViewUserDialog({
 									)}
 									{user.role === "trainee" && "trainerIds" in user && (
 										<div className="flex justify-between">
-											<span className="text-sm text-muted-foreground">
-												Trainer IDs
-											</span>
+											<span className="text-sm ">Trainer IDs</span>
 											<span className="text-sm font-mono">
 												{user.trainerIds?.join(", ") || "None"}
 											</span>
@@ -443,9 +417,7 @@ export function ViewUserDialog({
 									)}
 									{user.role === "trainee" && "buddyIds" in user && (
 										<div className="flex justify-between">
-											<span className="text-sm text-muted-foreground">
-												Buddy IDs
-											</span>
+											<span className="text-sm ">Buddy IDs</span>
 											<span className="text-sm font-mono">
 												{user.buddyIds?.join(", ") || "None"}
 											</span>
@@ -456,17 +428,13 @@ export function ViewUserDialog({
 										user.courseIds?.length > 0 && (
 											<>
 												<div className="flex justify-between">
-													<span className="text-sm text-muted-foreground">
-														Course IDs
-													</span>
+													<span className="text-sm ">Course IDs</span>
 													<span className="text-sm font-mono">
 														{user.courseIds.join(", ")}
 													</span>
 												</div>
 												<div className="flex justify-between">
-													<span className="text-sm text-muted-foreground">
-														Course Codes
-													</span>
+													<span className="text-sm ">Course Codes</span>
 													<span className="text-sm font-medium">
 														{getCourseInfo(user.courseIds)
 															.map((c) => c.code)
@@ -484,17 +452,13 @@ export function ViewUserDialog({
 								</CardHeader>
 								<CardContent className="space-y-2 py-2">
 									<div className="flex justify-between">
-										<span className="text-sm text-muted-foreground">
-											Created At (ISO)
-										</span>
+										<span className="text-sm ">Created At (ISO)</span>
 										<span className="text-sm font-mono">
 											{user.createdAt.toISOString()}
 										</span>
 									</div>
 									<div className="flex justify-between">
-										<span className="text-sm text-muted-foreground">
-											Updated At (ISO)
-										</span>
+										<span className="text-sm ">Updated At (ISO)</span>
 										<span className="text-sm font-mono">
 											{user.updatedAt.toISOString()}
 										</span>

@@ -223,7 +223,7 @@ const EditAssessmentsDialog = ({
 								>
 									{/* Cognitive section */}
 									<div>
-										<h3 className="text-sm font-medium mb-2 text-muted-foreground flex items-center">
+										<h3 className="text-sm font-medium mb-2  flex items-center">
 											<Brain className="h-4 w-4 mr-2 text-teal-600" />
 											Cognitive ({assignedCognitiveAssessments.length})
 										</h3>
@@ -236,7 +236,7 @@ const EditAssessmentsDialog = ({
 												/>
 											))}
 											{assignedCognitiveAssessments.length === 0 && (
-												<p className="text-sm text-muted-foreground italic">
+												<p className="text-sm  italic">
 													No cognitive assessments assigned
 												</p>
 											)}
@@ -245,7 +245,7 @@ const EditAssessmentsDialog = ({
 
 									{/* Psychological section */}
 									<div className="mt-4">
-										<h3 className="text-sm font-medium mb-2 text-muted-foreground flex items-center">
+										<h3 className="text-sm font-medium mb-2  flex items-center">
 											<Activity className="h-4 w-4 mr-2 text-indigo-600" />
 											Psychological ({assignedPsychologicalAssessments.length})
 										</h3>
@@ -258,7 +258,7 @@ const EditAssessmentsDialog = ({
 												/>
 											))}
 											{assignedPsychologicalAssessments.length === 0 && (
-												<p className="text-sm text-muted-foreground italic">
+												<p className="text-sm  italic">
 													No psychological assessments assigned
 												</p>
 											)}
@@ -283,7 +283,7 @@ const EditAssessmentsDialog = ({
 								>
 									{/* Cognitive section */}
 									<div>
-										<h3 className="text-sm font-medium mb-2 text-muted-foreground flex items-center">
+										<h3 className="text-sm font-medium mb-2  flex items-center">
 											<Brain className="h-4 w-4 mr-2 text-teal-600" />
 											Cognitive ({availableCognitiveAssessments.length})
 										</h3>
@@ -296,7 +296,7 @@ const EditAssessmentsDialog = ({
 												/>
 											))}
 											{availableCognitiveAssessments.length === 0 && (
-												<p className="text-sm text-muted-foreground italic">
+												<p className="text-sm  italic">
 													All cognitive assessments are assigned
 												</p>
 											)}
@@ -305,7 +305,7 @@ const EditAssessmentsDialog = ({
 
 									{/* Psychological section */}
 									<div className="mt-4">
-										<h3 className="text-sm font-medium mb-2 text-muted-foreground flex items-center">
+										<h3 className="text-sm font-medium mb-2  flex items-center">
 											<Activity className="h-4 w-4 mr-2 text-indigo-600" />
 											Psychological ({availablePsychologicalAssessments.length})
 										</h3>
@@ -318,7 +318,7 @@ const EditAssessmentsDialog = ({
 												/>
 											))}
 											{availablePsychologicalAssessments.length === 0 && (
-												<p className="text-sm text-muted-foreground italic">
+												<p className="text-sm  italic">
 													All psychological assessments are assigned
 												</p>
 											)}

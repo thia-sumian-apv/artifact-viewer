@@ -89,11 +89,11 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload }) => {
 		return (
 			<div className="bg-popover p-3 border border-border rounded-md shadow-md text-popover-foreground">
 				<p className="font-medium text-sm mb-1">{data.Trainee}</p>
-				<p className="text-xs text-muted-foreground mb-2">{`${data.Detachment}, ${data.Age_Group}`}</p>
+				<p className="text-xs  mb-2">{`${data.Detachment}, ${data.Age_Group}`}</p>
 				<div className="grid grid-cols-2 gap-x-3 gap-y-1 text-xs">
-					<span className="text-muted-foreground">{payload[0].name}:</span>
+					<span className="">{payload[0].name}:</span>
 					<span className="font-medium">{Number(data.x).toFixed(2)}</span>
-					<span className="text-muted-foreground">{payload[1].name}:</span>
+					<span className="">{payload[1].name}:</span>
 					<span className="font-medium">{Number(data.y).toFixed(2)}</span>
 				</div>
 			</div>

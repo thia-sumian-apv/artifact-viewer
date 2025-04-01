@@ -55,9 +55,7 @@ const AssessmentRunsList = ({
 					))
 				) : (
 					<div className="text-center py-8 bg-gray-50 dark:bg-gray-800 rounded-lg">
-						<p className="text-muted-foreground">
-							No assessment runs found for this course
-						</p>
+						<p className="">No assessment runs found for this course</p>
 						<Button variant="outline" onClick={onAddNewRun} className="mt-4">
 							<Plus className="h-4 w-4 mr-2" />
 							Create First Assessment Run

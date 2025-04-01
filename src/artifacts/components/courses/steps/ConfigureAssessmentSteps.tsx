@@ -72,7 +72,7 @@ const SARTConfig = () => {
 								step={1}
 								onValueChange={(value) => setNoiseLevel(value[0])}
 							/>
-							<span className="min-w-[3rem] text-sm text-muted-foreground text-right">
+							<span className="min-w-[3rem] text-sm  text-right">
 								{noiseLevel}%
 							</span>
 						</div>
@@ -132,7 +132,7 @@ const VisualRXNConfig = () => {
 								step={1}
 								onValueChange={(value) => setNoiseLevel(value[0])}
 							/>
-							<span className="min-w-[3rem] text-sm text-muted-foreground text-right">
+							<span className="min-w-[3rem] text-sm  text-right">
 								{noiseLevel}%
 							</span>
 						</div>
@@ -210,7 +210,7 @@ const SpatialPlanningConfig = () => {
 										handleDistributionChange(moves, value)
 									}
 								/>
-								<span className="min-w-[3rem] text-sm text-muted-foreground text-right">
+								<span className="min-w-[3rem] text-sm  text-right">
 									{moveDistribution[moves as keyof typeof moveDistribution]}%
 								</span>
 							</div>
@@ -466,7 +466,7 @@ const PsychologicalConfig = ({ assessmentId }: { assessmentId: string }) => {
 								<CardDescription>Question {index + 1}</CardDescription>
 								<div className="flex items-center gap-2">
 									<div className="flex items-center space-x-2">
-										<span className="text-xs text-muted-foreground">
+										<span className="text-xs ">
 											{question.type === "slider" ? "Slider" : "Scale"}
 										</span>
 										<Switch
@@ -479,7 +479,7 @@ const PsychologicalConfig = ({ assessmentId }: { assessmentId: string }) => {
 										variant="ghost"
 										size="icon"
 										onClick={() => removeQuestion(question.id)}
-										className="h-8 w-8 rounded-full text-muted-foreground hover:text-destructive hover:bg-destructive/10"
+										className="h-8 w-8 rounded-full  hover:text-destructive hover:bg-destructive/10"
 									>
 										×
 									</Button>
@@ -499,9 +499,7 @@ const PsychologicalConfig = ({ assessmentId }: { assessmentId: string }) => {
 
 							{question.type === "slider" ? (
 								<div className="space-y-2">
-									<Label className="text-xs text-muted-foreground">
-										Default Value
-									</Label>
+									<Label className="text-xs ">Default Value</Label>
 									<div className="flex items-center gap-4">
 										<Slider
 											defaultValue={[question.value || 50]}
@@ -512,7 +510,7 @@ const PsychologicalConfig = ({ assessmentId }: { assessmentId: string }) => {
 												updateQuestion(question.id, "value", value[0])
 											}
 										/>
-										<span className="min-w-[3rem] text-sm text-muted-foreground text-right">
+										<span className="min-w-[3rem] text-sm  text-right">
 											{question.value || 50}%
 										</span>
 									</div>
@@ -520,9 +518,7 @@ const PsychologicalConfig = ({ assessmentId }: { assessmentId: string }) => {
 							) : (
 								<div className="space-y-2">
 									<div className="flex justify-between items-center">
-										<Label className="text-xs text-muted-foreground">
-											Response Options
-										</Label>
+										<Label className="text-xs ">Response Options</Label>
 										<Button
 											variant="ghost"
 											size="sm"
@@ -555,7 +551,7 @@ const PsychologicalConfig = ({ assessmentId }: { assessmentId: string }) => {
 													size="icon"
 													onClick={() => removeOption(question.id, optionIndex)}
 													disabled={question.options.length <= 2}
-													className="h-8 w-8 rounded-full text-muted-foreground hover:text-destructive hover:bg-destructive/10"
+													className="h-8 w-8 rounded-full  hover:text-destructive hover:bg-destructive/10"
 												>
 													×
 												</Button>

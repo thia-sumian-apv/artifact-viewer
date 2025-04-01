@@ -105,12 +105,5 @@ export default {
 			},
 		},
 	},
-	plugins: [
-		tailwindcssAnimate,
-		require("tailwindcss-animate"),
-		require("daisyui"),
-	],
-	daisyui: {
-		themes: true, // or your custom themes
-	},
+	plugins: [tailwindcssAnimate, require("tailwindcss-animate")],
 };

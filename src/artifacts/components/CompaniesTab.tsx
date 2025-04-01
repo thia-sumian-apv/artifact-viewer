@@ -128,7 +128,7 @@ const CompaniesTab = () => {
 													<span className="text-sm">
 														{format(company.subscriptionStart, "dd/MM/yyyy")}
 													</span>
-													<span className="text-xs text-muted-foreground">
+													<span className="text-xs ">
 														to {format(company.subscriptionEnd, "dd/MM/yyyy")}
 													</span>
 												</div>

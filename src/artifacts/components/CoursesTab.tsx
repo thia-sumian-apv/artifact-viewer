@@ -139,9 +139,7 @@ const CoursesTab = () => {
 						<div className="space-y-6">
 							{/* Course Code and Name */}
 							<div className="space-y-1">
-								<h3 className="text-sm font-medium text-muted-foreground">
-									{selectedCourse.code}
-								</h3>
+								<h3 className="text-sm font-medium ">{selectedCourse.code}</h3>
 								<h2 className="text-2xl font-semibold">
 									{selectedCourse.name}
 								</h2>
@@ -149,9 +147,7 @@ const CoursesTab = () => {
 
 							{/* Description */}
 							<div className="space-y-2">
-								<h4 className="text-sm font-medium text-muted-foreground">
-									Description
-								</h4>
+								<h4 className="text-sm font-medium ">Description</h4>
 								<p className="text-sm">{selectedCourse.description}</p>
 							</div>
 
@@ -159,20 +155,18 @@ const CoursesTab = () => {
 							<div className="grid grid-cols-2 gap-4 pt-4 border-t">
 								<div className="space-y-2">
 									<div className="flex items-center text-sm">
-										<User className="h-4 w-4 mr-2 text-muted-foreground" />
+										<User className="h-4 w-4 mr-2 " />
 										<span className="font-medium">Created By</span>
 									</div>
-									<p className="text-sm text-muted-foreground">
-										{selectedCourse.createdBy}
-									</p>
+									<p className="text-sm ">{selectedCourse.createdBy}</p>
 								</div>
 
 								<div className="space-y-2">
 									<div className="flex items-center text-sm">
-										<Calendar className="h-4 w-4 mr-2 text-muted-foreground" />
+										<Calendar className="h-4 w-4 mr-2 " />
 										<span className="font-medium">Last Modified</span>
 									</div>
-									<p className="text-sm text-muted-foreground">
+									<p className="text-sm ">
 										{new Date(selectedCourse.lastModified).toLocaleDateString()}
 									</p>
 								</div>

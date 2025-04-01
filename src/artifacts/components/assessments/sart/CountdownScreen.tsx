@@ -10,7 +10,6 @@ const CountdownScreen: React.FC<CountdownScreenProps> = ({
 	onCountdownComplete,
 }) => {
 	const [stage, setStage] = useState(0);
-	const [_progress, setProgress] = useState(0);
 	const stages = ["Ready", "Get Set", "Go!"];
 
 	// Longer duration for each stage (2 seconds per stage)
@@ -27,7 +26,6 @@ const CountdownScreen: React.FC<CountdownScreenProps> = ({
 
 		// Reset progress to the starting value for this stage
 		const startValue = stage * 33.33;
-		setProgress(startValue);
 
 		// Animate progress to the end value
 		const endValue = (stage + 1) * 33.33;
@@ -43,7 +41,6 @@ const CountdownScreen: React.FC<CountdownScreenProps> = ({
 			currentProgress += increment;
 			if (currentProgress >= endValue) {
 				// Ensure progress reaches exactly the end value for the stage
-				setProgress(endValue);
 
 				// Move to next stage after completing this one
 				const timer = setTimeout(() => {
@@ -52,7 +49,6 @@ const CountdownScreen: React.FC<CountdownScreenProps> = ({
 
 				return () => clearTimeout(timer);
 			}
-			setProgress(currentProgress);
 			animationFrame = requestAnimationFrame(updateProgress);
 		};
 

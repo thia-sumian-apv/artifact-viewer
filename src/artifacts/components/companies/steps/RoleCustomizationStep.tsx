@@ -100,7 +100,7 @@ export default function RoleCustomizationStep({
 			<div className="flex items-center justify-between mb-2">
 				<div>
 					<p className="text-sm font-medium">Role Hierarchy Configuration</p>
-					<p className="text-xs text-muted-foreground">
+					<p className="text-xs ">
 						Customize role names and select which roles to use (min 2, max 4)
 					</p>
 				</div>
@@ -148,7 +148,7 @@ export default function RoleCustomizationStep({
 								<TooltipProvider>
 									<Tooltip>
 										<TooltipTrigger asChild>
-											<Info className="h-3.5 w-3.5 text-muted-foreground cursor-help" />
+											<Info className="h-3.5 w-3.5  cursor-help" />
 										</TooltipTrigger>
 										<TooltipContent side="right">
 											<p className="text-xs max-w-[200px]">{tooltips[role]}</p>

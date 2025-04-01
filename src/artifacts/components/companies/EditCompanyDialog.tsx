@@ -234,9 +234,7 @@ export function EditCompanyDialog({
 								<span className="text-sm font-medium">
 									Step {currentStep + 1} of {steps.length}
 								</span>
-								<span className="text-sm text-muted-foreground">
-									{steps[currentStep]}
-								</span>
+								<span className="text-sm ">{steps[currentStep]}</span>
 							</div>
 
 							<Progress

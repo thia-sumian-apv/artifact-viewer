@@ -77,7 +77,7 @@ export function ViewCompanyDialog({
 					<TabsContent value="details" className="space-y-4">
 						<div className="grid grid-cols-2 gap-4">
 							<div className="space-y-1">
-								<p className="text-sm text-muted-foreground flex items-center">
+								<p className="text-sm  flex items-center">
 									<Tag className="h-4 w-4 mr-2" />
 									Short Name
 								</p>
@@ -85,7 +85,7 @@ export function ViewCompanyDialog({
 							</div>
 
 							<div className="space-y-1">
-								<p className="text-sm text-muted-foreground flex items-center">
+								<p className="text-sm  flex items-center">
 									<Tag className="h-4 w-4 mr-2" />
 									Registration Number
 								</p>
@@ -93,7 +93,7 @@ export function ViewCompanyDialog({
 							</div>
 
 							<div className="space-y-1">
-								<p className="text-sm text-muted-foreground flex items-center">
+								<p className="text-sm  flex items-center">
 									<Users className="h-4 w-4 mr-2" />
 									Contact Person
 								</p>
@@ -101,7 +101,7 @@ export function ViewCompanyDialog({
 							</div>
 
 							<div className="space-y-1">
-								<p className="text-sm text-muted-foreground flex items-center">
+								<p className="text-sm  flex items-center">
 									<Mail className="h-4 w-4 mr-2" />
 									Email
 								</p>
@@ -109,7 +109,7 @@ export function ViewCompanyDialog({
 							</div>
 
 							<div className="space-y-1">
-								<p className="text-sm text-muted-foreground flex items-center">
+								<p className="text-sm  flex items-center">
 									<Phone className="h-4 w-4 mr-2" />
 									Phone
 								</p>
@@ -117,7 +117,7 @@ export function ViewCompanyDialog({
 							</div>
 
 							<div className="col-span-2 space-y-1">
-								<p className="text-sm text-muted-foreground flex items-center">
+								<p className="text-sm  flex items-center">
 									<MapPin className="h-4 w-4 mr-2" />
 									Address
 								</p>
@@ -129,7 +129,7 @@ export function ViewCompanyDialog({
 					<TabsContent value="subscription" className="space-y-4">
 						<div className="grid grid-cols-2 gap-4">
 							<div className="space-y-1">
-								<p className="text-sm text-muted-foreground flex items-center">
+								<p className="text-sm  flex items-center">
 									<Calendar className="h-4 w-4 mr-2" />
 									Subscription Start
 								</p>
@@ -139,7 +139,7 @@ export function ViewCompanyDialog({
 							</div>
 
 							<div className="space-y-1">
-								<p className="text-sm text-muted-foreground flex items-center">
+								<p className="text-sm  flex items-center">
 									<Calendar className="h-4 w-4 mr-2" />
 									Subscription End
 								</p>
@@ -149,7 +149,7 @@ export function ViewCompanyDialog({
 							</div>
 
 							<div className="space-y-1">
-								<p className="text-sm text-muted-foreground flex items-center">
+								<p className="text-sm  flex items-center">
 									<Tag className="h-4 w-4 mr-2" />
 									Duration
 								</p>
@@ -159,7 +159,7 @@ export function ViewCompanyDialog({
 							</div>
 
 							<div className="space-y-1">
-								<p className="text-sm text-muted-foreground flex items-center">
+								<p className="text-sm  flex items-center">
 									<Users className="h-4 w-4 mr-2" />
 									Licenses
 								</p>
@@ -169,7 +169,7 @@ export function ViewCompanyDialog({
 							</div>
 
 							<div className="space-y-1">
-								<p className="text-sm text-muted-foreground flex items-center">
+								<p className="text-sm  flex items-center">
 									<Calendar className="h-4 w-4 mr-2" />
 									Renewal Reminder
 								</p>
@@ -183,39 +183,31 @@ export function ViewCompanyDialog({
 					<TabsContent value="roles" className="space-y-4">
 						<div className="grid grid-cols-2 gap-4">
 							<div className="space-y-1">
-								<p className="text-sm text-muted-foreground">
-									Super Admin Label
-								</p>
+								<p className="text-sm ">Super Admin Label</p>
 								<p className="font-medium">{company.roleLabels.superAdmin}</p>
 							</div>
 
 							<div className="space-y-1">
-								<p className="text-sm text-muted-foreground">
-									Company Admin Label
-								</p>
+								<p className="text-sm ">Company Admin Label</p>
 								<p className="font-medium">{company.roleLabels.companyAdmin}</p>
 							</div>
 
 							<div className="space-y-1">
-								<p className="text-sm text-muted-foreground">
-									Course Commander Label
-								</p>
+								<p className="text-sm ">Course Commander Label</p>
 								<p className="font-medium">
 									{company.roleLabels.courseCommander}
 								</p>
 							</div>
 
 							<div className="space-y-1">
-								<p className="text-sm text-muted-foreground">
-									Course Trainer Label
-								</p>
+								<p className="text-sm ">Course Trainer Label</p>
 								<p className="font-medium">
 									{company.roleLabels.courseTrainer}
 								</p>
 							</div>
 
 							<div className="space-y-1">
-								<p className="text-sm text-muted-foreground">Trainee Label</p>
+								<p className="text-sm ">Trainee Label</p>
 								<p className="font-medium">{company.roleLabels.trainee}</p>
 							</div>
 						</div>
@@ -273,7 +265,7 @@ export function ViewCompanyDialog({
 										</div>
 										<div className="flex-1">
 											<p className="text-sm font-medium">{title}</p>
-											<p className="text-xs text-muted-foreground">
+											<p className="text-xs ">
 												{enabled ? "Enabled" : "Disabled"}
 											</p>
 										</div>
@@ -457,18 +449,14 @@ export function ViewCompanyDialog({
 										<h4 className="font-medium text-sm">Welcome Messages</h4>
 										<div className="mt-2 space-y-2 text-sm">
 											<div className="line-clamp-1">
-												<span className="text-xs text-muted-foreground">
-													Login:
-												</span>{" "}
+												<span className="text-xs ">Login:</span>{" "}
 												<span>
 													{company.brandingSettings?.customWelcomeMessage ||
 														`Welcome to ${company.name}`}
 												</span>
 											</div>
 											<div className="line-clamp-1">
-												<span className="text-xs text-muted-foreground">
-													Dashboard:
-												</span>{" "}
+												<span className="text-xs ">Dashboard:</span>{" "}
 												<span>
 													{company.brandingSettings?.dashboardWelcomeText ||
 														`Welcome to your ${company.name} dashboard`}
