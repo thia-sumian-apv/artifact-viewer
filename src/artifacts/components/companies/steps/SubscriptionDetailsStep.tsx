@@ -15,17 +15,22 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import { format, addMonths } from "date-fns";
-import { CalendarIcon } from "lucide-react";
+import { format, addMonths, addDays } from "date-fns";
+import { CalendarIcon, InfoIcon } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
+import { FormDescription } from "@/components/ui/form";
 
 interface SubscriptionDetailsStepProps {
 	data: {
-		subscriptionDuration: number;
-		subscriptionStart: Date;
-		subscriptionEnd: Date;
-		maxLicenses: number;
-		usedLicenses: number;
-		renewalReminder: number;
+		subscriptionDuration: number; // in months (required)
+		subscriptionStart: Date; // Subscription Start Date (required)
+		subscriptionEnd: Date; // Auto-calculated
+		maxLicenses: number; // Maximum User Licenses (required)
+		usedLicenses: number; // Current usage (display only)
+		unusedLicenses: number; // Auto-calculated (display only)
+		renewalReminder: number; // Days before expiry
+		includeTrial: boolean; // Option for free trial period
+		trialDays: number; // Number of days for trial
 	};
 	onUpdate: (data: SubscriptionDetailsStepProps["data"]) => void;
 	onNext: () => void;
@@ -44,20 +49,39 @@ export default function SubscriptionDetailsStep({
 
 	// Auto-calculate end date when duration or start date changes
 	useEffect(() => {
+		const startDate = data.subscriptionStart;
+
+		// If trial is included, add trial days to start date for subscription calculations
+		const calculationStartDate = data.includeTrial
+			? addDays(startDate, data.trialDays)
+			: startDate;
+
 		const newEndDate = addMonths(
-			data.subscriptionStart,
+			calculationStartDate,
 			data.subscriptionDuration,
 		);
-		if (newEndDate.getTime() !== data.subscriptionEnd.getTime()) {
+
+		// Calculate unused licenses
+		const newUnusedLicenses = Math.max(0, data.maxLicenses - data.usedLicenses);
+
+		if (
+			newEndDate.getTime() !== data.subscriptionEnd.getTime() ||
+			newUnusedLicenses !== data.unusedLicenses
+		) {
 			onUpdateRef.current({
 				...data,
 				subscriptionEnd: newEndDate,
+				unusedLicenses: newUnusedLicenses,
 			});
 		}
 	}, [
 		data.subscriptionDuration,
 		data.subscriptionStart,
 		data.subscriptionEnd,
+		data.maxLicenses,
+		data.usedLicenses,
+		data.includeTrial,
+		data.trialDays,
 		data,
 	]);
 
@@ -77,28 +101,85 @@ export default function SubscriptionDetailsStep({
 		}
 	};
 
+	const handleMaxLicensesChange = (value: string) => {
+		const maxLicenses = Number.parseInt(value, 10) || 1;
+		onUpdate({
+			...data,
+			maxLicenses,
+			unusedLicenses: Math.max(0, maxLicenses - data.usedLicenses),
+		});
+	};
+
 	return (
-		<div className="space-y-4 px-1">
-			<div className="space-y-2">
-				<Label htmlFor="subscriptionDuration">
-					Subscription Duration (months)
-				</Label>
-				<Select
-					value={data.subscriptionDuration.toString()}
-					onValueChange={handleDurationChange}
-				>
-					<SelectTrigger id="subscriptionDuration" className="w-full">
-						<SelectValue placeholder="Select duration" />
-					</SelectTrigger>
-					<SelectContent>
-						{[1, 3, 6, 12, 24, 36].map((months) => (
-							<SelectItem key={months} value={months.toString()}>
-								{months} {months === 1 ? "month" : "months"}
-							</SelectItem>
-						))}
-					</SelectContent>
-				</Select>
+		<div className="space-y-5 px-1">
+			<div className="space-y-3">
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+					<div className="space-y-2">
+						<Label htmlFor="subscriptionDuration">Subscription Duration</Label>
+						<Select
+							value={data.subscriptionDuration.toString()}
+							onValueChange={handleDurationChange}
+						>
+							<SelectTrigger id="subscriptionDuration" className="w-full">
+								<SelectValue placeholder="Select duration" />
+							</SelectTrigger>
+							<SelectContent>
+								{[1, 3, 6, 12, 24, 36].map((months) => (
+									<SelectItem key={months} value={months.toString()}>
+										{months} {months === 1 ? "month" : "months"}
+									</SelectItem>
+								))}
+							</SelectContent>
+						</Select>
+					</div>
+
+					<div className="space-y-2">
+						<Label>Free Trial</Label>
+						<div className="h-10 rounded-md bg-background px-3 flex items-center justify-between">
+							<div className="flex items-center space-x-2">
+								<Checkbox
+									id="includeTrial"
+									checked={data.includeTrial}
+									onCheckedChange={(checked) => {
+										onUpdate({
+											...data,
+											includeTrial: !!checked,
+											trialDays: checked ? 14 : 0,
+										});
+									}}
+								/>
+								<Label
+									htmlFor="includeTrial"
+									className="text-sm cursor-pointer font-normal"
+								>
+									14-day trial
+								</Label>
+							</div>
+
+							<Popover>
+								<PopoverTrigger asChild>
+									<Button
+										variant="ghost"
+										size="icon"
+										className="h-6 w-6 rounded-full"
+									>
+										<span className="sr-only">Trial info</span>
+										<InfoIcon className="h-4 w-4 text-muted-foreground" />
+									</Button>
+								</PopoverTrigger>
+								<PopoverContent className="w-80 p-3 text-sm">
+									<p>
+										Enables a 14-day free trial period. Customer gets immediate
+										access to all features. Billing starts after the trial
+										period ends.
+									</p>
+								</PopoverContent>
+							</Popover>
+						</div>
+					</div>
+				</div>
 			</div>
+
 			<div className="grid grid-cols-2 gap-4">
 				<div className="space-y-2">
 					<Label htmlFor="subscriptionStart">Subscription Start Date</Label>
@@ -123,7 +204,6 @@ export default function SubscriptionDetailsStep({
 						</PopoverContent>
 					</Popover>
 				</div>
-
 				<div className="space-y-2">
 					<Label htmlFor="subscriptionEnd">Subscription End Date</Label>
 					<div className="relative">
@@ -139,8 +219,13 @@ export default function SubscriptionDetailsStep({
 					</div>
 				</div>
 			</div>
-
-			<div className="grid grid-cols-2 gap-4">
+			{data.includeTrial && (
+				<FormDescription>
+					Access begins on this date. Paid subscription starts after{" "}
+					{data.trialDays} days trial.
+				</FormDescription>
+			)}
+			<div className="grid grid-cols-3 gap-4">
 				<div className="space-y-2">
 					<Label htmlFor="maxLicenses">Maximum User Licenses</Label>
 					<Input
@@ -148,12 +233,7 @@ export default function SubscriptionDetailsStep({
 						type="number"
 						min="1"
 						value={data.maxLicenses}
-						onChange={(e) =>
-							onUpdate({
-								...data,
-								maxLicenses: Number.parseInt(e.target.value) || 1,
-							})
-						}
+						onChange={(e) => handleMaxLicensesChange(e.target.value)}
 					/>
 				</div>
 
@@ -166,17 +246,25 @@ export default function SubscriptionDetailsStep({
 							value={data.usedLicenses}
 							className="bg-gray-50 dark:bg-gray-800 cursor-not-allowed"
 						/>
-						<div className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-500">
-							Auto-calculated
-						</div>
+					</div>
+				</div>
+
+				<div className="space-y-2">
+					<Label htmlFor="unusedLicenses">Unused Licenses</Label>
+					<div className="relative">
+						<Input
+							id="unusedLicenses"
+							readOnly
+							value={data.unusedLicenses}
+							className="bg-gray-50 dark:bg-gray-800 cursor-not-allowed"
+						/>
 					</div>
 				</div>
 			</div>
 
 			<div className="space-y-2">
-				<Label htmlFor="renewalReminder">
-					Renewal Reminder (days before expiry)
-				</Label>
+				<Label htmlFor="renewalReminder">Renewal Reminder</Label>
+				<span className="text-sm text-muted-foreground ml-1">(Optional)</span>
 				<Input
 					id="renewalReminder"
 					type="number"

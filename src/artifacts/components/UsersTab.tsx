@@ -313,44 +313,52 @@ const UsersTab = () => {
 							<TableHeader>
 								<TableRow>
 									<TableHead className="w-[250px]">
-										<Button
-											variant="ghost"
-											onClick={() => requestSort("name")}
-											className="font-semibold flex items-center"
-										>
-											Name
-											<ArrowUpDown className="ml-2 h-4 w-4" />
-										</Button>
+										<div className="flex justify-between items-center">
+											<span>Name</span>
+											<Button
+												variant="ghost"
+												onClick={() => requestSort("name")}
+												className="ml-2 h-8 w-8 p-0"
+											>
+												<ArrowUpDown className="h-4 w-4" />
+											</Button>
+										</div>
 									</TableHead>
 									<TableHead>
-										<Button
-											variant="ghost"
-											onClick={() => requestSort("email")}
-											className="font-semibold flex items-center"
-										>
-											Email
-											<ArrowUpDown className="ml-2 h-4 w-4" />
-										</Button>
+										<div className="flex justify-between items-center">
+											<span>Email</span>
+											<Button
+												variant="ghost"
+												onClick={() => requestSort("email")}
+												className="ml-2 h-8 w-8 p-0"
+											>
+												<ArrowUpDown className="h-4 w-4" />
+											</Button>
+										</div>
 									</TableHead>
 									<TableHead>
-										<Button
-											variant="ghost"
-											onClick={() => requestSort("role")}
-											className="font-semibold flex items-center"
-										>
-											Role
-											<ArrowUpDown className="ml-2 h-4 w-4" />
-										</Button>
+										<div className="flex justify-between items-center">
+											<span>Role</span>
+											<Button
+												variant="ghost"
+												onClick={() => requestSort("role")}
+												className="ml-2 h-8 w-8 p-0"
+											>
+												<ArrowUpDown className="h-4 w-4" />
+											</Button>
+										</div>
 									</TableHead>
 									<TableHead>
-										<Button
-											variant="ghost"
-											onClick={() => requestSort("company")}
-											className="font-semibold flex items-center"
-										>
-											Company
-											<ArrowUpDown className="ml-2 h-4 w-4" />
-										</Button>
+										<div className="flex justify-between items-center">
+											<span>Company</span>
+											<Button
+												variant="ghost"
+												onClick={() => requestSort("company")}
+												className="ml-2 h-8 w-8 p-0"
+											>
+												<ArrowUpDown className="h-4 w-4" />
+											</Button>
+										</div>
 									</TableHead>
 									<TableHead className="text-right">Actions</TableHead>
 								</TableRow>

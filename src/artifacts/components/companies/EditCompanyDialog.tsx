@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useForm, FormProvider } from "react-hook-form";
 import {
 	Dialog,
 	DialogContent,
@@ -7,24 +8,15 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import BasicCompanyInfoStep from "./steps/BasicCompanyInfoStep";
-import ContactInfoStep from "./steps/ContactInfoStep";
+import { Progress } from "@/components/ui/progress";
+import GeneralInformationStep from "./steps/GeneralInformationStep";
 import SubscriptionDetailsStep from "./steps/SubscriptionDetailsStep";
 import RoleCustomizationStep from "./steps/RoleCustomizationStep";
-import type { Company } from "../../mocks/companyData";
 import ModuleConfigurationStep, {
-	type ModuleConfig,
+	type ModuleConfigType,
 } from "./steps/ModuleConfigurationStep";
-import BrandingSettingsStep, {
-	type BrandingSettings,
-} from "./steps/BrandingSettingsStep";
-import NotificationSettingsStep, {
-	type NotificationSettings,
-} from "./steps/NotificationSettingsStep";
-import DataRetentionPolicyStep, {
-	type DataRetentionPolicy,
-} from "./steps/DataRetentionPolicyStep";
-import { Progress } from "@/components/ui/progress";
+import GeneralSettingsStep from "./steps/GeneralSettingsStep";
+import type { Company } from "@/artifacts/types/company";
 
 interface EditCompanyDialogProps {
 	open: boolean;
@@ -33,47 +25,56 @@ interface EditCompanyDialogProps {
 	onSave: (updatedCompany: Company) => void;
 }
 
-type BasicInfoType = {
-	name: string;
-	shortName: string;
-	registrationNumber: string;
-	logo: File | null;
-	status: "active" | "inactive";
-};
-
-type ContactInfoType = {
-	contactName: string;
-	contactEmail: string;
-	contactNumber: string;
-	address: string;
+// New type definitions based on AddCompanyDialog
+type GeneralInfoType = {
+	name: string; // Company Name (required)
+	shortName: string; // Company Short Name/Abbreviation
+	status: "active" | "inactive"; // Company Status (required)
+	contactName: string; // Contact Name (required)
+	contactEmail: string; // Contact Email (required)
+	contactNumber: string; // Contact Number
+	address: string; // Company Address
 };
 
 type SubscriptionDetailsType = {
-	subscriptionDuration: number;
-	subscriptionStart: Date;
-	subscriptionEnd: Date;
-	maxLicenses: number;
-	usedLicenses: number;
-	renewalReminder: number;
+	subscriptionDuration: number; // in months (required)
+	subscriptionStart: Date; // Subscription Start Date (required)
+	subscriptionEnd: Date; // Auto-calculated
+	maxLicenses: number; // Maximum User Licenses (required)
+	usedLicenses: number; // Current usage (display only)
+	unusedLicenses: number; // Auto-calculated (display only)
+	renewalReminder: number; // Days before expiry
+	includeTrial: boolean; // Option for free trial period
+	trialDays: number; // Number of days for trial
 };
 
 type RoleLabelsType = {
-	superAdmin: string;
+	superAdmin: string; // Hidden from UI
 	companyAdmin: string;
 	courseCommander: string;
 	courseTrainer: string;
 	trainee: string;
 };
 
+type GeneralSettingsType = {
+	notifications: {
+		userRegistration: "email" | "self"; // Welcome email or self-registration
+		reportAvailability: boolean;
+		emailSenderName: string;
+		welcomeEmailText: string;
+		reportAvailabilityText: string;
+	};
+	dataRetention: {
+		retentionPeriod: number; // in months
+	};
+};
+
 type FormData = {
-	basicInfo: BasicInfoType;
-	contactInfo: ContactInfoType;
+	generalInfo: GeneralInfoType;
 	subscriptionDetails: SubscriptionDetailsType;
 	roleLabels: RoleLabelsType;
-	moduleConfig: ModuleConfig;
-	notificationSettings: NotificationSettings;
-	dataRetentionPolicy: DataRetentionPolicy;
-	brandingSettings: BrandingSettings;
+	moduleConfig: ModuleConfigType;
+	generalSettings: GeneralSettingsType;
 };
 
 export function EditCompanyDialog({
@@ -84,121 +85,119 @@ export function EditCompanyDialog({
 }: EditCompanyDialogProps) {
 	const [currentStep, setCurrentStep] = useState(0);
 	const [formData, setFormData] = useState<FormData>({
-		basicInfo: {
+		generalInfo: {
 			name: company.name,
 			shortName: company.shortName,
-			registrationNumber: company.registrationNumber,
-			logo: null, // Can't populate File object from string URL
-			status: company.status,
-		},
-		contactInfo: {
+			status: company.status as "active" | "inactive",
 			contactName: company.contactName,
 			contactEmail: company.contactEmail,
 			contactNumber: company.contactNumber,
 			address: company.address,
 		},
 		subscriptionDetails: {
-			subscriptionDuration: company.subscriptionDuration,
+			subscriptionDuration: company.subscriptionDuration || 12,
 			subscriptionStart: company.subscriptionStart,
 			subscriptionEnd: company.subscriptionEnd,
 			maxLicenses: company.maxLicenses,
 			usedLicenses: company.usedLicenses,
-			renewalReminder: company.renewalReminder,
+			unusedLicenses: company.maxLicenses - company.usedLicenses,
+			renewalReminder: company.renewalReminder || 30,
+			includeTrial: false,
+			trialDays: 14,
 		},
-		roleLabels: company.roleLabels,
-		moduleConfig: company.modules,
-		notificationSettings: company.notificationSettings || {
-			welcomeEmail: true,
-			reportAvailabilityNotification: true,
-			emailSenderName: company.name || "",
-			emailFooterText: "",
-			companySupportEmail: company.contactEmail || "",
+		roleLabels: company.roleLabels || {
+			superAdmin: "Super Admin",
+			companyAdmin: "Company Admin",
+			courseCommander: "Course Commander",
+			courseTrainer: "Course Trainer",
+			trainee: "Trainee",
 		},
-		dataRetentionPolicy: company.dataRetentionPolicy || {
-			retentionPeriod: 12, // in months
-			archivePolicy: "archive", // archive, delete, anonymize
-			dataExportSettings: "none", // none, monthly, quarterly, yearly
+		moduleConfig: {
+			cognitiveAssessments: {
+				enabled: !!company.modules?.cognitiveAssessments,
+				sart: true,
+				visualRxn: true,
+				spatialPlanning: true,
+			},
+			psychologicalAssessments: {
+				enabled: !!company.modules?.psychologicalAssessments,
+				selfDetermination: true,
+				ml360Self: true,
+				ml360Buddy: true,
+				ml360Trainer: true,
+				teamResilience: !!company.modules?.teamResilience,
+			},
+			externalAssessments: {
+				enabled: !!company.modules?.externalAssessments,
+				cardioRespiratory: true,
+				strengthAssessment: true,
+				ippt: true,
+				soc: true,
+				roadMarch20km: true,
+			},
+			physicalAssessments: !!company.modules?.physicalAssessments,
+			individualReporting: !!company.modules?.individualReporting,
+			externalIntegration: !!company.modules?.externalIntegration,
+			training: {
+				enabled: true,
+				trainingA: true,
+				trainingB: true,
+			},
+			thirdPartyIntegration: {
+				enabled: true,
+				polarWatch: true,
+				vald: true,
+			},
+			reports: {
+				enabled: true,
+				teamResilienceReport: true,
+				traineeReport: true,
+			},
 		},
-		brandingSettings: company.brandingSettings || {
-			primaryColor: "#4f46e5", // default indigo color
-			secondaryColor: "#10b981", // default emerald color
-			customCSS: "",
-			customWelcomeMessage: `Welcome to ${company.name}`,
-			dashboardWelcomeText: `Welcome to your ${company.name} dashboard`,
+		generalSettings: {
+			notifications: {
+				userRegistration: "email",
+				reportAvailability: true,
+				emailSenderName: company.name,
+				welcomeEmailText: `Welcome to ${company.name}! Please set up your account.`,
+				reportAvailabilityText: "Your report is now available to view.",
+			},
+			dataRetention: {
+				retentionPeriod: 12,
+			},
 		},
 	});
 
-	// Re-initialize form data when company changes
-	useEffect(() => {
-		setFormData({
-			basicInfo: {
-				name: company.name,
-				shortName: company.shortName,
-				registrationNumber: company.registrationNumber,
-				logo: null,
-				status: company.status,
-			},
-			contactInfo: {
-				contactName: company.contactName,
-				contactEmail: company.contactEmail,
-				contactNumber: company.contactNumber,
-				address: company.address,
-			},
-			subscriptionDetails: {
-				subscriptionDuration: company.subscriptionDuration,
-				subscriptionStart: company.subscriptionStart,
-				subscriptionEnd: company.subscriptionEnd,
-				maxLicenses: company.maxLicenses,
-				usedLicenses: company.usedLicenses,
-				renewalReminder: company.renewalReminder,
-			},
-			roleLabels: company.roleLabels,
-			moduleConfig: company.modules,
-			notificationSettings: company.notificationSettings || {
-				welcomeEmail: true,
-				reportAvailabilityNotification: true,
-				emailSenderName: company.name || "",
-				emailFooterText: "",
-				companySupportEmail: company.contactEmail || "",
-			},
-			dataRetentionPolicy: company.dataRetentionPolicy || {
-				retentionPeriod: 12, // in months
-				archivePolicy: "archive", // archive, delete, anonymize
-				dataExportSettings: "none", // none, monthly, quarterly, yearly
-			},
-			brandingSettings: company.brandingSettings || {
-				primaryColor: "#4f46e5", // default indigo color
-				secondaryColor: "#10b981", // default emerald color
-				customCSS: "",
-				customWelcomeMessage: `Welcome to ${company.name}`,
-				dashboardWelcomeText: `Welcome to your ${company.name} dashboard`,
-			},
-		});
-	}, [company]);
+	// Set up form context
+	const form = useForm<FormData>({
+		defaultValues: formData,
+	});
 
+	// Update form when company or formData changes
+	useEffect(() => {
+		form.reset(formData);
+	}, [formData, form]);
+
+	// Update steps to match the new sections as in AddCompanyDialog
 	const steps = [
-		"Basic Information",
-		"Contact Information",
+		"General Information",
 		"Subscription Details",
-		"Role Customization",
+		"Role & Hierarchy Configuration",
 		"Module Configuration",
-		"Notification Settings",
-		"Data Retention Policy",
-		"Branding Settings",
+		"General Settings",
 	];
 
 	const handleComplete = async () => {
 		// Create updated company object
 		const updatedCompany: Company = {
 			...company,
-			name: formData.basicInfo.name,
-			shortName: formData.basicInfo.shortName,
-			registrationNumber: formData.basicInfo.registrationNumber,
-			status: formData.basicInfo.status,
-			contactName: formData.contactInfo.contactName,
-			contactEmail: formData.contactInfo.contactEmail,
-			contactNumber: formData.contactInfo.contactNumber,
-			address: formData.contactInfo.address,
+			name: formData.generalInfo.name,
+			shortName: formData.generalInfo.shortName,
+			status: formData.generalInfo.status,
+			contactName: formData.generalInfo.contactName,
+			contactEmail: formData.generalInfo.contactEmail,
+			contactNumber: formData.generalInfo.contactNumber,
+			address: formData.generalInfo.address,
 			subscriptionDuration: formData.subscriptionDetails.subscriptionDuration,
 			subscriptionStart: formData.subscriptionDetails.subscriptionStart,
 			subscriptionEnd: formData.subscriptionDetails.subscriptionEnd,
@@ -206,15 +205,19 @@ export function EditCompanyDialog({
 			usedLicenses: formData.subscriptionDetails.usedLicenses,
 			renewalReminder: formData.subscriptionDetails.renewalReminder,
 			roleLabels: formData.roleLabels,
-			modules: formData.moduleConfig,
+			modules: {
+				cognitiveAssessments:
+					formData.moduleConfig.cognitiveAssessments.enabled,
+				psychologicalAssessments:
+					formData.moduleConfig.psychologicalAssessments.enabled,
+				externalAssessments: formData.moduleConfig.externalAssessments.enabled,
+				physicalAssessments: formData.moduleConfig.physicalAssessments,
+				individualReporting: formData.moduleConfig.individualReporting,
+				externalIntegration: formData.moduleConfig.externalIntegration,
+				teamResilience:
+					formData.moduleConfig.psychologicalAssessments.teamResilience,
+			},
 		};
-
-		// If a new logo was uploaded
-		if (formData.basicInfo.logo) {
-			// In a real app, you'd upload the file and get a URL back
-			console.log("Would upload new logo:", formData.basicInfo.logo);
-			// updatedCompany.logo = newLogoUrl;
-		}
 
 		onSave(updatedCompany);
 		toast.success("Company updated successfully!");
@@ -242,102 +245,64 @@ export function EditCompanyDialog({
 								className="h-1.5 w-full"
 							/>
 						</div>
-
-						<div className="flex flex-wrap gap-1 mt-2">
-							{steps.map((step, index) => (
-								<Button
-									key={step}
-									onClick={() => setCurrentStep(index)}
-									variant={currentStep === index ? "secondary" : "ghost"}
-									size="sm"
-									className="text-xs h-7 w-7 p-0"
-								>
-									{index + 1}
-								</Button>
-							))}
-						</div>
 					</div>
 				</DialogHeader>
 
-				<div className="mt-2 flex-1 overflow-y-auto">
-					{currentStep === 0 && (
-						<BasicCompanyInfoStep
-							data={formData.basicInfo}
-							onUpdate={(basicInfo) => setFormData({ ...formData, basicInfo })}
-							onNext={() => setCurrentStep(1)}
-						/>
-					)}
-					{currentStep === 1 && (
-						<ContactInfoStep
-							data={formData.contactInfo}
-							onUpdate={(contactInfo) =>
-								setFormData({ ...formData, contactInfo })
-							}
-							onBack={() => setCurrentStep(0)}
-							onNext={() => setCurrentStep(2)}
-						/>
-					)}
-					{currentStep === 2 && (
-						<SubscriptionDetailsStep
-							data={formData.subscriptionDetails}
-							onUpdate={(subscriptionDetails) =>
-								setFormData({ ...formData, subscriptionDetails })
-							}
-							onBack={() => setCurrentStep(1)}
-							onNext={() => setCurrentStep(3)}
-						/>
-					)}
-					{currentStep === 3 && (
-						<RoleCustomizationStep
-							data={formData.roleLabels}
-							onUpdate={(roleLabels) =>
-								setFormData({ ...formData, roleLabels })
-							}
-							onBack={() => setCurrentStep(2)}
-							onNext={() => setCurrentStep(4)}
-						/>
-					)}
-					{currentStep === 4 && (
-						<ModuleConfigurationStep
-							data={formData.moduleConfig}
-							onUpdate={(moduleConfig) =>
-								setFormData({ ...formData, moduleConfig })
-							}
-							onBack={() => setCurrentStep(3)}
-							onNext={() => setCurrentStep(5)}
-						/>
-					)}
-					{currentStep === 5 && (
-						<NotificationSettingsStep
-							data={formData.notificationSettings}
-							onUpdate={(notificationSettings) =>
-								setFormData({ ...formData, notificationSettings })
-							}
-							onBack={() => setCurrentStep(4)}
-							onNext={() => setCurrentStep(6)}
-						/>
-					)}
-					{currentStep === 6 && (
-						<DataRetentionPolicyStep
-							data={formData.dataRetentionPolicy}
-							onUpdate={(dataRetentionPolicy) =>
-								setFormData({ ...formData, dataRetentionPolicy })
-							}
-							onBack={() => setCurrentStep(5)}
-							onNext={() => setCurrentStep(7)}
-						/>
-					)}
-					{currentStep === 7 && (
-						<BrandingSettingsStep
-							data={formData.brandingSettings}
-							onUpdate={(brandingSettings) =>
-								setFormData({ ...formData, brandingSettings })
-							}
-							onBack={() => setCurrentStep(6)}
-							onNext={handleComplete}
-						/>
-					)}
-				</div>
+				{/* Wrap all content with FormProvider */}
+				<FormProvider {...form}>
+					<div className="mt-4 flex-1 overflow-y-auto">
+						{currentStep === 0 && (
+							<GeneralInformationStep
+								data={formData.generalInfo}
+								onUpdate={(generalInfo) =>
+									setFormData({ ...formData, generalInfo })
+								}
+								onNext={() => setCurrentStep(1)}
+							/>
+						)}
+						{currentStep === 1 && (
+							<SubscriptionDetailsStep
+								data={formData.subscriptionDetails}
+								onUpdate={(subscriptionDetails) =>
+									setFormData({ ...formData, subscriptionDetails })
+								}
+								onNext={() => setCurrentStep(2)}
+								onBack={() => setCurrentStep(0)}
+							/>
+						)}
+						{currentStep === 2 && (
+							<RoleCustomizationStep
+								data={formData.roleLabels}
+								onUpdate={(roleLabels) =>
+									setFormData({ ...formData, roleLabels })
+								}
+								onBack={() => setCurrentStep(1)}
+								onNext={() => setCurrentStep(3)}
+							/>
+						)}
+						{currentStep === 3 && (
+							<ModuleConfigurationStep
+								data={formData.moduleConfig}
+								onUpdate={(moduleConfig) =>
+									setFormData({ ...formData, moduleConfig })
+								}
+								onNext={() => setCurrentStep(4)}
+								onBack={() => setCurrentStep(2)}
+							/>
+						)}
+						{currentStep === 4 && (
+							<GeneralSettingsStep
+								data={formData.generalSettings}
+								onUpdate={(generalSettings) =>
+									setFormData({ ...formData, generalSettings })
+								}
+								onBack={() => setCurrentStep(3)}
+								onNext={handleComplete}
+							/>
+						)}
+					</div>
+				</FormProvider>
+
 				<div className="mt-6 flex justify-between border-t pt-4">
 					<div>
 						{currentStep > 0 && (
@@ -353,13 +318,7 @@ export function EditCompanyDialog({
 
 					<div>
 						{currentStep < steps.length - 1 ? (
-							<Button
-								onClick={() => setCurrentStep(currentStep + 1)}
-								disabled={
-									(currentStep === 0 && !formData.basicInfo.name) ||
-									(currentStep === 1 && !formData.contactInfo.contactName)
-								}
-							>
+							<Button onClick={() => setCurrentStep(currentStep + 1)}>
 								Next
 							</Button>
 						) : (
