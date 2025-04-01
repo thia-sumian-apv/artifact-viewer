@@ -42,9 +42,7 @@ const AssessmentPool = ({ selectedAssessmentIds }: AssessmentPoolProps) => {
 			</CardHeader>
 			<CardContent className="space-y-4">
 				<div>
-					<h3 className="text-sm font-medium mb-2 text-muted-foreground">
-						Cognitive
-					</h3>
+					<h3 className="text-sm font-medium mb-2 ">Cognitive</h3>
 					<SortableContext
 						items={cognitiveAssessments.map((a) => a.id)}
 						strategy={verticalListSortingStrategy}
@@ -54,7 +52,7 @@ const AssessmentPool = ({ selectedAssessmentIds }: AssessmentPoolProps) => {
 								<AssessmentItem key={assessment.id} assessment={assessment} />
 							))}
 							{cognitiveAssessments.length === 0 && (
-								<p className="text-sm text-muted-foreground italic">
+								<p className="text-sm  italic">
 									All cognitive assessments are assigned
 								</p>
 							)}
@@ -63,9 +61,7 @@ const AssessmentPool = ({ selectedAssessmentIds }: AssessmentPoolProps) => {
 				</div>
 
 				<div>
-					<h3 className="text-sm font-medium mb-2 text-muted-foreground">
-						Psychological
-					</h3>
+					<h3 className="text-sm font-medium mb-2 ">Psychological</h3>
 					<SortableContext
 						items={psychologicalAssessments.map((a) => a.id)}
 						strategy={verticalListSortingStrategy}
@@ -75,7 +71,7 @@ const AssessmentPool = ({ selectedAssessmentIds }: AssessmentPoolProps) => {
 								<AssessmentItem key={assessment.id} assessment={assessment} />
 							))}
 							{psychologicalAssessments.length === 0 && (
-								<p className="text-sm text-muted-foreground italic">
+								<p className="text-sm  italic">
 									All psychological assessments are assigned
 								</p>
 							)}

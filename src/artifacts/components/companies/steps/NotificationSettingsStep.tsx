@@ -44,7 +44,7 @@ export default function NotificationSettingsStep({
 	return (
 		<div className="space-y-6 px-1">
 			<div>
-				<p className="text-sm text-muted-foreground">
+				<p className="text-sm ">
 					Configure notification settings and email customization for this
 					company.
 				</p>
@@ -65,7 +65,7 @@ export default function NotificationSettingsStep({
 						<div className="flex items-center justify-between space-x-2">
 							<Label htmlFor="welcomeEmail" className="flex flex-col space-y-1">
 								<span>Welcome Email</span>
-								<span className="font-normal text-xs text-muted-foreground">
+								<span className="font-normal text-xs ">
 									Send welcome email to new users
 								</span>
 							</Label>
@@ -82,7 +82,7 @@ export default function NotificationSettingsStep({
 								className="flex flex-col space-y-1"
 							>
 								<span>Report Availability Notification</span>
-								<span className="font-normal text-xs text-muted-foreground">
+								<span className="font-normal text-xs ">
 									Notify users when new reports are available
 								</span>
 							</Label>

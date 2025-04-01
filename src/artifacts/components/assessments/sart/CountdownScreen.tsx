@@ -10,11 +10,10 @@ const CountdownScreen: React.FC<CountdownScreenProps> = ({
 	onCountdownComplete,
 }) => {
 	const [stage, setStage] = useState(0);
-	const [progress, setProgress] = useState(0);
 	const stages = ["Ready", "Get Set", "Go!"];
 
 	// Longer duration for each stage (2 seconds per stage)
-	const stageDuration = 2000;
+	const stageDurations = [1250, 1250, 250]; // Ready: 1.25s, Get Set: 1.25s, Go!: 0.5s
 
 	useEffect(() => {
 		if (stage >= 3) {
@@ -22,14 +21,17 @@ const CountdownScreen: React.FC<CountdownScreenProps> = ({
 			return;
 		}
 
+		// Get the duration for the current stage
+		const currentStageDuration = stageDurations[stage];
+
 		// Reset progress to the starting value for this stage
 		const startValue = stage * 33.33;
-		setProgress(startValue);
 
 		// Animate progress to the end value
 		const endValue = (stage + 1) * 33.33;
 		const interval = 16; // ~60fps for smooth animation
-		const steps = stageDuration / interval;
+		// Use the current stage's duration for calculation
+		const steps = currentStageDuration / interval;
 		const increment = (endValue - startValue) / steps;
 
 		let currentProgress = startValue;
@@ -38,7 +40,7 @@ const CountdownScreen: React.FC<CountdownScreenProps> = ({
 		const updateProgress = () => {
 			currentProgress += increment;
 			if (currentProgress >= endValue) {
-				setProgress(endValue);
+				// Ensure progress reaches exactly the end value for the stage
 
 				// Move to next stage after completing this one
 				const timer = setTimeout(() => {
@@ -47,7 +49,6 @@ const CountdownScreen: React.FC<CountdownScreenProps> = ({
 
 				return () => clearTimeout(timer);
 			}
-			setProgress(currentProgress);
 			animationFrame = requestAnimationFrame(updateProgress);
 		};
 
@@ -60,13 +61,6 @@ const CountdownScreen: React.FC<CountdownScreenProps> = ({
 
 	// Define color based on stage
 	const getColorClass = () => {
-		if (stage === 0) return "text-blue-500";
-		if (stage === 1) return "text-amber-500";
-		return "text-green-500";
-	};
-
-	// Get the current color for the radial progress
-	const getProgressColorClass = () => {
 		if (stage === 0) return "text-blue-500";
 		if (stage === 1) return "text-amber-500";
 		return "text-green-500";
@@ -91,18 +85,6 @@ const CountdownScreen: React.FC<CountdownScreenProps> = ({
 
 			{/* Countdown timer - same position as the digit in NumberScreen and GameScreen */}
 			<div className="relative h-60 w-60 flex items-center justify-center bg-white dark:bg-gray-800 rounded-full shadow-md border-4 border-gray-100 dark:border-gray-700">
-				{/* daisyUI radial progress */}
-				<div
-					className={`radial-progress ${getProgressColorClass()} transition-colors duration-300`}
-					style={
-						{
-							"--value": progress,
-							"--size": "12rem",
-							"--thickness": "0.5rem",
-						} as React.CSSProperties
-					}
-				/>
-
 				<div className="absolute inset-0 flex items-center justify-center">
 					<span
 						className={`text-3xl font-bold ${getColorClass()} transition-colors duration-300`}

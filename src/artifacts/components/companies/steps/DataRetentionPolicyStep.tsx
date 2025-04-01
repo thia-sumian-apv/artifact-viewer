@@ -47,7 +47,7 @@ export default function DataRetentionPolicyStep({
 	return (
 		<div className="space-y-6 px-1">
 			<div>
-				<p className="text-sm text-muted-foreground">
+				<p className="text-sm ">
 					Configure how long data is retained and what happens when the
 					retention period expires.
 				</p>
@@ -80,7 +80,7 @@ export default function DataRetentionPolicyStep({
 							<div className="text-center text-sm font-medium">
 								{formatRetentionPeriod(data.retentionPeriod)}
 							</div>
-							<div className="text-xs text-muted-foreground text-center">
+							<div className="text-xs  text-center">
 								Data will be retained for{" "}
 								{formatRetentionPeriod(data.retentionPeriod)} after creation
 							</div>

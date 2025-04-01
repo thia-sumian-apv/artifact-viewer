@@ -163,7 +163,7 @@ const AddAssessmentRunDialog = ({
 													variant="outline"
 													className={cn(
 														"w-full pl-3 text-left font-normal",
-														!field.value && "text-muted-foreground",
+														!field.value && "",
 													)}
 													type="button"
 												>
@@ -208,7 +208,7 @@ const AddAssessmentRunDialog = ({
 													variant="outline"
 													className={cn(
 														"w-full pl-3 text-left font-normal",
-														!field.value && "text-muted-foreground",
+														!field.value && "",
 													)}
 													type="button"
 												>

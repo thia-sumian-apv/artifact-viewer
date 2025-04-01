@@ -84,7 +84,7 @@ export default function ModuleConfigurationStep({
 	return (
 		<div className="space-y-6 px-1">
 			<div>
-				<p className="text-sm text-muted-foreground">
+				<p className="text-sm ">
 					Select which modules to enable for this company based on their
 					subscription.
 				</p>

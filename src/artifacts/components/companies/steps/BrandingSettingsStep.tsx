@@ -40,7 +40,7 @@ export default function BrandingSettingsStep({
 	return (
 		<div className="space-y-6 px-1">
 			<div>
-				<p className="text-sm text-muted-foreground">
+				<p className="text-sm ">
 					Customize the appearance and branding for this company's portal.
 				</p>
 			</div>
@@ -195,9 +195,7 @@ export default function BrandingSettingsStep({
 								<Code className="h-4 w-4" />
 								Advanced Styling Options
 							</span>
-							<div className="text-xs text-muted-foreground">
-								{open ? "Hide" : "Show"}
-							</div>
+							<div className="text-xs ">{open ? "Hide" : "Show"}</div>
 						</Button>
 					</CollapsibleTrigger>
 					<CollapsibleContent className="px-4 pb-4">
@@ -215,7 +213,7 @@ export default function BrandingSettingsStep({
 								rows={5}
 								className="font-mono text-sm"
 							/>
-							<p className="text-xs text-muted-foreground">
+							<p className="text-xs ">
 								For advanced users only. Add custom CSS to further customize the
 								company portal appearance.
 							</p>
