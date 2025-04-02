@@ -1,14 +1,6 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import {
-	Brain,
-	Activity,
-	Dumbbell,
-	Zap,
-	BookOpen,
-	Link,
-	BarChart3,
-} from "lucide-react";
+import { Zap, BookOpen, Link, BarChart3 } from "lucide-react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -186,13 +178,18 @@ export default function ModuleConfigurationStep({
 										/>
 										<div className="flex items-center gap-2">
 											<span
-												className={`p-1.5 rounded-md ${
-													data.cognitiveAssessments.enabled
+												className={`p-1.5 rounded-md flex items-center justify-center ${
+													data.psychologicalAssessments.enabled
 														? "bg-teal-100 text-teal-600 dark:bg-teal-900/40 dark:text-teal-300"
 														: "bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400"
 												}`}
 											>
-												<Brain className="h-4 w-4" />
+												<span
+													className="material-symbols-outlined"
+													style={{ fontSize: "16px", lineHeight: 1 }}
+												>
+													neurology
+												</span>
 											</span>
 											<Label
 												htmlFor="cognitiveAssessments"
@@ -298,13 +295,18 @@ export default function ModuleConfigurationStep({
 										/>
 										<div className="flex items-center gap-2">
 											<span
-												className={`p-1.5 rounded-md ${
+												className={`p-1.5 rounded-md flex items-center justify-center ${
 													data.psychologicalAssessments.enabled
 														? "bg-teal-100 text-teal-600 dark:bg-teal-900/40 dark:text-teal-300"
 														: "bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400"
 												}`}
 											>
-												<Activity className="h-4 w-4" />
+												<span
+													className="material-icons"
+													style={{ fontSize: "16px", lineHeight: 1 }}
+												>
+													psychology
+												</span>
 											</span>
 											<Label
 												htmlFor="psychologicalAssessments"
@@ -446,13 +448,18 @@ export default function ModuleConfigurationStep({
 										/>
 										<div className="flex items-center gap-2">
 											<span
-												className={`p-1.5 rounded-md ${
-													data.externalAssessments.enabled
+												className={`p-1.5 rounded-md flex items-center justify-center ${
+													data.psychologicalAssessments.enabled
 														? "bg-teal-100 text-teal-600 dark:bg-teal-900/40 dark:text-teal-300"
 														: "bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400"
 												}`}
 											>
-												<Dumbbell className="h-4 w-4" />
+												<span
+													className="material-symbols-outlined"
+													style={{ fontSize: "16px", lineHeight: 1 }}
+												>
+													exercise
+												</span>
 											</span>
 											<Label
 												htmlFor="externalAssessments"

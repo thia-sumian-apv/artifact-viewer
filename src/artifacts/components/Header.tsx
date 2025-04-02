@@ -4,27 +4,18 @@ import {
 	BreadcrumbLink,
 	BreadcrumbList,
 } from "@/components/ui/breadcrumb";
-import { Separator } from "@/components/ui/separator";
-import { Moon, Sun, Monitor, PanelsTopLeft } from "lucide-react";
+import { Moon, Sun, Monitor } from "lucide-react";
 import { useEffect, useState } from "react";
 
 interface HeaderProps {
 	activeTab: string;
-	showSidebar: boolean;
-	setShowSidebar: (show: boolean) => void;
 	themeMode: "light" | "dark" | "system";
 	setThemeMode: (mode: "light" | "dark" | "system") => void;
 }
 
 type ThemeMode = "light" | "dark" | "system";
 
-const Header = ({
-	activeTab,
-	showSidebar,
-	setShowSidebar,
-	themeMode,
-	setThemeMode,
-}: HeaderProps) => {
+const Header = ({ activeTab, themeMode, setThemeMode }: HeaderProps) => {
 	const [mode, setMode] = useState<ThemeMode>(() => {
 		// First prioritize the prop value from parent
 		if (themeMode) {
@@ -75,70 +66,58 @@ const Header = ({
 	return (
 		<header className="bg-white dark:bg-gray-800 shadow-sm">
 			<div className="mx-auto px-4 sm:px-6 lg:px-8 py-4">
-				<div className="flex flex-col space-y-2">
-					<div className="flex justify-between items-center">
-						<div className="flex items-center gap-2">
+				<div className="flex justify-between items-center">
+					<Breadcrumb>
+						<BreadcrumbList>
+							<BreadcrumbItem>
+								<BreadcrumbLink href="/">
+									<h1 className="text-xl font-bold text-gray-900 dark:text-white">
+										{formatTabName(activeTab)}
+									</h1>
+								</BreadcrumbLink>
+							</BreadcrumbItem>
+						</BreadcrumbList>
+					</Breadcrumb>
+
+					<div className="flex items-center gap-4">
+						{/* Theme Toggle Group */}
+						<div className="bg-gray-100 dark:bg-gray-700 rounded-lg p-1 flex items-center">
 							<button
 								type="button"
-								onClick={() => setShowSidebar(!showSidebar)}
-								className="p-0 -ml-1 mr-4 rounded-md text-gray-400 hover:text-gray-500 dark:hover:text-gray-300"
+								className={`p-2 rounded-md transition-colors ${
+									mode === "light"
+										? "bg-teal-500 text-white shadow-sm"
+										: "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+								}`}
+								onClick={() => handleModeChange("light")}
+								aria-label="Light mode"
 							>
-								<PanelsTopLeft className="h-5 w-5 transform transition-transform" />
+								<Sun className="h-4 w-4" />
 							</button>
-							<Separator orientation="vertical" />
-							<Breadcrumb>
-								<BreadcrumbList>
-									<BreadcrumbItem>
-										<BreadcrumbLink href="/">
-											<h1 className="text-xl font-bold text-gray-900 dark:text-white">
-												{formatTabName(activeTab)}
-											</h1>
-										</BreadcrumbLink>
-									</BreadcrumbItem>
-								</BreadcrumbList>
-							</Breadcrumb>
-						</div>
-
-						<div className="flex items-center gap-4">
-							{/* Theme Toggle Group */}
-							<div className="bg-gray-100 dark:bg-gray-700 rounded-lg p-1 flex items-center">
-								<button
-									type="button"
-									className={`p-2 rounded-md transition-colors ${
-										mode === "light"
-											? "bg-teal-500 text-white shadow-sm"
-											: "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
-									}`}
-									onClick={() => handleModeChange("light")}
-									aria-label="Light mode"
-								>
-									<Sun className="h-4 w-4" />
-								</button>
-								<button
-									type="button"
-									className={`p-2 rounded-md transition-colors ${
-										mode === "dark"
-											? "bg-teal-500 text-white shadow-sm"
-											: "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
-									}`}
-									onClick={() => handleModeChange("dark")}
-									aria-label="Dark mode"
-								>
-									<Moon className="h-4 w-4" />
-								</button>
-								<button
-									type="button"
-									className={`p-2 rounded-md transition-colors ${
-										mode === "system"
-											? "bg-teal-500 text-white shadow-sm"
-											: "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
-									}`}
-									onClick={() => handleModeChange("system")}
-									aria-label="System theme"
-								>
-									<Monitor className="h-4 w-4" />
-								</button>
-							</div>
+							<button
+								type="button"
+								className={`p-2 rounded-md transition-colors ${
+									mode === "dark"
+										? "bg-teal-500 text-white shadow-sm"
+										: "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+								}`}
+								onClick={() => handleModeChange("dark")}
+								aria-label="Dark mode"
+							>
+								<Moon className="h-4 w-4" />
+							</button>
+							<button
+								type="button"
+								className={`p-2 rounded-md transition-colors ${
+									mode === "system"
+										? "bg-teal-500 text-white shadow-sm"
+										: "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+								}`}
+								onClick={() => handleModeChange("system")}
+								aria-label="System theme"
+							>
+								<Monitor className="h-4 w-4" />
+							</button>
 						</div>
 					</div>
 				</div>

@@ -1,13 +1,6 @@
 import { useMemo, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import {
-	Calendar,
-	Pencil,
-	Trash2,
-	Activity,
-	Brain,
-	ListPlus,
-} from "lucide-react";
+import { Calendar, Pencil, Trash2, ListPlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 import type { AssessmentRun } from "../../types/assessmentRun";
@@ -117,18 +110,6 @@ const AssessmentRunCard = ({
 							<span className="text-gray-900 dark:text-white">
 								Assigned Assessments ({assignedAssessments.length})
 							</span>
-							{cognitiveCount > 0 && (
-								<span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-teal-50 text-teal-700 dark:bg-teal-900/30 dark:text-teal-400">
-									<Brain className="h-3 w-3 mr-1" />
-									{cognitiveCount}
-								</span>
-							)}
-							{psychologicalCount > 0 && (
-								<span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-indigo-50 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400">
-									<Activity className="h-3 w-3 mr-1" />
-									{psychologicalCount}
-								</span>
-							)}
 						</div>
 
 						<div className="space-y-2">
@@ -143,12 +124,22 @@ const AssessmentRunCard = ({
 												assessment.type === "cognitive"
 													? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400"
 													: "bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400"
-											}`}
+											} flex items-center justify-center`}
 										>
 											{assessment.type === "cognitive" ? (
-												<Brain className="h-4 w-4" />
+												<span
+													className="material-symbols-outlined"
+													style={{ fontSize: "22px", lineHeight: 1 }}
+												>
+													neurology
+												</span>
 											) : (
-												<Activity className="h-4 w-4" />
+												<span
+													className="material-icons"
+													style={{ fontSize: "22px", lineHeight: 1 }}
+												>
+													psychology
+												</span>
 											)}
 										</div>
 										<div className="ml-3 flex-1 min-w-0">

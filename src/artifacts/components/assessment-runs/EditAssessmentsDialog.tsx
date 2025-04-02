@@ -9,7 +9,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Brain, Activity } from "lucide-react";
 import type { AssessmentRun } from "../../types/assessmentRun";
 import { allAssessments, getAssessmentById } from "../../types/assessment";
 
@@ -47,9 +46,25 @@ function DraggableAssessmentItem({
 		>
 			<div className="flex items-center">
 				{assessment.type === "cognitive" ? (
-					<Brain className="h-4 w-4 mr-2 text-teal-600" />
+					<span
+						className="material-symbols-outlined flex items-center justify-center mr-2 text-teal-600"
+						style={{
+							fontSize: "16px",
+							lineHeight: 1,
+							width: "16px",
+							height: "16px",
+							display: "inline-flex",
+						}}
+					>
+						neurology
+					</span>
 				) : (
-					<Activity className="h-4 w-4 mr-2 text-indigo-600" />
+					<span
+						className="material-icons mr-2 text-indigo-600"
+						style={{ fontSize: "16px", lineHeight: 1 }}
+					>
+						psychology
+					</span>
 				)}
 				<span className="font-medium">{assessment.title}</span>
 			</div>
@@ -224,7 +239,18 @@ const EditAssessmentsDialog = ({
 									{/* Cognitive section */}
 									<div>
 										<h3 className="text-sm font-medium mb-2  flex items-center">
-											<Brain className="h-4 w-4 mr-2 text-teal-600" />
+											<span
+												className="material-symbols-outlined flex items-center justify-center mr-2 text-teal-600"
+												style={{
+													fontSize: "16px",
+													lineHeight: 1,
+													width: "16px",
+													height: "16px",
+													display: "inline-flex",
+												}}
+											>
+												neurology
+											</span>
 											Cognitive ({assignedCognitiveAssessments.length})
 										</h3>
 										<div className="space-y-2">
@@ -246,7 +272,12 @@ const EditAssessmentsDialog = ({
 									{/* Psychological section */}
 									<div className="mt-4">
 										<h3 className="text-sm font-medium mb-2  flex items-center">
-											<Activity className="h-4 w-4 mr-2 text-indigo-600" />
+											<span
+												className="material-icons h-4 w-4 mr-2 text-indigo-600"
+												style={{ fontSize: "16px", lineHeight: 1 }}
+											>
+												psychology
+											</span>
 											Psychological ({assignedPsychologicalAssessments.length})
 										</h3>
 										<div className="space-y-2">
@@ -283,8 +314,19 @@ const EditAssessmentsDialog = ({
 								>
 									{/* Cognitive section */}
 									<div>
-										<h3 className="text-sm font-medium mb-2  flex items-center">
-											<Brain className="h-4 w-4 mr-2 text-teal-600" />
+										<h3 className="text-sm font-medium mb-2 flex items-center">
+											<span
+												className="material-symbols-outlined flex items-center justify-center mr-2 text-teal-600"
+												style={{
+													fontSize: "16px",
+													lineHeight: 1,
+													width: "16px",
+													height: "16px",
+													display: "inline-flex",
+												}}
+											>
+												neurology
+											</span>
 											Cognitive ({availableCognitiveAssessments.length})
 										</h3>
 										<div className="space-y-2">
@@ -306,7 +348,12 @@ const EditAssessmentsDialog = ({
 									{/* Psychological section */}
 									<div className="mt-4">
 										<h3 className="text-sm font-medium mb-2  flex items-center">
-											<Activity className="h-4 w-4 mr-2 text-indigo-600" />
+											<span
+												className="material-icons h-4 w-4 mr-2 text-indigo-600"
+												style={{ fontSize: "16px", lineHeight: 1 }}
+											>
+												psychology
+											</span>
 											Psychological ({availablePsychologicalAssessments.length})
 										</h3>
 										<div className="space-y-2">

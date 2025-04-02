@@ -1,10 +1,4 @@
-import {
-	Brain,
-	Activity,
-	FileText,
-	Dumbbell,
-	ChevronRight,
-} from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import {
 	Card,
 	CardHeader,
@@ -80,7 +74,12 @@ const Dashboard = ({
 							<h3 className="text-2xl font-bold text-white">Psychological</h3>
 							<p className="text-white/80 text-sm">Assessment</p>
 						</div>
-						<Activity className="absolute top-4 right-4 h-8 w-8 text-white/80" />
+						<span
+							className="material-icons absolute top-4 right-4 h-8 w-8 text-white/80"
+							style={{ fontSize: "32px" }}
+						>
+							psychology
+						</span>
 					</div>
 					<CardContent className="p-6">
 						<p className="text-gray-600 dark:text-gray-300 text-sm mb-6">
@@ -126,7 +125,12 @@ const Dashboard = ({
 							<h3 className="text-2xl font-bold text-white">Cognitive</h3>
 							<p className="text-white/80 text-sm">Assessment</p>
 						</div>
-						<Brain className="absolute top-4 right-4 h-8 w-8 text-white/80" />
+						<span
+							className="material-symbols-outlined absolute top-4 right-4 h-8 w-8 text-white/80"
+							style={{ fontSize: "32px" }}
+						>
+							neurology
+						</span>
 					</div>
 					<CardContent className="p-6">
 						<p className="text-gray-600 dark:text-gray-300 text-sm mb-6">
@@ -163,7 +167,20 @@ const Dashboard = ({
 						<CardTitle className="text-lg font-semibold text-gray-900 dark:text-white">
 							Physical Training Results
 						</CardTitle>
-						<Dumbbell className="h-6 w-6 text-gray-400 dark:text-gray-500" />
+						<span
+							className="material-symbols-outlined text-gray-400 dark:text-gray-500"
+							style={{
+								fontSize: "24px",
+								lineHeight: 1,
+								width: "24px",
+								height: "24px",
+								display: "inline-flex",
+								alignItems: "center",
+								justifyContent: "center",
+							}}
+						>
+							exercise
+						</span>
 					</div>
 				</CardHeader>
 				<CardContent className="p-6">
@@ -173,13 +190,58 @@ const Dashboard = ({
 								key={assessment.id}
 								className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 flex justify-between items-center"
 							>
-								<div>
-									<h4 className="text-sm font-medium text-gray-900 dark:text-white">
-										{assessment.title}
-									</h4>
-									<p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-										{assessment.date}
-									</p>
+								<div className="flex items-center">
+									{/* Add appropriate icon based on assessment id */}
+									{assessment.id === "cardio" && (
+										<span
+											className="material-symbols-outlined mr-2 text-teal-600 dark:text-teal-400"
+											style={{
+												fontSize: "20px",
+												lineHeight: 1,
+												display: "inline-flex",
+												alignItems: "center",
+												justifyContent: "center",
+											}}
+										>
+											cardiology
+										</span>
+									)}
+									{assessment.id === "strength" && (
+										<span
+											className="material-symbols-outlined mr-2 text-teal-600 dark:text-teal-400"
+											style={{
+												fontSize: "20px",
+												lineHeight: 1,
+												display: "inline-flex",
+												alignItems: "center",
+												justifyContent: "center",
+											}}
+										>
+											exercise
+										</span>
+									)}
+									{assessment.id === "ippt" && (
+										<span
+											className="material-symbols-outlined mr-2 text-teal-600 dark:text-teal-400"
+											style={{
+												fontSize: "20px",
+												lineHeight: 1,
+												display: "inline-flex",
+												alignItems: "center",
+												justifyContent: "center",
+											}}
+										>
+											directions_run
+										</span>
+									)}
+									<div>
+										<h4 className="text-sm font-medium text-gray-900 dark:text-white">
+											{assessment.title}
+										</h4>
+										<p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+											{assessment.date}
+										</p>
+									</div>
 								</div>
 								<div className="flex items-center">
 									<Badge
@@ -194,7 +256,18 @@ const Dashboard = ({
 										onClick={() => viewReport(assessment.id)}
 										className="p-1 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300"
 									>
-										<FileText className="h-4 w-4" />
+										<span
+											className="material-symbols-outlined"
+											style={{
+												fontSize: "16px",
+												lineHeight: 1,
+												display: "inline-flex",
+												alignItems: "center",
+												justifyContent: "center",
+											}}
+										>
+											description
+										</span>
 									</Button>
 								</div>
 							</div>

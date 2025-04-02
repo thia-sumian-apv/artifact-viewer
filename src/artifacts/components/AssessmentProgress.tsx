@@ -1,4 +1,4 @@
-import { Brain, Activity, Dumbbell, FileText } from "lucide-react";
+import { FileText } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
@@ -42,7 +42,14 @@ const AssessmentProgress = ({
 										{getPhysicalProgress().count}/3
 									</p>
 								</div>
-								<Dumbbell className="h-6 w-6 text-white/80" />
+								<span
+									className="material-symbols-outlined"
+									style={{
+										fontSize: "24px",
+									}}
+								>
+									exercise
+								</span>{" "}
 							</div>
 							<div className="mt-2">
 								<Progress
@@ -62,7 +69,9 @@ const AssessmentProgress = ({
 										{psychologicalProgress.count}/3
 									</p>
 								</div>
-								<Activity className="h-6 w-6 text-white/80" />
+								<span className="material-icons" style={{ fontSize: "24px" }}>
+									psychology
+								</span>
 							</div>
 							<div className="mt-2">
 								<Progress
@@ -82,7 +91,14 @@ const AssessmentProgress = ({
 										{cognitiveProgress.count}/3
 									</p>
 								</div>
-								<Brain className="h-6 w-6 text-white/80" />
+								<span
+									className="material-symbols-outlined"
+									style={{
+										fontSize: "24px",
+									}}
+								>
+									neurology
+								</span>
 							</div>
 							<div className="mt-2">
 								<Progress

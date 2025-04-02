@@ -9,7 +9,6 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { Dumbbell } from "lucide-react";
 import {
 	Bar,
 	XAxis,
@@ -176,7 +175,18 @@ const PhysicalMetricsDistribution: React.FC<
 					<p className="text-white/80 text-sm">Course Performance</p>
 				</div>
 				<div className="absolute top-4 right-4">
-					<Dumbbell className="h-8 w-8 text-white/80" />
+					<span
+						className="material-symbols-outlined flex items-center justify-center text-white/80"
+						style={{
+							fontSize: "32px",
+							lineHeight: 1,
+							width: "32px",
+							height: "32px",
+							display: "inline-flex",
+						}}
+					>
+						exercise
+					</span>
 				</div>
 			</div>
 

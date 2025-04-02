@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { Brain } from "lucide-react";
 import {
 	ResponsiveContainer,
 	RadarChart,
@@ -149,7 +148,18 @@ const ML360ProfilesRadar: React.FC<ML360ProfilesRadarProps> = ({
 						<p className="text-white/80 text-sm">Mindfulness dimensions</p>
 					</div>
 					<div className="absolute top-4 right-4">
-						<Brain className="h-8 w-8 text-white/80" />
+						<span
+							className="material-symbols-outlined flex items-center justify-center text-white/80"
+							style={{
+								fontSize: "32px",
+								lineHeight: 1,
+								width: "32px",
+								height: "32px",
+								display: "inline-flex",
+							}}
+						>
+							neurology
+						</span>
 					</div>
 				</div>
 			</CardHeader>
