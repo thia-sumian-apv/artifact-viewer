@@ -12,6 +12,8 @@ import {
 	Pencil,
 	Eye,
 	Trash2,
+	CheckCircle2,
+	XCircle,
 } from "lucide-react";
 import {
 	Table,
@@ -38,6 +40,14 @@ import { EditUserDialog, type userFormSchema } from "./users/EditUserDialog";
 import type { z } from "zod";
 import { dummyCourseData } from "../mocks/courseData";
 import { AddUserDialog } from "./users/AddUserDialog";
+import {
+	DropdownMenu,
+	DropdownMenuTrigger,
+	DropdownMenuContent,
+	DropdownMenuLabel,
+	DropdownMenuItem,
+	DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
 
 const UserRoleLabels: Record<UserRole, string> = {
 	superAdmin: "Super Admin",
@@ -73,8 +83,42 @@ const UsersTab = () => {
 			searchInputRef.current.focus();
 		}
 	}, [isSearchExpanded]);
+	const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
+	const handleSelectAll = () => {
+		if (selectedUsers.length === paginatedUsers.length) {
+			setSelectedUsers([]);
+		} else {
+			setSelectedUsers(paginatedUsers.map((user) => user.id));
+		}
+	};
 
-	const [selectedRoles, setSelectedRoles] = useState<UserRole[]>([]);
+	// Handle single user selection
+	const handleSelectUser = (userId: string) => {
+		if (selectedUsers.includes(userId)) {
+			setSelectedUsers(selectedUsers.filter((id) => id !== userId));
+		} else {
+			setSelectedUsers([...selectedUsers, userId]);
+		}
+	};
+
+	// Mass action handlers
+	const handleMassEnable = () => {
+		console.log("Mass enable users:", selectedUsers);
+		// Implement your enable logic here
+		setSelectedUsers([]);
+	};
+
+	const handleMassDisable = () => {
+		console.log("Mass disable users:", selectedUsers);
+		// Implement your disable logic here
+		setSelectedUsers([]);
+	};
+
+	const handleMassDelete = () => {
+		console.log("Mass delete users:", selectedUsers);
+		// Implement your delete logic here
+		setSelectedUsers([]);
+	};
 	const [sortConfig, setSortConfig] = useState<{
 		key: string;
 		direction: "ascending" | "descending";
@@ -88,7 +132,13 @@ const UsersTab = () => {
 	const [addDialogOpen, setAddDialogOpen] = useState(false);
 
 	const [currentPage, setCurrentPage] = useState(1);
-	const itemsPerPage = 10;
+	const [itemsPerPage, setItemsPerPage] = useState(10);
+	const itemsPerPageOptions = [10, 25, 50, 100];
+
+	const handleItemsPerPageChange = (value: number) => {
+		setItemsPerPage(value);
+		setCurrentPage(1);
+	};
 
 	// Add handler for new user
 	const handleAddUser = (values: z.infer<typeof userFormSchema>) => {
@@ -119,14 +169,6 @@ const UsersTab = () => {
 		courseCommander: "secondary",
 		courseTrainer: "outline",
 		trainee: "secondary",
-	};
-
-	const toggleRole = (role: UserRole) => {
-		if (selectedRoles.includes(role)) {
-			setSelectedRoles(selectedRoles.filter((r) => r !== role));
-		} else {
-			setSelectedRoles([...selectedRoles, role]);
-		}
 	};
 
 	// Associate users with company names
@@ -230,14 +272,16 @@ const UsersTab = () => {
 				.toLowerCase()
 				.includes(searchQuery.toLowerCase()) ||
 			user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-			user.companyName.toLowerCase().includes(searchQuery.toLowerCase());
+			user.companyName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+			// Add role search - search both the role key and the human-readable label
+			user.role
+				.toLowerCase()
+				.includes(searchQuery.toLowerCase()) ||
+			UserRoleLabels[user.role as UserRole]
+				.toLowerCase()
+				.includes(searchQuery.toLowerCase());
 
-		// Apply role filter
-		const roleMatch =
-			selectedRoles.length === 0 ||
-			selectedRoles.includes(user.role as UserRole);
-
-		return searchMatch && roleMatch;
+		return searchMatch;
 	});
 
 	const paginatedUsers = filteredUsers.slice(
@@ -308,6 +352,11 @@ const UsersTab = () => {
 				<div className="space-y-6">
 					<div className="flex justify-between items-center">
 						<h2 className="text-2xl font-bold">User Management</h2>
+						{selectedUsers.length > 0 && (
+							<Badge variant="outline" className="ml-2 px-2 py-1">
+								{selectedUsers.length} selected
+							</Badge>
+						)}
 						<div className="flex items-center gap-2">
 							<div
 								className={`relative transition-all duration-300 ease-in-out ${isSearchExpanded ? "w-64" : "w-8"}`}
@@ -317,7 +366,7 @@ const UsersTab = () => {
 										<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400 h-4 w-4" />
 										<Input
 											ref={searchInputRef}
-											placeholder="Search users..."
+											placeholder="Search name, email, role, company..."
 											value={searchQuery}
 											onChange={(e) => setSearchQuery(e.target.value)}
 											className="pl-9 h-9 text-sm w-full"
@@ -343,65 +392,101 @@ const UsersTab = () => {
 							>
 								Add New User
 							</Button>
-							<Button
-								variant="outline"
-								size="sm"
-								className="flex items-center gap-1"
-							>
-								<Upload className="h-4 w-4" />
-								Import
-							</Button>
-							<Button
-								variant="outline"
-								size="sm"
-								className="flex items-center gap-1"
-							>
-								<Download className="h-4 w-4" />
-								Export
-							</Button>
+							<DropdownMenu>
+								<DropdownMenuTrigger asChild>
+									<Button
+										variant="outline"
+										size="sm"
+										className={`flex items-center gap-1 ${
+											selectedUsers.length > 0
+												? "border-blue-500 text-blue-600 dark:border-blue-400 dark:text-blue-400"
+												: ""
+										}`}
+									>
+										{selectedUsers.length > 0 ? (
+											<>Bulk Actions</>
+										) : (
+											<>Actions</>
+										)}
+									</Button>
+								</DropdownMenuTrigger>
+								<DropdownMenuContent align="end" className="w-48">
+									{selectedUsers.length > 0 && (
+										<>
+											<DropdownMenuLabel>Selected Users</DropdownMenuLabel>
+											<DropdownMenuItem
+												onClick={handleMassEnable}
+												className="text-green-600 dark:text-green-400 focus:text-green-700 focus:bg-green-50 dark:focus:bg-green-900/20"
+											>
+												<CheckCircle2 className="h-4 w-4 mr-2" />
+												Enable
+											</DropdownMenuItem>
+											<DropdownMenuItem
+												onClick={handleMassDisable}
+												className="text-yellow-600 dark:text-yellow-400 focus:text-yellow-700 focus:bg-yellow-50 dark:focus:bg-yellow-900/20"
+											>
+												<XCircle className="h-4 w-4 mr-2" />
+												Disable
+											</DropdownMenuItem>
+											<DropdownMenuItem
+												onClick={handleMassDelete}
+												className="text-red-600 dark:text-red-400 focus:text-red-700 focus:bg-red-50 dark:focus:bg-red-900/20"
+											>
+												<Trash2 className="h-4 w-4 mr-2" />
+												Delete
+											</DropdownMenuItem>
+											<DropdownMenuItem onClick={() => setSelectedUsers([])}>
+												Clear Selection ({selectedUsers.length})
+											</DropdownMenuItem>
+											<DropdownMenuSeparator />
+										</>
+									)}
+									<DropdownMenuLabel>Import/Export</DropdownMenuLabel>
+									<DropdownMenuItem>
+										<Upload className="h-4 w-4 mr-2" />
+										Import Users
+									</DropdownMenuItem>
+									<DropdownMenuItem>
+										<Download className="h-4 w-4 mr-2" />
+										Export Users
+									</DropdownMenuItem>
+								</DropdownMenuContent>
+							</DropdownMenu>
 						</div>
 					</div>
-					<div className="flex flex-wrap gap-2 items-center">
-						<div className="text-sm font-medium text-gray-700 dark:text-gray-300 mr-1">
-							Filter by role:
-						</div>
-						{roles.map((role) => (
-							<Badge
-								key={role}
-								variant={
-									selectedRoles.includes(role)
-										? (roleBadgeVariants[role] as
-												| "default"
-												| "destructive"
-												| "outline"
-												| "secondary")
-										: "outline"
-								}
-								className={`px-3 py-1 cursor-pointer ${
-									selectedRoles.includes(role)
-										? ""
-										: "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-								}`}
-								onClick={() => toggleRole(role)}
-							>
-								{UserRoleLabels[role]}
+					{selectedUsers.length > 0 && (
+						<div className="flex items-center">
+							<Badge variant="secondary" className="px-3 py-1.5">
+								{selectedUsers.length} user
+								{selectedUsers.length !== 1 ? "s" : ""} selected
 							</Badge>
-						))}
-						{selectedRoles.length > 0 && (
 							<Button
 								variant="ghost"
 								size="sm"
-								className="h-7 text-xs text-gray-500"
-								onClick={() => setSelectedRoles([])}
+								onClick={() => setSelectedUsers([])}
+								className="ml-2 text-xs text-gray-500 h-7"
 							>
-								Clear All
+								Clear Selection
 							</Button>
-						)}
-					</div>
+						</div>
+					)}
 					<div>
 						<Table>
 							<TableHeader>
 								<TableRow>
+									<TableHead className="w-[40px]">
+										<div className="flex items-center justify-center">
+											<input
+												type="checkbox"
+												checked={
+													paginatedUsers.length > 0 &&
+													selectedUsers.length === paginatedUsers.length
+												}
+												onChange={handleSelectAll}
+												className="rounded border-gray-300 text-primary-600 focus:ring-primary-500 h-4 w-4 cursor-pointer"
+											/>
+										</div>
+									</TableHead>
 									<TableHead className="w-[120px]">
 										<div className="flex justify-between items-center">
 											<span>First Name</span>
@@ -491,6 +576,16 @@ const UsersTab = () => {
 									paginatedUsers.map((user) => (
 										<TableRow key={user.id}>
 											<TableCell>
+												<div className="flex items-center justify-center">
+													<input
+														type="checkbox"
+														checked={selectedUsers.includes(user.id)}
+														onChange={() => handleSelectUser(user.id)}
+														className="rounded border-gray-300 text-primary-600 focus:ring-primary-500 h-4 w-4 cursor-pointer"
+													/>
+												</div>
+											</TableCell>
+											<TableCell>
 												<span className="font-medium">{user.firstName}</span>
 											</TableCell>
 											<TableCell>{user.lastName}</TableCell>
@@ -568,14 +663,32 @@ const UsersTab = () => {
 					</div>
 					{/* Pagination UI */}
 					<div className="flex items-center justify-between mt-4 gap-4">
-						<div className="text-sm text-gray-500 whitespace-nowrap flex-shrink-0">
-							Showing{" "}
-							{Math.min(
-								filteredUsers.length,
-								(currentPage - 1) * itemsPerPage + 1,
-							)}
-							-{Math.min(filteredUsers.length, currentPage * itemsPerPage)} of{" "}
-							{filteredUsers.length}
+						<div className="text-sm text-gray-500 whitespace-nowrap flex-shrink-0 flex items-center gap-2">
+							<span>
+								Showing{" "}
+								{Math.min(
+									filteredUsers.length,
+									(currentPage - 1) * itemsPerPage + 1,
+								)}
+								-{Math.min(filteredUsers.length, currentPage * itemsPerPage)} of{" "}
+								{filteredUsers.length}
+							</span>
+							<div className="flex items-center ml-4">
+								<span className="text-sm text-gray-500 mr-2">Show:</span>
+								<select
+									className="h-8 rounded border border-gray-300 dark:border-gray-600 bg-transparent text-sm"
+									value={itemsPerPage}
+									onChange={(e) =>
+										handleItemsPerPageChange(Number(e.target.value))
+									}
+								>
+									{itemsPerPageOptions.map((option) => (
+										<option key={option} value={option}>
+											{option}
+										</option>
+									))}
+								</select>
+							</div>
 						</div>
 
 						{totalPages > 1 && (
