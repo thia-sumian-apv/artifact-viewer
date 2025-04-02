@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { mockUsers } from "../mocks/userData";
 import { mockCompanyData } from "../mocks/companyData";
+import { mockCohorts, mockSubcohorts } from "../mocks/cohortData";
 import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import {
 	Search,
@@ -12,7 +12,6 @@ import {
 	Pencil,
 	Eye,
 	Trash2,
-	Plus,
 } from "lucide-react";
 import {
 	Table,
@@ -22,6 +21,15 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
+import {
+	Pagination,
+	PaginationContent,
+	PaginationEllipsis,
+	PaginationItem,
+	PaginationLink,
+	PaginationNext,
+	PaginationPrevious,
+} from "@/components/ui/pagination";
 import { Button } from "@/components/ui/button";
 import type { UserRole } from "..";
 import { Card, CardContent } from "@/components/ui/card";
@@ -29,7 +37,6 @@ import { ViewUserDialog } from "./users/ViewUserDialog";
 import { EditUserDialog, type userFormSchema } from "./users/EditUserDialog";
 import type { z } from "zod";
 import { dummyCourseData } from "../mocks/courseData";
-import { mockSubcohorts } from "../mocks/cohortData";
 import { AddUserDialog } from "./users/AddUserDialog";
 
 const UserRoleLabels: Record<UserRole, string> = {
@@ -80,14 +87,8 @@ const UsersTab = () => {
 	const [editDialogOpen, setEditDialogOpen] = useState(false);
 	const [addDialogOpen, setAddDialogOpen] = useState(false);
 
-	const [_deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-	const [_userToDelete, setUserToDelete] = useState<string | null>(null);
-
-	// Add delete handler
-	const handleDelete = (userId: string) => {
-		setUserToDelete(userId);
-		setDeleteDialogOpen(true);
-	};
+	const [currentPage, setCurrentPage] = useState(1);
+	const itemsPerPage = 10;
 
 	// Add handler for new user
 	const handleAddUser = (values: z.infer<typeof userFormSchema>) => {
@@ -131,6 +132,8 @@ const UsersTab = () => {
 	// Associate users with company names
 	const usersWithCompany = mockUsers.map((user) => {
 		let companyName = "System";
+		let cohortName = "-";
+		let subcohortName = "-";
 
 		if ("companyId" in user && user.companyId) {
 			const company = mockCompanyData.find((c) => c.id === user.companyId);
@@ -139,9 +142,23 @@ const UsersTab = () => {
 			}
 		}
 
+		// Get cohort and subcohort info for applicable user roles
+		if ("subcohortId" in user && user.subcohortId) {
+			const subcohort = mockSubcohorts.find((s) => s.id === user.subcohortId);
+			if (subcohort) {
+				subcohortName = subcohort.name;
+				const cohort = mockCohorts.find((c) => c.id === subcohort.cohortId);
+				if (cohort) {
+					cohortName = cohort.name;
+				}
+			}
+		}
+
 		return {
 			...user,
 			companyName,
+			cohortName,
+			subcohortName,
 		};
 	});
 
@@ -167,9 +184,13 @@ const UsersTab = () => {
 		let bValue: string;
 
 		switch (sortConfig.key) {
-			case "name":
-				aValue = `${a.firstName} ${a.lastName}`;
-				bValue = `${b.firstName} ${b.lastName}`;
+			case "firstName":
+				aValue = a.firstName;
+				bValue = b.firstName;
+				break;
+			case "lastName":
+				aValue = a.lastName;
+				bValue = b.lastName;
 				break;
 			case "email":
 				aValue = a.email;
@@ -182,6 +203,14 @@ const UsersTab = () => {
 			case "company":
 				aValue = a.companyName;
 				bValue = b.companyName;
+				break;
+			case "cohort":
+				aValue = a.cohortName;
+				bValue = b.cohortName;
+				break;
+			case "subcohort":
+				aValue = a.subcohortName;
+				bValue = b.subcohortName;
 				break;
 			default:
 				return 0;
@@ -210,6 +239,68 @@ const UsersTab = () => {
 
 		return searchMatch && roleMatch;
 	});
+
+	const paginatedUsers = filteredUsers.slice(
+		(currentPage - 1) * itemsPerPage,
+		currentPage * itemsPerPage,
+	);
+
+	const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
+
+	// Handle page change
+	const handlePageChange = (page: number) => {
+		setCurrentPage(page);
+	};
+
+	// Generate page numbers to display
+	const getPageNumbers = () => {
+		const pages = [];
+		const maxPagesToShow = 5; // Show at most 5 page numbers
+
+		if (totalPages <= maxPagesToShow) {
+			// If total pages is less than max to show, display all pages
+			for (let i = 1; i <= totalPages; i++) {
+				pages.push(i);
+			}
+		} else {
+			// Always show first page
+			pages.push(1);
+
+			// Calculate start and end page numbers
+			let startPage = Math.max(2, currentPage - 1);
+			let endPage = Math.min(totalPages - 1, currentPage + 1);
+
+			// Adjust if we're near the beginning
+			if (currentPage <= 3) {
+				endPage = 4;
+			}
+
+			// Adjust if we're near the end
+			if (currentPage >= totalPages - 2) {
+				startPage = totalPages - 3;
+			}
+
+			// Add ellipsis after first page if needed
+			if (startPage > 2) {
+				pages.push("ellipsis-start");
+			}
+
+			// Add middle pages
+			for (let i = startPage; i <= endPage; i++) {
+				pages.push(i);
+			}
+
+			// Add ellipsis before last page if needed
+			if (endPage < totalPages - 1) {
+				pages.push("ellipsis-end");
+			}
+
+			// Always show last page
+			pages.push(totalPages);
+		}
+
+		return pages;
+	};
 
 	return (
 		<Card className="bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700">
@@ -250,8 +341,7 @@ const UsersTab = () => {
 								className="flex items-center gap-1"
 								onClick={() => setAddDialogOpen(true)}
 							>
-								<Plus className="h-4 w-4" />
-								Add User
+								Add New User
 							</Button>
 							<Button
 								variant="outline"
@@ -312,12 +402,24 @@ const UsersTab = () => {
 						<Table>
 							<TableHeader>
 								<TableRow>
-									<TableHead className="w-[250px]">
+									<TableHead className="w-[120px]">
 										<div className="flex justify-between items-center">
-											<span>Name</span>
+											<span>First Name</span>
 											<Button
 												variant="ghost"
-												onClick={() => requestSort("name")}
+												onClick={() => requestSort("firstName")}
+												className="ml-2 h-8 w-8 p-0"
+											>
+												<ArrowUpDown className="h-4 w-4" />
+											</Button>
+										</div>
+									</TableHead>
+									<TableHead className="w-[120px]">
+										<div className="flex justify-between items-center">
+											<span>Last Name</span>
+											<Button
+												variant="ghost"
+												onClick={() => requestSort("lastName")}
 												className="ml-2 h-8 w-8 p-0"
 											>
 												<ArrowUpDown className="h-4 w-4" />
@@ -336,7 +438,7 @@ const UsersTab = () => {
 											</Button>
 										</div>
 									</TableHead>
-									<TableHead>
+									<TableHead className="w-[120px]">
 										<div className="flex justify-between items-center">
 											<span>Role</span>
 											<Button
@@ -360,34 +462,38 @@ const UsersTab = () => {
 											</Button>
 										</div>
 									</TableHead>
+									<TableHead className="w-[160px]">
+										<div className="flex justify-between items-center">
+											<div className="text-xs">
+												<div className="font-medium">Cohort</div>
+												<div className="text-gray-500">Subcohort</div>
+											</div>
+											<Button
+												variant="ghost"
+												onClick={() => requestSort("cohort")}
+												className="ml-2 h-8 w-8 p-0"
+											>
+												<ArrowUpDown className="h-4 w-4" />
+											</Button>
+										</div>
+									</TableHead>
 									<TableHead className="text-right">Actions</TableHead>
 								</TableRow>
 							</TableHeader>
 							<TableBody>
-								{filteredUsers.length === 0 ? (
+								{paginatedUsers.length === 0 ? (
 									<TableRow>
-										<TableCell colSpan={5} className="h-24 text-center">
+										<TableCell colSpan={8} className="h-24 text-center">
 											No users found.
 										</TableCell>
 									</TableRow>
 								) : (
-									filteredUsers.map((user) => (
+									paginatedUsers.map((user) => (
 										<TableRow key={user.id}>
-											<TableCell className="flex items-center gap-3">
-												<Avatar className="h-8 w-8">
-													<AvatarImage
-														src=""
-														alt={`${user.firstName} ${user.lastName}`}
-													/>
-													<AvatarFallback className="bg-teal-100 dark:bg-teal-900 text-teal-500 dark:text-teal-300 text-xs">
-														{user.firstName[0]}
-														{user.lastName[0]}
-													</AvatarFallback>
-												</Avatar>
-												<span className="font-medium">
-													{user.firstName} {user.lastName}
-												</span>
+											<TableCell>
+												<span className="font-medium">{user.firstName}</span>
 											</TableCell>
+											<TableCell>{user.lastName}</TableCell>
 											<TableCell>{user.email}</TableCell>
 											<TableCell>
 												<Badge
@@ -404,7 +510,21 @@ const UsersTab = () => {
 												</Badge>
 											</TableCell>
 											<TableCell>{user.companyName}</TableCell>
-											<TableCell className="text-right">
+											<TableCell>
+												{user.cohortName !== "-" ? (
+													<div className="text-xs">
+														<div className="font-medium">{user.cohortName}</div>
+														{user.subcohortName !== "-" && (
+															<div className="text-gray-500">
+																{user.subcohortName}
+															</div>
+														)}
+													</div>
+												) : (
+													<span className="text-gray-400 text-sm">-</span>
+												)}
+											</TableCell>
+											<TableCell>
 												<div className="flex justify-end gap-1">
 													<Button
 														variant="ghost"
@@ -431,7 +551,9 @@ const UsersTab = () => {
 													<Button
 														variant="ghost"
 														size="icon"
-														onClick={() => handleDelete(user.id)}
+														onClick={() =>
+															console.log("Delete clicked", user.id)
+														}
 														className="h-8 w-8 text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
 													>
 														<Trash2 className="h-4 w-4" />
@@ -444,9 +566,67 @@ const UsersTab = () => {
 							</TableBody>
 						</Table>
 					</div>
+					{/* Pagination UI */}
+					<div className="flex items-center justify-between mt-4 gap-4">
+						<div className="text-sm text-gray-500 whitespace-nowrap flex-shrink-0">
+							Showing{" "}
+							{Math.min(
+								filteredUsers.length,
+								(currentPage - 1) * itemsPerPage + 1,
+							)}
+							-{Math.min(filteredUsers.length, currentPage * itemsPerPage)} of{" "}
+							{filteredUsers.length}
+						</div>
 
-					<div className="text-sm text-gray-500">
-						Total users: {filteredUsers.length}
+						{totalPages > 1 && (
+							<Pagination className="flex-grow flex justify-end">
+								<PaginationContent>
+									<PaginationItem>
+										<PaginationPrevious
+											onClick={() =>
+												handlePageChange(Math.max(1, currentPage - 1))
+											}
+											className={
+												currentPage === 1
+													? "pointer-events-none opacity-50"
+													: "cursor-pointer"
+											}
+										/>
+									</PaginationItem>
+
+									{getPageNumbers().map((page) => (
+										<PaginationItem
+											key={typeof page === "number" ? `page-${page}` : page}
+										>
+											{page === "ellipsis-start" || page === "ellipsis-end" ? (
+												<PaginationEllipsis />
+											) : (
+												<PaginationLink
+													isActive={page === currentPage}
+													onClick={() => handlePageChange(page as number)}
+													className="cursor-pointer"
+												>
+													{page}
+												</PaginationLink>
+											)}
+										</PaginationItem>
+									))}
+
+									<PaginationItem>
+										<PaginationNext
+											onClick={() =>
+												handlePageChange(Math.min(totalPages, currentPage + 1))
+											}
+											className={
+												currentPage === totalPages
+													? "pointer-events-none opacity-50"
+													: "cursor-pointer"
+											}
+										/>
+									</PaginationItem>
+								</PaginationContent>
+							</Pagination>
+						)}
 					</div>
 				</div>
 			</CardContent>
