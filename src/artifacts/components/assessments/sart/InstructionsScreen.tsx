@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ChevronRight, Brain } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 interface InstructionsScreenProps {
 	onContinue: () => void;
@@ -14,7 +14,18 @@ const InstructionsScreen: React.FC<InstructionsScreenProps> = ({
 	return (
 		<div className="max-w-xl mx-auto w-full flex flex-col items-center justify-center">
 			<div className="text-center mb-8">
-				<Brain className="h-12 w-12 mx-auto mb-4 text-teal-500" />
+				<span
+					className="material-symbols-outlined flex items-center justify-center mx-auto mb-4 text-teal-500"
+					style={{
+						fontSize: "48px",
+						lineHeight: 1,
+						width: "48px",
+						height: "48px",
+						display: "inline-flex",
+					}}
+				>
+					neurology
+				</span>
 				<h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
 					Sustained Attention Response Assessment
 				</h1>

@@ -8,7 +8,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Progress } from "@/components/ui/progress";
-import { Brain, Activity, Dumbbell, Calendar, Users } from "lucide-react";
+import { Calendar, Users } from "lucide-react";
 
 // Only require minimal props now - the component handles its own data
 interface CompanyAssessmentProgressProps {
@@ -235,7 +235,12 @@ const CompanyAssessmentProgress: React.FC<CompanyAssessmentProgressProps> = ({
 									<h4 className="text-sm font-medium text-white">
 										Physical Assessment
 									</h4>
-									<Dumbbell className="h-5 w-5 text-white/80" />
+									<span
+										className="material-symbols-outlined"
+										style={{ fontSize: "24px", lineHeight: 1 }}
+									>
+										exercise
+									</span>{" "}
 								</div>
 
 								<div className="flex items-center justify-between mb-1.5">
@@ -266,7 +271,12 @@ const CompanyAssessmentProgress: React.FC<CompanyAssessmentProgressProps> = ({
 									<h4 className="text-sm font-medium text-white">
 										Psychological Assessment
 									</h4>
-									<Activity className="h-5 w-5 text-white/80" />
+									<span
+										className="material-icons"
+										style={{ fontSize: "24px", lineHeight: 1 }}
+									>
+										psychology
+									</span>
 								</div>
 
 								<div className="flex items-center justify-between mb-1.5">
@@ -297,7 +307,12 @@ const CompanyAssessmentProgress: React.FC<CompanyAssessmentProgressProps> = ({
 									<h4 className="text-sm font-medium text-white">
 										Cognitive Assessment
 									</h4>
-									<Brain className="h-5 w-5 text-white/80" />
+									<span
+										className="material-symbols-outlined"
+										style={{ fontSize: "24px", lineHeight: 1 }}
+									>
+										neurology
+									</span>
 								</div>
 
 								<div className="flex items-center justify-between mb-1.5">
@@ -366,7 +381,12 @@ const CompanyAssessmentProgress: React.FC<CompanyAssessmentProgressProps> = ({
 										Physical
 									</div>
 									<div className="flex items-center justify-center space-x-1 mt-1">
-										<Dumbbell className="h-3 w-3 text-purple-500" />
+										<span
+											className="material-symbols-outlined  text-purple-500"
+											style={{ fontSize: "16px", lineHeight: 1 }}
+										>
+											exercise
+										</span>
 										<span className="text-xs font-semibold">
 											{progress.physical.percentage}%
 										</span>
@@ -377,7 +397,12 @@ const CompanyAssessmentProgress: React.FC<CompanyAssessmentProgressProps> = ({
 										Psychological
 									</div>
 									<div className="flex items-center justify-center space-x-1 mt-1">
-										<Activity className="h-3 w-3 text-blue-500" />
+										<span
+											className="material-icons  text-blue-500"
+											style={{ fontSize: "16px", lineHeight: 1 }}
+										>
+											psychology
+										</span>
 										<span className="text-xs font-semibold">
 											{progress.psychological.percentage}%
 										</span>
@@ -388,7 +413,12 @@ const CompanyAssessmentProgress: React.FC<CompanyAssessmentProgressProps> = ({
 										Cognitive
 									</div>
 									<div className="flex items-center justify-center space-x-1 mt-1">
-										<Brain className="h-3 w-3 text-teal-500" />
+										<span
+											className="material-symbols-outlined  text-teal-500"
+											style={{ fontSize: "16px", lineHeight: 1 }}
+										>
+											neurology
+										</span>
 										<span className="text-xs font-semibold">
 											{progress.cognitive.percentage}%
 										</span>

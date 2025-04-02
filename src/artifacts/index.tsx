@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Brain, Activity, Users, Dumbbell, Award } from "lucide-react";
+import { Users, Award } from "lucide-react";
 import type { Assessment } from "./components/AssessmentCard";
 import Dashboard from "./components/Dashboard";
 import CognitiveTab from "./components/CognitiveTab";
@@ -80,8 +80,21 @@ const NeuroVibesPortal = () => {
 						status: "completed",
 						progress: 100,
 						score: 87,
-						icon: <Brain className="h-6 w-6" />,
-						type: "cognitive", // Add this line
+						icon: (
+							<span
+								className="material-symbols-outlined flex items-center justify-center"
+								style={{
+									fontSize: "24px",
+									lineHeight: 1,
+									width: "24px",
+									height: "24px",
+									display: "inline-flex",
+								}}
+							>
+								neurology
+							</span>
+						),
+						type: "cognitive",
 					},
 					{
 						id: "vrxn",
@@ -91,8 +104,21 @@ const NeuroVibesPortal = () => {
 						duration: "15-20 mins",
 						status: "in_progress",
 						progress: 60,
-						icon: <Activity className="h-6 w-6" />,
-						type: "cognitive", // Add this line
+						icon: (
+							<span
+								className="material-icons flex items-center justify-center"
+								style={{
+									fontSize: "24px",
+									lineHeight: 1,
+									width: "24px",
+									height: "24px",
+									display: "inline-flex",
+								}}
+							>
+								psychology
+							</span>
+						),
+						type: "cognitive",
 					},
 					{
 						id: "spatial",
@@ -102,8 +128,21 @@ const NeuroVibesPortal = () => {
 						duration: "12-15 mins",
 						status: "available",
 						progress: 0,
-						icon: <Brain className="h-6 w-6" />,
-						type: "cognitive", // Add this line
+						icon: (
+							<span
+								className="material-symbols-outlined flex items-center justify-center"
+								style={{
+									fontSize: "24px",
+									lineHeight: 1,
+									width: "24px",
+									height: "24px",
+									display: "inline-flex",
+								}}
+							>
+								neurology
+							</span>
+						),
+						type: "cognitive",
 					},
 					{
 						id: "sart-training",
@@ -113,7 +152,20 @@ const NeuroVibesPortal = () => {
 						duration: "5-10 mins",
 						status: "available",
 						progress: 0,
-						icon: <Brain className="h-6 w-6" />,
+						icon: (
+							<span
+								className="material-symbols-outlined flex items-center justify-center"
+								style={{
+									fontSize: "24px",
+									lineHeight: 1,
+									width: "24px",
+									height: "24px",
+									display: "inline-flex",
+								}}
+							>
+								neurology
+							</span>
+						),
 						type: "cognitive",
 					},
 				],
@@ -150,7 +202,11 @@ const NeuroVibesPortal = () => {
 						duration: "10 mins",
 						status: "available",
 						progress: 0,
-						icon: <Activity className="h-6 w-6" />,
+						icon: (
+							<span className="material-icons" style={{ fontSize: "24px" }}>
+								psychology
+							</span>
+						),
 						type: "psychological",
 					},
 				],
@@ -163,7 +219,20 @@ const NeuroVibesPortal = () => {
 						status: "completed",
 						date: "2 Mar 2025",
 						score: 78,
-						icon: <Dumbbell className="h-6 w-6" />,
+						icon: (
+							<span
+								className="material-symbols-outlined flex items-center justify-center"
+								style={{
+									fontSize: "24px",
+									lineHeight: 1,
+									width: "24px",
+									height: "24px",
+									display: "inline-flex",
+								}}
+							>
+								exercise
+							</span>
+						),
 						type: "physical",
 					},
 					{
@@ -362,13 +431,12 @@ const NeuroVibesPortal = () => {
 
 			{/* Main Content */}
 			<div
-				className={`${showSidebar ? "ml-64" : "ml-20"} flex-1 transition-all duration-300 flex flex-col`}
+				className="flex-1 transition-all duration-300 flex flex-col"
+				style={{ marginLeft: "var(--sidebar-width, 16rem)" }}
 			>
 				{/* Header */}
 				<Header
 					activeTab={activeTab}
-					showSidebar={showSidebar}
-					setShowSidebar={setShowSidebar}
 					themeMode={themeMode}
 					setThemeMode={setThemeMode}
 				/>

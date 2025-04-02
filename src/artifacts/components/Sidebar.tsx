@@ -1,18 +1,3 @@
-import {
-	BarChart2,
-	Dumbbell,
-	Activity,
-	Brain,
-	FileText,
-	User,
-	BookOpen,
-	ClipboardList,
-	ChevronDown,
-	Library,
-	Building2,
-	Users,
-	UserCog,
-} from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
 	DropdownMenu,
@@ -27,19 +12,21 @@ import lightLogo from "../../assets/images/nv-logo-light.png";
 import darkLogo from "../../assets/images/nv-logo-dark.png";
 import logoCollapsed from "../../assets/images/nv-logo-collapsed.png";
 import type { UserRole } from "..";
+import { Button } from "@/components/ui/button";
 
 interface SidebarProps {
+	activeTab: string;
 	showSidebar: boolean;
 	setShowSidebar: (show: boolean) => void;
-	activeTab: string;
 	setActiveTab: (tab: string) => void;
 	userRole?: UserRole;
 	themeMode?: "light" | "dark" | "system";
 }
 
 const Sidebar = ({
-	showSidebar,
 	activeTab,
+	showSidebar,
+	setShowSidebar,
 	setActiveTab,
 	themeMode = "light",
 	userRole = "trainee",
@@ -62,6 +49,13 @@ const Sidebar = ({
 			setCurrentLogo(isDarkMode ? darkLogo : lightLogo);
 		}
 	}, [themeMode]);
+
+	useEffect(() => {
+		document.documentElement.style.setProperty(
+			"--sidebar-width",
+			showSidebar ? "16rem" : "5rem",
+		);
+	}, [showSidebar]);
 
 	// Listen for system theme changes when in system mode
 	useEffect(() => {
@@ -111,22 +105,48 @@ const Sidebar = ({
 		<div
 			className={`${showSidebar ? "w-64" : "w-20"} bg-white dark:bg-gray-800 h-screen shadow-md fixed transition-all duration-300 z-10`}
 		>
-			<div className="p-4 flex justify-center items-center">
+			<div className="p-4 flex items-center justify-between">
 				{showSidebar ? (
-					<div className="w-full h-12 flex-shrink-0">
-						<img
-							src={currentLogo}
-							alt="NeuroVibes Logo"
-							className="w-full h-full object-contain"
-						/>
-					</div>
+					<>
+						<div className="flex-1 max-w-[160px]">
+							<img
+								src={currentLogo}
+								alt="NeuroVibes Logo"
+								className="w-full object-contain h-10"
+							/>
+						</div>
+						<Button
+							variant="ghost"
+							size="sm"
+							onClick={() => setShowSidebar(false)}
+							className="ml-2 p-0 h-8 w-8"
+							aria-label="Collapse sidebar"
+						>
+							<span className="material-symbols-outlined text-gray-500">
+								left_panel_close
+							</span>
+						</Button>
+					</>
 				) : (
-					<div className="w-10 h-10 mx-auto">
-						<img
-							src={logoCollapsed}
-							alt="NeuroVibes Logo"
-							className="w-full h-full object-contain"
-						/>
+					<div className="mx-auto">
+						<div className="mb-2">
+							<img
+								src={logoCollapsed}
+								alt="NeuroVibes Logo"
+								className="w-10 h-10 object-contain"
+							/>
+						</div>
+						<Button
+							variant="ghost"
+							size="sm"
+							onClick={() => setShowSidebar(true)}
+							className="p-0 h-8 w-8 mx-auto"
+							aria-label="Expand sidebar"
+						>
+							<span className="material-symbols-outlined text-gray-500">
+								right_panel_close
+							</span>
+						</Button>
 					</div>
 				)}
 			</div>
@@ -137,7 +157,18 @@ const Sidebar = ({
 						onClick={() => setActiveTab("dashboard")}
 						onKeyDown={(e) => e.key === "Enter" && setActiveTab("dashboard")}
 					>
-						<BarChart2 className="h-5 w-5" />
+						<span
+							className="material-symbols-outlined flex items-center justify-center"
+							style={{
+								fontSize: "20px",
+								lineHeight: 1,
+								width: "20px",
+								height: "20px",
+								display: "inline-flex",
+							}}
+						>
+							dashboard
+						</span>
 						{showSidebar && <span className="ml-3 text-sm">Dashboard</span>}
 					</div>
 				)}
@@ -148,7 +179,18 @@ const Sidebar = ({
 						onClick={() => setActiveTab("companies")}
 						onKeyDown={(e) => e.key === "Enter" && setActiveTab("companies")}
 					>
-						<Building2 className="h-5 w-5" />
+						<span
+							className="material-symbols-outlined flex items-center justify-center"
+							style={{
+								fontSize: "20px",
+								lineHeight: 1,
+								width: "20px",
+								height: "20px",
+								display: "inline-flex",
+							}}
+						>
+							domain
+						</span>
 						{showSidebar && <span className="ml-3 text-sm">Companies</span>}
 					</div>
 				)}
@@ -165,15 +207,36 @@ const Sidebar = ({
 							}
 						>
 							<div className="flex items-center">
-								<UserCog className="h-5 w-5" />
+								<span
+									className="material-symbols-outlined flex items-center justify-center"
+									style={{
+										fontSize: "20px",
+										lineHeight: 1,
+										width: "20px",
+										height: "20px",
+										display: "inline-flex",
+									}}
+								>
+									manage_accounts
+								</span>
 								{showSidebar && (
 									<span className="ml-3 text-sm">User Management</span>
 								)}
 							</div>
 							{showSidebar && (
-								<ChevronDown
-									className={`h-4 w-4 transition-transform ${userMenuOpen ? "transform rotate-180" : ""}`}
-								/>
+								<span
+									className="material-symbols-outlined flex items-center justify-center transition-transform"
+									style={{
+										fontSize: "16px",
+										lineHeight: 1,
+										width: "16px",
+										height: "16px",
+										display: "inline-flex",
+										transform: userMenuOpen ? "rotate(180deg)" : "",
+									}}
+								>
+									expand_more
+								</span>
 							)}
 						</div>
 
@@ -192,7 +255,18 @@ const Sidebar = ({
 									onClick={() => setActiveTab("users")}
 									onKeyDown={(e) => e.key === "Enter" && setActiveTab("users")}
 								>
-									<Users className="h-5 w-5" />
+									<span
+										className="material-symbols-outlined flex items-center justify-center"
+										style={{
+											fontSize: "20px",
+											lineHeight: 1,
+											width: "20px",
+											height: "20px",
+											display: "inline-flex",
+										}}
+									>
+										group
+									</span>
 									<span className="ml-3 text-sm">Users</span>
 								</div>
 
@@ -207,7 +281,18 @@ const Sidebar = ({
 										e.key === "Enter" && setActiveTab("cohorts")
 									}
 								>
-									<ClipboardList className="h-5 w-5" />
+									<span
+										className="material-symbols-outlined flex items-center justify-center"
+										style={{
+											fontSize: "20px",
+											lineHeight: 1,
+											width: "20px",
+											height: "20px",
+											display: "inline-flex",
+										}}
+									>
+										format_list_bulleted
+									</span>
 									<span className="ml-3 text-sm">Cohorts</span>
 								</div>
 							</div>
@@ -231,15 +316,36 @@ const Sidebar = ({
 							}
 						>
 							<div className="flex items-center">
-								<BookOpen className="h-5 w-5" />
+								<span
+									className="material-symbols-outlined flex items-center justify-center"
+									style={{
+										fontSize: "20px",
+										lineHeight: 1,
+										width: "20px",
+										height: "20px",
+										display: "inline-flex",
+									}}
+								>
+									menu_book
+								</span>
 								{showSidebar && (
 									<span className="ml-3 text-sm">Course Management</span>
 								)}
 							</div>
 							{showSidebar && (
-								<ChevronDown
-									className={`h-4 w-4 transition-transform ${courseMenuOpen ? "transform rotate-180" : ""}`}
-								/>
+								<span
+									className="material-symbols-outlined flex items-center justify-center transition-transform"
+									style={{
+										fontSize: "16px",
+										lineHeight: 1,
+										width: "16px",
+										height: "16px",
+										display: "inline-flex",
+										transform: courseMenuOpen ? "rotate(180deg)" : "",
+									}}
+								>
+									expand_more
+								</span>
 							)}
 						</div>
 
@@ -260,7 +366,18 @@ const Sidebar = ({
 										e.key === "Enter" && setActiveTab("courses")
 									}
 								>
-									<Library className="h-5 w-5" />
+									<span
+										className="material-symbols-outlined flex items-center justify-center"
+										style={{
+											fontSize: "20px",
+											lineHeight: 1,
+											width: "20px",
+											height: "20px",
+											display: "inline-flex",
+										}}
+									>
+										local_library
+									</span>
 									<span className="ml-3 text-sm">Courses</span>
 								</div>
 
@@ -275,7 +392,18 @@ const Sidebar = ({
 										e.key === "Enter" && setActiveTab("assessmentRuns")
 									}
 								>
-									<ClipboardList className="h-5 w-5" />
+									<span
+										className="material-symbols-outlined flex items-center justify-center"
+										style={{
+											fontSize: "20px",
+											lineHeight: 1,
+											width: "20px",
+											height: "20px",
+											display: "inline-flex",
+										}}
+									>
+										assignment
+									</span>
 									<span className="ml-3 text-sm">Assessment Runs</span>
 								</div>
 							</div>
@@ -289,7 +417,18 @@ const Sidebar = ({
 						onClick={() => setActiveTab("physical")}
 						onKeyDown={(e) => e.key === "Enter" && setActiveTab("physical")}
 					>
-						<Dumbbell className="h-5 w-5" />
+						<span
+							className="material-symbols-outlined flex items-center justify-center"
+							style={{
+								fontSize: "20px",
+								lineHeight: 1,
+								width: "20px",
+								height: "20px",
+								display: "inline-flex",
+							}}
+						>
+							exercise
+						</span>
 						{showSidebar && <span className="ml-3 text-sm">Physical</span>}
 					</div>
 				)}
@@ -302,7 +441,18 @@ const Sidebar = ({
 							e.key === "Enter" && setActiveTab("psychological")
 						}
 					>
-						<Activity className="h-5 w-5" />
+						<span
+							className="material-icons flex items-center justify-center"
+							style={{
+								fontSize: "20px",
+								lineHeight: 1,
+								width: "20px",
+								height: "20px",
+								display: "inline-flex",
+							}}
+						>
+							psychology
+						</span>
 						{showSidebar && <span className="ml-3 text-sm">Psychological</span>}
 					</div>
 				)}
@@ -313,7 +463,18 @@ const Sidebar = ({
 						onClick={() => setActiveTab("cognitive")}
 						onKeyDown={(e) => e.key === "Enter" && setActiveTab("cognitive")}
 					>
-						<Brain className="h-5 w-5" />
+						<span
+							className="material-symbols-outlined flex items-center justify-center"
+							style={{
+								fontSize: "20px",
+								lineHeight: 1,
+								width: "20px",
+								height: "20px",
+								display: "inline-flex",
+							}}
+						>
+							neurology
+						</span>
 						{showSidebar && <span className="ml-3 text-sm">Cognitive</span>}
 					</div>
 				)}
@@ -324,7 +485,18 @@ const Sidebar = ({
 						onClick={() => setActiveTab("reports")}
 						onKeyDown={(e) => e.key === "Enter" && setActiveTab("reports")}
 					>
-						<FileText className="h-5 w-5" />
+						<span
+							className="material-symbols-outlined flex items-center justify-center"
+							style={{
+								fontSize: "20px",
+								lineHeight: 1,
+								width: "20px",
+								height: "20px",
+								display: "inline-flex",
+							}}
+						>
+							description
+						</span>
 						{showSidebar && <span className="ml-3 text-sm">Reports</span>}
 					</div>
 				)}
@@ -335,7 +507,18 @@ const Sidebar = ({
 						onClick={() => setActiveTab("profile")}
 						onKeyDown={(e) => e.key === "Enter" && setActiveTab("profile")}
 					>
-						<User className="h-5 w-5" />
+						<span
+							className="material-symbols-outlined flex items-center justify-center"
+							style={{
+								fontSize: "20px",
+								lineHeight: 1,
+								width: "20px",
+								height: "20px",
+								display: "inline-flex",
+							}}
+						>
+							person
+						</span>
 						{showSidebar && <span className="ml-3 text-sm">Profile</span>}
 					</div>
 				)}

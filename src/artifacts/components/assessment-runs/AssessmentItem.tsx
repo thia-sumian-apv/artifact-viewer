@@ -1,7 +1,6 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Card, CardContent } from "@/components/ui/card";
-import { Brain, Activity } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Assessment } from "@/artifacts/types/assessment";
 
@@ -36,9 +35,23 @@ const AssessmentItem = ({
 	const getIcon = () => {
 		switch (assessment.type) {
 			case "cognitive":
-				return <Brain className="h-4 w-4 mr-2" />;
+				return (
+					<span
+						className="material-symbols-outlined h-4 w-4 mr-2"
+						style={{ fontSize: "24px" }}
+					>
+						psychology
+					</span>
+				);
 			case "psychological":
-				return <Activity className="h-4 w-4 mr-2" />;
+				return (
+					<span
+						className="material-icons-outlined h-4 w-4 mr-2"
+						style={{ fontSize: "24px" }}
+					>
+						psychology
+					</span>
+				);
 			default:
 				return null;
 		}

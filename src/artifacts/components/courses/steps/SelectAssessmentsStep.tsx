@@ -1,7 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import type { Assessment } from "../../AssessmentCard";
-import { Brain, Activity } from "lucide-react";
 
 const assessmentOptions = {
 	cognitive: [
@@ -68,11 +67,21 @@ function AssessmentItem({
 			<div className="flex items-center justify-between">
 				<div className="flex items-center gap-2">
 					<div className="flex-shrink-0 bg-teal-50 dark:bg-teal-900/30 rounded p-1">
-						<div className="text-teal-600 dark:text-teal-400">
+						<div className="flex items-center justify-center text-teal-600 dark:text-teal-400">
 							{assessment.type === "cognitive" ? (
-								<Brain className="h-4 w-4" />
+								<span
+									className="material-symbols-outlined"
+									style={{ fontSize: "18px", lineHeight: 1 }}
+								>
+									neurology
+								</span>
 							) : (
-								<Activity className="h-4 w-4" />
+								<span
+									className="material-icons"
+									style={{ fontSize: "18px", lineHeight: 1 }}
+								>
+									psychology
+								</span>
 							)}
 						</div>
 					</div>

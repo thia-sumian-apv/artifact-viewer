@@ -19,7 +19,7 @@ import {
 	ComposedChart,
 	Line,
 } from "recharts";
-import { Brain, Eye, Lightbulb } from "lucide-react";
+import { Lightbulb } from "lucide-react";
 
 interface MetricData {
 	histogram: {
@@ -153,28 +153,6 @@ const CognitiveMetricsDistribution: React.FC<
 
 	const kdeData = generateKDEData(histogramData);
 
-	const getMetricIcon = () => {
-		if (selectedCognitiveMetric.includes("Attention"))
-			return <Lightbulb className="h-8 w-8 text-white/80" />;
-		if (selectedCognitiveMetric.includes("Visual"))
-			return <Eye className="h-8 w-8 text-white/80" />;
-		return <Brain className="h-8 w-8 text-white/80" />;
-	};
-
-	const getBarColor = () => {
-		const mean = metricData.stats.mean;
-		if (mean > 95) return "#A78BFA"; // High performance (purple)
-		if (mean > 85) return "#818CF8"; // Average performance (indigo)
-		return "#93C5FD"; // Needs improvement (lighter blue)
-	};
-
-	const getLineColor = () => {
-		const mean = metricData.stats.mean;
-		if (mean > 95) return "#7C3AED"; // Dark purple
-		if (mean > 85) return "#4F46E5"; // Dark indigo
-		return "#2563EB"; // Dark blue
-	};
-
 	return (
 		<Card className="overflow-hidden shadow-lg transform hover:scale-[1.01] transition-all duration-200 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800">
 			<div
@@ -196,7 +174,9 @@ const CognitiveMetricsDistribution: React.FC<
 					<h3 className="text-2xl font-bold text-white">Cognitive Metrics</h3>
 					<p className="text-white/80 text-sm">Course Performance</p>
 				</div>
-				<div className="absolute top-4 right-4">{getMetricIcon()}</div>
+				<div className="absolute top-4 right-4">
+					<Lightbulb className="h-8 w-8 text-white/80" />
+				</div>
 			</div>
 
 			<CardContent className="p-6">
@@ -273,7 +253,7 @@ const CognitiveMetricsDistribution: React.FC<
 							/>
 							<Bar
 								dataKey="count"
-								fill={getBarColor()}
+								fill="#A78BFA"
 								opacity={0.8}
 								radius={[4, 4, 0, 0]}
 								name="Count"
@@ -281,7 +261,7 @@ const CognitiveMetricsDistribution: React.FC<
 							<Line
 								type="monotone"
 								dataKey="density"
-								stroke={getLineColor()}
+								stroke="#7C3AED"
 								strokeWidth={2.5}
 								dot={false}
 								activeDot={false}

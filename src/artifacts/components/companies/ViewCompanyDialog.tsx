@@ -16,9 +16,6 @@ import {
 	Mail,
 	Phone,
 	MapPin,
-	Activity,
-	Brain,
-	Dumbbell,
 	User,
 	Zap,
 	Bell,
@@ -489,8 +486,13 @@ export function ViewCompanyDialog({
 											<AccordionItem value="cognitive" className="border-b">
 												<AccordionTrigger className="py-3 hover:no-underline">
 													<div className="flex items-center">
-														<div className="bg-teal-50 dark:bg-teal-900/20 p-1 rounded-md mr-2">
-															<Brain className="h-3.5 w-3.5 text-teal-600 dark:text-teal-400" />
+														<div className="bg-teal-50 dark:bg-teal-900/20 p-1 rounded-md mr-2 flex items-center justify-center">
+															<span
+																className="material-symbols-outlined text-teal-600 dark:text-teal-400"
+																style={{ fontSize: "18px", lineHeight: 1 }}
+															>
+																neurology
+															</span>
 														</div>
 														<span className="font-medium text-sm">
 															Cognitive Assessments
@@ -530,8 +532,13 @@ export function ViewCompanyDialog({
 											<AccordionItem value="psychological" className="border-b">
 												<AccordionTrigger className="py-3 hover:no-underline">
 													<div className="flex items-center">
-														<div className="bg-indigo-50 dark:bg-indigo-900/20 p-1 rounded-md mr-2">
-															<Activity className="h-3.5 w-3.5 text-indigo-600 dark:text-indigo-400" />
+														<div className="bg-indigo-50 dark:bg-indigo-900/20 p-1 rounded-md mr-2 flex items-center justify-center">
+															<span
+																className="material-icons text-indigo-600 dark:text-indigo-400"
+																style={{ fontSize: "18px", lineHeight: 1 }}
+															>
+																psychology
+															</span>
 														</div>
 														<span className="font-medium text-sm">
 															Psychological Assessments
@@ -574,8 +581,13 @@ export function ViewCompanyDialog({
 											>
 												<AccordionTrigger className="py-3 hover:no-underline">
 													<div className="flex items-center">
-														<div className="bg-purple-50 dark:bg-purple-900/20 p-1 rounded-md mr-2">
-															<Dumbbell className="h-3.5 w-3.5 text-purple-600 dark:text-purple-400" />
+														<div className="bg-purple-50 dark:bg-purple-900/20 p-1 rounded-md mr-2 flex items-center justify-center">
+															<span
+																className="material-symbols-outlined text-purple-600 dark:text-purple-400"
+																style={{ fontSize: "18px", lineHeight: 1 }}
+															>
+																exercise
+															</span>
 														</div>
 														<span className="font-medium text-sm">
 															Physical & External Assessments

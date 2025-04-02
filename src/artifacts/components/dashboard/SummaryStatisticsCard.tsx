@@ -2,9 +2,6 @@ import type React from "react";
 import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import {
-	BarChart,
-	Brain,
-	Calculator,
 	Users,
 	ArrowRightLeft,
 	ArrowUp,
@@ -67,32 +64,6 @@ const SummaryStatisticsCard: React.FC<SummaryStatisticsCardProps> = ({
 			}
 		}
 	}, [data, selectedCategory]);
-
-	// Get category icon for header
-	const getCategoryIcon = () => {
-		switch (selectedCategory) {
-			case "physical":
-				return (
-					<BarChart className="absolute top-4 right-4 h-8 w-8 text-white/80" />
-				);
-			case "cognitive":
-				return (
-					<Brain className="absolute top-4 right-4 h-8 w-8 text-white/80" />
-				);
-			case "leadership":
-				return (
-					<Users className="absolute top-4 right-4 h-8 w-8 text-white/80" />
-				);
-			case "other":
-				return (
-					<Calculator className="absolute top-4 right-4 h-8 w-8 text-white/80" />
-				);
-			default:
-				return (
-					<Calculator className="absolute top-4 right-4 h-8 w-8 text-white/80" />
-				);
-		}
-	};
 
 	// Format number to 2 decimal places
 	const formatNumber = (num: number) => {
@@ -181,7 +152,20 @@ const SummaryStatisticsCard: React.FC<SummaryStatisticsCardProps> = ({
 					</h3>
 					<p className="text-white/80 text-sm">Statistical Summary</p>
 				</div>
-				{getCategoryIcon()}
+				<span
+					className="material-symbols-outlined absolute top-4 right-4 text-white/80"
+					style={{
+						fontSize: "32px",
+						lineHeight: 1,
+						width: "32px",
+						height: "32px",
+						display: "inline-flex",
+						alignItems: "center",
+						justifyContent: "center",
+					}}
+				>
+					monitoring
+				</span>
 			</div>
 
 			<CardContent className="p-6">
@@ -193,25 +177,81 @@ const SummaryStatisticsCard: React.FC<SummaryStatisticsCardProps> = ({
 								value="physical"
 								className="flex items-center justify-center gap-1 text-xs"
 							>
-								<BarChart className="h-3 w-3" /> Physical
+								<span
+									className="material-symbols-outlined"
+									style={{
+										fontSize: "16px",
+										lineHeight: 1,
+										width: "16px",
+										height: "16px",
+										display: "inline-flex",
+										alignItems: "center",
+										justifyContent: "center",
+									}}
+								>
+									exercise
+								</span>{" "}
+								Physical
 							</TabsTrigger>
 							<TabsTrigger
 								value="cognitive"
 								className="flex items-center justify-center gap-1 text-xs"
 							>
-								<Brain className="h-3 w-3" /> Cognitive
+								<span
+									className="material-symbols-outlined"
+									style={{
+										fontSize: "16px",
+										lineHeight: 1,
+										width: "16px",
+										height: "16px",
+										display: "inline-flex",
+										alignItems: "center",
+										justifyContent: "center",
+									}}
+								>
+									neurology
+								</span>{" "}
+								Cognitive
 							</TabsTrigger>
 							<TabsTrigger
 								value="leadership"
 								className="flex items-center justify-center gap-1 text-xs"
 							>
-								<Users className="h-3 w-3" /> Leadership
+								<span
+									className="material-icons"
+									style={{
+										fontSize: "16px",
+										lineHeight: 1,
+										width: "16px",
+										height: "16px",
+										display: "inline-flex",
+										alignItems: "center",
+										justifyContent: "center",
+									}}
+								>
+									psychology
+								</span>{" "}
+								Leadership
 							</TabsTrigger>
 							<TabsTrigger
 								value="other"
 								className="flex items-center justify-center gap-1 text-xs"
 							>
-								<Calculator className="h-3 w-3" /> Other
+								<span
+									className="material-symbols-outlined"
+									style={{
+										fontSize: "16px",
+										lineHeight: 1,
+										width: "16px",
+										height: "16px",
+										display: "inline-flex",
+										alignItems: "center",
+										justifyContent: "center",
+									}}
+								>
+									calculate
+								</span>{" "}
+								Other
 							</TabsTrigger>
 						</TabsList>
 					</Tabs>

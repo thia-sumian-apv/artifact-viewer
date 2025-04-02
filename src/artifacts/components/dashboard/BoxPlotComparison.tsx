@@ -2,7 +2,7 @@ import type React from "react";
 import { useState, useRef, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { BarChart4, Activity, Brain, TrendingUp } from "lucide-react";
+import { BarChart4, TrendingUp } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import * as Plot from "@observablehq/plot";
 import * as d3 from "d3";
@@ -382,15 +382,27 @@ const BoxPlotComparison: React.FC<BoxPlotComparisonProps> = ({
 							<TabsList className="grid grid-cols-3">
 								<TabsTrigger
 									value="physical"
-									className="flex items-center gap-1 text-xs"
+									className="flex items-center justify-center gap-1 text-xs"
 								>
-									<Activity className="h-3 w-3" /> Physical
+									<span
+										className="material-icons"
+										style={{ fontSize: "16px", lineHeight: 1 }}
+									>
+										psychology
+									</span>{" "}
+									Physical
 								</TabsTrigger>
 								<TabsTrigger
 									value="cognitive"
-									className="flex items-center gap-1 text-xs"
+									className="flex items-center justify-center gap-1 text-xs"
 								>
-									<Brain className="h-3 w-3" /> Cognitive
+									<span
+										className="material-symbols-outlined"
+										style={{ fontSize: "16px", lineHeight: 1 }}
+									>
+										neurology
+									</span>{" "}
+									Cognitive
 								</TabsTrigger>
 								<TabsTrigger
 									value="ml360"
