@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
+import type * as z from "zod";
 import type { User } from "../../types/users";
 import type { UserRole } from "../..";
 import {
@@ -33,28 +33,13 @@ import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { mockCohorts } from "@/artifacts/mocks/cohortData";
 import { mockCompanyData } from "@/artifacts/mocks/companyData";
-import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
+import {
+	Popover,
+	PopoverTrigger,
+	PopoverContent,
+} from "@/components/ui/popover";
 import { toast } from "sonner";
-
-export const userFormSchema = z.object({
-	firstName: z.string().min(2, "First name must be at least 2 characters"),
-	lastName: z.string().min(2, "Last name must be at least 2 characters"),
-	email: z.string().email("Invalid email address"),
-	role: z.enum([
-		"superAdmin",
-		"companyAdmin",
-		"courseCommander",
-		"courseTrainer",
-		"trainee",
-	]),
-	companyId: z.string().optional(),
-	courseId: z.string().optional(),
-	subcohortId: z.string().optional(),
-	dateOfBirth: z.date(),
-	weight: z.coerce.number().positive("Weight must be positive"),
-	height: z.coerce.number().positive("Height must be positive"),
-	gender: z.enum(["male", "female", "other"]),
-});
+import { userFormSchema } from "@/artifacts/schemas/userFormSchema";
 
 interface EditUserDialogProps {
 	user: User | null;
@@ -93,9 +78,10 @@ export function EditUserDialog({
 				role: user.role as UserRole,
 				companyId: "companyId" in user ? user.companyId : undefined,
 				subcohortId: "subcohortId" in user ? user.subcohortId : undefined,
-				courseId: "courseIds" in user && user.courseIds?.length
-					? user.courseIds[0]
-					: undefined,
+				courseId:
+					"courseIds" in user && user.courseIds?.length
+						? user.courseIds[0]
+						: undefined,
 				dateOfBirth: user.dateOfBirth,
 				weight: user.weight,
 				height: user.height,
@@ -108,7 +94,7 @@ export function EditUserDialog({
 		try {
 			await onSave(values);
 			toast(isNewUser ? "User created" : "User updated", {
-				description: `${values.firstName} ${values.lastName} was ${isNewUser ? 'created' : 'updated'} successfully.`,
+				description: `${values.firstName} ${values.lastName} was ${isNewUser ? "created" : "updated"} successfully.`,
 				action: {
 					label: "View",
 					onClick: () => console.log("View user details"),
@@ -117,9 +103,12 @@ export function EditUserDialog({
 			onOpenChange(false);
 		} catch (error) {
 			console.error("Error saving user:", error);
-			toast.error(isNewUser ? "Failed to create user" : "Failed to update user", {
-				description: "Please try again.",
-			});
+			toast.error(
+				isNewUser ? "Failed to create user" : "Failed to update user",
+				{
+					description: "Please try again.",
+				},
+			);
 		}
 	};
 
@@ -127,7 +116,9 @@ export function EditUserDialog({
 		form.reset();
 		onOpenChange(false);
 		toast("Cancelled", {
-			description: isNewUser ? "User creation was cancelled" : "User edit was cancelled",
+			description: isNewUser
+				? "User creation was cancelled"
+				: "User edit was cancelled",
 		});
 	};
 
@@ -144,13 +135,20 @@ export function EditUserDialog({
 		>
 			<DialogContent className="sm:max-w-[500px]">
 				<DialogHeader>
-					<DialogTitle>{isNewUser ? "Create User Details" : "Edit User Details"}</DialogTitle>
+					<DialogTitle>
+						{isNewUser ? "Create User Details" : "Edit User Details"}
+					</DialogTitle>
 				</DialogHeader>
 				<Form {...form}>
-					<form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
+					<form
+						onSubmit={form.handleSubmit(handleSubmit)}
+						className="space-y-6"
+					>
 						{/* Basic Information Section */}
 						<div className="space-y-4">
-							<h3 className="text-sm font-medium text-gray-500">Basic Information</h3>
+							<h3 className="text-sm font-medium text-gray-500">
+								Basic Information
+							</h3>
 							<div className="grid grid-cols-2 gap-4">
 								<FormField
 									control={form.control}
@@ -185,11 +183,7 @@ export function EditUserDialog({
 									<FormItem>
 										<FormLabel>Email Address*</FormLabel>
 										<FormControl>
-											<Input
-												{...field}
-												type="email"
-												disabled={!isNewUser}
-											/>
+											<Input {...field} type="email" disabled={!isNewUser} />
 										</FormControl>
 									</FormItem>
 								)}
@@ -198,7 +192,9 @@ export function EditUserDialog({
 
 						{/* Physical Details Section */}
 						<div className="space-y-4">
-							<h3 className="text-sm font-medium text-gray-500">Physical Details</h3>
+							<h3 className="text-sm font-medium text-gray-500">
+								Physical Details
+							</h3>
 							<div className="grid grid-cols-2 gap-4">
 								<FormField
 									control={form.control}
@@ -239,7 +235,7 @@ export function EditUserDialog({
 															variant={"outline"}
 															className={cn(
 																"w-full pl-3 text-left font-normal",
-																!field.value && "text-muted-foreground"
+																!field.value && "text-muted-foreground",
 															)}
 														>
 															{field.value ? (
@@ -299,7 +295,9 @@ export function EditUserDialog({
 
 						{/* Additional Details Section */}
 						<div className="space-y-4">
-							<h3 className="text-sm font-medium text-gray-500">Additional Details</h3>
+							<h3 className="text-sm font-medium text-gray-500">
+								Additional Details
+							</h3>
 							<div className="grid grid-cols-2 gap-4">
 								<FormField
 									control={form.control}
@@ -390,65 +388,65 @@ export function EditUserDialog({
 
 							{(form.watch("role") === "courseTrainer" ||
 								form.watch("role") === "trainee") && (
-									<div className="grid grid-cols-2 gap-4">
-										<FormItem>
-											<FormLabel>Group</FormLabel>
-											<Select
-												disabled
-												value={
-													subcohorts.find(
-														(s) => s.id === form.watch("subcohortId"),
-													)?.cohortId ?? ""
-												}
-											>
-												<FormControl>
-													<SelectTrigger>
-														<SelectValue placeholder="Associated Group">
-															{mockCohorts.find(
-																(c) =>
-																	c.id ===
-																	subcohorts.find(
-																		(s) => s.id === form.watch("subcohortId"),
-																	)?.cohortId,
-															)?.name ?? "No group selected"}
-														</SelectValue>
-													</SelectTrigger>
-												</FormControl>
-											</Select>
-										</FormItem>
+								<div className="grid grid-cols-2 gap-4">
+									<FormItem>
+										<FormLabel>Group</FormLabel>
+										<Select
+											disabled
+											value={
+												subcohorts.find(
+													(s) => s.id === form.watch("subcohortId"),
+												)?.cohortId ?? ""
+											}
+										>
+											<FormControl>
+												<SelectTrigger>
+													<SelectValue placeholder="Associated Group">
+														{mockCohorts.find(
+															(c) =>
+																c.id ===
+																subcohorts.find(
+																	(s) => s.id === form.watch("subcohortId"),
+																)?.cohortId,
+														)?.name ?? "No group selected"}
+													</SelectValue>
+												</SelectTrigger>
+											</FormControl>
+										</Select>
+									</FormItem>
 
-										<FormField
-											control={form.control}
-											name="subcohortId"
-											render={({ field }) => (
-												<FormItem>
-													<FormLabel>Sub-group</FormLabel>
-													<Select
-														onValueChange={field.onChange}
-														defaultValue={field.value}
-														value={field.value}
-													>
-														<FormControl>
-															<SelectTrigger>
-																<SelectValue placeholder="Select sub-group" />
-															</SelectTrigger>
-														</FormControl>
-														<SelectContent>
-															{subcohorts.map((subcohort) => (
-																<SelectItem
-																	key={subcohort.id}
-																	value={subcohort.id}
-																>
-																	{subcohort.name}
-																</SelectItem>
-															))}
-														</SelectContent>
-													</Select>
-												</FormItem>
-											)}
-										/>
-									</div>
-								)}
+									<FormField
+										control={form.control}
+										name="subcohortId"
+										render={({ field }) => (
+											<FormItem>
+												<FormLabel>Sub-group</FormLabel>
+												<Select
+													onValueChange={field.onChange}
+													defaultValue={field.value}
+													value={field.value}
+												>
+													<FormControl>
+														<SelectTrigger>
+															<SelectValue placeholder="Select sub-group" />
+														</SelectTrigger>
+													</FormControl>
+													<SelectContent>
+														{subcohorts.map((subcohort) => (
+															<SelectItem
+																key={subcohort.id}
+																value={subcohort.id}
+															>
+																{subcohort.name}
+															</SelectItem>
+														))}
+													</SelectContent>
+												</Select>
+											</FormItem>
+										)}
+									/>
+								</div>
+							)}
 						</div>
 
 						<DialogFooter className="gap-2">

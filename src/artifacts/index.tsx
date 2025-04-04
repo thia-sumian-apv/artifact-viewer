@@ -19,6 +19,7 @@ import CohortsTab from "./components/CohortsTab";
 import UsersTab from "./components/UsersTab";
 import CommanderDashboard from "./components/dashboard/CommanderDashboard";
 import { Toaster } from "sonner";
+import PhysicalStatsAdminView from "./components/physical/PhysicalStatsAdminView";
 
 export type UserRole =
 	| "superAdmin"
@@ -384,7 +385,9 @@ const NeuroVibesPortal = () => {
 				);
 
 			case "physical":
-				return (
+				return userRole === "companyAdmin" || userRole === "superAdmin" ? (
+					<PhysicalStatsAdminView />
+				) : (
 					<PhysicalTab
 						assessments={assessments}
 						startAssessment={startAssessment}
