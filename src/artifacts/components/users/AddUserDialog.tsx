@@ -21,7 +21,7 @@ export function AddUserDialog({
 	subcohorts,
 	onSave,
 }: AddUserDialogProps) {
-	// We reuse the EditUserDialog but pass null as the user prop to indicate this is for adding
+	// We reuse the EditUserDialog but with isNewUser=true to indicate this is for creating a new user
 	return (
 		<EditUserDialog
 			user={null}
@@ -32,6 +32,7 @@ export function AddUserDialog({
 			courses={courses}
 			subcohorts={subcohorts}
 			onSave={onSave}
+			isNewUser={true}
 		/>
 	);
 }
