@@ -18,6 +18,7 @@ import CompaniesTab from "./components/CompaniesTab";
 import CohortsTab from "./components/CohortsTab";
 import UsersTab from "./components/UsersTab";
 import CommanderDashboard from "./components/dashboard/CommanderDashboard";
+import { Toaster } from "sonner";
 
 export type UserRole =
 	| "superAdmin"
@@ -419,6 +420,7 @@ const NeuroVibesPortal = () => {
 
 	return (
 		<div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200 flex">
+			<Toaster position="bottom-right" richColors />
 			{/* Sidebar */}
 			<Sidebar
 				showSidebar={showSidebar}
