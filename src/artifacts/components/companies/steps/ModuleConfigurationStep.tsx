@@ -113,7 +113,7 @@ export default function ModuleConfigurationStep({
 		const subModules = Object.entries(moduleData).filter(
 			([key]) => key !== "enabled",
 		);
-		return subModules.every(([_, value]) => value);
+		return subModules.every(([, value]) => value); // Remove the underscore
 	};
 
 	// Helper function to toggle all submodules

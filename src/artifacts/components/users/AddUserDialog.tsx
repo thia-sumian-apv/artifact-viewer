@@ -1,6 +1,7 @@
-import { EditUserDialog, type userFormSchema } from "./EditUserDialog";
+import { EditUserDialog } from "./EditUserDialog";
 import type { z } from "zod";
 import type { UserRole } from "../..";
+import type { userFormSchema } from "@/artifacts/schemas/userFormSchema";
 
 interface AddUserDialogProps {
 	open: boolean;

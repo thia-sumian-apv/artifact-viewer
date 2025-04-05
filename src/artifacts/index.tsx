@@ -19,6 +19,7 @@ import CohortsTab from "./components/CohortsTab";
 import UsersTab from "./components/UsersTab";
 import CommanderDashboard from "./components/dashboard/CommanderDashboard";
 import { Toaster } from "sonner";
+import PhysicalStatsAdminView from "./components/physical/PhysicalStatsAdminView";
 
 export type UserRole =
 	| "superAdmin"
@@ -28,7 +29,7 @@ export type UserRole =
 	| "trainee";
 
 const NeuroVibesPortal = () => {
-	const [isSuperAdmin, _setIsSuperAdmin] = useState(true); // For demo, set to true
+	const [isSuperAdmin] = useState(true); // For demo, set to true
 	const [activeTab, setActiveTab] = useState("dashboard");
 	const [assessments, setAssessments] = useState<{
 		cognitive: Assessment[];
@@ -384,12 +385,10 @@ const NeuroVibesPortal = () => {
 				);
 
 			case "physical":
-				return (
-					<PhysicalTab
-						assessments={assessments}
-						startAssessment={startAssessment}
-						viewReport={viewReport}
-					/>
+				return userRole === "companyAdmin" || userRole === "superAdmin" ? (
+					<PhysicalStatsAdminView />
+				) : (
+					<PhysicalTab />
 				);
 
 			case "reports":
