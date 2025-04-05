@@ -29,7 +29,7 @@ export type UserRole =
 	| "trainee";
 
 const NeuroVibesPortal = () => {
-	const [isSuperAdmin, _setIsSuperAdmin] = useState(true); // For demo, set to true
+	const [isSuperAdmin] = useState(true); // For demo, set to true
 	const [activeTab, setActiveTab] = useState("dashboard");
 	const [assessments, setAssessments] = useState<{
 		cognitive: Assessment[];
@@ -388,11 +388,7 @@ const NeuroVibesPortal = () => {
 				return userRole === "companyAdmin" || userRole === "superAdmin" ? (
 					<PhysicalStatsAdminView />
 				) : (
-					<PhysicalTab
-						assessments={assessments}
-						startAssessment={startAssessment}
-						viewReport={viewReport}
-					/>
+					<PhysicalTab />
 				);
 
 			case "reports":
