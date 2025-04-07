@@ -118,7 +118,6 @@ const Dashboard = ({
         psychologicalProgress={psychologicalProgress}
         getPhysicalProgress={getPhysicalProgress}
         overallProgress={overallProgress}
-        setActiveTab={setActiveTab}
         selectedRunId={selectedRunId}
         onRunChange={handleAssessmentRunChange}
       />

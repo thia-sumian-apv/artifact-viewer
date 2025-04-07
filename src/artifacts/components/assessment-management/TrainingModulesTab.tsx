@@ -108,7 +108,7 @@ const TrainingModulesTab = () => {
             <span className="text-sm text-gray-500 dark:text-gray-400">
               Assessment Run:
             </span>
-            <div className="w-64">
+            <div>
               <Select value={selectedRunId} onValueChange={handleRunChange}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select assessment run" />
