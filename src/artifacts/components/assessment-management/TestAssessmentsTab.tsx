@@ -195,7 +195,7 @@ const TestAssessmentsTab = ({
   // Process assessment runs when component mounts or dummyAssessmentRunData changes
   useEffect(() => {
     processAssessmentRuns();
-  }, [dummyAssessmentRunData, selectedRunId]);
+  }, [selectedRunId]);
 
   // Functions for handling assessments
   const startAssessment = (id: string) => {
