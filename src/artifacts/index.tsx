@@ -142,6 +142,10 @@ const NeuroVibesPortal = () => {
   const psychologicalProgress = getPsychologicalProgress();
   const overallProgress = getOverallProgress();
 
+  const isViewCommanderDashboard = (role: UserRole): boolean => {
+    return ["superAdmin", "companyAdmin", "courseCommander"].includes(role);
+  };
+
   // Render the appropriate tab content
   const renderTabContent = () => {
     if (loading) {
@@ -155,7 +159,7 @@ const NeuroVibesPortal = () => {
     switch (activeTabState) {
       case "dashboard":
         // Show CommanderDashboard for course commanders, regular Dashboard for others
-        return userRole === "courseCommander" ? (
+        return isViewCommanderDashboard(userRole) ? (
           <CommanderDashboard />
         ) : (
           <Dashboard
