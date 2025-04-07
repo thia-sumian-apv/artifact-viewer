@@ -1,26 +1,26 @@
-import AssessmentCard from "./AssessmentCard";
-import type { Assessment } from "./AssessmentCard";
+import AssessmentCard from "../AssessmentCard";
+import type { Assessment } from "../AssessmentCard";
 
-interface PsychologicalTabProps {
+interface CognitiveTabProps {
   assessments: {
-    psychological: Assessment[];
+    cognitive: Assessment[];
   };
   startAssessment: (id: string) => void;
   viewReport: (id: string) => void;
 }
 
-const PsychologicalTab = ({
+const CognitiveTab = ({
   assessments,
   startAssessment,
   viewReport,
-}: PsychologicalTabProps) => {
+}: CognitiveTabProps) => {
   return (
     <>
       <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
-        Psychological Assessments
+        Cognitive Assessments
       </h2>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {assessments.psychological.map((assessment) => (
+        {assessments.cognitive.map((assessment) => (
           <AssessmentCard
             key={assessment.id}
             assessment={assessment}
@@ -33,4 +33,4 @@ const PsychologicalTab = ({
   );
 };
 
-export default PsychologicalTab;
+export default CognitiveTab;
