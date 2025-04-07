@@ -28,7 +28,7 @@ const TrainingModulesTab = () => {
         "Enhance your focus and concentration by identifying and selecting numbers in sequential order from a randomized grid.",
       duration: "15-20 mins",
       status: "available",
-      icon: <BookOpen className="h-6 w-6" />,
+      icon: BookOpen,
       type: "cognitive",
     },
     {
@@ -37,7 +37,7 @@ const TrainingModulesTab = () => {
       description: "Description for training module B.",
       duration: "30-35 mins",
       status: "available",
-      icon: <Lightbulb className="h-6 w-6" />,
+      icon: Lightbulb,
       type: "cognitive",
     },
   ]);

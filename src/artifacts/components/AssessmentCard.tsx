@@ -1,4 +1,4 @@
-import { Clock, Play, Calendar, Info } from "lucide-react";
+import { Clock, Play, Calendar, Info, type LucideIcon } from "lucide-react";
 import {
   Card,
   CardHeader,
@@ -11,13 +11,13 @@ export interface Assessment {
   title: string;
   description: string;
   status: "available" | "completed" | "in_progress" | "future" | string;
-  icon?: React.ReactNode;
+  icon?: LucideIcon; // Changed from ReactNode to LucideIcon
   duration?: string;
   date?: string;
   progress?: number;
   score?: number;
   type: "cognitive" | "psychological" | "physical";
-  futureDate?: string; // Date when assessment will become available
+  futureDate?: string;
 }
 
 interface AssessmentCardProps {
@@ -100,7 +100,7 @@ const AssessmentCard = ({
                     : "text-teal-600 dark:text-teal-400"
                 }`}
               >
-                {assessment.icon}
+                {assessment.icon && <assessment.icon className="h-6 w-6" />}{" "}
               </div>
             </div>
             <div className="ml-3 flex-1 min-w-0">
