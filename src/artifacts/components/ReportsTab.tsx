@@ -29,9 +29,9 @@ const ReportsTab = ({ assessments, viewReport }: ReportsTabProps) => {
                   className="bg-gray-50 dark:bg-gray-700 p-3 rounded-lg flex items-center justify-between"
                 >
                   <div className="flex items-center">
-                    <div className="text-teal-500 dark:text-teal-400 mr-3">
-                      {assessment.icon}
-                    </div>
+                    {assessment.icon && (
+                      <assessment.icon className="mr-2 text-teal-600 dark:text-teal-400 h-5 w-5" />
+                    )}
                     <div>
                       <h4 className="text-sm font-medium text-gray-900 dark:text-white">
                         {assessment.title}
@@ -65,7 +65,9 @@ const ReportsTab = ({ assessments, viewReport }: ReportsTabProps) => {
               >
                 <div className="flex items-center">
                   <div className="text-teal-500 dark:text-teal-400 mr-3">
-                    {assessment.icon}
+                    {assessment.icon && (
+                      <assessment.icon className="text-teal-500 dark:text-teal-400 mr-3" />
+                    )}
                   </div>
                   <div>
                     <h4 className="text-sm font-medium text-gray-900 dark:text-white">

@@ -16,15 +16,17 @@ import SARTTraining from "../assessments/sart/SARTTraining";
 import type { Assessment } from "../AssessmentCard";
 import { dummyAssessmentRunData } from "../../types/assessmentRun";
 import { format } from "date-fns";
-import { Brain, Eye, Users, Shield, Heart, Volleyball } from "lucide-react";
 import type { UserRole } from "../../index";
+import { baseAssessments } from "./assessments";
 
 interface TestAssessmentsTabProps {
   userRole?: UserRole;
+  initialAssessmentType?: string;
 }
 
 const TestAssessmentsTab = ({
   userRole = "trainee",
+  initialAssessmentType,
 }: TestAssessmentsTabProps) => {
   // Assessment modal state
   const [currentAssessment, setCurrentAssessment] = useState<string | null>(
@@ -41,77 +43,7 @@ const TestAssessmentsTab = ({
   );
 
   // Store base assessment data in a ref to avoid re-render cycles
-  const baseAssessmentsRef = useRef<{
-    cognitive: Assessment[];
-    psychological: Assessment[];
-    physical: Assessment[];
-  }>({
-    cognitive: [
-      {
-        id: "sart",
-        title: "Sustained Attention Response Task (SART)",
-        description:
-          "Measures your ability to maintain focus and suppress impulsive responses over time.",
-        duration: "10-12 mins",
-        status: "available",
-        icon: <Brain className="h-6 w-6" />,
-        type: "cognitive",
-      },
-      {
-        id: "vrxn",
-        title: "Visual Recognition (RXN)",
-        description:
-          "Tests your ability to memorize and identify visual patterns under time constraints.",
-        duration: "15-20 mins",
-        status: "completed",
-        icon: <Eye className="h-6 w-6" />,
-        type: "cognitive",
-      },
-      {
-        id: "spatial",
-        title: "Spatial Planning",
-        description:
-          "Evaluates your ability to visualize and strategize spatial arrangements with minimal moves.",
-        duration: "12-15 mins",
-        status: "available",
-        icon: <Volleyball className="h-6 w-6" />,
-        type: "cognitive",
-      },
-    ],
-    psychological: [
-      {
-        id: "ml360",
-        title: "Mindful Leadership Assessment (ML360)",
-        description:
-          "Evaluates leadership behaviors reflecting mindfulness in workplace scenarios.",
-        duration: "15-20 mins",
-        status: "completed",
-        icon: <Users className="h-6 w-6" />,
-        type: "psychological",
-      },
-      {
-        id: "teamres",
-        title: "Team Resilience Assessment",
-        description:
-          "Measures your team's ability to bounce back from challenges and adapt to change.",
-        duration: "10-15 mins",
-        status: "available",
-        icon: <Shield className="h-6 w-6" />,
-        type: "psychological",
-      },
-      {
-        id: "selfdet",
-        title: "Self-Determination Assessment",
-        description:
-          "Evaluates your motivation level and sense of autonomy, competence, and relatedness.",
-        duration: "10 mins",
-        status: "available",
-        icon: <Heart className="h-6 w-6" />,
-        type: "psychological",
-      },
-    ],
-    physical: [],
-  });
+  const baseAssessmentsRef = useRef(baseAssessments);
 
   // State for filtered assessments to display
   const [assessments, setAssessments] = useState<{
@@ -220,7 +152,10 @@ const TestAssessmentsTab = ({
     <div className="space-y-6">
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
         <div className="flex-1">
-          <Tabs defaultValue="cognitive" className="w-full">
+          <Tabs
+            defaultValue={initialAssessmentType || "cognitive"}
+            className="w-full"
+          >
             <div className="flex items-center justify-between mb-4">
               <TabsList>
                 <TabsTrigger value="cognitive">Cognitive</TabsTrigger>

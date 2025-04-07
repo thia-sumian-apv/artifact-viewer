@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Users, Award } from "lucide-react";
 import type { Assessment } from "./components/AssessmentCard";
 import Dashboard from "./components/Dashboard";
 import ReportsTab from "./components/ReportsTab";
@@ -16,6 +15,7 @@ import CommanderDashboard from "./components/dashboard/CommanderDashboard";
 import { Toaster } from "sonner";
 import TestAssessmentsTab from "./components/assessment-management/TestAssessmentsTab";
 import TrainingModulesTab from "./components/assessment-management/TrainingModulesTab";
+import { baseAssessments } from "./components/assessment-management/assessments";
 
 export type UserRole =
   | "superAdmin"
@@ -26,7 +26,22 @@ export type UserRole =
 
 const NeuroVibesPortal = () => {
   const [isSuperAdmin] = useState(true); // For demo, set to true
-  const [activeTab, setActiveTab] = useState("dashboard");
+  const [activeTabState, setActiveTabState] = useState("dashboard");
+  const [activeAssessmentType, setActiveAssessmentType] = useState<
+    string | undefined
+  >(undefined);
+
+  const setActiveTab = (tab: string) => {
+    // Check if tab is an assessment type that should redirect to testAssessments
+    if (tab === "cognitive" || tab === "psychological" || tab === "physical") {
+      setActiveAssessmentType(tab);
+      setActiveTabState("testAssessments");
+    } else {
+      setActiveAssessmentType(undefined);
+      setActiveTabState(tab);
+    }
+  };
+
   const [assessments, setAssessments] = useState<{
     cognitive: Assessment[];
     psychological: Assessment[];
@@ -63,195 +78,7 @@ const NeuroVibesPortal = () => {
   useEffect(() => {
     // Simulate API call to fetch available assessments
     setTimeout(() => {
-      setAssessments({
-        cognitive: [
-          {
-            id: "sart",
-            title: "Sustained Attention Response Task (SART)",
-            description:
-              "Measures your ability to maintain focus and suppress impulsive responses over time.",
-            duration: "10-12 mins",
-            status: "completed",
-            progress: 100,
-            score: 87,
-            icon: (
-              <span
-                className="material-symbols-outlined flex items-center justify-center"
-                style={{
-                  fontSize: "24px",
-                  lineHeight: 1,
-                  width: "24px",
-                  height: "24px",
-                  display: "inline-flex",
-                }}
-              >
-                neurology
-              </span>
-            ),
-            type: "cognitive",
-          },
-          {
-            id: "vrxn",
-            title: "Visual Recognition (RXN)",
-            description:
-              "Tests your ability to memorize and identify visual patterns under time constraints.",
-            duration: "15-20 mins",
-            status: "in_progress",
-            progress: 60,
-            icon: (
-              <span
-                className="material-icons flex items-center justify-center"
-                style={{
-                  fontSize: "24px",
-                  lineHeight: 1,
-                  width: "24px",
-                  height: "24px",
-                  display: "inline-flex",
-                }}
-              >
-                psychology
-              </span>
-            ),
-            type: "cognitive",
-          },
-          {
-            id: "spatial",
-            title: "Spatial Planning",
-            description:
-              "Evaluates your ability to visualize and strategize spatial arrangements with minimal moves.",
-            duration: "12-15 mins",
-            status: "available",
-            progress: 0,
-            icon: (
-              <span
-                className="material-symbols-outlined flex items-center justify-center"
-                style={{
-                  fontSize: "24px",
-                  lineHeight: 1,
-                  width: "24px",
-                  height: "24px",
-                  display: "inline-flex",
-                }}
-              >
-                neurology
-              </span>
-            ),
-            type: "cognitive",
-          },
-          {
-            id: "sart-training",
-            title: "SART Training",
-            description:
-              "Sustained Attention to Response Task training exercise",
-            duration: "5-10 mins",
-            status: "available",
-            progress: 0,
-            icon: (
-              <span
-                className="material-symbols-outlined flex items-center justify-center"
-                style={{
-                  fontSize: "24px",
-                  lineHeight: 1,
-                  width: "24px",
-                  height: "24px",
-                  display: "inline-flex",
-                }}
-              >
-                neurology
-              </span>
-            ),
-            type: "cognitive",
-          },
-        ],
-
-        psychological: [
-          {
-            id: "ml360",
-            title: "Mindful Leadership Assessment (ML360)",
-            description:
-              "Evaluates leadership behaviors reflecting mindfulness in workplace scenarios.",
-            duration: "15-20 mins",
-            status: "completed",
-            progress: 100,
-            score: 92,
-            icon: <Users className="h-6 w-6" />,
-            type: "psychological",
-          },
-          {
-            id: "teamres",
-            title: "Team Resilience Assessment",
-            description:
-              "Measures your team's ability to bounce back from challenges and adapt to change.",
-            duration: "10-15 mins",
-            status: "available",
-            progress: 0,
-            icon: <Users className="h-6 w-6" />,
-            type: "psychological",
-          },
-          {
-            id: "selfdet",
-            title: "Self-Determination Assessment",
-            description:
-              "Evaluates your motivation level and sense of autonomy, competence, and relatedness.",
-            duration: "10 mins",
-            status: "available",
-            progress: 0,
-            icon: (
-              <span className="material-icons" style={{ fontSize: "24px" }}>
-                psychology
-              </span>
-            ),
-            type: "psychological",
-          },
-        ],
-
-        physical: [
-          {
-            id: "cardio",
-            title: "Cardio-Respiratory Fitness",
-            description: "Results from your VO2 Max and endurance testing.",
-            status: "completed",
-            date: "2 Mar 2025",
-            score: 78,
-            icon: (
-              <span
-                className="material-symbols-outlined flex items-center justify-center"
-                style={{
-                  fontSize: "24px",
-                  lineHeight: 1,
-                  width: "24px",
-                  height: "24px",
-                  display: "inline-flex",
-                }}
-              >
-                exercise
-              </span>
-            ),
-            type: "physical",
-          },
-          {
-            id: "strength",
-            title: "Strength Assessment",
-            description: "Measurements from resistance training evaluation.",
-            status: "completed",
-            date: "28 Feb 2025",
-            score: 82,
-            icon: <Award className="h-6 w-6" />,
-            type: "physical",
-          },
-          {
-            id: "ippt",
-            title: "IPPT Results",
-            description:
-              "Individual Physical Proficiency Test scores and analysis.",
-            status: "completed",
-            date: "15 Feb 2025",
-            score: 85,
-            icon: <Award className="h-6 w-6" />,
-            type: "physical",
-          },
-        ],
-      });
+      setAssessments({ ...baseAssessments });
       setLoading(false);
     }, 1000);
   }, []);
@@ -325,14 +152,13 @@ const NeuroVibesPortal = () => {
       );
     }
 
-    switch (activeTab) {
+    switch (activeTabState) {
       case "dashboard":
         // Show CommanderDashboard for course commanders, regular Dashboard for others
         return userRole === "courseCommander" ? (
           <CommanderDashboard />
         ) : (
           <Dashboard
-            assessments={assessments}
             cognitiveProgress={cognitiveProgress}
             psychologicalProgress={psychologicalProgress}
             overallProgress={overallProgress}
@@ -365,7 +191,12 @@ const NeuroVibesPortal = () => {
         return <CohortsTab />;
 
       case "testAssessments":
-        return <TestAssessmentsTab userRole={userRole} />;
+        return (
+          <TestAssessmentsTab
+            userRole={userRole}
+            initialAssessmentType={activeAssessmentType}
+          />
+        );
 
       case "trainingModules":
         return <TrainingModulesTab />;
@@ -382,7 +213,7 @@ const NeuroVibesPortal = () => {
       <Sidebar
         showSidebar={showSidebar}
         setShowSidebar={setShowSidebar}
-        activeTab={activeTab}
+        activeTab={activeTabState}
         setActiveTab={setActiveTab}
         themeMode={themeMode}
         userRole={userRole}
@@ -395,7 +226,7 @@ const NeuroVibesPortal = () => {
       >
         {/* Header */}
         <Header
-          activeTab={activeTab}
+          activeTab={activeTabState}
           themeMode={themeMode}
           setThemeMode={setThemeMode}
         />
