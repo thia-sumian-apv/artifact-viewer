@@ -6,6 +6,8 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 
+export type AssessmentType = "cognitive" | "psychological" | "physical";
+
 export interface Assessment {
   id: string;
   title: string;
@@ -16,7 +18,7 @@ export interface Assessment {
   date?: string;
   progress?: number;
   score?: number;
-  type: "cognitive" | "psychological" | "physical";
+  type: AssessmentType;
   futureDate?: string;
 }
 

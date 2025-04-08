@@ -22,6 +22,8 @@ import {
 } from "@/components/ui/select";
 import { format } from "date-fns";
 import { dummyAssessmentRunData } from "../types/assessmentRun";
+import { SARTReportDialog } from "./reports/SARTReportDialog";
+import ML360ReportDialog from "./reports/ML360ReportDialog";
 
 interface ReportsTabProps {
   assessments: {
@@ -49,6 +51,18 @@ const ReportsTab = ({ assessments, viewReport }: ReportsTabProps) => {
   );
   const handleRunChange = (value: string) => {
     setSelectedRunId(value);
+  };
+
+  const [sartDialogOpen, setSartDialogOpen] = useState(false);
+  const [ml360DialogOpen, setMl360DialogOpen] = useState(false);
+  const handleViewReport = (id: string) => {
+    if (id === "sart") {
+      setSartDialogOpen(true);
+    } else if (id === "ml360") {
+      setMl360DialogOpen(true);
+    } else {
+      viewReport(id);
+    }
   };
 
   return (
@@ -116,10 +130,10 @@ const ReportsTab = ({ assessments, viewReport }: ReportsTabProps) => {
                     </div>
                     <button
                       type="button"
-                      onClick={() => viewReport(assessment.id)}
+                      onClick={() => handleViewReport(assessment.id)}
                       className="px-3 py-1 text-xs bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 rounded-md hover:bg-teal-100 dark:hover:bg-teal-900/50"
                     >
-                      View Report
+                      View Results
                     </button>
                   </div>
                 ))}
@@ -130,6 +144,14 @@ const ReportsTab = ({ assessments, viewReport }: ReportsTabProps) => {
           <PhysicalReport assessments={physicalData} />
         </CardContent>
       </Card>
+      <SARTReportDialog
+        open={sartDialogOpen}
+        onOpenChange={setSartDialogOpen}
+      />
+      <ML360ReportDialog
+        open={ml360DialogOpen}
+        onOpenChange={setMl360DialogOpen}
+      />
       <OverallReportDialog
         open={reportDialogOpen}
         onOpenChange={setReportDialogOpen}

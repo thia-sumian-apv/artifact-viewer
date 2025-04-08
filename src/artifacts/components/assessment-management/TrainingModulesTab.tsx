@@ -1,5 +1,5 @@
-// src/artifacts/components/assessment-management/TrainingModulesTab.tsx
 import { useState, useEffect, useRef } from "react";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import {
   Select,
   SelectContent,
@@ -8,83 +8,94 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { format } from "date-fns";
-import { BookOpen, Lightbulb } from "lucide-react";
+import { BookOpen, Lightbulb, Activity } from "lucide-react";
 import type { Assessment } from "../AssessmentCard";
 import { dummyAssessmentRunData } from "../../types/assessmentRun";
 import TrainingTab from "./TrainingTab";
 
 const TrainingModulesTab = () => {
-  // Assessment run selection state - using existing assessment runs
   const [selectedRunId, setSelectedRunId] = useState(
     dummyAssessmentRunData[0].id
   );
 
-  // Define static training modules that apply to all assessment runs
-  const trainingModulesRef = useRef<Assessment[]>([
-    {
-      id: "trainingA",
-      title: "Concentration Grid",
-      description:
-        "Enhance your focus and concentration by identifying and selecting numbers in sequential order from a randomized grid.",
-      duration: "15-20 mins",
-      status: "available",
-      icon: BookOpen,
-      type: "cognitive",
-    },
-    {
-      id: "trainingB",
-      title: "Training Module B",
-      description: "Description for training module B.",
-      duration: "30-35 mins",
-      status: "available",
-      icon: Lightbulb,
-      type: "cognitive",
-    },
-  ]);
+  // Define static training modules organized by type
+  const trainingModulesRef = useRef({
+    cognitive: [
+      {
+        id: "trainingA",
+        title: "Concentration Grid",
+        description:
+          "Enhance your focus and concentration by identifying and selecting numbers in sequential order from a randomized grid.",
+        duration: "15-20 mins",
+        status: "available",
+        icon: BookOpen,
+        type: "cognitive" as const,
+      },
+    ],
+    psychological: [
+      {
+        id: "trainingB",
+        title: "Stress Management",
+        description:
+          "Learn techniques for managing stress and maintaining mental resilience.",
+        duration: "30-35 mins",
+        status: "available",
+        icon: Lightbulb,
+        type: "psychological" as const,
+      },
+    ],
+    physical: [
+      {
+        id: "trainingC",
+        title: "Physical Recovery",
+        description:
+          "Guided exercises for optimal physical recovery and performance.",
+        duration: "25-30 mins",
+        status: "available",
+        icon: Activity,
+        type: "physical" as const,
+      },
+    ],
+  });
 
   // State for filtered modules to display
-  const [trainingModules, setTrainingModules] = useState<Assessment[]>(
+  const [trainingModules, setTrainingModules] = useState(
     trainingModulesRef.current
   );
 
   // Process assessment runs and determine which training modules should be available
   const processAssessmentRuns = () => {
     const now = new Date();
-    const data: Record<string, Assessment[]> = {};
+    const data: Record<string, typeof trainingModulesRef.current> = {};
 
     dummyAssessmentRunData.forEach((run) => {
       const startDate = new Date(run.startDate);
       const isFuture = now < startDate;
 
-      // Create a copy of all training modules with status adjusted for this run
-      const modulesForRun = trainingModulesRef.current.map((module) => {
-        if (isFuture) {
-          return {
-            ...module,
-            status: "future",
-            futureDate: format(startDate, "MMM d, yyyy"),
-          };
-        } else {
-          // For active or past runs, use the original status
-          return { ...module };
-        }
-      });
+      // Process each type of training module
+      const processModules = <T extends Assessment[]>(modules: T) =>
+        modules.map((module) => ({
+          ...module,
+          status: isFuture ? "future" : module.status,
+          futureDate: isFuture ? format(startDate, "MMM d, yyyy") : undefined,
+        })) as T;
 
-      data[run.id] = modulesForRun;
+      data[run.id] = {
+        cognitive: processModules(trainingModulesRef.current.cognitive),
+        psychological: processModules(trainingModulesRef.current.psychological),
+        physical: processModules(trainingModulesRef.current.physical),
+      };
     });
 
-    // Update current modules based on selected run
     if (data[selectedRunId]) {
       setTrainingModules(data[selectedRunId]);
     }
   };
 
-  // Process assessment runs when component mounts or selected run changes
   useEffect(() => {
     processAssessmentRuns();
   }, [selectedRunId]);
 
-  // Functions for handling training modules
   const startTraining = (id: string) => {
     console.log(`Starting training module: ${id}`);
   };
@@ -100,37 +111,62 @@ const TrainingModulesTab = () => {
   return (
     <div className="space-y-6">
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h3 className="text-lg font-medium text-gray-900 dark:text-white">
-            Available Training Modules
-          </h3>
-          <div className="flex items-center space-x-2">
-            <span className="text-sm text-gray-500 dark:text-gray-400">
-              Assessment Run:
-            </span>
-            <div>
-              <Select value={selectedRunId} onValueChange={handleRunChange}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select assessment run" />
-                </SelectTrigger>
-                <SelectContent>
-                  {dummyAssessmentRunData.map((run) => (
-                    <SelectItem key={run.id} value={run.id}>
-                      {run.name} ({format(new Date(run.startDate), "MMM d")} -{" "}
-                      {format(new Date(run.endDate), "MMM d, yyyy")})
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-        </div>
+        <div className="flex-1">
+          <Tabs defaultValue="cognitive" className="w-full">
+            <div className="flex items-center justify-between mb-4">
+              <TabsList>
+                <TabsTrigger value="cognitive">Cognitive</TabsTrigger>
+                <TabsTrigger value="psychological">Psychological</TabsTrigger>
+                <TabsTrigger value="physical">Physical</TabsTrigger>
+              </TabsList>
 
-        <TrainingTab
-          modules={trainingModules}
-          startTraining={startTraining}
-          viewReport={viewReport}
-        />
+              <div className="flex items-center space-x-2">
+                <span className="text-sm text-gray-500 dark:text-gray-400">
+                  Assessment Run:
+                </span>
+                <div>
+                  <Select value={selectedRunId} onValueChange={handleRunChange}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select assessment run" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {dummyAssessmentRunData.map((run) => (
+                        <SelectItem key={run.id} value={run.id}>
+                          {run.name} ({format(new Date(run.startDate), "MMM d")}{" "}
+                          - {format(new Date(run.endDate), "MMM d, yyyy")})
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+            </div>
+
+            <TabsContent value="cognitive">
+              <TrainingTab
+                modules={trainingModules.cognitive}
+                startTraining={startTraining}
+                viewReport={viewReport}
+              />
+            </TabsContent>
+
+            <TabsContent value="psychological">
+              <TrainingTab
+                modules={trainingModules.psychological}
+                startTraining={startTraining}
+                viewReport={viewReport}
+              />
+            </TabsContent>
+
+            <TabsContent value="physical">
+              <TrainingTab
+                modules={trainingModules.physical}
+                startTraining={startTraining}
+                viewReport={viewReport}
+              />
+            </TabsContent>
+          </Tabs>
+        </div>
       </div>
     </div>
   );
