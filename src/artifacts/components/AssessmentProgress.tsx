@@ -21,6 +21,7 @@ import { format } from "date-fns";
 import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import OverallReportDialog from "./reports/OverallReportDialog";
+import { UserRole } from "..";
 
 interface ProgressData {
   count: number;
@@ -34,6 +35,7 @@ interface AssessmentProgressProps {
   overallProgress: ProgressData;
   selectedRunId: string;
   onRunChange: (runId: string) => void;
+  userRole: UserRole;
 }
 
 // ... existing code ...
@@ -45,6 +47,7 @@ const AssessmentProgress = ({
   overallProgress,
   selectedRunId,
   onRunChange,
+  userRole,
 }: AssessmentProgressProps) => {
   const [isActiveRun, setIsActiveRun] = useState(true);
   const [startDate, setStartDate] = useState<Date | null>(null);
@@ -204,14 +207,16 @@ const AssessmentProgress = ({
                       <FileText className="h-3.5 w-3.5 mr-1.5" />
                       View Overall Report
                     </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border-indigo-200 dark:bg-indigo-900/30 dark:text-indigo-300 dark:hover:bg-indigo-900/50 dark:border-indigo-800"
-                    >
-                      <FileText className="h-3.5 w-3.5 mr-1.5" />
-                      Trainer Notes
-                    </Button>
+                    {userRole === "courseTrainer" && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border-indigo-200 dark:bg-indigo-900/30 dark:text-indigo-300 dark:hover:bg-indigo-900/50 dark:border-indigo-800"
+                      >
+                        <FileText className="h-3.5 w-3.5 mr-1.5" />
+                        Trainer Notes
+                      </Button>
+                    )}
                   </div>
                 </>
               ) : (

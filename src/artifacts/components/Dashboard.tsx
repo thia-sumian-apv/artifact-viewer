@@ -25,6 +25,7 @@ import {
 import { dummyAssessmentRunData } from "../types/assessmentRun";
 import { useState } from "react";
 import AssessmentLaunchCard from "./AssessmentLaunchCard";
+import { UserRole } from "..";
 
 interface ProgressData {
   count: number;
@@ -35,6 +36,7 @@ interface DashboardProps {
   cognitiveProgress: ProgressData;
   psychologicalProgress: ProgressData;
   overallProgress: ProgressData;
+  userRole: UserRole;
   getPhysicalProgress: () => ProgressData;
   setActiveTab: (tab: string) => void;
   viewReport: (id: string) => void;
@@ -59,6 +61,7 @@ const Dashboard = ({
   getPhysicalProgress,
   overallProgress,
   setActiveTab,
+  userRole,
 }: DashboardProps) => {
   // Use a sample user (Thomas Garcia)
   const userId = "user-008";
@@ -120,10 +123,8 @@ const Dashboard = ({
         overallProgress={overallProgress}
         selectedRunId={selectedRunId}
         onRunChange={handleAssessmentRunChange}
+        userRole={userRole}
       />
-      <div className="mb-6">
-        {/* Dashboard label and notification buttons removed */}
-      </div>
 
       {/* Assessment Launch Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">

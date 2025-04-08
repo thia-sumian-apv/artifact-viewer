@@ -169,6 +169,7 @@ const NeuroVibesPortal = () => {
             getPhysicalProgress={getPhysicalProgress}
             setActiveTab={setActiveTab}
             viewReport={viewReport}
+            userRole={userRole}
           />
         );
 
