@@ -13,6 +13,30 @@ import darkLogo from "../../assets/images/nv-logo-dark.png";
 import logoCollapsed from "../../assets/images/nv-logo-collapsed.png";
 import type { UserRole } from "..";
 import { Button } from "@/components/ui/button";
+import {
+  PanelLeftClose,
+  PanelRightClose,
+  LayoutDashboard,
+  Building2,
+  User,
+  ChevronDown,
+  Users,
+  ListTodo,
+  BookOpen,
+  GraduationCap,
+  ClipboardList,
+  ClipboardPen,
+  BookCheck,
+  School,
+  FileText,
+  UserPen,
+} from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface SidebarProps {
   activeTab: string;
@@ -23,6 +47,26 @@ interface SidebarProps {
   themeMode?: "light" | "dark" | "system";
 }
 
+// Consistent style classes
+const menuItemBaseStyle = `
+  px-4 py-2.5
+  mx-2
+  rounded-md
+  flex items-center
+  transition-all duration-200
+  cursor-pointer
+`;
+
+const menuItemActiveStyle = `
+  bg-teal-50 dark:bg-teal-900/30 
+  text-teal-600 dark:text-teal-400
+`;
+
+const menuItemInactiveStyle = `
+  text-gray-600 dark:text-gray-300
+  hover:bg-gray-50 dark:hover:bg-gray-700
+`;
+
 const Sidebar = ({
   activeTab,
   showSidebar,
@@ -31,19 +75,26 @@ const Sidebar = ({
   themeMode = "light",
   userRole = "trainee",
 }: SidebarProps) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const shouldShowSidebar = showSidebar || (!showSidebar && isHovered);
   const [courseMenuOpen, setCourseMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [currentLogo, setCurrentLogo] = useState(lightLogo);
   const [assessmentMenuOpen, setAssessmentMenuOpen] = useState(false);
 
-  // Update logo based on theme
+  useEffect(() => {
+    document.documentElement.style.setProperty(
+      "--sidebar-width",
+      shouldShowSidebar ? "16rem" : "5rem"
+    );
+  }, [shouldShowSidebar]);
+
   useEffect(() => {
     if (themeMode === "dark") {
       setCurrentLogo(darkLogo);
     } else if (themeMode === "light") {
       setCurrentLogo(lightLogo);
     } else if (themeMode === "system") {
-      // Check system preference
       const isDarkMode = window.matchMedia(
         "(prefers-color-scheme: dark)"
       ).matches;
@@ -51,14 +102,6 @@ const Sidebar = ({
     }
   }, [themeMode]);
 
-  useEffect(() => {
-    document.documentElement.style.setProperty(
-      "--sidebar-width",
-      showSidebar ? "16rem" : "5rem"
-    );
-  }, [showSidebar]);
-
-  // Listen for system theme changes when in system mode
   useEffect(() => {
     if (themeMode === "system") {
       const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
@@ -71,7 +114,7 @@ const Sidebar = ({
     }
   }, [themeMode]);
 
-  // Define which tabs are visible for each role
+  // Role permissions remain the same...
   const rolePermissions = {
     superAdmin: [
       "dashboard",
@@ -103,17 +146,91 @@ const Sidebar = ({
     trainee: ["dashboard", "assessmentManagement", "reports", "profile"],
   };
 
-  // Get current role's visible tabs
   const visibleTabs = rolePermissions[userRole] || rolePermissions.trainee;
+
+  const renderMenuItem = (
+    icon: React.ReactNode,
+    label: string,
+    isActive: boolean,
+    onClick: () => void,
+    hasSubmenu = false,
+    isSubmenuOpen = false
+  ) => (
+    <div
+      className={`
+      ${menuItemBaseStyle}
+      ${isActive ? menuItemActiveStyle : menuItemInactiveStyle}
+      ${hasSubmenu ? "justify-between" : ""}
+      mt-1
+      overflow-hidden // Add this to prevent content from affecting width
+    `}
+      onClick={onClick}
+      onKeyDown={(e) => e.key === "Enter" && onClick()}
+      role="button"
+      tabIndex={0}
+    >
+      <div className="flex items-center min-w-0">
+        {" "}
+        {/* Add min-w-0 to allow text truncation */}
+        <div className="w-5 h-5 flex-shrink-0 flex items-center justify-center">
+          {icon}
+        </div>
+        {shouldShowSidebar && (
+          <span
+            className={`
+          ml-3 text-sm whitespace-nowrap
+          transition-all duration-300 delay-75 // Add delay to text appearance
+          ${
+            shouldShowSidebar
+              ? "opacity-100 translate-x-0"
+              : "opacity-0 -translate-x-4"
+          }
+        `}
+          >
+            {label}
+          </span>
+        )}
+      </div>
+      {hasSubmenu && shouldShowSidebar && (
+        <ChevronDown
+          className="h-4 w-4 flex-shrink-0 transition-transform duration-200 ml-2"
+          style={{
+            transform: isSubmenuOpen ? "rotate(180deg)" : "",
+          }}
+        />
+      )}
+    </div>
+  );
+
+  const handleCloseSidebar = () => {
+    setShowSidebar(false);
+    setIsHovered(false);
+
+    // Temporarily disable hover detection for a short time
+    // to prevent immediate re-hover
+    const element = document.querySelector(".sidebar-container") as HTMLElement;
+    if (element) {
+      element.style.pointerEvents = "none";
+      setTimeout(() => {
+        element.style.pointerEvents = "auto";
+      }, 300);
+    }
+  };
 
   return (
     <div
-      className={`${
-        showSidebar ? "w-64" : "w-20"
-      } bg-white dark:bg-gray-800 h-screen shadow-md fixed transition-all duration-300 z-10`}
+      className={`
+        sidebar-container
+        ${shouldShowSidebar ? "w-64" : "w-20"} 
+        bg-white dark:bg-gray-800 
+        h-screen shadow-md fixed 
+        transition-all duration-300 ease-in-out z-10 
+      `}
+      onMouseEnter={() => !showSidebar && setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <div className="p-4 flex items-center justify-between">
-        {showSidebar ? (
+        {shouldShowSidebar ? (
           <>
             <div className="flex-1 max-w-[160px]">
               <img
@@ -122,486 +239,222 @@ const Sidebar = ({
                 className="w-full object-contain h-10"
               />
             </div>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setShowSidebar(false)}
-              className="ml-2 p-0 h-8 w-8"
-              aria-label="Collapse sidebar"
-            >
-              <span className="material-symbols-outlined text-gray-500">
-                left_panel_close
-              </span>
-            </Button>
+            {!isHovered ? (
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={handleCloseSidebar}
+                      className="ml-2 p-0 h-8 w-8"
+                      aria-label="Collapse sidebar"
+                    >
+                      <PanelLeftClose className="h-5 w-5 text-gray-500" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent side="right">
+                    <p>Close Sidebar</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            ) : (
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => {
+                        setShowSidebar(true);
+                        setIsHovered(false);
+                      }}
+                      className="ml-2 p-0 h-8 w-8"
+                      aria-label="Expand sidebar"
+                    >
+                      <PanelRightClose className="h-5 w-5 text-gray-500" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent side="right">
+                    <p>Keep Sidebar Open</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            )}
           </>
         ) : (
-          <div className="mx-auto">
-            <div className="mb-2">
+          <>
+            <div
+              className={`flex-1 max-w-[160px] transition-all duration-300 ${
+                isHovered ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              <img
+                src={currentLogo}
+                alt="NeuroVibes Logo"
+                className="w-full object-contain h-10"
+              />
+            </div>
+            <div
+              className={`absolute left-1/2 -translate-x-1/2 transition-all duration-300 ${
+                isHovered ? "opacity-0" : "opacity-100"
+              }`}
+            >
               <img
                 src={logoCollapsed}
                 alt="NeuroVibes Logo"
                 className="w-10 h-10 object-contain"
               />
             </div>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setShowSidebar(true)}
-              className="p-0 h-8 w-8 mx-auto"
-              aria-label="Expand sidebar"
-            >
-              <span className="material-symbols-outlined text-gray-500">
-                right_panel_close
-              </span>
-            </Button>
-          </div>
+          </>
         )}
       </div>
-      <nav className="mt-4">
-        {visibleTabs.includes("dashboard") && (
-          <div
-            className={`px-4 py-2 ${
-              activeTab === "dashboard"
-                ? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400"
-                : "text-gray-600 dark:text-gray-300"
-            } hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mx-2 flex items-center`}
-            onClick={() => setActiveTab("dashboard")}
-            onKeyDown={(e) => e.key === "Enter" && setActiveTab("dashboard")}
-          >
-            <span
-              className="material-symbols-outlined flex items-center justify-center"
-              style={{
-                fontSize: "20px",
-                lineHeight: 1,
-                width: "20px",
-                height: "20px",
-                display: "inline-flex",
-              }}
-            >
-              dashboard
-            </span>
-            {showSidebar && <span className="ml-3 text-sm">Dashboard</span>}
-          </div>
-        )}
 
-        {visibleTabs.includes("companies") && (
-          <div
-            className={`px-4 py-2 mt-1 ${
-              activeTab === "companies"
-                ? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400"
-                : "text-gray-600 dark:text-gray-300"
-            } hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mx-2 flex items-center`}
-            onClick={() => setActiveTab("companies")}
-            onKeyDown={(e) => e.key === "Enter" && setActiveTab("companies")}
-          >
-            <span
-              className="material-symbols-outlined flex items-center justify-center"
-              style={{
-                fontSize: "20px",
-                lineHeight: 1,
-                width: "20px",
-                height: "20px",
-                display: "inline-flex",
-              }}
-            >
-              domain
-            </span>
-            {showSidebar && <span className="ml-3 text-sm">Companies</span>}
-          </div>
-        )}
+      {/* Navigation */}
+      <nav className="mt-4">
+        {visibleTabs.includes("dashboard") &&
+          renderMenuItem(
+            <LayoutDashboard className="h-5 w-5" />,
+            "Dashboard",
+            activeTab === "dashboard",
+            () => setActiveTab("dashboard")
+          )}
+
+        {visibleTabs.includes("companies") &&
+          renderMenuItem(
+            <Building2 className="h-5 w-5" />,
+            "Companies",
+            activeTab === "companies",
+            () => setActiveTab("companies")
+          )}
 
         {visibleTabs.includes("users") && (
           <div className="relative">
-            <div
-              className={`px-4 py-2 mt-1 ${"text-gray-600 dark:text-gray-300"} hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mx-2 flex items-center justify-between`}
-              onClick={() => showSidebar && setUserMenuOpen(!userMenuOpen)}
-              onKeyDown={(e) =>
-                e.key === "Enter" &&
-                showSidebar &&
-                setUserMenuOpen(!userMenuOpen)
-              }
-            >
-              <div className="flex items-center">
-                <span
-                  className="material-symbols-outlined flex items-center justify-center"
-                  style={{
-                    fontSize: "20px",
-                    lineHeight: 1,
-                    width: "20px",
-                    height: "20px",
-                    display: "inline-flex",
-                  }}
-                >
-                  manage_accounts
-                </span>
-                {showSidebar && (
-                  <span className="ml-3 text-sm">User Management</span>
-                )}
-              </div>
-              {showSidebar && (
-                <span
-                  className="material-symbols-outlined flex items-center justify-center transition-transform"
-                  style={{
-                    fontSize: "16px",
-                    lineHeight: 1,
-                    width: "16px",
-                    height: "16px",
-                    display: "inline-flex",
-                    transform: userMenuOpen ? "rotate(180deg)" : "",
-                  }}
-                >
-                  expand_more
-                </span>
-              )}
-            </div>
+            {renderMenuItem(
+              <User className="h-5 w-5" />,
+              "User Management",
+              activeTab === "users",
+              () => shouldShowSidebar && setUserMenuOpen(!userMenuOpen),
+              true,
+              userMenuOpen
+            )}
 
-            {/* Submenu */}
-            {showSidebar && userMenuOpen && (
+            {shouldShowSidebar && userMenuOpen && (
               <div className="ml-6 mt-1 relative">
-                {/* Vertical line */}
                 <div className="absolute left-2 top-0 bottom-0 w-[1px] bg-gray-200 dark:bg-gray-700" />
-
-                <div
-                  className={`px-4 py-2 ${
-                    activeTab === "users"
-                      ? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400"
-                      : "text-gray-600 dark:text-gray-300"
-                  } hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mr-2 ml-6 flex items-center relative`}
-                  onClick={() => setActiveTab("users")}
-                  onKeyDown={(e) => e.key === "Enter" && setActiveTab("users")}
-                >
-                  <span
-                    className="material-symbols-outlined flex items-center justify-center"
-                    style={{
-                      fontSize: "20px",
-                      lineHeight: 1,
-                      width: "20px",
-                      height: "20px",
-                      display: "inline-flex",
-                    }}
-                  >
-                    group
-                  </span>
-                  <span className="ml-3 text-sm">Users</span>
-                </div>
-
-                <div
-                  className={`px-4 py-2 ${
-                    activeTab === "cohorts"
-                      ? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400"
-                      : "text-gray-600 dark:text-gray-300"
-                  } hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mr-2 ml-6 flex items-center relative`}
-                  onClick={() => setActiveTab("cohorts")}
-                  onKeyDown={(e) =>
-                    e.key === "Enter" && setActiveTab("cohorts")
-                  }
-                >
-                  <span
-                    className="material-symbols-outlined flex items-center justify-center"
-                    style={{
-                      fontSize: "20px",
-                      lineHeight: 1,
-                      width: "20px",
-                      height: "20px",
-                      display: "inline-flex",
-                    }}
-                  >
-                    format_list_bulleted
-                  </span>
-                  <span className="ml-3 text-sm">Cohorts</span>
-                </div>
+                {renderMenuItem(
+                  <Users className="h-5 w-5" />,
+                  "Users",
+                  activeTab === "users",
+                  () => setActiveTab("users")
+                )}
+                {renderMenuItem(
+                  <ListTodo className="h-5 w-5" />,
+                  "Cohorts",
+                  activeTab === "cohorts",
+                  () => setActiveTab("cohorts")
+                )}
               </div>
             )}
           </div>
         )}
 
+        {/* Course Management Section */}
         {visibleTabs.includes("course") && (
           <div className="relative">
-            <div
-              className={`px-4 py-2 mt-1 ${
-                activeTab === "course"
-                  ? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400"
-                  : "text-gray-600 dark:text-gray-300"
-              } hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mx-2 flex items-center justify-between`}
-              onClick={() => showSidebar && setCourseMenuOpen(!courseMenuOpen)}
-              onKeyDown={(e) =>
-                e.key === "Enter" &&
-                showSidebar &&
-                setCourseMenuOpen(!courseMenuOpen)
-              }
-            >
-              <div className="flex items-center">
-                <span
-                  className="material-symbols-outlined flex items-center justify-center"
-                  style={{
-                    fontSize: "20px",
-                    lineHeight: 1,
-                    width: "20px",
-                    height: "20px",
-                    display: "inline-flex",
-                  }}
-                >
-                  menu_book
-                </span>
-                {showSidebar && (
-                  <span className="ml-3 text-sm">Course Management</span>
-                )}
-              </div>
-              {showSidebar && (
-                <span
-                  className="material-symbols-outlined flex items-center justify-center transition-transform"
-                  style={{
-                    fontSize: "16px",
-                    lineHeight: 1,
-                    width: "16px",
-                    height: "16px",
-                    display: "inline-flex",
-                    transform: courseMenuOpen ? "rotate(180deg)" : "",
-                  }}
-                >
-                  expand_more
-                </span>
-              )}
-            </div>
+            {renderMenuItem(
+              <BookOpen className="h-5 w-5" />,
+              "Course Management",
+              activeTab === "course",
+              () => shouldShowSidebar && setCourseMenuOpen(!courseMenuOpen),
+              true,
+              courseMenuOpen
+            )}
 
-            {/* Submenu */}
-            {showSidebar && courseMenuOpen && (
+            {shouldShowSidebar && courseMenuOpen && (
               <div className="ml-6 mt-1 relative">
-                {/* Vertical line */}
                 <div className="absolute left-2 top-0 bottom-0 w-[1px] bg-gray-200 dark:bg-gray-700" />
-
-                <div
-                  className={`px-4 py-2 ${
-                    activeTab === "courses"
-                      ? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400"
-                      : "text-gray-600 dark:text-gray-300"
-                  } hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mr-2 ml-6 flex items-center relative`}
-                  onClick={() => setActiveTab("courses")}
-                  onKeyDown={(e) =>
-                    e.key === "Enter" && setActiveTab("courses")
-                  }
-                >
-                  <span
-                    className="material-symbols-outlined flex items-center justify-center"
-                    style={{
-                      fontSize: "20px",
-                      lineHeight: 1,
-                      width: "20px",
-                      height: "20px",
-                      display: "inline-flex",
-                    }}
-                  >
-                    local_library
-                  </span>
-                  <span className="ml-3 text-sm">Courses</span>
-                </div>
-
-                <div
-                  className={`px-4 py-2 ${
-                    activeTab === "assessmentRuns"
-                      ? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400"
-                      : "text-gray-600 dark:text-gray-300"
-                  } hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mr-2 ml-6 flex items-center relative`}
-                  onClick={() => setActiveTab("assessmentRuns")}
-                  onKeyDown={(e) =>
-                    e.key === "Enter" && setActiveTab("assessmentRuns")
-                  }
-                >
-                  <span
-                    className="material-symbols-outlined flex items-center justify-center"
-                    style={{
-                      fontSize: "20px",
-                      lineHeight: 1,
-                      width: "20px",
-                      height: "20px",
-                      display: "inline-flex",
-                    }}
-                  >
-                    assignment
-                  </span>
-                  <span className="ml-3 text-sm">Assessment Runs</span>
-                </div>
+                {renderMenuItem(
+                  <GraduationCap className="h-5 w-5" />,
+                  "Courses",
+                  activeTab === "courses",
+                  () => setActiveTab("courses")
+                )}
+                {renderMenuItem(
+                  <ClipboardList className="h-5 w-5" />,
+                  "Assessment Runs",
+                  activeTab === "assessmentRuns",
+                  () => setActiveTab("assessmentRuns")
+                )}
               </div>
             )}
           </div>
         )}
 
-        {/* New Assessment Management Section */}
+        {/* Assessment Management Section */}
         {visibleTabs.includes("assessmentManagement") && (
           <div className="relative">
-            <div
-              className={`px-4 py-2 mt-1 ${
-                activeTab === "assessmentManagement"
-                  ? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400"
-                  : "text-gray-600 dark:text-gray-300"
-              } hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mx-2 flex items-center justify-between`}
-              onClick={() =>
-                showSidebar && setAssessmentMenuOpen(!assessmentMenuOpen)
-              }
-              onKeyDown={(e) =>
-                e.key === "Enter" &&
-                showSidebar &&
-                setAssessmentMenuOpen(!assessmentMenuOpen)
-              }
-            >
-              <div className="flex items-center">
-                <span
-                  className="material-symbols-outlined flex items-center justify-center"
-                  style={{
-                    fontSize: "20px",
-                    lineHeight: 1,
-                    width: "20px",
-                    height: "20px",
-                    display: "inline-flex",
-                  }}
-                >
-                  assessment
-                </span>
-                {showSidebar && (
-                  <span className="ml-3 text-sm">Assessments</span>
-                )}
-              </div>
-              {showSidebar && (
-                <span
-                  className="material-symbols-outlined flex items-center justify-center transition-transform"
-                  style={{
-                    fontSize: "16px",
-                    lineHeight: 1,
-                    width: "16px",
-                    height: "16px",
-                    display: "inline-flex",
-                    transform: assessmentMenuOpen ? "rotate(180deg)" : "",
-                  }}
-                >
-                  expand_more
-                </span>
-              )}
-            </div>
+            {renderMenuItem(
+              <ClipboardPen className="h-5 w-5" />,
+              "Assessments",
+              activeTab === "assessmentManagement",
+              () =>
+                shouldShowSidebar && setAssessmentMenuOpen(!assessmentMenuOpen),
+              true,
+              assessmentMenuOpen
+            )}
 
-            {/* Submenu */}
-            {showSidebar && assessmentMenuOpen && (
+            {shouldShowSidebar && assessmentMenuOpen && (
               <div className="ml-6 mt-1 relative">
-                {/* Vertical line */}
                 <div className="absolute left-2 top-0 bottom-0 w-[1px] bg-gray-200 dark:bg-gray-700" />
-
-                <div
-                  className={`px-4 py-2 ${
-                    activeTab === "testAssessments"
-                      ? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400"
-                      : "text-gray-600 dark:text-gray-300"
-                  } hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mr-2 ml-6 flex items-center relative`}
-                  onClick={() => setActiveTab("testAssessments")}
-                  onKeyDown={(e) =>
-                    e.key === "Enter" && setActiveTab("testAssessments")
-                  }
-                >
-                  <span
-                    className="material-symbols-outlined flex items-center justify-center"
-                    style={{
-                      fontSize: "20px",
-                      lineHeight: 1,
-                      width: "20px",
-                      height: "20px",
-                      display: "inline-flex",
-                    }}
-                  >
-                    quiz
-                  </span>
-                  <span className="ml-3 text-sm">Test Assessments</span>
-                </div>
-
-                <div
-                  className={`px-4 py-2 ${
-                    activeTab === "trainingModules"
-                      ? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400"
-                      : "text-gray-600 dark:text-gray-300"
-                  } hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mr-2 ml-6 flex items-center relative`}
-                  onClick={() => setActiveTab("trainingModules")}
-                  onKeyDown={(e) =>
-                    e.key === "Enter" && setActiveTab("trainingModules")
-                  }
-                >
-                  <span
-                    className="material-symbols-outlined flex items-center justify-center"
-                    style={{
-                      fontSize: "20px",
-                      lineHeight: 1,
-                      width: "20px",
-                      height: "20px",
-                      display: "inline-flex",
-                    }}
-                  >
-                    school
-                  </span>
-                  <span className="ml-3 text-sm">Training Modules</span>
-                </div>
+                {renderMenuItem(
+                  <BookCheck className="h-5 w-5" />,
+                  "Test Assessments",
+                  activeTab === "testAssessments",
+                  () => setActiveTab("testAssessments")
+                )}
+                {renderMenuItem(
+                  <School className="h-5 w-5" />,
+                  "Training Modules",
+                  activeTab === "trainingModules",
+                  () => setActiveTab("trainingModules")
+                )}
               </div>
             )}
           </div>
         )}
 
-        {visibleTabs.includes("reports") && (
-          <div
-            className={`px-4 py-2 mt-1 ${
-              activeTab === "reports"
-                ? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400"
-                : "text-gray-600 dark:text-gray-300"
-            } hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mx-2 flex items-center`}
-            onClick={() => setActiveTab("reports")}
-            onKeyDown={(e) => e.key === "Enter" && setActiveTab("reports")}
-          >
-            <span
-              className="material-symbols-outlined flex items-center justify-center"
-              style={{
-                fontSize: "20px",
-                lineHeight: 1,
-                width: "20px",
-                height: "20px",
-                display: "inline-flex",
-              }}
-            >
-              description
-            </span>
-            {showSidebar && <span className="ml-3 text-sm">Reports</span>}
-          </div>
-        )}
+        {visibleTabs.includes("reports") &&
+          renderMenuItem(
+            <FileText className="h-5 w-5" />,
+            "Reports",
+            activeTab === "reports",
+            () => setActiveTab("reports")
+          )}
 
-        {visibleTabs.includes("profile") && (
-          <div
-            className={`px-4 py-2 mt-1 ${
-              activeTab === "profile"
-                ? "bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400"
-                : "text-gray-600 dark:text-gray-300"
-            } hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer rounded-md mx-2 flex items-center`}
-            onClick={() => setActiveTab("profile")}
-            onKeyDown={(e) => e.key === "Enter" && setActiveTab("profile")}
-          >
-            <span
-              className="material-symbols-outlined flex items-center justify-center"
-              style={{
-                fontSize: "20px",
-                lineHeight: 1,
-                width: "20px",
-                height: "20px",
-                display: "inline-flex",
-              }}
-            >
-              person
-            </span>
-            {showSidebar && <span className="ml-3 text-sm">Profile</span>}
-          </div>
-        )}
+        {visibleTabs.includes("profile") &&
+          renderMenuItem(
+            <UserPen className="h-5 w-5" />,
+            "Profile",
+            activeTab === "profile",
+            () => setActiveTab("profile")
+          )}
       </nav>
 
+      {/* User Profile Section */}
       <div className="absolute bottom-4 w-full px-4">
-        {/* User Profile Dropdown */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button
               type="button"
-              className={`w-full flex items-center ${
-                showSidebar ? "px-2 py-3" : "justify-center p-2" // Added more padding when collapsed
-              } bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600`}
+              className={`
+                w-full flex items-center
+                ${shouldShowSidebar ? "px-2 py-3" : "justify-center p-2"}
+                bg-gray-100 dark:bg-gray-700 
+                rounded-lg 
+                hover:bg-gray-200 dark:hover:bg-gray-600
+                transition-all duration-200
+              `}
             >
               <Avatar className="h-8 w-8">
                 <AvatarImage src="" alt="User" />
@@ -609,7 +462,7 @@ const Sidebar = ({
                   JD
                 </AvatarFallback>
               </Avatar>
-              {showSidebar && (
+              {shouldShowSidebar && (
                 <div className="ml-3 text-left">
                   <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
                     John Doe

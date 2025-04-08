@@ -133,7 +133,6 @@ const Dashboard = ({
           type="psychological"
           progress={psychologicalProgress}
           icon={Activity}
-          backgroundImage="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
           selectedRunId={selectedRunId}
           onStart={() => setActiveTab("psychological")}
         />
@@ -144,7 +143,6 @@ const Dashboard = ({
           type="cognitive"
           progress={cognitiveProgress}
           icon={Brain}
-          backgroundImage="https://images.unsplash.com/photo-1571310100246-e0676f359b42?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
           selectedRunId={selectedRunId}
           onStart={() => setActiveTab("cognitive")}
         />

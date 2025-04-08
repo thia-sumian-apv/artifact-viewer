@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { dummyAssessmentRunData } from "../types/assessmentRun";
 import { format } from "date-fns";
 import { useState, useEffect } from "react";
+import psychologicalBg from "@/assets/images/psychological-background-image.jpg";
+import cognitiveBg from "@/assets/images/cognitive-background-image.jpg";
 
 interface ProgressData {
   count: number;
@@ -17,7 +19,6 @@ interface AssessmentLaunchCardProps {
   type: "psychological" | "cognitive";
   progress: ProgressData;
   icon: LucideIcon;
-  backgroundImage: string;
   selectedRunId: string;
   onStart: () => void;
 }
@@ -28,7 +29,6 @@ const AssessmentLaunchCard = ({
   type,
   progress,
   icon: Icon,
-  backgroundImage,
   selectedRunId,
   onStart,
 }: AssessmentLaunchCardProps) => {
@@ -47,6 +47,10 @@ const AssessmentLaunchCard = ({
       setStartDate(runStartDate);
     }
   }, [selectedRunId]);
+
+  const getBackgroundImage = () => {
+    return type === "psychological" ? psychologicalBg : cognitiveBg;
+  };
 
   const getGradientClasses = () => {
     if (type === "psychological") {
@@ -82,7 +86,7 @@ const AssessmentLaunchCard = ({
         <div
           className="absolute inset-0 opacity-20"
           style={{
-            backgroundImage: `url('${backgroundImage}')`,
+            backgroundImage: `url('${getBackgroundImage()}')`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}

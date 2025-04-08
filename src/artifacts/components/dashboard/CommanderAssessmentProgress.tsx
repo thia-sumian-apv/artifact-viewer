@@ -8,7 +8,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Progress } from "@/components/ui/progress";
-import { Calendar, Users } from "lucide-react";
+import { Brain, Calendar, Dumbbell, Users } from "lucide-react";
+import { HeadCircuit } from "@phosphor-icons/react";
 
 // Only require minimal props now - the component handles its own data
 interface CompanyAssessmentProgressProps {
@@ -235,12 +236,7 @@ const CompanyAssessmentProgress: React.FC<CompanyAssessmentProgressProps> = ({
                   <h4 className="text-sm font-medium text-white">
                     Physical Assessment
                   </h4>
-                  <span
-                    className="material-symbols-outlined"
-                    style={{ fontSize: "24px", lineHeight: 1 }}
-                  >
-                    exercise
-                  </span>{" "}
+                  <Dumbbell className="w-6 h-6" />
                 </div>
 
                 <div className="flex items-center justify-between mb-1.5">
@@ -271,12 +267,7 @@ const CompanyAssessmentProgress: React.FC<CompanyAssessmentProgressProps> = ({
                   <h4 className="text-sm font-medium text-white">
                     Psychological Assessment
                   </h4>
-                  <span
-                    className="material-icons"
-                    style={{ fontSize: "24px", lineHeight: 1 }}
-                  >
-                    psychology
-                  </span>
+                  <HeadCircuit className="w-6 h-6" weight="bold" />
                 </div>
 
                 <div className="flex items-center justify-between mb-1.5">
@@ -307,12 +298,7 @@ const CompanyAssessmentProgress: React.FC<CompanyAssessmentProgressProps> = ({
                   <h4 className="text-sm font-medium text-white">
                     Cognitive Assessment
                   </h4>
-                  <span
-                    className="material-symbols-outlined"
-                    style={{ fontSize: "24px", lineHeight: 1 }}
-                  >
-                    neurology
-                  </span>
+                  <Brain className="w-6 h-6" />
                 </div>
 
                 <div className="flex items-center justify-between mb-1.5">
@@ -381,12 +367,7 @@ const CompanyAssessmentProgress: React.FC<CompanyAssessmentProgressProps> = ({
                     Physical
                   </div>
                   <div className="flex items-center justify-center space-x-1 mt-1">
-                    <span
-                      className="material-symbols-outlined  text-purple-500"
-                      style={{ fontSize: "16px", lineHeight: 1 }}
-                    >
-                      exercise
-                    </span>
+                    <Dumbbell className="w-4 h-4 text-purple-500" />
                     <span className="text-xs font-semibold">
                       {progress.physical.percentage}%
                     </span>
@@ -397,12 +378,10 @@ const CompanyAssessmentProgress: React.FC<CompanyAssessmentProgressProps> = ({
                     Psychological
                   </div>
                   <div className="flex items-center justify-center space-x-1 mt-1">
-                    <span
-                      className="material-icons  text-blue-500"
-                      style={{ fontSize: "16px", lineHeight: 1 }}
-                    >
-                      psychology
-                    </span>
+                    <HeadCircuit
+                      className="w-4 h-4 text-blue-500"
+                      weight="bold"
+                    />
                     <span className="text-xs font-semibold">
                       {progress.psychological.percentage}%
                     </span>
@@ -413,12 +392,7 @@ const CompanyAssessmentProgress: React.FC<CompanyAssessmentProgressProps> = ({
                     Cognitive
                   </div>
                   <div className="flex items-center justify-center space-x-1 mt-1">
-                    <span
-                      className="material-symbols-outlined  text-teal-500"
-                      style={{ fontSize: "16px", lineHeight: 1 }}
-                    >
-                      neurology
-                    </span>
+                    <Brain className="w-4 h-4 text-teal-500" />
                     <span className="text-xs font-semibold">
                       {progress.cognitive.percentage}%
                     </span>
