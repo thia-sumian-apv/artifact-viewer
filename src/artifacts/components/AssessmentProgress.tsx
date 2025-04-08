@@ -1,11 +1,4 @@
-import {
-  Activity,
-  Brain,
-  Calendar,
-  Clock,
-  Dumbbell,
-  FileText,
-} from "lucide-react";
+import { Brain, Calendar, Clock, Dumbbell, FileText } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
@@ -22,6 +15,7 @@ import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import OverallReportDialog from "./reports/OverallReportDialog";
 import { UserRole } from "..";
+import { HeadCircuit } from "@phosphor-icons/react";
 
 interface ProgressData {
   count: number;
@@ -139,7 +133,10 @@ const AssessmentProgress = ({
                       /3
                     </p>
                   </div>
-                  <Activity className="h-6 w-6 text-white/80" />
+                  <HeadCircuit
+                    className="h-6 w-6 text-white/80"
+                    weight="bold"
+                  />
                 </div>
                 <div className="mt-2">
                   <Progress

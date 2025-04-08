@@ -12,7 +12,6 @@ import {
   Medal,
   Route,
   Mountain,
-  Activity,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -26,6 +25,7 @@ import { dummyAssessmentRunData } from "../types/assessmentRun";
 import { useState } from "react";
 import AssessmentLaunchCard from "./AssessmentLaunchCard";
 import { UserRole } from "..";
+import { HeadCircuit } from "@phosphor-icons/react";
 
 interface ProgressData {
   count: number;
@@ -133,7 +133,7 @@ const Dashboard = ({
           description="Evaluate your leadership behaviors, team resilience, and personal motivation levels through comprehensive self-assessment surveys."
           type="psychological"
           progress={psychologicalProgress}
-          icon={Activity}
+          icon={HeadCircuit}
           selectedRunId={selectedRunId}
           onStart={() => setActiveTab("psychological")}
         />

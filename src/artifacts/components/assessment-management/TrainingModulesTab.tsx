@@ -8,10 +8,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { format } from "date-fns";
-import { BookOpen, Lightbulb, Activity } from "lucide-react";
+import { BookOpen, Lightbulb } from "lucide-react";
 import type { Assessment } from "../AssessmentCard";
 import { dummyAssessmentRunData } from "../../types/assessmentRun";
 import TrainingTab from "./TrainingTab";
+import { HeadCircuit } from "@phosphor-icons/react";
 
 const TrainingModulesTab = () => {
   const [selectedRunId, setSelectedRunId] = useState(
@@ -52,7 +53,7 @@ const TrainingModulesTab = () => {
           "Guided exercises for optimal physical recovery and performance.",
         duration: "25-30 mins",
         status: "available",
-        icon: Activity,
+        icon: HeadCircuit,
         type: "physical" as const,
       },
     ],
