@@ -1,11 +1,4 @@
-import {
-  Activity,
-  Brain,
-  Calendar,
-  Clock,
-  Dumbbell,
-  FileText,
-} from "lucide-react";
+import { Brain, Calendar, Clock, Dumbbell, FileText } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
@@ -21,6 +14,8 @@ import { format } from "date-fns";
 import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import OverallReportDialog from "./reports/OverallReportDialog";
+import { UserRole } from "..";
+import { HeadCircuit } from "@phosphor-icons/react";
 
 interface ProgressData {
   count: number;
@@ -34,6 +29,7 @@ interface AssessmentProgressProps {
   overallProgress: ProgressData;
   selectedRunId: string;
   onRunChange: (runId: string) => void;
+  userRole: UserRole;
 }
 
 // ... existing code ...
@@ -45,6 +41,7 @@ const AssessmentProgress = ({
   overallProgress,
   selectedRunId,
   onRunChange,
+  userRole,
 }: AssessmentProgressProps) => {
   const [isActiveRun, setIsActiveRun] = useState(true);
   const [startDate, setStartDate] = useState<Date | null>(null);
@@ -136,7 +133,10 @@ const AssessmentProgress = ({
                       /3
                     </p>
                   </div>
-                  <Activity className="h-6 w-6 text-white/80" />
+                  <HeadCircuit
+                    className="h-6 w-6 text-white/80"
+                    weight="bold"
+                  />
                 </div>
                 <div className="mt-2">
                   <Progress
@@ -204,14 +204,16 @@ const AssessmentProgress = ({
                       <FileText className="h-3.5 w-3.5 mr-1.5" />
                       View Overall Report
                     </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border-indigo-200 dark:bg-indigo-900/30 dark:text-indigo-300 dark:hover:bg-indigo-900/50 dark:border-indigo-800"
-                    >
-                      <FileText className="h-3.5 w-3.5 mr-1.5" />
-                      Trainer Notes
-                    </Button>
+                    {userRole === "courseTrainer" && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border-indigo-200 dark:bg-indigo-900/30 dark:text-indigo-300 dark:hover:bg-indigo-900/50 dark:border-indigo-800"
+                      >
+                        <FileText className="h-3.5 w-3.5 mr-1.5" />
+                        Trainer Notes
+                      </Button>
+                    )}
                   </div>
                 </>
               ) : (

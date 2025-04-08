@@ -12,7 +12,6 @@ import {
   Medal,
   Route,
   Mountain,
-  Activity,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -25,6 +24,8 @@ import {
 import { dummyAssessmentRunData } from "../types/assessmentRun";
 import { useState } from "react";
 import AssessmentLaunchCard from "./AssessmentLaunchCard";
+import { UserRole } from "..";
+import { HeadCircuit } from "@phosphor-icons/react";
 
 interface ProgressData {
   count: number;
@@ -35,6 +36,7 @@ interface DashboardProps {
   cognitiveProgress: ProgressData;
   psychologicalProgress: ProgressData;
   overallProgress: ProgressData;
+  userRole: UserRole;
   getPhysicalProgress: () => ProgressData;
   setActiveTab: (tab: string) => void;
   viewReport: (id: string) => void;
@@ -59,6 +61,7 @@ const Dashboard = ({
   getPhysicalProgress,
   overallProgress,
   setActiveTab,
+  userRole,
 }: DashboardProps) => {
   // Use a sample user (Thomas Garcia)
   const userId = "user-008";
@@ -120,10 +123,8 @@ const Dashboard = ({
         overallProgress={overallProgress}
         selectedRunId={selectedRunId}
         onRunChange={handleAssessmentRunChange}
+        userRole={userRole}
       />
-      <div className="mb-6">
-        {/* Dashboard label and notification buttons removed */}
-      </div>
 
       {/* Assessment Launch Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -132,8 +133,7 @@ const Dashboard = ({
           description="Evaluate your leadership behaviors, team resilience, and personal motivation levels through comprehensive self-assessment surveys."
           type="psychological"
           progress={psychologicalProgress}
-          icon={Activity}
-          backgroundImage="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+          icon={HeadCircuit}
           selectedRunId={selectedRunId}
           onStart={() => setActiveTab("psychological")}
         />
@@ -144,7 +144,6 @@ const Dashboard = ({
           type="cognitive"
           progress={cognitiveProgress}
           icon={Brain}
-          backgroundImage="https://images.unsplash.com/photo-1571310100246-e0676f359b42?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
           selectedRunId={selectedRunId}
           onStart={() => setActiveTab("cognitive")}
         />

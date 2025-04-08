@@ -1,4 +1,11 @@
-import { Brain, Eye, Users, Shield, Heart, Volleyball } from "lucide-react";
+import {
+  Users,
+  ShieldUser,
+  Anvil,
+  BrainCog,
+  Shapes,
+  Boxes,
+} from "lucide-react";
 import { Assessment } from "../AssessmentCard";
 
 export const baseAssessments: {
@@ -14,7 +21,7 @@ export const baseAssessments: {
         "Measures your ability to maintain focus and suppress impulsive responses over time.",
       duration: "10-12 mins",
       status: "available",
-      icon: Brain,
+      icon: BrainCog,
       type: "cognitive",
     },
     {
@@ -24,7 +31,7 @@ export const baseAssessments: {
         "Tests your ability to memorize and identify visual patterns under time constraints.",
       duration: "15-20 mins",
       status: "completed",
-      icon: Eye,
+      icon: Shapes,
       type: "cognitive",
     },
     {
@@ -34,7 +41,7 @@ export const baseAssessments: {
         "Evaluates your ability to visualize and strategize spatial arrangements with minimal moves.",
       duration: "12-15 mins",
       status: "available",
-      icon: Volleyball,
+      icon: Boxes,
       type: "cognitive",
     },
   ],
@@ -56,7 +63,7 @@ export const baseAssessments: {
         "Measures your team's ability to bounce back from challenges and adapt to change.",
       duration: "10-15 mins",
       status: "available",
-      icon: Shield,
+      icon: ShieldUser,
       type: "psychological",
     },
     {
@@ -66,7 +73,7 @@ export const baseAssessments: {
         "Evaluates your motivation level and sense of autonomy, competence, and relatedness.",
       duration: "10 mins",
       status: "available",
-      icon: Heart,
+      icon: Anvil,
       type: "psychological",
     },
   ],
