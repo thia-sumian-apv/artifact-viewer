@@ -143,7 +143,6 @@ const ML360ProfilesRadar: React.FC<ML360ProfilesRadarProps> = ({
           />
           <div className="absolute bottom-4 left-6">
             <h3 className="text-2xl font-bold text-white">ML360 Profiles</h3>
-            <p className="text-white/80 text-sm">Mindfulness dimensions</p>
           </div>
           <div className="absolute top-4 right-4">
             <Brain className="text-white/80 w-8 h-8" />

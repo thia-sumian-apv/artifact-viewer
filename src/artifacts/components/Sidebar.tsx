@@ -18,18 +18,17 @@ import {
   PanelRightClose,
   LayoutDashboard,
   Building2,
-  User,
+  UserCog,
   ChevronDown,
   Users,
-  ListTodo,
-  BookOpen,
-  GraduationCap,
   ClipboardList,
-  ClipboardPen,
   BookCheck,
   School,
   FileText,
   UserPen,
+  List,
+  BookOpenText,
+  LibraryBig,
 } from "lucide-react";
 import {
   Tooltip,
@@ -331,7 +330,7 @@ const Sidebar = ({
         {visibleTabs.includes("users") && (
           <div className="relative">
             {renderMenuItem(
-              <User className="h-5 w-5" />,
+              <UserCog className="h-5 w-5" />,
               "User Management",
               activeTab === "users",
               () => shouldShowSidebar && setUserMenuOpen(!userMenuOpen),
@@ -349,7 +348,7 @@ const Sidebar = ({
                   () => setActiveTab("users")
                 )}
                 {renderMenuItem(
-                  <ListTodo className="h-5 w-5" />,
+                  <List className="h-5 w-5" />,
                   "Cohorts",
                   activeTab === "cohorts",
                   () => setActiveTab("cohorts")
@@ -363,7 +362,7 @@ const Sidebar = ({
         {visibleTabs.includes("course") && (
           <div className="relative">
             {renderMenuItem(
-              <BookOpen className="h-5 w-5" />,
+              <BookOpenText className="h-5 w-5" />,
               "Course Management",
               activeTab === "course",
               () => shouldShowSidebar && setCourseMenuOpen(!courseMenuOpen),
@@ -375,7 +374,7 @@ const Sidebar = ({
               <div className="ml-6 mt-1 relative">
                 <div className="absolute left-2 top-0 bottom-0 w-[1px] bg-gray-200 dark:bg-gray-700" />
                 {renderMenuItem(
-                  <GraduationCap className="h-5 w-5" />,
+                  <LibraryBig className="h-5 w-5" />,
                   "Courses",
                   activeTab === "courses",
                   () => setActiveTab("courses")
@@ -395,7 +394,7 @@ const Sidebar = ({
         {visibleTabs.includes("assessmentManagement") && (
           <div className="relative">
             {renderMenuItem(
-              <ClipboardPen className="h-5 w-5" />,
+              <FileText className="h-5 w-5" />,
               "Assessments",
               activeTab === "assessmentManagement",
               () =>

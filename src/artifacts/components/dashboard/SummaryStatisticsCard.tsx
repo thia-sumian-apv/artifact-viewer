@@ -155,7 +155,6 @@ const SummaryStatisticsCard: React.FC<SummaryStatisticsCardProps> = ({
           <h3 className="text-2xl font-bold text-white">
             Performance Overview
           </h3>
-          <p className="text-white/80 text-sm">Statistical Summary</p>
         </div>
         <ActivitySquare className="absolute top-4 right-4 text-white/80 w-8 h-8" />
       </div>
