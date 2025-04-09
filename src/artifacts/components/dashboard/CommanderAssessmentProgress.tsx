@@ -8,7 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Progress } from "@/components/ui/progress";
-import { Brain, Calendar, Dumbbell, Users } from "lucide-react";
+import { Brain, Calendar, Dumbbell } from "lucide-react";
 import { HeadCircuit } from "@phosphor-icons/react";
 
 // Only require minimal props now - the component handles its own data
@@ -322,85 +322,6 @@ const CompanyAssessmentProgress: React.FC<CompanyAssessmentProgressProps> = ({
               </CardContent>
             </Card>
           </div>
-
-          {/* Overall progress row spanning full width */}
-          <Card className="col-span-1 lg:col-span-4 bg-white dark:bg-gray-800 border-gray-100 dark:border-gray-700 shadow-sm">
-            <CardContent className="p-4">
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center">
-                  <Users className="h-4 w-4 mr-1.5 text-blue-500" />
-                  <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Overall Assessment Progress
-                  </h3>
-                </div>
-                <div className="text-sm font-medium text-blue-600 dark:text-blue-400">
-                  {progress.overall.count} of{" "}
-                  {(selectedCompanyInfo?.totalTrainees ?? 0) * 3} total
-                  assessments
-                </div>
-              </div>
-
-              <div className="relative pt-1">
-                <div className="flex items-center justify-between mb-1">
-                  <div>
-                    <span className="text-xs font-semibold inline-block text-gray-600 dark:text-gray-400">
-                      Company-wide completion rate
-                    </span>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-xs font-semibold inline-block text-blue-600 dark:text-blue-400">
-                      {progress.overall.percentage}%
-                    </span>
-                  </div>
-                </div>
-                <div className="overflow-hidden h-2.5 text-xs flex rounded-full bg-gray-100 dark:bg-gray-700 mb-3">
-                  <div
-                    style={{ width: `${progress.overall.percentage}%` }}
-                    className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-gradient-to-r from-blue-500 to-indigo-500"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-3 gap-2 text-center mt-1">
-                <div className="px-1">
-                  <div className="text-xs font-medium text-gray-600 dark:text-gray-400">
-                    Physical
-                  </div>
-                  <div className="flex items-center justify-center space-x-1 mt-1">
-                    <Dumbbell className="w-4 h-4 text-purple-500" />
-                    <span className="text-xs font-semibold">
-                      {progress.physical.percentage}%
-                    </span>
-                  </div>
-                </div>
-                <div className="px-1">
-                  <div className="text-xs font-medium text-gray-600 dark:text-gray-400">
-                    Psychological
-                  </div>
-                  <div className="flex items-center justify-center space-x-1 mt-1">
-                    <HeadCircuit
-                      className="w-4 h-4 text-blue-500"
-                      weight="bold"
-                    />
-                    <span className="text-xs font-semibold">
-                      {progress.psychological.percentage}%
-                    </span>
-                  </div>
-                </div>
-                <div className="px-1">
-                  <div className="text-xs font-medium text-gray-600 dark:text-gray-400">
-                    Cognitive
-                  </div>
-                  <div className="flex items-center justify-center space-x-1 mt-1">
-                    <Brain className="w-4 h-4 text-teal-500" />
-                    <span className="text-xs font-semibold">
-                      {progress.cognitive.percentage}%
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
         </div>
       </CardContent>
     </Card>

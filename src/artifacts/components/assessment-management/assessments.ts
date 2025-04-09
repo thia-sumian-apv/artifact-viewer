@@ -1,12 +1,6 @@
-import {
-  Users,
-  ShieldUser,
-  Anvil,
-  BrainCog,
-  Shapes,
-  Boxes,
-} from "lucide-react";
+import { ShieldUser, Anvil, BrainCog, Shapes, Boxes } from "lucide-react";
 import { Assessment } from "../AssessmentCard";
+import { Handshake } from "@phosphor-icons/react";
 
 export const baseAssessments: {
   cognitive: Assessment[];
@@ -53,7 +47,7 @@ export const baseAssessments: {
         "Evaluates leadership behaviors reflecting mindfulness in workplace scenarios.",
       duration: "15-20 mins",
       status: "completed",
-      icon: Users,
+      icon: Handshake,
       type: "psychological",
     },
     {
