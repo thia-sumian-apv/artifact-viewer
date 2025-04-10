@@ -229,13 +229,14 @@ const BoxPlotComparison: React.FC<BoxPlotComparisonProps> = ({
       marginLeft: 80,
       marginRight: 40,
       marginTop: 40,
-      marginBottom: 60, // Increased bottom margin for x-axis labels
+      marginBottom: 60,
       y: {
         label: getMetricTitle(),
         domain: [valueExtent[0] - padding, valueExtent[1] + padding],
         grid: true,
         labelAnchor: "center",
         labelOffset: 60,
+        tickFormat: ".1f",
       },
       x: {
         label: groupBy === "age" ? "Age Group" : "Detachment",
@@ -244,17 +245,21 @@ const BoxPlotComparison: React.FC<BoxPlotComparisonProps> = ({
         labelOffset: 40,
         tickSize: 6,
       },
+      style: {
+        background: "transparent",
+        color: "#374151",
+        fontSize: "12px",
+        overflow: "visible",
+      },
       marks: [
-        // 1. Rules for the whiskers (min to max)
         Plot.ruleX(transformedData, {
           x: "group",
           y1: "min",
           y2: "max",
-          stroke: "#000",
+          stroke: "#374151",
           strokeWidth: 1.5,
         }),
 
-        // 2. Rectangles for the interquartile range (Q1 to Q3)
         Plot.rectY(transformedData, {
           x: "group",
           y1: "q1",
@@ -265,37 +270,31 @@ const BoxPlotComparison: React.FC<BoxPlotComparisonProps> = ({
                 colors.length
             ],
           fillOpacity: 0.8,
-          stroke: "#000",
+          stroke: "#374151",
           strokeWidth: 1.5,
           insetLeft: 0.3,
           insetRight: 0.3,
         }),
 
-        // 3. Horizontal lines for the median (fixed from ruleY to ruleX)
         Plot.ruleY(transformedData, {
           x1: (d) => d.group,
           x2: (d) => d.group,
           y: "median",
-          stroke: "#000",
+          stroke: "#1f2937",
           strokeWidth: 2.5,
-          insetLeft: -0.3, // Adjusted to be wider than the box
-          insetRight: -0.3, // Adjusted to be wider than the box
+          insetLeft: -0.3,
+          insetRight: -0.3,
         }),
 
-        // 4. Dots for the outliers
         Plot.dot(outlierData, {
           x: "group",
           y: "value",
-          fill: "black",
-          stroke: "#000",
+          fill: "#1f2937",
+          stroke: "#374151",
           strokeWidth: 1,
           r: 3.5,
         }),
       ],
-      style: {
-        background: "transparent",
-        color: "currentColor",
-      },
     });
 
     // Render the plot
@@ -311,7 +310,7 @@ const BoxPlotComparison: React.FC<BoxPlotComparisonProps> = ({
 
   if (loading) {
     return (
-      <Card className="overflow-hidden shadow-lg transform hover:scale-[1.01] transition-all duration-200 border-0">
+      <Card className="overflow-hidden shadow-lg transform hover:scale-[1.01] transition-all duration-200 border border-gray-200">
         <div className="h-40 bg-gradient-to-r from-blue-600 to-indigo-600 relative overflow-hidden">
           <div className="absolute bottom-4 left-6">
             <h3 className="text-2xl font-bold text-white">
@@ -320,7 +319,7 @@ const BoxPlotComparison: React.FC<BoxPlotComparisonProps> = ({
             <p className="text-white/80 text-sm">Loading data...</p>
           </div>
         </div>
-        <CardContent className="p-6">
+        <CardContent className="p-6 bg-white">
           <Skeleton className="h-[280px] w-full" />
         </CardContent>
       </Card>
@@ -329,14 +328,14 @@ const BoxPlotComparison: React.FC<BoxPlotComparisonProps> = ({
 
   if (error || !data) {
     return (
-      <Card className="overflow-hidden shadow-lg transform hover:scale-[1.01] transition-all duration-200 border-0">
+      <Card className="overflow-hidden shadow-lg transform hover:scale-[1.01] transition-all duration-200 border border-gray-200">
         <div className="h-40 bg-gradient-to-r from-red-600 to-pink-600 relative overflow-hidden">
           <div className="absolute bottom-4 left-6">
             <h3 className="text-2xl font-bold text-white">Error</h3>
             <p className="text-white/80 text-sm">Failed to load data</p>
           </div>
         </div>
-        <CardContent className="p-6">
+        <CardContent className="p-6 bg-white">
           <div className="flex items-center justify-center h-[280px]">
             <p className="text-red-500">
               {error || "Failed to load boxplot data"}
@@ -348,7 +347,7 @@ const BoxPlotComparison: React.FC<BoxPlotComparisonProps> = ({
   }
 
   return (
-    <Card className="overflow-hidden shadow-lg transform hover:scale-[1.01] transition-all duration-200 border-0">
+    <Card className="overflow-hidden shadow-lg transform hover:scale-[1.01] transition-all duration-200 bg-white border">
       <div className="h-40 bg-gradient-to-r from-indigo-900 via-purple-800 to-indigo-700 relative overflow-hidden">
         <div
           className="absolute inset-0 opacity-20"
@@ -378,22 +377,22 @@ const BoxPlotComparison: React.FC<BoxPlotComparisonProps> = ({
               }
               className="w-full sm:w-auto"
             >
-              <TabsList className="grid grid-cols-3">
+              <TabsList className="grid grid-cols-3 bg-gray-100 p-1">
                 <TabsTrigger
                   value="physical"
-                  className="flex items-center justify-center gap-1 text-xs"
+                  className="flex items-center justify-center gap-1 text-xs data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-sm text-gray-600"
                 >
                   <Dumbbell className="h-4 w-4" /> Physical
                 </TabsTrigger>
                 <TabsTrigger
                   value="cognitive"
-                  className="flex items-center justify-center gap-1 text-xs"
+                  className="flex items-center justify-center gap-1 text-xs data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-sm text-gray-600"
                 >
                   <Brain className="h-4 w-4" /> Cognitive
                 </TabsTrigger>
                 <TabsTrigger
                   value="ml360"
-                  className="flex items-center gap-1 text-xs"
+                  className="flex items-center gap-1 text-xs data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-sm text-gray-600"
                 >
                   <TrendingUp className="h-3 w-3" /> ML360
                 </TabsTrigger>
@@ -412,11 +411,17 @@ const BoxPlotComparison: React.FC<BoxPlotComparisonProps> = ({
               }
               className="w-full sm:w-auto"
             >
-              <TabsList className="grid grid-cols-2">
-                <TabsTrigger value="age" className="text-xs">
+              <TabsList className="grid grid-cols-2 bg-gray-100 p-1">
+                <TabsTrigger
+                  value="age"
+                  className="text-xs data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-sm text-gray-600"
+                >
                   Age Group
                 </TabsTrigger>
-                <TabsTrigger value="detachment" className="text-xs">
+                <TabsTrigger
+                  value="detachment"
+                  className="text-xs data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-sm text-gray-600"
+                >
                   Detachment
                 </TabsTrigger>
               </TabsList>
@@ -426,10 +431,10 @@ const BoxPlotComparison: React.FC<BoxPlotComparisonProps> = ({
 
         <div
           ref={boxplotRef}
-          className="h-[300px] w-full border border-gray-100 rounded-lg overflow-hidden bg-white p-2"
+          className="h-[300px] w-full border border-gray-100 rounded-lg overflow-visible p-2"
         />
 
-        <div className="text-xs text-gray-600 bg-gray-50 p-2 rounded-lg">
+        <div className="text-xs text-gray-600 bg-gray-50/50 border border-gray-100 p-2 rounded-lg">
           <p>
             <span className="font-medium">Box Plot:</span> The box shows IQR
             (Q1-Q3) with median line. Whiskers extend to min/max values within

@@ -136,7 +136,7 @@ const SummaryStatisticsCard: React.FC<SummaryStatisticsCardProps> = ({
     data.categories[selectedCategory as keyof typeof data.categories] || [];
 
   return (
-    <Card className="overflow-hidden shadow-lg transform hover:scale-[1.01] transition-all duration-200 border-0">
+    <Card className="overflow-hidden shadow-lg transform hover:scale-[1.01] transition-all duration-200 border-0 bg-white">
       <div
         className={
           "h-40 bg-gradient-to-r from-green-500 to-teal-600 relative overflow-hidden"
@@ -158,33 +158,32 @@ const SummaryStatisticsCard: React.FC<SummaryStatisticsCardProps> = ({
         </div>
         <ActivitySquare className="absolute top-4 right-4 text-white/80 w-8 h-8" />
       </div>
-
       <CardContent className="p-6">
         {/* Category Tabs */}
         <div className="mb-4">
           <Tabs value={selectedCategory} onValueChange={setSelectedCategory}>
-            <TabsList className="grid grid-cols-4 mb-2">
+            <TabsList className="grid grid-cols-4 mb-2 bg-gray-100 p-1">
               <TabsTrigger
                 value="physical"
-                className="flex items-center justify-center gap-1 text-xs"
+                className="flex items-center justify-center gap-1 text-xs data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-sm text-gray-600"
               >
                 <Dumbbell className="w-4 h-4" /> Physical
               </TabsTrigger>
               <TabsTrigger
                 value="cognitive"
-                className="flex items-center justify-center gap-1 text-xs"
+                className="flex items-center justify-center gap-1 text-xs data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-sm text-gray-600"
               >
                 <Brain className="w-4 h-4" /> Cognitive
               </TabsTrigger>
               <TabsTrigger
                 value="leadership"
-                className="flex items-center justify-center gap-1 text-xs"
+                className="flex items-center justify-center gap-1 text-xs data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-sm text-gray-600"
               >
                 <HeadCircuit className="w-4 h-4" weight="bold" /> Leadership
               </TabsTrigger>
               <TabsTrigger
                 value="other"
-                className="flex items-center justify-center gap-1 text-xs"
+                className="flex items-center justify-center gap-1 text-xs data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-sm text-gray-600"
               >
                 <Calculator className="w-4 h-4" /> Other
               </TabsTrigger>
@@ -193,12 +192,16 @@ const SummaryStatisticsCard: React.FC<SummaryStatisticsCardProps> = ({
 
           <div className="mt-3">
             <Select value={selectedMetric} onValueChange={setSelectedMetric}>
-              <SelectTrigger className="w-full border-gray-100 shadow-sm">
+              <SelectTrigger className="w-full border-gray-100 shadow-sm bg-white text-gray-900">
                 <SelectValue placeholder="Select a metric" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-white border-gray-100">
                 {metricsInCategory.map((metric) => (
-                  <SelectItem key={metric} value={metric}>
+                  <SelectItem
+                    key={metric}
+                    value={metric}
+                    className="text-gray-900"
+                  >
                     {metric}
                   </SelectItem>
                 ))}
@@ -210,19 +213,23 @@ const SummaryStatisticsCard: React.FC<SummaryStatisticsCardProps> = ({
         {selectedStats && (
           <div className="space-y-5 pt-1 h-full flex flex-col">
             {/* Count Badge */}
-            <div className="flex items-center justify-between px-1 py-2 border-b border-gray-100 dark:border-gray-700">
+            <div className="flex items-center justify-between px-1 py-2 border-b border-gray-100">
               <div className="flex items-center space-x-2">
-                <div className="bg-blue-100 dark:bg-blue-900/30 h-8 w-8 rounded-full flex items-center justify-center">
-                  <Users className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                <div className="bg-blue-100 h-8 w-8 rounded-full flex items-center justify-center">
+                  <Users className="h-4 w-4 text-blue-600" />
                 </div>
                 <div>
-                  <div className="text-sm font-medium">Sample Count</div>
+                  <div className="text-sm font-medium text-gray-900">
+                    Sample Count
+                  </div>
                   <div className="text-xs text-gray-500">
                     Total observations
                   </div>
                 </div>
               </div>
-              <div className="text-xl font-bold">{selectedStats.count}</div>
+              <div className="text-xl font-bold text-gray-900">
+                {selectedStats.count}
+              </div>
             </div>
 
             {/* Key Stats - Redesigned with better spacing */}
@@ -231,8 +238,10 @@ const SummaryStatisticsCard: React.FC<SummaryStatisticsCardProps> = ({
               <div className="flex items-center space-x-2 border-l-3 border-blue-500 pl-3 py-1">
                 <Target className="h-5 w-5 text-blue-500 flex-shrink-0" />
                 <div className="flex-1 flex justify-between items-center">
-                  <span className="text-sm font-medium">Mean</span>
-                  <span className="text-lg font-bold text-blue-600 dark:text-blue-400">
+                  <span className="text-sm font-medium text-gray-900">
+                    Mean
+                  </span>
+                  <span className="text-lg font-bold text-blue-600">
                     {formatNumber(selectedStats.mean)}
                   </span>
                 </div>
@@ -242,8 +251,10 @@ const SummaryStatisticsCard: React.FC<SummaryStatisticsCardProps> = ({
               <div className="flex items-center space-x-2 border-l-3 border-purple-500 pl-3 py-1">
                 <ArrowRightLeft className="h-5 w-5 text-purple-500 flex-shrink-0" />
                 <div className="flex-1 flex justify-between items-center">
-                  <span className="text-sm font-medium">Std Dev</span>
-                  <span className="text-lg font-bold text-purple-600 dark:text-purple-400">
+                  <span className="text-sm font-medium text-gray-900">
+                    Std Dev
+                  </span>
+                  <span className="text-lg font-bold text-purple-600">
                     {formatNumber(selectedStats.std)}
                   </span>
                 </div>
@@ -253,8 +264,8 @@ const SummaryStatisticsCard: React.FC<SummaryStatisticsCardProps> = ({
               <div className="flex items-center space-x-2 border-l-3 border-red-500 pl-3 py-1">
                 <ArrowDown className="h-5 w-5 text-red-500 flex-shrink-0" />
                 <div className="flex-1 flex justify-between items-center">
-                  <span className="text-sm font-medium">Min</span>
-                  <span className="text-lg font-bold text-red-600 dark:text-red-400">
+                  <span className="text-sm font-medium text-gray-900">Min</span>
+                  <span className="text-lg font-bold text-red-600">
                     {formatNumber(selectedStats.min)}
                   </span>
                 </div>
@@ -264,8 +275,8 @@ const SummaryStatisticsCard: React.FC<SummaryStatisticsCardProps> = ({
               <div className="flex items-center space-x-2 border-l-3 border-green-500 pl-3 py-1">
                 <ArrowUp className="h-5 w-5 text-green-500 flex-shrink-0" />
                 <div className="flex-1 flex justify-between items-center">
-                  <span className="text-sm font-medium">Max</span>
-                  <span className="text-lg font-bold text-green-600 dark:text-green-400">
+                  <span className="text-sm font-medium text-gray-900">Max</span>
+                  <span className="text-lg font-bold text-green-600">
                     {formatNumber(selectedStats.max)}
                   </span>
                 </div>
@@ -273,11 +284,11 @@ const SummaryStatisticsCard: React.FC<SummaryStatisticsCardProps> = ({
             </div>
 
             {/* Quartiles */}
-            <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3">
-              <div className="text-sm font-medium mb-2 flex items-center gap-1.5">
+            <div className="bg-gray-50 rounded-lg p-3">
+              <div className="text-sm font-medium mb-2 flex items-center gap-1.5 text-gray-900">
                 {getStatIcon("50%")} Distribution Quartiles
               </div>
-              <div className="flex items-center w-full h-4 relative mb-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+              <div className="flex items-center w-full h-4 relative mb-3 bg-gray-200 rounded-full overflow-hidden">
                 <div
                   className="absolute left-0 top-0 bottom-0 bg-blue-200"
                   style={{ width: "25%" }}
@@ -318,12 +329,10 @@ const SummaryStatisticsCard: React.FC<SummaryStatisticsCardProps> = ({
                   </div>
                 </div>
               </div>
-              <div className="flex items-start gap-2 text-xs text-gray-500 pt-1 italic border-t border-gray-100 dark:border-gray-700 mt-auto">
+              <div className="flex items-start gap-2 text-xs text-gray-500 pt-1 italic border-t border-gray-100 mt-auto">
                 <Gauge className="h-3.5 w-3.5 mt-0.5 flex-shrink-0 text-gray-400" />
                 <span>
-                  <span className="font-medium text-gray-700 dark:text-gray-300">
-                    Quartiles
-                  </span>{" "}
+                  <span className="font-medium text-gray-700">Quartiles</span>{" "}
                   divide the data into four equal parts. The interquartile range
                   (IQR) between Q1 and Q3 contains the middle 50% of values.
                 </span>

@@ -156,12 +156,8 @@ const CognitiveMetricsDistribution: React.FC<
   const kdeData = generateKDEData(histogramData);
 
   return (
-    <Card className="overflow-hidden shadow-lg transform hover:scale-[1.01] transition-all duration-200 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800">
-      <div
-        className={
-          "h-40 bg-gradient-to-r from-indigo-500 to-purple-600 relative overflow-hidden"
-        }
-      >
+    <Card className="overflow-hidden shadow-lg transform hover:scale-[1.01] transition-all duration-200 bg-white">
+      <div className="h-40 bg-gradient-to-r from-indigo-500 to-purple-600 relative overflow-hidden">
         <div
           className="absolute inset-0 opacity-20"
           style={{
@@ -181,32 +177,36 @@ const CognitiveMetricsDistribution: React.FC<
       </div>
 
       <CardContent className="p-6">
-        {/* Simplified control row with selector and key stats */}
-        <div className="flex flex-wrap items-center justify-between mb-4 pb-4 border-b border-gray-100 dark:border-gray-700">
+        {/* Control row */}
+        <div className="flex flex-wrap items-center justify-between mb-4 pb-4 border-b border-gray-100">
           <div className="flex items-center">
             <Select
               value={selectedCognitiveMetric}
               onValueChange={setSelectedCognitiveMetric}
             >
-              <SelectTrigger className="w-[260px] mr-3 bg-gray-50 dark:bg-gray-700/50 border-gray-100 dark:border-gray-600">
-                <SelectValue />
+              <SelectTrigger className="w-[260px] mr-3 bg-white border-gray-200 text-gray-900">
+                <SelectValue className="text-gray-900" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-white border-gray-200">
                 {Object.keys(cognitiveMetrics).map((metric) => (
-                  <SelectItem key={metric} value={metric}>
+                  <SelectItem
+                    key={metric}
+                    value={metric}
+                    className="text-gray-900 hover:bg-gray-100 focus:bg-gray-100"
+                  >
                     {metric}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
 
-            <Badge className="bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300 hover:bg-gray-100">
+            <Badge className="bg-gray-100 text-gray-800 hover:bg-gray-100">
               {metricData.stats.count} Trainees
             </Badge>
           </div>
         </div>
 
-        {/* Main focus: Distribution chart with more height */}
+        {/* Chart */}
         <div className="h-80">
           <ResponsiveContainer width="100%" height="100%">
             <ComposedChart
@@ -225,9 +225,10 @@ const CognitiveMetricsDistribution: React.FC<
                   position: "insideBottom",
                   offset: -10,
                   fontSize: 12,
+                  fill: "#374151",
                 }}
-                tick={{ fontSize: 11 }}
-                tickFormatter={(value) => value.toFixed(1)} // Add this line
+                tick={{ fontSize: 11, fill: "#374151" }}
+                tickFormatter={(value) => value.toFixed(1)}
               />
               <YAxis
                 label={{
@@ -236,8 +237,9 @@ const CognitiveMetricsDistribution: React.FC<
                   position: "insideLeft",
                   offset: 10,
                   fontSize: 12,
+                  fill: "#374151",
                 }}
-                tick={{ fontSize: 11 }}
+                tick={{ fontSize: 11, fill: "#374151" }}
               />
               <Tooltip
                 formatter={(value, name) => [
@@ -245,10 +247,11 @@ const CognitiveMetricsDistribution: React.FC<
                 ]}
                 labelFormatter={(label) => `Accuracy: ${label.toFixed(1)}`}
                 contentStyle={{
+                  backgroundColor: "white",
                   borderRadius: "6px",
-                  border: "none",
+                  border: "1px solid #e5e7eb",
                   boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-                  backgroundColor: "rgba(255, 255, 255, 0.9)",
+                  color: "#374151",
                 }}
               />
               <Bar
@@ -271,36 +274,36 @@ const CognitiveMetricsDistribution: React.FC<
           </ResponsiveContainer>
         </div>
 
-        {/* Subtle statistical insights below the chart */}
-        <div className="mt-4 grid grid-cols-3 gap-2 text-xs text-gray-500 dark:text-gray-400">
+        {/* Stats */}
+        <div className="mt-4 grid grid-cols-3 gap-2 text-xs text-gray-500">
           <div>
             <span>Mean: </span>
-            <span className="font-medium text-gray-900 dark:text-gray-200">
+            <span className="font-medium text-gray-900">
               {metricData.stats.mean.toFixed(1)}%
             </span>
           </div>
           <div>
             <span>Median: </span>
-            <span className="font-medium text-gray-900 dark:text-gray-200">
+            <span className="font-medium text-gray-900">
               {metricData.stats.median.toFixed(1)}%
             </span>
           </div>
           <div>
             <span>Range: </span>
-            <span className="font-medium text-gray-900 dark:text-gray-200">
+            <span className="font-medium text-gray-900">
               {metricData.stats.min.toFixed(1)}-
               {metricData.stats.max.toFixed(1)}%
             </span>
           </div>
           <div>
             <span>Std Dev: </span>
-            <span className="font-medium text-gray-900 dark:text-gray-200">
+            <span className="font-medium text-gray-900">
               {metricData.stats.std.toFixed(1)}
             </span>
           </div>
           <div>
             <span>Q1-Q3: </span>
-            <span className="font-medium text-gray-900 dark:text-gray-200">
+            <span className="font-medium text-gray-900">
               {metricData.stats.q1.toFixed(1)}-{metricData.stats.q3.toFixed(1)}%
             </span>
           </div>

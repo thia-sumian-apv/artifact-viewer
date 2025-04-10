@@ -186,18 +186,16 @@ const CrossDomainCorrelationMatrix: React.FC<
   };
 
   return (
-    <Card className="border-0 shadow-sm">
-      <CardContent className="pt-6">
+    <Card className="border-0 shadow-sm bg-white">
+      <CardContent className="pt-6 bg-white">
         <div className="space-y-10">
-          {/* Domain selection options - reordered to match screenshot */}
+          {/* Domain selection options */}
           <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
-            {/* Left side - Header showing current selection */}
-            <h3 className="text-xl font-semibold whitespace-nowrap">
+            <h3 className="text-xl font-semibold whitespace-nowrap text-gray-900">
               {getDomainTitle(selectedSourceDomain)} ×{" "}
               {getDomainTitle(selectedTargetDomain)} Correlation
             </h3>
 
-            {/* Right side - Domain selection controls with inline labels */}
             <div className="flex items-center gap-1">
               <span className="text-base font-medium text-gray-700 whitespace-nowrap">
                 Domain Correlation From:
@@ -207,12 +205,22 @@ const CrossDomainCorrelationMatrix: React.FC<
                 value={selectedSourceDomain}
                 onValueChange={setSelectedSourceDomain}
               >
-                <SelectTrigger id="source-domain" className="w-[130px] mx-2">
-                  <SelectValue placeholder="Source Domain" />
+                <SelectTrigger
+                  id="source-domain"
+                  className="w-[130px] mx-2 bg-white border-gray-200 text-gray-900"
+                >
+                  <SelectValue
+                    className="text-gray-900"
+                    placeholder="Source Domain"
+                  />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-white border-gray-200">
                   {domains.map((domain) => (
-                    <SelectItem key={`source-${domain}`} value={domain}>
+                    <SelectItem
+                      key={`source-${domain}`}
+                      value={domain}
+                      className="text-gray-900 hover:bg-gray-100 focus:bg-gray-100"
+                    >
                       {getDomainTitle(domain)}
                     </SelectItem>
                   ))}
@@ -227,12 +235,22 @@ const CrossDomainCorrelationMatrix: React.FC<
                 value={selectedTargetDomain}
                 onValueChange={setSelectedTargetDomain}
               >
-                <SelectTrigger id="target-domain" className="w-[130px] ml-2">
-                  <SelectValue placeholder="Target Domain" />
+                <SelectTrigger
+                  id="target-domain"
+                  className="w-[130px] ml-2 bg-white border-gray-200 text-gray-900"
+                >
+                  <SelectValue
+                    className="text-gray-900"
+                    placeholder="Target Domain"
+                  />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-white border-gray-200">
                   {domains.map((domain) => (
-                    <SelectItem key={`target-${domain}`} value={domain}>
+                    <SelectItem
+                      key={`target-${domain}`}
+                      value={domain}
+                      className="text-gray-900 hover:bg-gray-100 focus:bg-gray-100"
+                    >
                       {getDomainTitle(domain)}
                     </SelectItem>
                   ))}
@@ -244,15 +262,10 @@ const CrossDomainCorrelationMatrix: React.FC<
           {/* Matrix with gradient legend */}
           <div className="flex flex-col items-center mt-8">
             <div className="flex flex-col items-start w-full">
-              {/* Matrix and vertical legend container */}
               <div className="flex items-center justify-center w-full">
-                {/* Scrollable matrix container */}
                 <div className="overflow-auto max-w-full">
                   <div className="flex">
-                    {/* Empty top-left corner */}
                     <div className={`${labelWidth} flex-shrink-0`} />
-
-                    {/* Column headers (target metrics) */}
                     <div className="flex">
                       {targetMetrics.map((target) => (
                         <div
@@ -260,7 +273,7 @@ const CrossDomainCorrelationMatrix: React.FC<
                           className={`${cellWidth} flex-shrink-0 pb-2 px-1`}
                         >
                           <div
-                            className={`font-medium ${fontSize} text-center overflow-hidden`}
+                            className={`font-medium ${fontSize} text-gray-900 text-center overflow-hidden`}
                           >
                             {target}
                           </div>
@@ -277,7 +290,7 @@ const CrossDomainCorrelationMatrix: React.FC<
                           className={`${labelWidth} ${cellHeight} flex-shrink-0 pr-2 flex items-center justify-end`}
                         >
                           <div
-                            className={`font-medium ${fontSize} text-right overflow-hidden`}
+                            className={`font-medium ${fontSize} text-gray-900 text-right overflow-hidden`}
                           >
                             {source}
                           </div>

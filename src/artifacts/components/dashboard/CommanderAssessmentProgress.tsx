@@ -121,10 +121,10 @@ const CompanyAssessmentProgress: React.FC<CompanyAssessmentProgressProps> = ({
                 value={selectedCompany}
                 onValueChange={handleCompanyChange}
               >
-                <SelectTrigger>
+                <SelectTrigger className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                   <SelectValue placeholder="Select Company" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                   {companies.map((company) => (
                     <SelectItem key={company.id} value={company.id}>
                       {company.name}
@@ -138,10 +138,10 @@ const CompanyAssessmentProgress: React.FC<CompanyAssessmentProgressProps> = ({
                 Assessment Run:
               </span>
               <Select value={selectedRun} onValueChange={handleRunChange}>
-                <SelectTrigger>
+                <SelectTrigger className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                   <SelectValue placeholder="Select Assessment Run" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                   {assessmentRuns.map((run) => (
                     <SelectItem key={run.id} value={run.id}>
                       {run.name}
@@ -157,9 +157,9 @@ const CompanyAssessmentProgress: React.FC<CompanyAssessmentProgressProps> = ({
       <CardContent className="p-6 pt-0">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
           {/* Left column: Assessment info */}
-          <Card className="col-span-1 shadow-sm border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-750">
+          <Card className="col-span-1 shadow-sm border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/60">
             <CardContent className="p-4">
-              <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3 flex items-center">
+              <h3 className="text-sm font-medium text-gray-700 dark:text-gray-200 mb-3 flex items-center">
                 <Calendar className="h-4 w-4 mr-1 text-blue-500" />
                 Assessment Info
               </h3>

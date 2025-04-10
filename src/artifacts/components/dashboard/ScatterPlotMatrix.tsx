@@ -87,14 +87,18 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload }) => {
   if (active && payload && payload.length) {
     const data = payload[0].payload;
     return (
-      <div className="bg-popover p-3 border border-border rounded-md shadow-md text-popover-foreground">
+      <div className="bg-white p-3 border border-gray-200 rounded-md shadow-md text-gray-900">
         <p className="font-medium text-sm mb-1">{data.Trainee}</p>
-        <p className="text-xs  mb-2">{`${data.Detachment}, ${data.Age_Group}`}</p>
+        <p className="text-xs text-gray-600 mb-2">{`${data.Detachment}, ${data.Age_Group}`}</p>
         <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-xs">
-          <span className="">{payload[0].name}:</span>
-          <span className="font-medium">{Number(data.x).toFixed(2)}</span>
-          <span className="">{payload[1].name}:</span>
-          <span className="font-medium">{Number(data.y).toFixed(2)}</span>
+          <span className="text-gray-600">{payload[0].name}:</span>
+          <span className="font-medium text-gray-900">
+            {Number(data.x).toFixed(2)}
+          </span>
+          <span className="text-gray-600">{payload[1].name}:</span>
+          <span className="font-medium text-gray-900">
+            {Number(data.y).toFixed(2)}
+          </span>
         </div>
       </div>
     );
@@ -107,33 +111,39 @@ const MetricStatsCard: React.FC<{
   stats: { min: number; max: number; mean: number; median: number };
   description?: string;
 }> = ({ metricName, stats, description }) => (
-  <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-100">
+  <div className="bg-gray-50 p-4 rounded-lg border border-gray-100">
     <h4 className="font-medium text-gray-800 text-md mb-1">
       {metricName.replace(/_/g, " ")}
     </h4>
     {description && (
-      <p className="text-xs text-gray-600 dark:text-gray-400 mb-3 leading-relaxed">
+      <p className="text-xs text-gray-600 mb-3 leading-relaxed">
         {description}
       </p>
     )}
     <div className="mt-2 grid grid-cols-2 gap-x-6 gap-y-2">
       <div className="flex justify-between">
-        <span className="text-sm text-gray-500 dark:text-gray-400">Min:</span>
-        <span className="text-sm font-medium">{stats.min.toFixed(2)}</span>
-      </div>
-      <div className="flex justify-between">
-        <span className="text-sm text-gray-500 dark:text-gray-400">Max:</span>
-        <span className="text-sm font-medium">{stats.max.toFixed(2)}</span>
-      </div>
-      <div className="flex justify-between">
-        <span className="text-sm text-gray-500 dark:text-gray-400">Mean:</span>
-        <span className="text-sm font-medium">{stats.mean.toFixed(2)}</span>
-      </div>
-      <div className="flex justify-between">
-        <span className="text-sm text-gray-500 dark:text-gray-400">
-          Median:
+        <span className="text-sm text-gray-500">Min:</span>
+        <span className="text-sm font-medium text-black">
+          {stats.min.toFixed(2)}
         </span>
-        <span className="text-sm font-medium">{stats.median.toFixed(2)}</span>
+      </div>
+      <div className="flex justify-between">
+        <span className="text-sm text-gray-500">Max:</span>
+        <span className="text-sm font-medium text-black">
+          {stats.max.toFixed(2)}
+        </span>
+      </div>
+      <div className="flex justify-between">
+        <span className="text-sm text-gray-500">Mean:</span>
+        <span className="text-sm font-medium text-black">
+          {stats.mean.toFixed(2)}
+        </span>
+      </div>
+      <div className="flex justify-between">
+        <span className="text-sm text-gray-500">Median:</span>
+        <span className="text-sm font-medium text-black">
+          {stats.median.toFixed(2)}
+        </span>
       </div>
     </div>
   </div>
@@ -334,15 +344,21 @@ const PlotControls: React.FC<{
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 items-end">
       {/* Group By tabs - column 1 */}
       <div>
-        <Label className="text-sm font-medium block mb-1.5">Group By</Label>
+        <Label className="text-sm font-medium text-gray-900 block mb-1.5">
+          Group By
+        </Label>
         <Tabs
           value={selectedGroup}
           onValueChange={setSelectedGroup}
           className="w-full"
         >
-          <TabsList className="w-full grid grid-cols-2 bg-muted h-9">
+          <TabsList className="w-full grid grid-cols-2 bg-gray-100 h-9">
             {groupOptions.map((option) => (
-              <TabsTrigger key={option} value={option} className="text-xs">
+              <TabsTrigger
+                key={option}
+                value={option}
+                className="text-xs data-[state=active]:bg-white data-[state=active]:text-gray-900 text-gray-600"
+              >
                 {option}
               </TabsTrigger>
             ))}
@@ -354,7 +370,7 @@ const PlotControls: React.FC<{
       <div>
         <Label
           htmlFor="x-metric-select"
-          className="text-sm font-medium mb-1.5 block"
+          className="text-sm font-medium text-gray-900 mb-1.5 block"
         >
           X-Axis Metric
         </Label>
@@ -362,12 +378,18 @@ const PlotControls: React.FC<{
           value={currentPlot?.x_metric || ""}
           onValueChange={handleXMetricChange}
         >
-          <SelectTrigger id="x-metric-select" className="bg-background h-9">
-            <SelectValue placeholder="Select X-axis metric" />
+          <SelectTrigger
+            id="x-metric-select"
+            className="bg-white border-gray-200 text-gray-900 h-9"
+          >
+            <SelectValue
+              className="text-gray-900"
+              placeholder="Select X-axis metric"
+            />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="bg-white border-gray-200">
             {availableXMetrics.map((metric) => (
-              <SelectItem key={metric} value={metric}>
+              <SelectItem key={metric} value={metric} className="text-gray-900">
                 {metric.replace(/_/g, " ")}
               </SelectItem>
             ))}
@@ -379,7 +401,7 @@ const PlotControls: React.FC<{
       <div>
         <Label
           htmlFor="y-metric-select"
-          className="text-sm font-medium mb-1.5 block"
+          className="text-sm font-medium text-gray-900 mb-1.5 block"
         >
           Y-Axis Metric
         </Label>
@@ -387,12 +409,18 @@ const PlotControls: React.FC<{
           value={currentPlot?.y_metric || ""}
           onValueChange={handleYMetricChange}
         >
-          <SelectTrigger id="y-metric-select" className="bg-background h-9">
-            <SelectValue placeholder="Select Y-axis metric" />
+          <SelectTrigger
+            id="y-metric-select"
+            className="bg-white border-gray-200 text-gray-900 h-9"
+          >
+            <SelectValue
+              className="text-gray-900"
+              placeholder="Select Y-axis metric"
+            />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="bg-white border-gray-200">
             {availableYMetricsForCurrentX.map((metric) => (
-              <SelectItem key={metric} value={metric}>
+              <SelectItem key={metric} value={metric} className="text-gray-900">
                 {metric.replace(/_/g, " ")}
               </SelectItem>
             ))}
@@ -466,7 +494,7 @@ const ScatterPlotMatrix: React.FC<ScatterPlotMatrixProps> = ({
   const scatterData = prepareScatterData();
 
   return (
-    <Card className="col-span-2 overflow-hidden shadow-lg transform hover:scale-[1.01] transition-all duration-200 border-0">
+    <Card className="col-span-2 overflow-hidden shadow-lg transform hover:scale-[1.01] transition-all duration-200 bg-white">
       <div className="h-40 bg-gradient-to-r from-teal-600 to-pink-600 relative overflow-hidden">
         <div
           className="absolute inset-0 opacity-20"
@@ -485,7 +513,7 @@ const ScatterPlotMatrix: React.FC<ScatterPlotMatrixProps> = ({
         <TrendingUp className="absolute top-4 right-4 h-8 w-8 text-white/80" />
       </div>
 
-      <CardContent className="p-8">
+      <CardContent className="p-8 bg-white">
         {/* Plot selection controls without metricInfo */}
         <PlotControls
           plots={data.scatter_plots}

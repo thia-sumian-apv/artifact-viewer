@@ -55,7 +55,7 @@ const CorrelationMatrix: React.FC<CorrelationMatrixProps> = ({
   if (!data || error) return null;
 
   return (
-    <Card className="col-span-2 overflow-hidden shadow-lg transform hover:scale-[1.01] transition-all duration-200">
+    <Card className="col-span-2 overflow-hidden shadow-lg transform hover:scale-[1.01] transition-all duration-200 bg-white">
       <div className="h-40 bg-gradient-to-r from-red-500 to-blue-600 relative overflow-hidden">
         <div
           className="absolute inset-0 opacity-20"
@@ -72,7 +72,7 @@ const CorrelationMatrix: React.FC<CorrelationMatrixProps> = ({
         <Network className="absolute top-4 right-4 h-8 w-8 text-white/80" />
       </div>
 
-      <CardContent className="p-6">
+      <CardContent className="p-6 bg-white">
         <CrossDomainCorrelationMatrix data={data.cross_domain_correlation} />
       </CardContent>
     </Card>

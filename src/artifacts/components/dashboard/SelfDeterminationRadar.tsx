@@ -133,7 +133,7 @@ const SelfDeterminationRadar: React.FC<SelfDeterminationRadarProps> = ({
   };
 
   return (
-    <Card className="overflow-hidden shadow-lg transform hover:scale-[1.01] transition-all duration-200">
+    <Card className="overflow-hidden shadow-lg transform hover:scale-[1.01] transition-all duration-200 bg-white">
       <CardHeader className="p-0">
         <div className="h-40 bg-gradient-to-r from-purple-500 to-fuchsia-600 relative overflow-hidden">
           <div
@@ -156,23 +156,29 @@ const SelfDeterminationRadar: React.FC<SelfDeterminationRadarProps> = ({
         </div>
       </CardHeader>
 
-      <CardContent className="p-6">
-        <div className="flex items-center justify-between mb-4 pb-4 border-b border-gray-100 dark:border-gray-700">
+      <CardContent className="p-6 bg-white">
+        <div className="flex items-center justify-between mb-4 pb-4 border-b border-gray-100">
           <Tabs
             value={activeTab}
             onValueChange={(v) => setActiveTab(v as "age" | "detachment")}
             className="w-full"
           >
             <div className="flex items-center justify-between">
-              <TabsList className="bg-gray-100 dark:bg-gray-800">
-                <TabsTrigger value="age" className="text-sm">
+              <TabsList className="bg-gray-100">
+                <TabsTrigger
+                  value="age"
+                  className="text-sm data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-sm text-gray-600"
+                >
                   By Age Group
                 </TabsTrigger>
-                <TabsTrigger value="detachment" className="text-sm">
+                <TabsTrigger
+                  value="detachment"
+                  className="text-sm data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-sm text-gray-600"
+                >
                   By Detachment
                 </TabsTrigger>
               </TabsList>
-              <Badge className="bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300 hover:bg-gray-100">
+              <Badge className="bg-gray-100 text-gray-800 hover:bg-gray-100">
                 {getTotalCount()} Trainees
               </Badge>
             </div>
@@ -182,33 +188,30 @@ const SelfDeterminationRadar: React.FC<SelfDeterminationRadarProps> = ({
         <div className="h-80">
           <ResponsiveContainer width="100%" height="100%">
             <RadarChart outerRadius="75%" data={radarData}>
-              <PolarGrid
-                strokeDasharray="3 3"
-                stroke="hsl(var(--muted-foreground))"
-              />
+              <PolarGrid strokeDasharray="3 3" stroke="#9CA3AF" />
               <PolarAngleAxis
                 dataKey="dimension"
                 tick={{
                   fontSize: 12,
-                  fill: "hsl(var(--foreground))",
+                  fill: "#374151",
                   fontWeight: "500",
                 }}
-                stroke="hsl(var(--border))"
+                stroke="#E5E7EB"
               />
               <PolarRadiusAxis
-                angle={90} // Change angle to 90 degrees for better alignment
+                angle={90}
                 domain={[0, 5]}
                 tick={{
                   fontSize: 11,
-                  fill: "hsl(var(--foreground))",
-                  dy: 0, // Adjust vertical position
+                  fill: "#374151",
+                  dy: 0,
                 }}
-                axisLine={{ stroke: "hsl(var(--border))" }}
-                tickLine={{ stroke: "hsl(var(--border))" }}
-                stroke="hsl(var(--border))"
-                tickCount={6} // Create ticks at 0, 1, 2, 3, 4, 5
-                tickFormatter={(value) => value.toString()} // Format tick labels
-                orientation="middle" // Ensure ticks are centered
+                axisLine={{ stroke: "#E5E7EB" }}
+                tickLine={{ stroke: "#E5E7EB" }}
+                stroke="#E5E7EB"
+                tickCount={6}
+                tickFormatter={(value) => value.toString()}
+                orientation="middle"
               />
               {activeTab === "age"
                 ? data.self_determination_profiles.by_age_group.map(
@@ -248,11 +251,11 @@ const SelfDeterminationRadar: React.FC<SelfDeterminationRadarProps> = ({
                 ]}
                 labelFormatter={(label) => `Dimension: ${label}`}
                 contentStyle={{
-                  borderRadius: "var(--radius)",
-                  backgroundColor: "hsl(var(--background))",
-                  borderColor: "hsl(var(--border))",
-                  boxShadow: "var(--shadow)",
-                  color: "hsl(var(--foreground))",
+                  backgroundColor: "white",
+                  borderRadius: "6px",
+                  border: "1px solid #E5E7EB",
+                  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                  color: "#374151",
                   padding: "0.75rem 1rem",
                 }}
               />
@@ -261,15 +264,15 @@ const SelfDeterminationRadar: React.FC<SelfDeterminationRadarProps> = ({
                 iconSize={10}
                 wrapperStyle={{
                   paddingTop: 10,
-                  color: "hsl(var(--foreground))",
+                  color: "#374151",
                 }}
               />
             </RadarChart>
           </ResponsiveContainer>
         </div>
-        <div className="mt-4 text-sm text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800/50 p-3 rounded-lg">
+        <div className="mt-4 text-sm text-gray-600 bg-gray-50 p-3 rounded-lg border border-gray-100">
           <div className="flex items-center justify-center">
-            <span className="font-medium">Scale:1 to 5</span>
+            <span className="font-medium text-gray-900">Scale: 1 to 5</span>
           </div>
           <p className="text-center text-xs mt-1">
             Data shows average self-determination scores by{" "}
