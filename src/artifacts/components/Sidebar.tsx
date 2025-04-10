@@ -22,13 +22,14 @@ import {
   ChevronDown,
   Users,
   ClipboardList,
-  BookCheck,
   School,
   FileText,
   UserPen,
   List,
   BookOpenText,
   LibraryBig,
+  ClipboardPen,
+  BookOpenCheck,
 } from "lucide-react";
 import {
   Tooltip,
@@ -394,7 +395,7 @@ const Sidebar = ({
         {visibleTabs.includes("assessmentManagement") && (
           <div className="relative">
             {renderMenuItem(
-              <FileText className="h-5 w-5" />,
+              <ClipboardPen className="h-5 w-5" />,
               "Assessments",
               activeTab === "assessmentManagement",
               () =>
@@ -407,7 +408,7 @@ const Sidebar = ({
               <div className="ml-6 mt-1 relative">
                 <div className="absolute left-2 top-0 bottom-0 w-[1px] bg-gray-200 dark:bg-gray-700" />
                 {renderMenuItem(
-                  <BookCheck className="h-5 w-5" />,
+                  <BookOpenCheck className="h-5 w-5" />,
                   "Test Assessments",
                   activeTab === "testAssessments",
                   () => setActiveTab("testAssessments")
